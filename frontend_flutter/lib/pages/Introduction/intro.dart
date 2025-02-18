@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertest/pages/Login/login.dart'; // Import the LoginPage
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class IntroPage extends StatelessWidget {
+  const IntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate to LoginPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          },
+          child: Text('Go to Login'),
+        ),
+      ),
     );
   }
 
   AppBar appBar() {
     return AppBar(
-      title: Text(
-          'Breakfast',
+      title: Text('Breakfast',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.bold
-          )
-      ),
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
       centerTitle: true,
       backgroundColor: Colors.red,
       elevation: 0.0,
       leading: GestureDetector(
-        onTap: (){
-
-        },
+        onTap: () {},
         child: Container(
           margin: EdgeInsets.all(10),
           alignment: Alignment.center,
@@ -44,9 +50,7 @@ class HomePage extends StatelessWidget {
       ),
       actions: [
         GestureDetector(
-          onTap: (){
-
-          },
+          onTap: () {},
           child: Container(
             margin: EdgeInsets.all(10),
             alignment: Alignment.center,
@@ -62,7 +66,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         )
-      ]
+      ],
     );
   }
 }
