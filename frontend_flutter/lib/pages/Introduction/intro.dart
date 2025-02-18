@@ -1,72 +1,86 @@
+import 'dart:ui'; // Import for BackdropFilter
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:fluttertest/pages/Login/login.dart'; // Import the LoginPage
+import 'package:fluttertest/pages/Login/login.dart'; // Import your login page
 
-class IntroPage extends StatelessWidget {
+class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
+
+  @override
+  _IntroPageState createState() => _IntroPageState();
+}
+
+class _IntroPageState extends State<IntroPage>
+    with SingleTickerProviderStateMixin {
+  double _opacity = 0.0;
+  double _scale = 0.5; // Start with a smaller size
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start fading in background & scaling the icon after 2 seconds
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        _opacity = 1.0;
+        _scale = 1.0; // Scale up the icon
+      });
+    });
+
+    // Navigate to login page after 3 seconds
+    Future.delayed(Duration(seconds: 6), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()), // Go to Login
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate to LoginPage
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-            );
-          },
-          child: Text('Go to Login'),
-        ),
-      ),
-    );
-  }
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background Image with Fade-in Effect
+          AnimatedOpacity(
+            duration: Duration(seconds: 2),
+            opacity: _opacity,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  'assets/img/IntroPage.png',
+                  fit: BoxFit.cover,
+                ),
 
-  AppBar appBar() {
-    return AppBar(
-      title: Text('Breakfast',
-          style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
-      centerTitle: true,
-      backgroundColor: Colors.red,
-      elevation: 0.0,
-      leading: GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: EdgeInsets.all(10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: Color(0xffF7F8F8),
-            borderRadius: BorderRadius.circular(10),
+                // Background Blur Effect
+                Positioned.fill(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+                    child: Container(
+                      color: Colors.black.withOpacity(0.1),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          child: SvgPicture.asset(
-            "assets/icons/Arrow - Left 2.svg",
-            height: 20,
-            width: 20,
+
+          // Centered Icon Image with Scaling Animation
+          Center(
+            child: AnimatedScale(
+              scale: _scale,
+              duration: Duration(seconds: 2),
+              curve: Curves.easeInOut,
+              child: Image.asset(
+                'assets/img/BB_1.png',
+                width: 500, // Make it bigger
+                height: 500,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
-      actions: [
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: EdgeInsets.all(10),
-            alignment: Alignment.center,
-            width: 37,
-            decoration: BoxDecoration(
-              color: Color(0xffF7F8F8),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: SvgPicture.asset(
-              "assets/icons/dots.svg",
-              height: 5,
-              width: 5,
-            ),
-          ),
-        )
-      ],
     );
   }
 }
