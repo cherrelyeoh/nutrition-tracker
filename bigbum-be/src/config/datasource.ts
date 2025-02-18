@@ -9,7 +9,7 @@ const config = {
   password: 'admin',
   seeds: [__dirname + '/seeds/*{.ts,.js}'],
   entities: [__dirname + '/../modules/**/*.entity{.ts,.js}'],
-  migrations: [__dirname + '/migrations/*{.ts,.js}'],
+  migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],
   migrationsTableName: 'typeorm_migrations',
   logging: process.env.TYPEORM_LOGGING === 'true',
   synchronize: false,
