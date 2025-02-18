@@ -23,7 +23,7 @@ class RegisterPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
-              child: Text('Go to Home'),
+              child: Text('Go to Login Page'),
             ),
             SizedBox(height: 20), // Add some spacing
             ElevatedButton(
@@ -34,7 +34,7 @@ class RegisterPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const OnboardPage()),
                 );
               },
-              child: Text('Go to Home 2'),
+              child: Text('Start User Onboarding'),
             ),
           ],
         ),
