@@ -4,10 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './User.entity';
 
 @Injectable()
-export class UserService extends TypeOrmCrudService<UserEntity>{
-
-    constructor(@InjectRepository(UserEntity) repo) {
-        super(repo);
-    }
-
+export class UserService extends TypeOrmCrudService<UserEntity> {
+  constructor(@InjectRepository(UserEntity) repo) {
+    super(repo);
+  }
 }
