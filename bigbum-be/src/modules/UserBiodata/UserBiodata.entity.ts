@@ -13,7 +13,7 @@ import { UserEntity } from '../User/User.entity';
 @Entity('UserBiodata')
 export class UserBiodataEntity {
   @PrimaryGeneratedColumn()
-  userBioDataId: number;
+  id: number;
 
   @OneToOne(() => UserEntity)
   @JoinColumn({ name: 'userId' })

@@ -8,16 +8,16 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { UserBiodataEntity } from '../UserBiodata/UserBiodata.entity';
+import { UserEntity } from '../User/User.entity';
 
 @Entity('UserBiodataLogs')
 export class UserBiodataLogsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => UserBiodataEntity)
-  @JoinColumn({ name: 'userBioDataId' })
-  userBiodata: UserBiodataEntity;
+  @OneToOne(() => UserEntity)
+  @JoinColumn({ name: 'userId' })
+  user: UserEntity;
 
   @Column({ type: 'int' })
   age: number;
