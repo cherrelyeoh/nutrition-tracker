@@ -34,11 +34,11 @@ class _LoginInputState extends State<LoginInput> {
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,
         border: Border.all(color: const Color(0x19006EE9), width: 1),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0x19006EE9),
+            color: Color(0x19006EE9),
             blurRadius: 6,
-            offset: const Offset(1, 2),
+            offset: Offset(1, 2),
           )
         ],
       ),
@@ -50,7 +50,7 @@ class _LoginInputState extends State<LoginInput> {
             height: widget.height,
             decoration: BoxDecoration(
               color: widget.backgroundColor,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
               ),
