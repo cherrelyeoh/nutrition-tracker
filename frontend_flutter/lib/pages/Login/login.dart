@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
+import 'package:fluttertest/widgets/app_button_1.dart';
+import 'package:fluttertest/widgets/app_button_2.dart';
+import 'package:fluttertest/widgets/login_input.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -16,7 +19,7 @@ class LoginPage extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.brown),
+                icon: const Icon(Icons.arrow_back, color: Colors.brown),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -27,77 +30,49 @@ class LoginPage extends StatelessWidget {
             ),
 
             // Logo (BB Icon)
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Image.asset(
               'assets/img/BB_1.png', // Ensure this image is in assets
               width: 120,
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Email Field
-            TextField(
-              decoration: InputDecoration(
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.only(right: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(Icons.email, color: Colors.white),
-                ),
-                hintText: "Email",
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
+            const LoginInput(
+              height: 45,
+              width: 325,
+              backgroundColor: Color(0xFF700000),
+              placeholderInput: "Email",
+              icon: Icons.email,
             ),
 
-            SizedBox(height: 20),
-
-            // Password Field
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.only(right: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(Icons.lock, color: Colors.white),
-                ),
-                hintText: "Password",
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
+            const SizedBox(
+              height: 15,
             ),
 
-            SizedBox(height: 30),
+            const LoginInput(
+              height: 45,
+              width: 325,
+              backgroundColor: Color(0xFF700000),
+              placeholderInput: "Password",
+              isObscureText: true,
+              icon: Icons.lock,
+            ),
+
+            const SizedBox(height: 150),
 
             // Login Button
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pinkAccent,
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                elevation: 5,
-              ),
-              child: Text("Log In",
-                  style: TextStyle(fontSize: 18, color: Colors.white)),
-            ),
+            AppButton1(
+                textColor: Colors.white,
+                backgroundColor: const Color(0xFFFE6C6C),
+                borderColor: const Color(0xFFFE6C6C),
+                borderRadius: 50,
+                text: "Log In",
+                textSize: 16,
+                height: 50,
+                width: 200),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Social Media Login Buttons (Google, Facebook)
             Row(
@@ -105,20 +80,49 @@ class LoginPage extends StatelessWidget {
               children: [
                 IconButton(
                   icon: SizedBox(
-                    width: 24, // Adjust this value
-                    height: 24, // Adjust this value
+                    width: 35,
+                    height: 35,
                     child: Image.asset('assets/img/google.png'),
                   ),
                   onPressed: () {},
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 IconButton(
                   icon: SizedBox(
-                    width: 24, // Adjust this value
-                    height: 24, // Adjust this value
+                    width: 35,
+                    height: 35,
                     child: Image.asset('assets/img/facebook.png'),
                   ),
                   onPressed: () {},
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppButton2(
+                    textColor: Colors.white,
+                    backgroundColor: Colors.black,
+                    borderColor: Colors.black,
+                    text: "1",
+                    size: 40,
+                    isIcon: true,
+                    icon: Icons.favorite_border),
+                SizedBox(
+                  height: 10,
+                ),
+                AppButton2(
+                    textColor: Colors.black,
+                    backgroundColor: Colors.yellow,
+                    borderColor: Colors.black,
+                    text: "2",
+                    size: 40),
+                SizedBox(
+                  height: 10,
                 ),
               ],
             )
