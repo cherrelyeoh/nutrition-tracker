@@ -5,12 +5,14 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from './config/datasource';
 import { AIPromptModule } from './modules/AIPrompt/AIPrompt.module';
+import { UserMealLogModule } from './modules/UserMealLog/UserMealLog.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(config),
     AIPromptModule,
+    UserMealLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],

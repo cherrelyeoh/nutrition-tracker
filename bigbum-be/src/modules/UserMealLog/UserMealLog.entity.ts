@@ -21,16 +21,10 @@ export class UserMealLogEntity {
   @Column({ type: 'varchar', length: 255, nullable: true })
   mealImage?: string;
 
-  @Column({ type: 'varchar', length: 255 })
-  mealText: string;
-
-  @Column({ type: 'int' })
-  mealLevel: number;
-
   @Column({ type: 'varchar', length: 255, nullable: true })
-  remarks?: string;
+  mealType: string;
 
-  // Another table Response
+  //Response
 
   @Column({ type: 'text' })
   mealName: string;
@@ -39,16 +33,22 @@ export class UserMealLogEntity {
   weight: number;
 
   @Column({ type: 'int' })
-  calories: string;
+  calories: number;
 
   @Column({ type: 'int' })
-  protein: string;
+  protein: number;
 
   @Column({ type: 'int' })
-  fats: string;
+  fats: number;
 
   @Column({ type: 'int' })
-  carbs: string;
+  carbs: number;
+
+  @Column({ type: 'int' })
+  mealLevel: number;
+
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  comments?: string;
 
   @ManyToOne(() => AIIntegrationLogsEntity, { nullable: true })
   @JoinColumn({ name: 'promptLog' })

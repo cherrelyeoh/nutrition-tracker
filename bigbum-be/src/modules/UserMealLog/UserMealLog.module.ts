@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserMealLogController } from './UserMealLog.controller';
 import { UserMealLogEntity } from './UserMealLog.entity';
 import { UserMealLogService } from './UserMealLog.service';
+import { AIIntegrationModule } from 'src/integrations/AIIntegration/AIIntegration.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserMealLogEntity])],
+  imports: [TypeOrmModule.forFeature([UserMealLogEntity]), AIIntegrationModule],
   providers: [UserMealLogService],
   controllers: [UserMealLogController],
 })
