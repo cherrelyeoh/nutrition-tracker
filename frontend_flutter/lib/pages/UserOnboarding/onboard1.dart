@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Login/register.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard2.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
 class OnboardPage1 extends StatelessWidget {
@@ -69,7 +70,7 @@ class OnboardPage1 extends StatelessWidget {
                     backgroundColor: Colors.grey[850],
                     borderColor: Colors.white,
                     borderRadius: 50,
-                    text: "Sign Up",
+                    text: "Next",
                     textSize: 20,
                     textWeight: FontWeight.w700,
                     height: 50,
@@ -79,7 +80,7 @@ class OnboardPage1 extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const OnboardPage1()),
+                            builder: (context) => const OnboardPage2()),
                       );
                     },
                   ),

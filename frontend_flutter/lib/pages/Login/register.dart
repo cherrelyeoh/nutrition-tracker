@@ -49,7 +49,7 @@ class RegisterPage extends StatelessWidget {
             // Logo (BB Icon)
             const SizedBox(height: 40),
             Image.asset(
-              'assets/img/BB_1.png', // Ensure this image is in assets
+              'assets/img/BB-1.png', // Ensure this image is in assets
               width: 150,
             ),
 
