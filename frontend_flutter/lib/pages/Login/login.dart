@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard1.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard2.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
-import 'package:fluttertest/widgets/app_button_2.dart';
 import 'package:fluttertest/widgets/login_input.dart';
 
 class LoginPage extends StatelessWidget {
@@ -56,7 +55,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 40),
 
             Image.asset(
-              'assets/img/BB_1.png', // Ensure this image is in assets
+              'assets/img/BB-1.png', // Ensure this image is in assets
               width: 150,
             ),
 
@@ -100,7 +99,7 @@ class LoginPage extends StatelessWidget {
                 debugPrint("Starting onboarding...");
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const OnboardPage1()),
+                  MaterialPageRoute(builder: (context) => const MainHomePage()),
                 );
               },
             ),

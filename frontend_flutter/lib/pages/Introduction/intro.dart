@@ -73,7 +73,7 @@ class _IntroPageState extends State<IntroPage>
               duration: Duration(seconds: 2),
               curve: Curves.easeInOut,
               child: Image.asset(
-                'assets/img/BB_1.png',
+                'assets/img/BB-1.png',
                 width: 500, // Make it bigger
                 height: 500,
               ),
