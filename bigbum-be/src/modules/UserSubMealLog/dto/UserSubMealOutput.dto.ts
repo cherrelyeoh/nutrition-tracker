@@ -12,16 +12,16 @@ export class UserSubMealOutput {
   weight: number;
 
   @ApiProperty()
-  calories: string;
+  calories: number;
 
   @ApiProperty()
-  protein: string;
+  protein: number;
 
   @ApiProperty()
-  fats: string;
+  fats: number;
 
   @ApiProperty()
-  carbs: string;
+  carbs: number;
 
   @ApiProperty()
   mainMeal?: UserMealLogEntity;

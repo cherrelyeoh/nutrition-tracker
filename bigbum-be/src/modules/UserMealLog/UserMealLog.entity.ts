@@ -18,33 +18,36 @@ export class UserMealLogEntity {
 
   //Request
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   mealImage?: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   mealType: string;
+
+  @Column({ type: 'boolean', default: false })
+  isComplete: boolean;
 
   //Response
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   mealName: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   weight: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   calories: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   protein: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   fats: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   carbs: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   mealLevel: number;
 
   @Column({ type: 'varchar', length: 255, nullable: true })

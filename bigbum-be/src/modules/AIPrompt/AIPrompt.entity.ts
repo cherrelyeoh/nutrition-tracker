@@ -15,7 +15,7 @@ export class AIPromptEntity {
   @Column({ type: 'varchar', length: 255 })
   promptName: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'text' })
   promptRequest: string;
 
   @Column({ type: 'varchar', length: 255 })

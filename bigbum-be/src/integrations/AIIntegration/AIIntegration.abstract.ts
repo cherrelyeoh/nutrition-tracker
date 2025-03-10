@@ -1,11 +1,11 @@
-import { MealQuestionResponse } from 'src/modules/UserMealLog/dto/MealQuestionResponse.dto';
+import { MealQuestionResponse } from 'src/modules/UserMealQuestions/dto/MealQuestionResponse.dto';
 import { MealResultResponse } from 'src/modules/UserMealLog/dto/MealResultResponse.dto';
 
 export abstract class AIIntegrationService {
   abstract testFunction(imageBase64String: string): Promise<string>;
 
-  abstract extractMealNutrients(
+  abstract AIPromptWithImage(
     imageBase64String: string,
-    userId: number,
-  ): Promise<MealQuestionResponse | MealResultResponse>;
+    prompt: string,
+  ): Promise<any>;
 }

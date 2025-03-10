@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BaseResponseDto } from './BaseResponse.dto';
+import { BaseResponseDto } from '../../UserMealLog/dto/BaseResponse.dto';
 
 export class MealQuestionResponse extends BaseResponseDto {
   ResponseType: 'Question';

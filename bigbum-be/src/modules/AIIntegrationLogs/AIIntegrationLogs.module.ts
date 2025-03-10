@@ -7,6 +7,7 @@ import { AIIntegrationLogsService } from './AIIntegrationLogs.service';
 @Module({
   imports: [TypeOrmModule.forFeature([AIIntegrationLogsEntity])],
   providers: [AIIntegrationLogsService],
-  controllers: [AIIntegrationLogsController]
+  controllers: [AIIntegrationLogsController],
+  exports: [AIIntegrationLogsService],
 })
-export class AIIntegrationLogsModule { }
+export class AIIntegrationLogsModule {}

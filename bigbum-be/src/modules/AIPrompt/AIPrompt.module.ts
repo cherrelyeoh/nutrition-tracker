@@ -9,5 +9,6 @@ import { AIIntegrationModule } from 'src/integrations/AIIntegration/AIIntegratio
   imports: [TypeOrmModule.forFeature([AIPromptEntity]), AIIntegrationModule],
   providers: [AIPromptService],
   controllers: [AIPromptController],
+  exports: [AIPromptService],
 })
 export class AIPromptModule {}

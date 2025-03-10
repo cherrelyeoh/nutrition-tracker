@@ -3,7 +3,7 @@ import { Crud } from '@nestjsx/crud';
 import { UserMealLogService } from './UserMealLog.service';
 import { UserMealLogEntity } from './UserMealLog.entity';
 import { RouteMetadata } from 'nestjs-gis';
-import { MealQuestionResponse } from './dto/MealQuestionResponse.dto';
+import { MealQuestionResponse } from '../UserMealQuestions/dto/MealQuestionResponse.dto';
 import { MealResultResponse } from './dto/MealResultResponse.dto';
 import { UserMealInputDto } from './dto/UserMealInput.dto';
 import { ApiBody, ApiOkResponse, ApiResponse } from '@nestjs/swagger';

@@ -15,6 +15,10 @@ export class AIPromptService extends TypeOrmCrudService<AIPromptEntity> {
     super(repo);
   }
 
+  async getOneFromName(promptName: string): Promise<AIPromptEntity> {
+    const prompt = await this.repo.findOneBy({ promptName });
+    return prompt;
+  }
   async testAIFunction(image: string) {
     const base64Value = await this.convertImageToBase();
     return await this._aiIntegrationService.testFunction(base64Value);

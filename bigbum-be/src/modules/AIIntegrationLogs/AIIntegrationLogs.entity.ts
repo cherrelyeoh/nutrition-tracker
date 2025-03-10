@@ -32,8 +32,8 @@ export class AIIntegrationLogsEntity {
   @JoinColumn({ name: 'promptType' })
   promptType: AIPromptEntity;
 
-  @Column({ type: 'timestamp' })
-  requestDuration: Date;
+  @Column({ type: 'int', nullable: true })
+  requestDuration: number;
 
   @Column({ type: 'int' })
   promptToken: number;
