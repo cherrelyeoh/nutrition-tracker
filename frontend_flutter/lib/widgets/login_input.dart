@@ -85,6 +85,5 @@ class _LoginInputState extends State<LoginInput> {
         ],
       ),
     );
-    ;
   }
 }

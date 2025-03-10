@@ -19,7 +19,7 @@ class _IntroPageState extends State<IntroPage>
     super.initState();
 
     // Start fading in background & scaling the icon after 2 seconds
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _opacity = 1.0;
         _scale = 1.0; // Scale up the icon
@@ -27,10 +27,10 @@ class _IntroPageState extends State<IntroPage>
     });
 
     // Navigate to login page after 3 seconds
-    Future.delayed(Duration(seconds: 6), () {
+    Future.delayed(const Duration(seconds: 6), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()), // Go to Login
+        MaterialPageRoute(builder: (context) => const LoginPage()), // Go to Login
       );
     });
   }
@@ -43,7 +43,7 @@ class _IntroPageState extends State<IntroPage>
         children: [
           // Background Image with Fade-in Effect
           AnimatedOpacity(
-            duration: Duration(seconds: 2),
+            duration: const Duration(seconds: 2),
             opacity: _opacity,
             child: Stack(
               fit: StackFit.expand,
@@ -70,7 +70,7 @@ class _IntroPageState extends State<IntroPage>
           Center(
             child: AnimatedScale(
               scale: _scale,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
               curve: Curves.easeInOut,
               child: Image.asset(
                 'assets/img/BB-1.png',
