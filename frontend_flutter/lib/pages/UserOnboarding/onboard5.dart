@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard3.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard5.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard4.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard6.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
-class OnboardPage4 extends StatefulWidget {
-  const OnboardPage4({super.key});
+class OnboardPage5 extends StatefulWidget {
+  const OnboardPage5({super.key});
 
   @override
-  _OnboardPage4State createState() => _OnboardPage4State();
+  _OnboardPage5State createState() => _OnboardPage5State();
 }
 
-class _OnboardPage4State extends State<OnboardPage4> {
+class _OnboardPage5State extends State<OnboardPage5> {
   final ScrollController _scrollController = ScrollController();
   int selectedAge = 25; // Default age
 
@@ -32,11 +32,11 @@ class _OnboardPage4State extends State<OnboardPage4> {
               const SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
-                  debugPrint("Onboarding page 3..");
+                  debugPrint("Onboarding page 4..");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OnboardPage3()),
+                        builder: (context) => const OnboardPage4()),
                   );
                 },
                 child: SvgPicture.asset(
@@ -61,7 +61,7 @@ class _OnboardPage4State extends State<OnboardPage4> {
           const SizedBox(height: 20),
 
           const Text(
-            "What's Your Weight?",
+            "What is Your Height?",
             style: TextStyle(
               color: Colors.white,
               fontSize: 22,
@@ -79,7 +79,7 @@ class _OnboardPage4State extends State<OnboardPage4> {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  "Disclaimer: We collect your time alive on Earth solely to ensure accurate BMI calculations",
+                  "Disclaimer: We collect your height solely to ensure accurate BMI calculations",
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white,
@@ -159,12 +159,12 @@ class _OnboardPage4State extends State<OnboardPage4> {
             height: 50,
             width: 200,
             onPressed: () {
-              debugPrint("Onboard Page 5...");
+              debugPrint("Onboard Page 6...");
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const OnboardPage5(), // Pass age if needed
+                      const OnboardPage6(), // Pass age if needed
                 ),
               );
             },

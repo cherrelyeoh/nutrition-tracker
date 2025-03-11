@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/Login/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard3.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard5.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard7.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard8.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
-class OnboardPage4 extends StatefulWidget {
-  const OnboardPage4({super.key});
+class OnboardPage8 extends StatefulWidget {
+  const OnboardPage8({super.key});
 
   @override
-  _OnboardPage4State createState() => _OnboardPage4State();
+  _OnboardPage8State createState() => _OnboardPage8State();
 }
 
-class _OnboardPage4State extends State<OnboardPage4> {
+class _OnboardPage8State extends State<OnboardPage8> {
   final ScrollController _scrollController = ScrollController();
   int selectedAge = 25; // Default age
 
@@ -32,11 +33,11 @@ class _OnboardPage4State extends State<OnboardPage4> {
               const SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
-                  debugPrint("Onboarding page 3..");
+                  debugPrint("Onboarding page 7..");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OnboardPage3()),
+                        builder: (context) => const OnboardPage7()),
                   );
                 },
                 child: SvgPicture.asset(
@@ -61,7 +62,7 @@ class _OnboardPage4State extends State<OnboardPage4> {
           const SizedBox(height: 20),
 
           const Text(
-            "What's Your Weight?",
+            "Fill Your Profile",
             style: TextStyle(
               color: Colors.white,
               fontSize: 22,
@@ -79,7 +80,7 @@ class _OnboardPage4State extends State<OnboardPage4> {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  "Disclaimer: We collect your time alive on Earth solely to ensure accurate BMI calculations",
+                  "We want to know your fitness and health goals for us to set you on the right track!",
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white,
@@ -149,22 +150,21 @@ class _OnboardPage4State extends State<OnboardPage4> {
 
           // Continue Button
           AppButton1(
-            textColor: Colors.white,
-            backgroundColor: Colors.grey[850],
+            textColor: Colors.black,
+            backgroundColor: Colors.yellow,
             borderColor: Colors.white,
             borderRadius: 50,
-            text: "Continue",
+            text: "Start",
             textSize: 20,
             textWeight: FontWeight.w700,
             height: 50,
             width: 200,
             onPressed: () {
-              debugPrint("Onboard Page 5...");
+              debugPrint("Routing back to login page..");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      const OnboardPage5(), // Pass age if needed
+                  builder: (context) => const LoginPage(), // Pass age if needed
                 ),
               );
             },

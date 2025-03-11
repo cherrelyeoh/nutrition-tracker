@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard3.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard5.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard6.dart';
+import 'package:fluttertest/pages/UserOnboarding/onboard8.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
+import 'package:fluttertest/widgets/onboard7_button.dart';
 
-class OnboardPage4 extends StatefulWidget {
-  const OnboardPage4({super.key});
+class OnboardPage7 extends StatefulWidget {
+  const OnboardPage7({super.key});
 
   @override
-  _OnboardPage4State createState() => _OnboardPage4State();
+  _OnboardPage7State createState() => _OnboardPage7State();
 }
 
-class _OnboardPage4State extends State<OnboardPage4> {
+class _OnboardPage7State extends State<OnboardPage7> {
   final ScrollController _scrollController = ScrollController();
+  bool isSelected = false; // Track selection state
   int selectedAge = 25; // Default age
 
   @override
@@ -32,11 +34,11 @@ class _OnboardPage4State extends State<OnboardPage4> {
               const SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
-                  debugPrint("Onboarding page 3..");
+                  debugPrint("Onboarding page 6..");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OnboardPage3()),
+                        builder: (context) => const OnboardPage6()),
                   );
                 },
                 child: SvgPicture.asset(
@@ -61,7 +63,7 @@ class _OnboardPage4State extends State<OnboardPage4> {
           const SizedBox(height: 20),
 
           const Text(
-            "What's Your Weight?",
+            "Physical Activity Level",
             style: TextStyle(
               color: Colors.white,
               fontSize: 22,
@@ -79,7 +81,7 @@ class _OnboardPage4State extends State<OnboardPage4> {
               children: [
                 SizedBox(height: 20),
                 Text(
-                  "Disclaimer: We collect your time alive on Earth solely to ensure accurate BMI calculations",
+                  "We want to know your physical activity level for us to set you on the right track!",
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white,
@@ -93,56 +95,41 @@ class _OnboardPage4State extends State<OnboardPage4> {
 
           const Spacer(),
 
-          // AGE PICKER
-          SizedBox(
-            height: 100, // Adjust height as needed
-            child: Center(
-              child: ListView.builder(
-                controller: _scrollController,
-                scrollDirection: Axis.horizontal,
-                itemCount: 101, // Numbers 0 - 100
-                itemBuilder: (context, index) {
-                  bool isSelected = index == selectedAge;
+          SelectableContainer(
+            text: 'Beginner',
+            selectedColor: Colors.yellow,
+            unselectedColor: Colors.white,
+            selectedTextColor: Colors.black,
+            unselectedTextColor: const Color(0xFFFE6C6C),
+            onTap: () {
+              debugPrint("Beginner selected!");
+            },
+          ),
 
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedAge = index;
-                        double itemWidth = 60.0; // Adjust based on actual width
-                        double screenWidth = MediaQuery.of(context).size.width;
-                        double scrollTo = (index * itemWidth) -
-                            (screenWidth / 2) +
-                            (itemWidth / 2);
+          const SizedBox(height: 40),
 
-                        _scrollController.animateTo(
-                          scrollTo,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                        );
-                      });
-                    },
-                    child: Container(
-                      width: 60,
-                      alignment: Alignment.center,
-                      decoration: isSelected
-                          ? BoxDecoration(
-                              color: Colors.red, // Highlight selected age
-                              borderRadius: BorderRadius.circular(10),
-                            )
-                          : null,
-                      child: Text(
-                        index.toString(),
-                        style: TextStyle(
-                          fontSize: isSelected ? 32 : 24,
-                          fontWeight: FontWeight.bold,
-                          color: isSelected ? Colors.white : Colors.grey[400],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+          SelectableContainer(
+            text: 'Intermediate',
+            selectedColor: Colors.yellow,
+            unselectedColor: Colors.white,
+            selectedTextColor: Colors.black,
+            unselectedTextColor: const Color(0xFFFE6C6C),
+            onTap: () {
+              debugPrint("Intermediate selected!");
+            },
+          ),
+
+          const SizedBox(height: 40),
+
+          SelectableContainer(
+            text: 'Advanced',
+            selectedColor: Colors.yellow,
+            unselectedColor: Colors.white,
+            selectedTextColor: Colors.black,
+            unselectedTextColor: const Color(0xFFFE6C6C),
+            onTap: () {
+              debugPrint("Advanced selected!");
+            },
           ),
 
           const Spacer(),
@@ -159,12 +146,12 @@ class _OnboardPage4State extends State<OnboardPage4> {
             height: 50,
             width: 200,
             onPressed: () {
-              debugPrint("Onboard Page 5...");
+              debugPrint("Onboard Page 9...");
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const OnboardPage5(), // Pass age if needed
+                      const OnboardPage8(), // Pass age if needed
                 ),
               );
             },
