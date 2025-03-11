@@ -7,8 +7,8 @@ export class UserMealInputDto {
   @ApiPropertyOptional()
   userMealId?: number;
 
-  @ApiProperty()
-  mealImage: string;
+  @ApiPropertyOptional()
+  mealImage?: string;
 
   @ApiProperty()
   mealName: string;

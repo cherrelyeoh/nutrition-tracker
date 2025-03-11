@@ -349,4 +349,22 @@ If the input is invalid or cannot be processed, respond in the following error f
   //   console.log('Saving OpenAI log:', log);
   //   // Implement database save logic
   // }
+
+  private readonly tokenCostPer1000: Record<
+    string,
+    { input: number; output: number }
+  > = {
+    'gpt-4-turbo': { input: 0.01, output: 0.03 }, // Example cost per 1K tokens
+    'gpt-4': { input: 0.03, output: 0.06 },
+    'gpt-3.5-turbo': { input: 0.001, output: 0.002 },
+    'gpt-4o': { input: 0.005, output: 0.015 }, // GPT-4o pricing per 1K tokens
+  };
+
+  calculateTokenCost(inputTokens: number, outputTokens: number): number {
+    const cost = this.tokenCostPer1000['gpt-4o'];
+    const inputCost = (inputTokens / 1000) * cost.input;
+    const outputCost = (outputTokens / 1000) * cost.output;
+
+    return parseFloat((inputCost + outputCost).toFixed(6)); // Round to 6 decimal places
+  }
 }

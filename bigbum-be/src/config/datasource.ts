@@ -2,11 +2,19 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 
 const config = {
   type: 'postgres',
-  host: 'localhost',
+  // host: 'localhost',
+  // port: 5432,
+  // database: 'bigbum_db',
+  // username: 'postgres',
+  // password: 'admin',
+  host: 'ep-floral-bonus-a1rem7lk-pooler.ap-southeast-1.aws.neon.tech', // Neon host
   port: 5432,
-  database: 'bigbum_db',
-  username: 'postgres',
-  password: 'admin',
+  database: 'bigbum_db', // Neon database
+  username: 'neondb_owner', // Neon user
+  password: 'npg_POpdDS2B0lxT', // Neon password
+  ssl: {
+    rejectUnauthorized: false, // Required for Neon
+  },
   seeds: [__dirname + '/seeds/*{.ts,.js}'],
   entities: [__dirname + '/../modules/**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/../database/migrations/*{.ts,.js}'],

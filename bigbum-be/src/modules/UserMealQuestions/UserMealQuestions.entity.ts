@@ -22,10 +22,10 @@ export class UserMealQuestionsEntity {
   options: string[]; // JSON array of options
 
   @Column({ type: 'text', nullable: true })
-  answer: string[];
+  answer: string;
 
   @ManyToOne(() => UserMealLogEntity)
-  @JoinColumn({ name: 'createdBy' })
+  @JoinColumn({ name: 'userMealLog' })
   userMealLog: UserMealLogEntity;
 
   @CreateDateColumn({ type: 'timestamp' })

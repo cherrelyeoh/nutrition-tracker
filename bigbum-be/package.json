@@ -28,6 +28,7 @@
     "seed:revert": "npx typeorm-ts-node-esm migration:revert"
   },
   "dependencies": {
+    "@automapper/core": "^8.8.1",
     "@nestjs/axios": "^4.0.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.1",
@@ -88,5 +89,14 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "overrides": {
+    "@automapper/classes": {
+      "reflect-metadata": "^0.2.2"
+    },
+    "@automapper/nestjs": {
+      "@nestjs/common": "^11.0.0",
+      "@nestjs/core": "^11.0.0"
+    }
   }
 }

@@ -8,6 +8,7 @@ import { AIPromptModule } from './modules/AIPrompt/AIPrompt.module';
 import { UserMealLogModule } from './modules/UserMealLog/UserMealLog.module';
 import { AIIntegrationLogsModule } from './modules/AIIntegrationLogs/AIIntegrationLogs.module';
 import { UserModule } from './modules/User/User.module';
+import { UserMealQuestionsModule } from './modules/UserMealQuestions/UserMealQuestions.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UserModule } from './modules/User/User.module';
     UserMealLogModule,
     AIIntegrationLogsModule,
     UserModule,
+    UserMealQuestionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
