@@ -7,6 +7,7 @@ import { UserMealQuestionsService } from './UserMealQuestions.service';
 @Module({
   imports: [TypeOrmModule.forFeature([UserMealQuestionsEntity])],
   providers: [UserMealQuestionsService],
-  controllers: [UserMealQuestionsController]
+  controllers: [UserMealQuestionsController],
+  exports: [UserMealQuestionsService],
 })
-export class UserMealQuestionsModule { }
+export class UserMealQuestionsModule {}

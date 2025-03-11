@@ -16,6 +16,8 @@ import { PromptName } from '../AIPrompt/AIPrompt.constants';
 import { UserService } from '../User/User.service';
 import { UserMealQuestionsEntity } from '../UserMealQuestions/UserMealQuestions.entity';
 import { UserMealQuestionsService } from '../UserMealQuestions/UserMealQuestions.service';
+import * as request from 'supertest';
+import { AIPromptEntity } from '../AIPrompt/AIPrompt.entity';
 
 @Injectable()
 export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
@@ -33,31 +35,63 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
   async extractNutrientData(
     input: UserMealInputDto,
   ): Promise<MealQuestionResponse | MealResultResponse> {
-    const prompt = await this.aiPromptService.getOneFromName(
-      PromptName.FullNutrientsWithImage,
-    );
+    let questionsAndAnswer = [];
 
-    const user = await this.userService.findOne({ where: { id: 1 } }); // Replace with actual user ID
+    if (input.userMealId) {
+      questionsAndAnswer = await this.userMealQuestionService.find({
+        where: { userMealLog: { id: input.userMealId } },
+      });
+    }
+
+    let prompt: AIPromptEntity = null;
+
+    if (questionsAndAnswer.length > 0) {
+      prompt = await this.aiPromptService.getOneFromName(
+        PromptName.OnlyNutrientsWithImage,
+      );
+      questionsAndAnswer.forEach((question) => {
+        prompt.promptRequest += `\nQuestion: ${question.question}\nAnswer: ${question.answer}\n`; // Append each question
+      });
+    } else {
+      prompt = await this.aiPromptService.getOneFromName(
+        PromptName.FullNutrientsWithImage,
+      );
+    }
+    const startTime = Date.now(); // Start timer
 
     const response = await this.aiIntegrationService.AIPromptWithImage(
       input.mealImage,
       prompt.promptRequest,
     );
 
+    const endTime = Date.now(); // End timer
+    const timeTaken = endTime - startTime; // Calculate duration in milliseconds
+
     // Prepare AI log data
     const aiLog = new AIIntegrationLogsEntity();
     aiLog.actionUrl = 'ChatGPT';
-    aiLog.request = JSON.stringify({ input: input.mealImage });
+    aiLog.request = prompt.promptRequest;
     aiLog.response = JSON.stringify(response);
-    aiLog.responseType = 'ExtractNutrientDetails';
-    aiLog.requestDuration = 0;
-    aiLog.promptToken = response?.Usage ?? 0;
-    aiLog.cost = 0;
-    aiLog.createdBy = user;
+    aiLog.responseType = prompt.promptName;
+    aiLog.requestDuration = timeTaken;
+    aiLog.promptToken = response.usage.total_tokens ?? 0;
+    aiLog.cost = await this.aiIntegrationService.calculateTokenCost(
+      Number(response.usage.prompt_tokens),
+      Number(response.usage.completion_tokens),
+    );
+    aiLog.createdBy = await this.userService.findOne({
+      where: { id: input.userId },
+    });
     aiLog.promptType = prompt;
 
     await this.aiLogService.create(aiLog);
-    const rawContent = JSON.parse(response.choices[0].message.content);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const cleanedContent = response.choices[0].message.content
+      .replace(/```json/g, '') // Remove ```json
+      .replace(/```/g, '') // Remove closing ```
+      .replace(/\\n/g, '') // Remove escaped newlines
+      .replace(/\\"/g, '"'); // Fix escaped quotes
+    const rawContent = JSON.parse(cleanedContent);
 
     if (
       rawContent.ResponseType == 'Question' ||
@@ -65,17 +99,22 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     ) {
       let userMealLog: UserMealLogEntity = {
         mealType: input.mealName,
-        mealImage: input.mealImage,
+        mealImage: 'input.mealImage1',
       } as UserMealLogEntity;
 
-      const temp = this.repo.create(userMealLog);
-      userMealLog = await this.repo.save(temp);
+      if (input.userMealId != null && input.userMealId > 0) {
+        await this.repo.update(input.userMealId, userMealLog);
+      } else {
+        const temp = this.repo.create(userMealLog);
+        userMealLog = await this.repo.save(temp);
+      }
 
       let lastResponse = null;
       if (rawContent.ResponseType === 'Question') {
         return this.mapToQuestionResponse(rawContent, userMealLog);
       } else if (rawContent.ResponseType === 'NutrientResult') {
-        return this.mapToNutrientResult(rawContent, userMealLog);
+        userMealLog.id = input.userMealId;
+        return await this.mapToNutrientResult(rawContent, userMealLog);
       }
     }
   }
@@ -116,11 +155,21 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
   /**
    * Maps AI Nutrient result response to MealResultResponse DTO
    */
-  private mapToNutrientResult(
+  private async mapToNutrientResult(
     parsedContent: any,
     userMealLog: UserMealLogEntity,
-  ): MealResultResponse {
+  ): Promise<MealResultResponse> {
     const mainMeal = this.mapToUserMealOutput(parsedContent.Result);
+    userMealLog.calories = mainMeal.calories;
+    userMealLog.protein = mainMeal.protein;
+    userMealLog.fats = mainMeal.fats;
+    userMealLog.carbs = mainMeal.carbs;
+    userMealLog.mealLevel = mainMeal.mealLevel;
+    userMealLog.comments = mainMeal.comments;
+
+    if (userMealLog.id != null && userMealLog.id > 0) {
+      await this.repo.update(userMealLog.id, userMealLog);
+    }
 
     const subMealList: UserSubMealOutput[] =
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call

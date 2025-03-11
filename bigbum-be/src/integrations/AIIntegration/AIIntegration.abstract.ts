@@ -1,6 +1,3 @@
-import { MealQuestionResponse } from 'src/modules/UserMealQuestions/dto/MealQuestionResponse.dto';
-import { MealResultResponse } from 'src/modules/UserMealLog/dto/MealResultResponse.dto';
-
 export abstract class AIIntegrationService {
   abstract testFunction(imageBase64String: string): Promise<string>;
 
@@ -8,4 +5,6 @@ export abstract class AIIntegrationService {
     imageBase64String: string,
     prompt: string,
   ): Promise<any>;
+
+  abstract calculateTokenCost(inputTokens: number, outputTokens: number);
 }

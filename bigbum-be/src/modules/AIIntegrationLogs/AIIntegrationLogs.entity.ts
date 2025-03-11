@@ -38,7 +38,7 @@ export class AIIntegrationLogsEntity {
   @Column({ type: 'int' })
   promptToken: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'float', default: 0 })
   cost: number;
 
   @ManyToOne(() => UserEntity, { nullable: true })

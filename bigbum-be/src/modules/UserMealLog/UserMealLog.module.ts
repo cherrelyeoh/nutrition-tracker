@@ -7,6 +7,7 @@ import { AIIntegrationModule } from 'src/integrations/AIIntegration/AIIntegratio
 import { AIIntegrationLogsModule } from '../AIIntegrationLogs/AIIntegrationLogs.module';
 import { AIPromptModule } from '../AIPrompt/AIPrompt.module';
 import { UserModule } from '../User/User.module';
+import { UserMealQuestionsModule } from '../UserMealQuestions/UserMealQuestions.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserModule } from '../User/User.module';
     AIIntegrationLogsModule,
     AIPromptModule,
     UserModule,
+    UserMealQuestionsModule,
   ],
   providers: [UserMealLogService],
   controllers: [UserMealLogController],
