@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard2.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 

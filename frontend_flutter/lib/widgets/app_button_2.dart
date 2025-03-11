@@ -24,6 +24,10 @@ class AppButton2 extends StatelessWidget {
     return Container(
       width: size,
       height: size,
+      decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: borderColor, width: 1.0)),
       child: Center(
         child: isIcon == false
             ? Text(
@@ -32,10 +36,6 @@ class AppButton2 extends StatelessWidget {
               )
             : Icon(icon, color: textColor),
       ),
-      decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: borderColor, width: 1.0)),
     );
   }
 }
