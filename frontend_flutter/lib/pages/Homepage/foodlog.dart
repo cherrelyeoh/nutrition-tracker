@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
-import 'package:fluttertest/pages/Introduction/intro.dart';
-import 'package:fluttertest/pages/Login/login.dart';
-import 'package:fluttertest/widgets/macros_small_widget.dart';
-import 'package:fluttertest/widgets/meal_idea_widget.dart';
-import 'package:fluttertest/widgets/meal_type_widget.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class FoodLogPage extends StatefulWidget {
   const FoodLogPage({super.key});
@@ -27,30 +20,10 @@ class _FoodLogPageState extends State<FoodLogPage> {
     // fetchData();
   }
 
-  // Future<void> fetchData() async {
-  //   try {
-  //     final response = await http
-  //         .get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
-  //     if (response.statusCode == 200) {
-  //       setState(() {
-  //         data = json.decode(response.body);
-  //         isLoading = false;
-  //       });
-  //     } else {
-  //       throw Exception("Failed to load data");
-  //     }
-  //   } catch (e) {
-  //     setState(() {
-  //       hasError = true;
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900], // Set background color
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -83,13 +56,18 @@ class _FoodLogPageState extends State<FoodLogPage> {
                         height: 12,
                       ),
                     ),
-                    const Text(
-                      'Dinner',
-                      style: TextStyle(
-                        color: Color(0xFFFE6C6C),
-                        fontSize: 22,
-                        fontFamily: 'League Spartan',
-                        fontWeight: FontWeight.w600,
+                    const SizedBox(width: 20),
+                    const Expanded(
+                      // Forces "Dinner" to take up available space
+                      child: Text(
+                        'Dinner',
+                        style: TextStyle(
+                          color: Color(0xFFFE6C6C),
+                          fontSize: 22,
+                          fontFamily: 'League Spartan',
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
                     ),
                     const Row(
@@ -158,17 +136,17 @@ class _FoodLogPageState extends State<FoodLogPage> {
                         child: Container(
                           height: 338,
                           decoration: BoxDecoration(
-                            color: Color(0xFFDADADA),
+                            color: const Color(0xFFDADADA),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Center(
-                            child: Container(
+                            child: SizedBox(
                               width: 234,
                               height: 294,
                               child: Stack(
                                 children: [
                                   // Title
-                                  Positioned(
+                                  const Positioned(
                                     left: 20,
                                     top: 0,
                                     child: Text(
@@ -219,7 +197,7 @@ Positioned _positionedText(double left, double top, String text) {
     top: top,
     child: Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         color: Color(0xFF260000),
         fontSize: 24,
         fontWeight: FontWeight.w400,

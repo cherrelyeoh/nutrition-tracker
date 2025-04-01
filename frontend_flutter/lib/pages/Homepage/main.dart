@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Homepage/foodlog.dart';
-import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({super.key});
@@ -54,26 +51,6 @@ class _MainHomePageState extends State<MainHomePage> {
     // fetchData();
   }
 
-  // Future<void> fetchData() async {
-  //   try {
-  //     final response = await http
-  //         .get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
-  //     if (response.statusCode == 200) {
-  //       setState(() {
-  //         data = json.decode(response.body);
-  //         isLoading = false;
-  //       });
-  //     } else {
-  //       throw Exception("Failed to load data");
-  //     }
-  //   } catch (e) {
-  //     setState(() {
-  //       hasError = true;
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +66,7 @@ class _MainHomePageState extends State<MainHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Custom Header
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 30,
                 child: Row(
@@ -124,6 +101,30 @@ class _MainHomePageState extends State<MainHomePage> {
                       ],
                     ),
                   ],
+                ),
+              ),
+
+              const SizedBox(height: 10), // Space before the new text
+
+              // Clickable Text (Links to Another Page)
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FoodLogPage(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "It's time to log your meal!",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                  textAlign: TextAlign.start,
                 ),
               ),
 
@@ -173,7 +174,7 @@ class _MainHomePageState extends State<MainHomePage> {
                     ],
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
 
@@ -230,7 +231,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 ],
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
 
@@ -243,7 +244,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 
@@ -297,7 +298,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
 
@@ -310,7 +311,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 ),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
 

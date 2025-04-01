@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard1.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/login_input.dart';
 
