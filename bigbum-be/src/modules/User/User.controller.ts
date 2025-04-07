@@ -17,9 +17,15 @@ import {
 import { SignUpDto } from './dto/SignUp.dto';
 import { LoginDto } from './dto/Login.dto';
 import { UserService } from './User.service';
+import { CreateUserDto } from './dto/CreateUser.dto';
+import { UpdateUserDto } from './dto/UpdateUser.dto';
 @RouteMetadata()
 @Crud({
   model: { type: UserEntity },
+  dto: {
+    create: CreateUserDto,
+    update: UpdateUserDto,
+  },
   params: {},
 })
 @ApiTags('Authentication')
