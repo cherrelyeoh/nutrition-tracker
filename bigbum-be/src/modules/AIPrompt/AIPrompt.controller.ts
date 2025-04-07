@@ -3,7 +3,7 @@ import { Crud } from '@nestjsx/crud';
 import { AIPromptService } from './AIPrompt.service';
 import { AIPromptEntity } from './AIPrompt.entity';
 import { RouteMetadata } from 'nestjs-gis';
-import { ApiBody, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse } from '@nestjs/swagger';
 
 @RouteMetadata()
 @Crud({
