@@ -31,6 +31,12 @@ export class UserBiodataEntity {
   @Column({ type: 'float' })
   bmi: number;
 
+  @Column({ type: 'float' })
+  bodyFat: number;
+
+  @Column({ type: 'float' })
+  muscleMass: number;
+
   @Column({ type: 'int' })
   goal: number;
 

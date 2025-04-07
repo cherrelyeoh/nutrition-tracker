@@ -1,17 +1,18 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  OneToOne,
-  JoinColumn,
-  UpdateDateColumn,
   DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from '../User/User.entity';
+import { MainMacro } from './UserIntakeTarget.constants';
 
-@Entity('UserBiodataLogs')
-export class UserBiodataLogsEntity {
+@Entity('UserIntakeTarget')
+export class UserIntakeTargetEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,23 +20,33 @@ export class UserBiodataLogsEntity {
   @JoinColumn({ name: 'userId' })
   user: UserEntity;
 
-  @Column({ type: 'int' })
-  age: number;
+  @Column({ type: 'float' })
+  calorie: number;
 
   @Column({ type: 'float' })
-  weight: number;
+  fats: number;
 
   @Column({ type: 'float' })
-  height: number;
+  carbs: number;
 
   @Column({ type: 'float' })
-  bodyFat: number;
+  protein: number;
 
-  @Column({ type: 'float' })
-  muscleMass: number;
+  @Column({ type: 'enum', enum: MainMacro })
+  mainMacro: MainMacro;
 
-  @Column({ type: 'float' })
-  bmi: number;
+  //Extended Macros
+  //   @Column({ type: 'float' })
+  //   fiber: number;
+
+  //   @Column({ type: 'float' })
+  //   sugars: number;
+
+  //   @Column({ type: 'float' })
+  //   saturatedFat: number;
+
+  //   @Column({ type: 'float' })
+  //   transFat: number;
 
   @Column({ type: 'varchar', length: 255 })
   createdBy: string;

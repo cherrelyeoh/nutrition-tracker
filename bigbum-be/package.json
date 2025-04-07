@@ -22,7 +22,7 @@
     "migration:run": "npm run typeorm migration:run",
     "migration:generate": "npm run typeorm -- migration:generate src/database/migrations/Migration",
     "migration:revert": "npm run typeorm migration:revert",
-    "generate-api": "openapi-generator-cli generate -i http://localhost:3000/api-json -g dart-dio -o ../frontend_flutter/lib/services/api",
+    "generate-api": "openapi-generator-cli generate -i http://localhost:3000/api-json -g dart-dio -o ../frontend_flutter/lib/services/api --skip-validate-spec",
     "seed:generate": "npx typeorm-ts-node-esm migration:create src/database/migrations/DataSeeder",
     "seed:run": "npm run typeorm migration:run",
     "seed:revert": "npx typeorm-ts-node-esm migration:revert"

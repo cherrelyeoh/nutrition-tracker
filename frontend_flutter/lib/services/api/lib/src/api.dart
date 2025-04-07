@@ -9,7 +9,12 @@ import 'package:openapi/src/auth/api_key_auth.dart';
 import 'package:openapi/src/auth/basic_auth.dart';
 import 'package:openapi/src/auth/bearer_auth.dart';
 import 'package:openapi/src/auth/oauth.dart';
+import 'package:openapi/src/api/ai_integration_logs_api.dart';
+import 'package:openapi/src/api/ai_prompt_api.dart';
 import 'package:openapi/src/api/app_api.dart';
+import 'package:openapi/src/api/user_api.dart';
+import 'package:openapi/src/api/user_meal_log_api.dart';
+import 'package:openapi/src/api/user_meal_questions_api.dart';
 
 class Openapi {
   static const String basePath = r'http://localhost';
@@ -65,9 +70,39 @@ class Openapi {
     }
   }
 
+  /// Get AIIntegrationLogsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AIIntegrationLogsApi getAIIntegrationLogsApi() {
+    return AIIntegrationLogsApi(dio, serializers);
+  }
+
+  /// Get AIPromptApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AIPromptApi getAIPromptApi() {
+    return AIPromptApi(dio, serializers);
+  }
+
   /// Get AppApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   AppApi getAppApi() {
     return AppApi(dio, serializers);
+  }
+
+  /// Get UserApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  UserApi getUserApi() {
+    return UserApi(dio, serializers);
+  }
+
+  /// Get UserMealLogApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  UserMealLogApi getUserMealLogApi() {
+    return UserMealLogApi(dio, serializers);
+  }
+
+  /// Get UserMealQuestionsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  UserMealQuestionsApi getUserMealQuestionsApi() {
+    return UserMealQuestionsApi(dio, serializers);
   }
 }

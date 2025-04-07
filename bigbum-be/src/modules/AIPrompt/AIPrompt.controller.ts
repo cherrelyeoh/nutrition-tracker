@@ -3,7 +3,7 @@ import { Crud } from '@nestjsx/crud';
 import { AIPromptService } from './AIPrompt.service';
 import { AIPromptEntity } from './AIPrompt.entity';
 import { RouteMetadata } from 'nestjs-gis';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 
 @RouteMetadata()
 @Crud({
@@ -23,7 +23,7 @@ export class AIPromptController {
       },
     },
   })
-  @ApiResponse({ status: 201, description: 'Success' })
+  @ApiOkResponse({ description: 'Success' })
   async testFunction(
     @Body('imageBase64') imageBase64: string,
   ): Promise<string> {
