@@ -1,12 +1,95 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard1.dart';
-import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/login_input.dart';
+import 'package:http/http.dart' as http;
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final nameController = TextEditingController();
+  final numberController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final retypePasswordController = TextEditingController();
+
+  bool isLoading = false;
+
+  Future<void> registerUser() async {
+    debugPrint('Registration User called');
+    setState(() {
+      isLoading = true;
+    });
+
+    // if (nameController.text.isEmpty ||
+    //     emailController.text.isEmpty ||
+    //     passwordController.text.isEmpty ||
+    //     retypePasswordController.text.isEmpty) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text("Please fill in all fields")),
+    //   );
+    //   setState(() => isLoading = false);
+    //   return;
+    // }
+
+    // if (passwordController.text != retypePasswordController.text) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text("Passwords do not match")),
+    //   );
+    //   setState(() => isLoading = false);
+    //   return;
+    // }
+
+    final url = Uri.parse("http://192.168.1.8:3000/rest/User/signup"); //
+
+    debugPrint("Name ${nameController.text}");
+    debugPrint("Email ${emailController.text}");
+    debugPrint("Password ${passwordController.text}");
+    debugPrint("Phone ${numberController.text}");
+
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode({
+        "name": nameController.text,
+        "emailAddress": emailController.text,
+        "password": passwordController.text,
+        "mobileNumber": numberController.text,
+        "accountStatus": 1,
+        "createdBy": "mobile-app",
+        "lastUpdatedBy": "mobile-app"
+      }),
+    );
+
+    debugPrint(response.toString());
+
+    setState(() {
+      isLoading = false;
+    });
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      // Success
+      debugPrint("User registered!");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const OnboardPage1()),
+      );
+    } else {
+      debugPrint("Registration failed: ${response.body}");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to register: ${response.reasonPhrase}")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,27 +132,36 @@ class RegisterPage extends StatelessWidget {
             // Logo (BB Icon)
             const SizedBox(height: 40),
             Image.asset(
-              'assets/img/BB-1.png', // Ensure this image is in assets
+              'assets/img/BB-1.png',
               width: 150,
             ),
 
             const SizedBox(height: 30),
 
-            const Text(
-              "Let's Get Started!",
-              style: TextStyle(
-                color: Colors.white, // Text color
-                fontSize: 18, // Font size
-                fontWeight: FontWeight.bold,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const OnboardPage1()),
+                );
+              },
+              child: const Text(
+                "Let's Get Started!",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
 
             const SizedBox(height: 20),
 
-            const LoginInput(
+            LoginInput(
+              controller: nameController,
               height: 45,
               width: 325,
-              backgroundColor: Color(0xFF700000),
+              backgroundColor: const Color(0xFF700000),
               placeholderInput: "Name",
               icon: Icons.email,
             ),
@@ -78,7 +170,8 @@ class RegisterPage extends StatelessWidget {
               height: 20,
             ),
 
-            const LoginInput(
+            LoginInput(
+              controller: numberController,
               height: 45,
               width: 325,
               backgroundColor: Color(0xFF700000),
@@ -90,7 +183,8 @@ class RegisterPage extends StatelessWidget {
               height: 20,
             ),
 
-            const LoginInput(
+            LoginInput(
+              controller: emailController,
               height: 45,
               width: 325,
               backgroundColor: Color(0xFF700000),
@@ -102,7 +196,8 @@ class RegisterPage extends StatelessWidget {
               height: 20,
             ),
 
-            const LoginInput(
+            LoginInput(
+              controller: passwordController,
               height: 45,
               width: 325,
               backgroundColor: Color(0xFF700000),
@@ -115,7 +210,8 @@ class RegisterPage extends StatelessWidget {
               height: 20,
             ),
 
-            const LoginInput(
+            LoginInput(
+              controller: retypePasswordController,
               height: 45,
               width: 325,
               backgroundColor: Color(0xFF700000),
@@ -166,23 +262,24 @@ class RegisterPage extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            AppButton1(
-              textColor: Colors.white,
-              backgroundColor: Colors.grey[850],
-              borderColor: Colors.white,
-              borderRadius: 50,
-              text: "Sign Up",
-              textSize: 20,
-              textWeight: FontWeight.w700,
-              height: 50,
-              width: 200,
-              onPressed: () {
-                debugPrint("Starting onboarding...");
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const OnboardPage1()),
-                );
-              },
+            ElevatedButton(
+              onPressed: isLoading ? null : registerUser,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[850],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+              child: isLoading
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
             ),
 
             const SizedBox(height: 20),

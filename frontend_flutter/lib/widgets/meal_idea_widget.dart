@@ -6,11 +6,11 @@ class FoodCard extends StatelessWidget {
   final String restaurantName;
 
   const FoodCard({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.foodName,
     required this.restaurantName,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

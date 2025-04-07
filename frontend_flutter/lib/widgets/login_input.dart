@@ -9,6 +9,7 @@ class LoginInput extends StatefulWidget {
   final double textSize;
   final Color textColor;
   final IconData? icon;
+  final TextEditingController controller;
   const LoginInput(
       {super.key,
       required this.height,
@@ -18,7 +19,8 @@ class LoginInput extends StatefulWidget {
       this.isObscureText = false,
       this.textSize = 14,
       this.textColor = Colors.black,
-      this.icon});
+      this.icon,
+      required this.controller});
 
   @override
   State<LoginInput> createState() => _LoginInputState();
@@ -69,6 +71,9 @@ class _LoginInputState extends State<LoginInput> {
           // Password Text
           Expanded(
             child: TextField(
+              controller: widget.controller,
+              cursorColor: Colors.black,
+              cursorHeight: widget.textSize,
               obscureText: widget.isObscureText, // Hide password input
               decoration: InputDecoration(
                 hintText: widget.placeholderInput,
