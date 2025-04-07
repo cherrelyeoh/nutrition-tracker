@@ -8,7 +8,12 @@ import {
 import { Crud, CrudController } from '@nestjsx/crud';
 import { UserEntity } from './user.entity';
 import { RouteMetadata } from 'nestjs-gis';
-import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiResponse,
+  ApiOperation,
+  ApiOkResponse,
+} from '@nestjs/swagger';
 import { SignUpDto } from './dto/SignUp.dto';
 import { LoginDto } from './dto/Login.dto';
 import { UserService } from './User.service';
@@ -41,8 +46,7 @@ export class UserController implements CrudController<UserEntity> {
   @Post('login')
   @UsePipes(new ValidationPipe({ transform: true }))
   @ApiOperation({ summary: 'Authenticate user' })
-  @ApiResponse({
-    status: 200,
+  @ApiOkResponse({
     description: 'Login successful',
     schema: {
       type: 'object',
