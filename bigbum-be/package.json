@@ -22,7 +22,7 @@
     "migration:run": "npm run typeorm migration:run",
     "migration:generate": "npm run typeorm -- migration:generate src/database/migrations/Migration",
     "migration:revert": "npm run typeorm migration:revert",
-    "generate-api": "openapi-generator-cli generate -i http://localhost:3000/api-json -g dart-dio -o ../frontend_flutter/lib/services/api --skip-validate-spec",
+    "generate-api": "curl http://localhost:3000/api-json -o ../frontend_flutter/openapi.json",
     "seed:generate": "npx typeorm-ts-node-esm migration:create src/database/migrations/DataSeeder",
     "seed:run": "npm run typeorm migration:run",
     "seed:revert": "npx typeorm-ts-node-esm migration:revert"
@@ -54,6 +54,7 @@
     "@nestjs/testing": "^11.0.1",
     "@swc/cli": "^0.6.0",
     "@swc/core": "^1.10.7",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.7",
