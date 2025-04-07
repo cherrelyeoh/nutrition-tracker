@@ -11,7 +11,7 @@ class SelectableContainer extends StatefulWidget {
   final VoidCallback? onTap; // Optional callback when tapped
 
   const SelectableContainer({
-    Key? key,
+    super.key,
     required this.text,
     this.selectedColor = Colors.yellow,
     this.unselectedColor = Colors.white,
@@ -20,7 +20,7 @@ class SelectableContainer extends StatefulWidget {
     this.width = 323,
     this.height = 64,
     this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   _SelectableContainerState createState() => _SelectableContainerState();

@@ -5,8 +5,17 @@ import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/login_input.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +69,11 @@ class LoginPage extends StatelessWidget {
 
             const SizedBox(height: 50),
 
-            const LoginInput(
+            LoginInput(
+              controller: emailController,
               height: 45,
               width: 325,
-              backgroundColor: Color(0xFF700000),
+              backgroundColor: const Color(0xFF700000),
               placeholderInput: "Email",
               icon: Icons.email,
             ),
@@ -72,10 +82,11 @@ class LoginPage extends StatelessWidget {
               height: 20,
             ),
 
-            const LoginInput(
+            LoginInput(
+              controller: passwordController,
               height: 45,
               width: 325,
-              backgroundColor: Color(0xFF700000),
+              backgroundColor: const Color(0xFF700000),
               placeholderInput: "Password",
               isObscureText: true,
               icon: Icons.lock,

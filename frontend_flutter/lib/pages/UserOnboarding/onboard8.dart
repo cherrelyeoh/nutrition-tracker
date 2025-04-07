@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard7.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard8.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
 class OnboardPage8 extends StatefulWidget {

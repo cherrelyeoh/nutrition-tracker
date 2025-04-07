@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/pages/Login/login.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard1.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard2.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard4.dart';
