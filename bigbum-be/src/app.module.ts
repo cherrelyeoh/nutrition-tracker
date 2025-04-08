@@ -9,6 +9,7 @@ import { UserMealLogModule } from './modules/UserMealLog/UserMealLog.module';
 import { AIIntegrationLogsModule } from './modules/AIIntegrationLogs/AIIntegrationLogs.module';
 import { UserModule } from './modules/User/User.module';
 import { UserMealQuestionsModule } from './modules/UserMealQuestions/UserMealQuestions.module';
+import { UserBiodataModule } from './modules/UserBiodata/UserBiodata.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserMealQuestionsModule } from './modules/UserMealQuestions/UserMealQue
     AIIntegrationLogsModule,
     UserModule,
     UserMealQuestionsModule,
+    UserBiodataModule,
   ],
   controllers: [AppController],
   providers: [AppService],

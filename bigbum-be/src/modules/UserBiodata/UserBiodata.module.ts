@@ -8,5 +8,6 @@ import { UserBiodataService } from './UserBiodata.service';
   imports: [TypeOrmModule.forFeature([UserBiodataEntity])],
   providers: [UserBiodataService],
   controllers: [UserBiodataController],
+  exports: [UserBiodataService],
 })
 export class UserBiodataModule {}

@@ -5,8 +5,8 @@ import { UserSubMealOutput } from 'src/modules/UserSubMealLog/dto/UserSubMealOut
 
 export class MealResultResponse extends BaseResponseDto {
   ResponseType: 'NutrientResult';
-  @ApiProperty()
+  @ApiProperty({ type: () => UserMealOutputDto })
   mainMeal: UserMealOutputDto;
-  @ApiProperty()
+  @ApiProperty({ type: () => [UserSubMealOutput] })
   subMealList: UserSubMealOutput[];
 }

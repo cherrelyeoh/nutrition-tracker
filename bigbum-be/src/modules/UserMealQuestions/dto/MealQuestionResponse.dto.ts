@@ -3,6 +3,7 @@ import { BaseResponseDto } from '../../UserMealLog/dto/BaseResponse.dto';
 
 export class MealQuestionResponse extends BaseResponseDto {
   ResponseType: 'Question';
+
   @ApiProperty()
   questionList: MealQuestions[];
 }
