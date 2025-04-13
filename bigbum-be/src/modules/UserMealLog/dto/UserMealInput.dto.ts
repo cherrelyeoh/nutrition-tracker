@@ -12,4 +12,7 @@ export class UserMealInputDto {
 
   @ApiProperty()
   mealName: string;
+
+  @ApiProperty()
+  dateOfMeal: Date;
 }

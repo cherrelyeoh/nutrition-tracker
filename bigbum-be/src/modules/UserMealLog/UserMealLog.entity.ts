@@ -17,7 +17,6 @@ export class UserMealLogEntity {
   id: number;
 
   //Request
-
   @Column({ type: 'varchar', length: 255, nullable: false })
   mealImage?: string;
 
@@ -26,6 +25,9 @@ export class UserMealLogEntity {
 
   @Column({ type: 'boolean', default: false })
   isComplete: boolean;
+
+  @Column({ type: 'timestamp', nullable: true })
+  dateOfMeal: Date; // This field is to cater for the future where we would allow multiple meals
 
   //Response
 
