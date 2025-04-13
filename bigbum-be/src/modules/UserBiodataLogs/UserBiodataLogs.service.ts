@@ -1,4 +1,4 @@
-import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserBiodataLogsEntity } from './UserBiodataLogs.entity';

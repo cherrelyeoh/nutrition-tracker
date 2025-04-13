@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common';
-import { Crud } from '@nestjsx/crud';
+import { Crud } from '@dataui/crud';
 import { AIIntegrationLogsService } from './AIIntegrationLogs.service';
 import { AIIntegrationLogsEntity } from './AIIntegrationLogs.entity';
 import { RouteMetadata } from 'nestjs-gis';

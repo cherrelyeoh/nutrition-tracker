@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { Crud } from '@nestjsx/crud';
+import { Crud } from '@dataui/crud';
 import { UserMealLogService } from './UserMealLog.service';
 import { UserMealLogEntity } from './UserMealLog.entity';
 import { RouteMetadata } from 'nestjs-gis';

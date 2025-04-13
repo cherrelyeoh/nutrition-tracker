@@ -5,7 +5,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Crud, CrudController } from '@dataui/crud';
 import { UserEntity } from './user.entity';
 import { RouteMetadata } from 'nestjs-gis';
 import {

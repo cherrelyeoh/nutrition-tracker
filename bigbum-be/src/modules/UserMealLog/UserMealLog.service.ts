@@ -1,4 +1,4 @@
-import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserMealLogEntity } from './UserMealLog.entity';
@@ -16,7 +16,6 @@ import { PromptName } from '../AIPrompt/AIPrompt.constants';
 import { UserService } from '../User/User.service';
 import { UserMealQuestionsEntity } from '../UserMealQuestions/UserMealQuestions.entity';
 import { UserMealQuestionsService } from '../UserMealQuestions/UserMealQuestions.service';
-import * as request from 'supertest';
 import { AIPromptEntity } from '../AIPrompt/AIPrompt.entity';
 
 @Injectable()
@@ -91,6 +90,7 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       .replace(/```/g, '') // Remove closing ```
       .replace(/\\n/g, '') // Remove escaped newlines
       .replace(/\\"/g, '"'); // Fix escaped quotes
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const rawContent = JSON.parse(cleanedContent);
 
     if (
@@ -99,7 +99,8 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     ) {
       let userMealLog: UserMealLogEntity = {
         mealType: input.mealName,
-        mealImage: 'input.mealImage1',
+        mealImage: 'input.mealImage',
+        dateOfMeal: input.dateOfMeal,
       } as UserMealLogEntity;
 
       if (input.userMealId != null && input.userMealId > 0) {
@@ -109,7 +110,7 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
         userMealLog = await this.repo.save(temp);
       }
 
-      let lastResponse = null;
+      // let lastResponse = null;
       if (rawContent.ResponseType === 'Question') {
         return this.mapToQuestionResponse(rawContent, userMealLog);
       } else if (rawContent.ResponseType === 'NutrientResult') {
