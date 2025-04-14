@@ -4,8 +4,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard1.dart';
+import 'package:fluttertest/services/api/authentication/authentication_client.dart';
+import 'package:fluttertest/services/api/models/sign_up_dto.dart';
 import 'package:fluttertest/widgets/login_input.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -48,46 +51,48 @@ class _RegisterPageState extends State<RegisterPage> {
     //   return;
     // }
 
-    final url = Uri.parse("http://192.168.1.8:3000/rest/User/signup"); //
+    final signUpData = SignUpDto(
+      name: nameController.text,
+      emailAddress: emailController.text,
+      password: passwordController.text,
+      mobileNumber: numberController.text,
+    );
+
+    final dio = Dio();
 
     debugPrint("Name ${nameController.text}");
     debugPrint("Email ${emailController.text}");
     debugPrint("Password ${passwordController.text}");
     debugPrint("Phone ${numberController.text}");
 
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "name": nameController.text,
-        "emailAddress": emailController.text,
-        "password": passwordController.text,
-        "mobileNumber": numberController.text,
-        "accountStatus": 1,
-        "createdBy": "mobile-app",
-        "lastUpdatedBy": "mobile-app"
-      }),
-    );
+    final client =
+        AuthenticationClient(dio, baseUrl: 'http://192.168.1.8:3000/');
 
-    debugPrint(response.toString());
+    try {
+      // 4. Call the sign-up endpoint
+      final response = await client.userControllerSignUp(body: signUpData);
+    } catch (e) {
+      // Handle errors
+      print('Error during sign-up: $e');
+    }
 
     setState(() {
       isLoading = false;
     });
 
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      // Success
-      debugPrint("User registered!");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const OnboardPage1()),
-      );
-    } else {
-      debugPrint("Registration failed: ${response.body}");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to register: ${response.reasonPhrase}")),
-      );
-    }
+    // if (response.statusCode == 201 || response.statusCode == 200) {
+    //   // Success
+    //   debugPrint("User registered!");
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => const OnboardPage1()),
+    //   );
+    // } else {
+    //   debugPrint("Registration failed: ${response.body}");
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text("Failed to register: ${response.reasonPhrase}")),
+    //   );
+    // }
   }
 
   @override

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertest/pages/FoodScan/foodscan2.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
+import 'package:fluttertest/widgets/app_button_1.dart';
 
-class FoodLogPage extends StatefulWidget {
-  const FoodLogPage({super.key});
+class FoodScan1 extends StatefulWidget {
+  const FoodScan1({super.key});
 
   @override
-  _FoodLogPageState createState() => _FoodLogPageState();
+  _FoodScan1State createState() => _FoodScan1State();
 }
 
-class _FoodLogPageState extends State<FoodLogPage> {
+class _FoodScan1State extends State<FoodScan1> {
   List<dynamic> data = [];
   bool isLoading = true;
   bool hasError = false;
@@ -121,64 +123,31 @@ class _FoodLogPageState extends State<FoodLogPage> {
                           height: 250, // ✅ Give it a fixed height
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            image: const DecorationImage(
-                              image: AssetImage("assets/img/breakfast1.png"),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      const Spacer(),
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Container(
-                          height: 338,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFDADADA),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: SizedBox(
-                              width: 234,
-                              height: 294,
-                              child: Stack(
-                                children: [
-                                  // Title
-                                  const Positioned(
-                                    left: 20,
-                                    top: 0,
-                                    child: Text(
-                                      'Egg Benedict',
-                                      style: TextStyle(
-                                        color: Color(0xFF260000),
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  // Calories & Weight
-                                  _positionedText(81, 73, '249kcal'),
-                                  _positionedText(98, 132, '256g'),
-                                  _positionedText(98, 195, '256g'),
-                                  _positionedText(98, 256, '256g'),
-                                  // Icons
-                                  _positionedIcon(
-                                      Icons.fitness_center, Colors.red, 0, 71),
-                                  _positionedIcon(
-                                      Icons.fitness_center, Colors.red, 0, 132),
-                                  _positionedIcon(
-                                      Icons.fastfood, Colors.blue, 0, 193),
-                                  _positionedIcon(
-                                      Icons.local_pizza, Colors.orange, 0, 254),
-                                ],
-                              ),
-                            ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 15),
+
+                      // AppButton1 Widget
+                      AppButton1(
+                        textColor: Colors.white,
+                        backgroundColor: const Color(0xFFFE6C6C),
+                        borderColor: const Color(0xFFFE6C6C),
+                        borderRadius: 50,
+                        text: "Meal Scan",
+                        textSize: 20,
+                        textWeight: FontWeight.w700,
+                        height: 50,
+                        width: 200,
+                        onPressed: () {
+                          debugPrint("Starting onboarding...");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FoodScan2()),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -191,30 +160,3 @@ class _FoodLogPageState extends State<FoodLogPage> {
   }
 }
 
-Positioned _positionedText(double left, double top, String text) {
-  return Positioned(
-    left: left,
-    top: top,
-    child: Text(
-      text,
-      style: const TextStyle(
-        color: Color(0xFF260000),
-        fontSize: 24,
-        fontWeight: FontWeight.w400,
-      ),
-    ),
-  );
-}
-
-Positioned _positionedIcon(
-    IconData icon, Color color, double left, double top) {
-  return Positioned(
-    left: left,
-    top: top,
-    child: Icon(
-      icon,
-      size: 40, // Adjust size as needed
-      color: color, // Customize icon color
-    ),
-  );
-}

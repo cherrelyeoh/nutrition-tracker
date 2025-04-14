@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/pages/Homepage/foodlog.dart';
+import 'package:fluttertest/pages/FoodScan/foodscan1.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
@@ -112,7 +112,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const FoodLogPage(),
+                      builder: (context) => const FoodScan1(),
                     ),
                   );
                 },
@@ -333,7 +333,7 @@ class _MainHomePageState extends State<MainHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FoodLogPage(),
+                          builder: (context) => const FoodScan1(),
                         ),
                       );
                     },

@@ -13,7 +13,6 @@ class OnboardPage7 extends StatefulWidget {
 }
 
 class _OnboardPage7State extends State<OnboardPage7> {
-  final ScrollController _scrollController = ScrollController();
   bool isSelected = false; // Track selection state
   int selectedAge = 25; // Default age
 
