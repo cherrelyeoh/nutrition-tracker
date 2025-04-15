@@ -3,12 +3,18 @@ import { Crud } from '@dataui/crud';
 import { UserIntakeTargetService } from './UserIntakeTarget.service';
 import { UserIntakeTargetEntity } from './UserIntakeTarget.entity';
 import { RouteMetadata, GISCrud } from 'nestjs-gis';
+import { CreateUserIntakeTargetDto } from './dto/CreateUserIntakeTarget.dto';
+import { UpdateUserIntakeTargetDto } from './dto/UpdateUserIntakeTarget.dto';
 
 @RouteMetadata()
 @GISCrud()
 @Crud({
   model: { type: UserIntakeTargetEntity },
   params: {},
+  dto: {
+    create: CreateUserIntakeTargetDto,
+    update: UpdateUserIntakeTargetDto,
+  },
 })
 @Controller('rest/UserIntakeTarget')
 export class UserIntakeTargetController {
