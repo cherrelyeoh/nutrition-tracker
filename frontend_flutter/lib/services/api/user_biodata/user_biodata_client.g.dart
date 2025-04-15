@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_meal_questions_client.dart';
+part of 'user_biodata_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'user_meal_questions_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _UserMealQuestionsClient implements UserMealQuestionsClient {
-  _UserMealQuestionsClient(
+class _UserBiodataClient implements UserBiodataClient {
+  _UserBiodataClient(
     this._dio, {
     this.baseUrl,
   });
@@ -19,8 +19,8 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
   String? baseUrl;
 
   @override
-  Future<GetManyUserMealQuestionsEntityResponseDto>
-      getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  Future<GetManyUserBiodataEntityResponseDto>
+      getManyBaseUserBiodataControllerUserBiodataEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -49,14 +49,14 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetManyUserMealQuestionsEntityResponseDto>(Options(
+        _setStreamType<GetManyUserBiodataEntityResponseDto>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/rest/UserMealQuestions',
+              '/rest/UserBiodata',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -65,29 +65,27 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
-        GetManyUserMealQuestionsEntityResponseDto.fromJson(_result.data!);
+    final value = GetManyUserBiodataEntityResponseDto.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<UserMealQuestionsEntity>
-      createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {required CreateUserMealQuestionDto body}) async {
+  Future<UserBiodataEntity> createOneBaseUserBiodataControllerUserBiodataEntity(
+      {required CreateUserBiodataDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserMealQuestionsEntity>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserBiodataEntity>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/rest/UserMealQuestions',
+              '/rest/UserBiodata',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -96,28 +94,28 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserMealQuestionsEntity.fromJson(_result.data!);
+    final value = UserBiodataEntity.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<List<UserMealQuestionsEntity>>
-      createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {required CreateManyUserMealQuestionsEntityDto body}) async {
+  Future<List<UserBiodataEntity>>
+      createManyBaseUserBiodataControllerUserBiodataEntity(
+          {required CreateManyUserBiodataEntityDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<UserMealQuestionsEntity>>(Options(
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<UserBiodataEntity>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/rest/UserMealQuestions/bulk',
+              '/rest/UserBiodata/bulk',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -128,31 +126,31 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
             ))));
     var value = _result.data!
         .map((dynamic i) =>
-            UserMealQuestionsEntity.fromJson(i as Map<String, dynamic>))
+            UserBiodataEntity.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
 
   @override
-  Future<UserMealQuestionsEntity>
-      updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  Future<UserBiodataEntity>
+      updateOneBaseUserBiodataControllerUserBiodataEntity({
     required num id,
-    required UpdateUserMealQuestionDto body,
+    required UpdateUserBiodataDto body,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserMealQuestionsEntity>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserBiodataEntity>(Options(
       method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/rest/UserMealQuestions/${id}',
+              '/rest/UserBiodata/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -161,30 +159,30 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserMealQuestionsEntity.fromJson(_result.data!);
+    final value = UserBiodataEntity.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<UserMealQuestionsEntity>
-      replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  Future<UserBiodataEntity>
+      replaceOneBaseUserBiodataControllerUserBiodataEntity({
     required num id,
-    required UserMealQuestionsEntity body,
+    required UserBiodataEntity body,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserMealQuestionsEntity>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserBiodataEntity>(Options(
       method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/rest/UserMealQuestions/${id}',
+              '/rest/UserBiodata/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -193,12 +191,12 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserMealQuestionsEntity.fromJson(_result.data!);
+    final value = UserBiodataEntity.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<void> deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+  Future<void> deleteOneBaseUserBiodataControllerUserBiodataEntity(
       {required num id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -211,7 +209,7 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
     )
         .compose(
           _dio.options,
-          '/rest/UserMealQuestions/${id}',
+          '/rest/UserBiodata/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -223,8 +221,7 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
   }
 
   @override
-  Future<UserMealQuestionsEntity>
-      getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  Future<UserBiodataEntity> getOneBaseUserBiodataControllerUserBiodataEntity({
     required num id,
     List<String>? fields,
     List<String>? join,
@@ -239,15 +236,15 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<UserMealQuestionsEntity>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserBiodataEntity>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/rest/UserMealQuestions/${id}',
+              '/rest/UserBiodata/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -256,12 +253,12 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = UserMealQuestionsEntity.fromJson(_result.data!);
+    final value = UserBiodataEntity.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<void> userMealQuestionsController() async {
+  Future<void> userBiodataController() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -273,7 +270,7 @@ class _UserMealQuestionsClient implements UserMealQuestionsClient {
     )
         .compose(
           _dio.options,
-          '/rest/UserMealQuestions/metadata',
+          '/rest/UserBiodata/metadata',
           queryParameters: queryParameters,
           data: _data,
         )

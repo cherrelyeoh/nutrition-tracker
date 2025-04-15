@@ -11,7 +11,7 @@ CreateManyUserMealQuestionsEntityDto
         CreateManyUserMealQuestionsEntityDto(
           bulk: (json['bulk'] as List<dynamic>)
               .map((e) =>
-                  UserMealQuestionsEntity.fromJson(e as Map<String, dynamic>))
+                  CreateUserMealQuestionDto.fromJson(e as Map<String, dynamic>))
               .toList(),
         );
 

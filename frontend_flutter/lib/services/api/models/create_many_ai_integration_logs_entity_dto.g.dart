@@ -11,7 +11,7 @@ CreateManyAIIntegrationLogsEntityDto
         CreateManyAIIntegrationLogsEntityDto(
           bulk: (json['bulk'] as List<dynamic>)
               .map((e) =>
-                  AIIntegrationLogsEntity.fromJson(e as Map<String, dynamic>))
+                  CreateAIIntegrationLogDto.fromJson(e as Map<String, dynamic>))
               .toList(),
         );
 

@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_many_user_entity_dto.dart';
+part of 'create_many_user_biodata_entity_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreateManyUserEntityDto _$CreateManyUserEntityDtoFromJson(
+CreateManyUserBiodataEntityDto _$CreateManyUserBiodataEntityDtoFromJson(
         Map<String, dynamic> json) =>
-    CreateManyUserEntityDto(
+    CreateManyUserBiodataEntityDto(
       bulk: (json['bulk'] as List<dynamic>)
-          .map((e) => CreateUserDto.fromJson(e as Map<String, dynamic>))
+          .map((e) => CreateUserBiodataDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$CreateManyUserEntityDtoToJson(
-        CreateManyUserEntityDto instance) =>
+Map<String, dynamic> _$CreateManyUserBiodataEntityDtoToJson(
+        CreateManyUserBiodataEntityDto instance) =>
     <String, dynamic>{
       'bulk': instance.bulk,
     };

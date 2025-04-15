@@ -73,7 +73,7 @@ class _AIIntegrationLogsClient implements AIIntegrationLogsClient {
   @override
   Future<AIIntegrationLogsEntity>
       createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {required AIIntegrationLogsEntity body}) async {
+          {required CreateAIIntegrationLogDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -137,7 +137,7 @@ class _AIIntegrationLogsClient implements AIIntegrationLogsClient {
   Future<AIIntegrationLogsEntity>
       updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num id,
-    required AIIntegrationLogsEntity body,
+    required UpdateAIIntegrationLogDto body,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

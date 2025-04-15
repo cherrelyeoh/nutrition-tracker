@@ -5,34 +5,19 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../models/create_many_user_entity_dto.dart';
-import '../models/create_user_dto.dart';
-import '../models/get_many_user_entity_response_dto.dart';
-import '../models/login_dto.dart';
-import '../models/post_rest_user_login_response.dart';
-import '../models/sign_up_dto.dart';
-import '../models/update_user_dto.dart';
-import '../models/user_entity.dart';
+import '../models/create_many_user_biodata_entity_dto.dart';
+import '../models/create_user_biodata_dto.dart';
+import '../models/get_many_user_biodata_entity_response_dto.dart';
+import '../models/update_user_biodata_dto.dart';
+import '../models/user_biodata_entity.dart';
 
-part 'authentication_client.g.dart';
+part 'user_biodata_client.g.dart';
 
 @RestApi()
-abstract class AuthenticationClient {
-  factory AuthenticationClient(Dio dio, {String? baseUrl}) = _AuthenticationClient;
+abstract class UserBiodataClient {
+  factory UserBiodataClient(Dio dio, {String? baseUrl}) = _UserBiodataClient;
 
-  /// Register a new user
-  @POST('/rest/User/signup')
-  Future<UserEntity> userControllerSignUp({
-    @Body() required SignUpDto body,
-  });
-
-  /// Authenticate user
-  @POST('/rest/User/login')
-  Future<PostRestUserLoginResponse> userControllerLogin({
-    @Body() required LoginDto body,
-  });
-
-  /// Retrieve multiple UserEntities.
+  /// Retrieve multiple UserBiodataEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
@@ -53,8 +38,8 @@ abstract class AuthenticationClient {
   /// [page] - Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>.
   ///
   /// [cache] - Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>.
-  @GET('/rest/User')
-  Future<GetManyUserEntityResponseDto> getManyBaseUserControllerUserEntity({
+  @GET('/rest/UserBiodata')
+  Future<GetManyUserBiodataEntityResponseDto> getManyBaseUserBiodataControllerUserBiodataEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -67,53 +52,53 @@ abstract class AuthenticationClient {
     @Query('cache') int? cache,
   });
 
-  /// Create a single UserEntity
-  @POST('/rest/User')
-  Future<UserEntity> createOneBaseUserControllerUserEntity({
-    @Body() required CreateUserDto body,
+  /// Create a single UserBiodataEntity
+  @POST('/rest/UserBiodata')
+  Future<UserBiodataEntity> createOneBaseUserBiodataControllerUserBiodataEntity({
+    @Body() required CreateUserBiodataDto body,
   });
 
-  /// Create multiple UserEntities
-  @POST('/rest/User/bulk')
-  Future<List<UserEntity>> createManyBaseUserControllerUserEntity({
-    @Body() required CreateManyUserEntityDto body,
+  /// Create multiple UserBiodataEntities
+  @POST('/rest/UserBiodata/bulk')
+  Future<List<UserBiodataEntity>> createManyBaseUserBiodataControllerUserBiodataEntity({
+    @Body() required CreateManyUserBiodataEntityDto body,
   });
 
-  /// Update a single UserEntity
-  @PATCH('/rest/User/{id}')
-  Future<UserEntity> updateOneBaseUserControllerUserEntity({
+  /// Update a single UserBiodataEntity
+  @PATCH('/rest/UserBiodata/{id}')
+  Future<UserBiodataEntity> updateOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num id,
-    @Body() required UpdateUserDto body,
+    @Body() required UpdateUserBiodataDto body,
   });
 
-  /// Replace a single UserEntity
-  @PUT('/rest/User/{id}')
-  Future<UserEntity> replaceOneBaseUserControllerUserEntity({
+  /// Replace a single UserBiodataEntity
+  @PUT('/rest/UserBiodata/{id}')
+  Future<UserBiodataEntity> replaceOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num id,
-    @Body() required UserEntity body,
+    @Body() required UserBiodataEntity body,
   });
 
-  /// Delete a single UserEntity
-  @DELETE('/rest/User/{id}')
-  Future<void> deleteOneBaseUserControllerUserEntity({
+  /// Delete a single UserBiodataEntity
+  @DELETE('/rest/UserBiodata/{id}')
+  Future<void> deleteOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num id,
   });
 
-  /// Retrieve a single UserEntity.
+  /// Retrieve a single UserBiodataEntity.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
   /// [join] - Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>.
   ///
   /// [cache] - Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>.
-  @GET('/rest/User/{id}')
-  Future<UserEntity> getOneBaseUserControllerUserEntity({
+  @GET('/rest/UserBiodata/{id}')
+  Future<UserBiodataEntity> getOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
     @Query('cache') int? cache,
   });
 
-  @GET('/rest/User/metadata')
-  Future<void> userController();
+  @GET('/rest/UserBiodata/metadata')
+  Future<void> userBiodataController();
 }

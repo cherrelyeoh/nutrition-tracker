@@ -10,6 +10,7 @@ import 'user_meal_log/user_meal_log_client.dart';
 import 'ai_integration_logs/ai_integration_logs_client.dart';
 import 'authentication/authentication_client.dart';
 import 'user_meal_questions/user_meal_questions_client.dart';
+import 'user_biodata/user_biodata_client.dart';
 
 /// BigBum Document `v1.0`.
 ///
@@ -32,6 +33,7 @@ class ApiClient {
   AIIntegrationLogsClient? _aIIntegrationLogs;
   AuthenticationClient? _authentication;
   UserMealQuestionsClient? _userMealQuestions;
+  UserBiodataClient? _userBiodata;
 
   AppClient get app => _app ??= AppClient(_dio, baseUrl: _baseUrl);
 
@@ -44,4 +46,6 @@ class ApiClient {
   AuthenticationClient get authentication => _authentication ??= AuthenticationClient(_dio, baseUrl: _baseUrl);
 
   UserMealQuestionsClient get userMealQuestions => _userMealQuestions ??= UserMealQuestionsClient(_dio, baseUrl: _baseUrl);
+
+  UserBiodataClient get userBiodata => _userBiodata ??= UserBiodataClient(_dio, baseUrl: _baseUrl);
 }

@@ -22,7 +22,7 @@ abstract class UserMealLogClient {
     @Body() required Object1 body,
   });
 
-  /// Retrieve many UserMealLogEntity.
+  /// Retrieve multiple UserMealLogEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
@@ -57,39 +57,39 @@ abstract class UserMealLogClient {
     @Query('cache') int? cache,
   });
 
-  /// Create one UserMealLogEntity
+  /// Create a single UserMealLogEntity
   @POST('/rest/UserMealLog')
   Future<UserMealLogEntity> createOneBaseUserMealLogControllerUserMealLogEntity({
     @Body() required UserMealLogEntity body,
   });
 
-  /// Create many UserMealLogEntity
+  /// Create multiple UserMealLogEntities
   @POST('/rest/UserMealLog/bulk')
   Future<List<UserMealLogEntity>> createManyBaseUserMealLogControllerUserMealLogEntity({
     @Body() required CreateManyUserMealLogEntityDto body,
   });
 
-  /// Update one UserMealLogEntity
+  /// Update a single UserMealLogEntity
   @PATCH('/rest/UserMealLog/{id}')
   Future<UserMealLogEntity> updateOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num id,
     @Body() required UserMealLogEntity body,
   });
 
-  /// Replace one UserMealLogEntity
+  /// Replace a single UserMealLogEntity
   @PUT('/rest/UserMealLog/{id}')
   Future<UserMealLogEntity> replaceOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num id,
     @Body() required UserMealLogEntity body,
   });
 
-  /// Delete one UserMealLogEntity
+  /// Delete a single UserMealLogEntity
   @DELETE('/rest/UserMealLog/{id}')
   Future<void> deleteOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num id,
   });
 
-  /// Retrieve one UserMealLogEntity.
+  /// Retrieve a single UserMealLogEntity.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///

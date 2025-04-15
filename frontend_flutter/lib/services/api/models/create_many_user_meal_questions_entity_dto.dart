@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'user_meal_questions_entity.dart';
+import 'create_user_meal_question_dto.dart';
 
 part 'create_many_user_meal_questions_entity_dto.g.dart';
 
@@ -16,7 +16,7 @@ class CreateManyUserMealQuestionsEntityDto {
   
   factory CreateManyUserMealQuestionsEntityDto.fromJson(Map<String, Object?> json) => _$CreateManyUserMealQuestionsEntityDtoFromJson(json);
   
-  final List<UserMealQuestionsEntity> bulk;
+  final List<CreateUserMealQuestionDto> bulk;
 
   Map<String, Object?> toJson() => _$CreateManyUserMealQuestionsEntityDtoToJson(this);
 }

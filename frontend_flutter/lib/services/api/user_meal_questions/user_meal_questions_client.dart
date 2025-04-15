@@ -6,7 +6,9 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/create_many_user_meal_questions_entity_dto.dart';
+import '../models/create_user_meal_question_dto.dart';
 import '../models/get_many_user_meal_questions_entity_response_dto.dart';
+import '../models/update_user_meal_question_dto.dart';
 import '../models/user_meal_questions_entity.dart';
 
 part 'user_meal_questions_client.g.dart';
@@ -15,7 +17,7 @@ part 'user_meal_questions_client.g.dart';
 abstract class UserMealQuestionsClient {
   factory UserMealQuestionsClient(Dio dio, {String? baseUrl}) = _UserMealQuestionsClient;
 
-  /// Retrieve many UserMealQuestionsEntity.
+  /// Retrieve multiple UserMealQuestionsEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
@@ -50,39 +52,39 @@ abstract class UserMealQuestionsClient {
     @Query('cache') int? cache,
   });
 
-  /// Create one UserMealQuestionsEntity
+  /// Create a single UserMealQuestionsEntity
   @POST('/rest/UserMealQuestions')
   Future<UserMealQuestionsEntity> createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
-    @Body() required UserMealQuestionsEntity body,
+    @Body() required CreateUserMealQuestionDto body,
   });
 
-  /// Create many UserMealQuestionsEntity
+  /// Create multiple UserMealQuestionsEntities
   @POST('/rest/UserMealQuestions/bulk')
   Future<List<UserMealQuestionsEntity>> createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Body() required CreateManyUserMealQuestionsEntityDto body,
   });
 
-  /// Update one UserMealQuestionsEntity
+  /// Update a single UserMealQuestionsEntity
   @PATCH('/rest/UserMealQuestions/{id}')
   Future<UserMealQuestionsEntity> updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num id,
-    @Body() required UserMealQuestionsEntity body,
+    @Body() required UpdateUserMealQuestionDto body,
   });
 
-  /// Replace one UserMealQuestionsEntity
+  /// Replace a single UserMealQuestionsEntity
   @PUT('/rest/UserMealQuestions/{id}')
   Future<UserMealQuestionsEntity> replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num id,
     @Body() required UserMealQuestionsEntity body,
   });
 
-  /// Delete one UserMealQuestionsEntity
+  /// Delete a single UserMealQuestionsEntity
   @DELETE('/rest/UserMealQuestions/{id}')
   Future<void> deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num id,
   });
 
-  /// Retrieve one UserMealQuestionsEntity.
+  /// Retrieve a single UserMealQuestionsEntity.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///

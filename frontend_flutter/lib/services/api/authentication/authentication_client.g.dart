@@ -127,7 +127,7 @@ class _AuthenticationClient implements AuthenticationClient {
 
   @override
   Future<UserEntity> createOneBaseUserControllerUserEntity(
-      {required UserEntity body}) async {
+      {required CreateUserDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -188,7 +188,7 @@ class _AuthenticationClient implements AuthenticationClient {
   @override
   Future<UserEntity> updateOneBaseUserControllerUserEntity({
     required num id,
-    required UserEntity body,
+    required UpdateUserDto body,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

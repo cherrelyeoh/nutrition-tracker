@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'ai_integration_logs_entity.dart';
+import 'create_ai_integration_log_dto.dart';
 
 part 'create_many_ai_integration_logs_entity_dto.g.dart';
 
@@ -16,7 +16,7 @@ class CreateManyAIIntegrationLogsEntityDto {
   
   factory CreateManyAIIntegrationLogsEntityDto.fromJson(Map<String, Object?> json) => _$CreateManyAIIntegrationLogsEntityDtoFromJson(json);
   
-  final List<AIIntegrationLogsEntity> bulk;
+  final List<CreateAIIntegrationLogDto> bulk;
 
   Map<String, Object?> toJson() => _$CreateManyAIIntegrationLogsEntityDtoToJson(this);
 }

@@ -22,7 +22,7 @@ abstract class AIPromptClient {
     @Body() required Object0 body,
   });
 
-  /// Retrieve many AIPromptEntity.
+  /// Retrieve multiple AIPromptEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
@@ -57,39 +57,39 @@ abstract class AIPromptClient {
     @Query('cache') int? cache,
   });
 
-  /// Create one AIPromptEntity
+  /// Create a single AIPromptEntity
   @POST('/rest/AIPrompt')
   Future<AIPromptEntity> createOneBaseAIPromptControllerAIPromptEntity({
     @Body() required AIPromptEntity body,
   });
 
-  /// Create many AIPromptEntity
+  /// Create multiple AIPromptEntities
   @POST('/rest/AIPrompt/bulk')
   Future<List<AIPromptEntity>> createManyBaseAIPromptControllerAIPromptEntity({
     @Body() required CreateManyAIPromptEntityDto body,
   });
 
-  /// Update one AIPromptEntity
+  /// Update a single AIPromptEntity
   @PATCH('/rest/AIPrompt/{id}')
   Future<AIPromptEntity> updateOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num id,
     @Body() required AIPromptEntity body,
   });
 
-  /// Replace one AIPromptEntity
+  /// Replace a single AIPromptEntity
   @PUT('/rest/AIPrompt/{id}')
   Future<AIPromptEntity> replaceOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num id,
     @Body() required AIPromptEntity body,
   });
 
-  /// Delete one AIPromptEntity
+  /// Delete a single AIPromptEntity
   @DELETE('/rest/AIPrompt/{id}')
   Future<void> deleteOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num id,
   });
 
-  /// Retrieve one AIPromptEntity.
+  /// Retrieve a single AIPromptEntity.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///

@@ -6,8 +6,10 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/ai_integration_logs_entity.dart';
+import '../models/create_ai_integration_log_dto.dart';
 import '../models/create_many_ai_integration_logs_entity_dto.dart';
 import '../models/get_many_ai_integration_logs_entity_response_dto.dart';
+import '../models/update_ai_integration_log_dto.dart';
 
 part 'ai_integration_logs_client.g.dart';
 
@@ -15,7 +17,7 @@ part 'ai_integration_logs_client.g.dart';
 abstract class AIIntegrationLogsClient {
   factory AIIntegrationLogsClient(Dio dio, {String? baseUrl}) = _AIIntegrationLogsClient;
 
-  /// Retrieve many AIIntegrationLogsEntity.
+  /// Retrieve multiple AIIntegrationLogsEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
@@ -50,39 +52,39 @@ abstract class AIIntegrationLogsClient {
     @Query('cache') int? cache,
   });
 
-  /// Create one AIIntegrationLogsEntity
+  /// Create a single AIIntegrationLogsEntity
   @POST('/rest/AIIntegrationLogs')
   Future<AIIntegrationLogsEntity> createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
-    @Body() required AIIntegrationLogsEntity body,
+    @Body() required CreateAIIntegrationLogDto body,
   });
 
-  /// Create many AIIntegrationLogsEntity
+  /// Create multiple AIIntegrationLogsEntities
   @POST('/rest/AIIntegrationLogs/bulk')
   Future<List<AIIntegrationLogsEntity>> createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Body() required CreateManyAIIntegrationLogsEntityDto body,
   });
 
-  /// Update one AIIntegrationLogsEntity
+  /// Update a single AIIntegrationLogsEntity
   @PATCH('/rest/AIIntegrationLogs/{id}')
   Future<AIIntegrationLogsEntity> updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num id,
-    @Body() required AIIntegrationLogsEntity body,
+    @Body() required UpdateAIIntegrationLogDto body,
   });
 
-  /// Replace one AIIntegrationLogsEntity
+  /// Replace a single AIIntegrationLogsEntity
   @PUT('/rest/AIIntegrationLogs/{id}')
   Future<AIIntegrationLogsEntity> replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num id,
     @Body() required AIIntegrationLogsEntity body,
   });
 
-  /// Delete one AIIntegrationLogsEntity
+  /// Delete a single AIIntegrationLogsEntity
   @DELETE('/rest/AIIntegrationLogs/{id}')
   Future<void> deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num id,
   });
 
-  /// Retrieve one AIIntegrationLogsEntity.
+  /// Retrieve a single AIIntegrationLogsEntity.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
