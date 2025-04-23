@@ -27,3 +27,7 @@ FrontEnd
 dart run swagger_parser
 dart run build_runner build -d
 ```
+
+flutter pub get
+flutter run
+--> Install dart and flutter exetnsions in VSCode to be able to run
