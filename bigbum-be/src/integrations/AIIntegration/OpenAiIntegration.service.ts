@@ -10,11 +10,6 @@ import { ChatGPTInputDto } from './dto/ChatGPTInputDto.dto';
 import { lastValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import * as util from 'util'; // Import util for safe object inspection
-import { stringify } from 'querystring';
-import { MealQuestionResponse } from 'src/modules/UserMealQuestions/dto/MealQuestionResponse.dto';
-import { MealResultResponse } from 'src/modules/UserMealLog/dto/MealResultResponse.dto';
-import { UserMealOutputDto } from 'src/modules/UserMealLog/dto/UserMealOutput.dto';
-import { UserSubMealOutput } from 'src/modules/UserSubMealLog/dto/UserSubMealOutput.dto';
 
 // import * as dotenv from 'dotenv';
 
