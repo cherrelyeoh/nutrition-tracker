@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard6.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard8.dart';
+import 'package:fluttertest/pages/UserOnboarding/goal_onboarding.dart';
+import 'package:fluttertest/pages/UserOnboarding/profile_onboarding.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
-import 'package:fluttertest/widgets/onboard7_button.dart';
+import 'package:fluttertest/widgets/selectable_button.dart';
 
-class OnboardPage7 extends StatefulWidget {
-  const OnboardPage7({super.key});
+class PhysicalOnboarding extends StatefulWidget {
+  const PhysicalOnboarding({super.key});
 
   @override
-  _OnboardPage7State createState() => _OnboardPage7State();
+  _PhysicalOnboardingState createState() => _PhysicalOnboardingState();
 }
 
-class _OnboardPage7State extends State<OnboardPage7> {
-  bool isSelected = false; // Track selection state
-  int selectedAge = 25; // Default age
+class _PhysicalOnboardingState extends State<PhysicalOnboarding> {
+  String? selectedLevel; // Store selected level (e.g., Beginner, Intermediate)
+
+  void _handleSelection(String level) {
+    setState(() {
+      selectedLevel = level;
+    });
+    debugPrint('$level selected!');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +39,11 @@ class _OnboardPage7State extends State<OnboardPage7> {
               const SizedBox(width: 20),
               GestureDetector(
                 onTap: () {
-                  debugPrint("Onboarding page 6..");
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const OnboardPage6()),
-                  );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const GoalOnboarding(),
+                      ));
                 },
                 child: SvgPicture.asset(
                   'assets/img/arrow-left.svg',
@@ -60,7 +65,6 @@ class _OnboardPage7State extends State<OnboardPage7> {
           ),
 
           const SizedBox(height: 20),
-
           const Text(
             "Physical Activity Level",
             style: TextStyle(
@@ -71,8 +75,6 @@ class _OnboardPage7State extends State<OnboardPage7> {
           ),
 
           const SizedBox(height: 20),
-
-          // Disclaimer
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: const Column(
@@ -96,44 +98,43 @@ class _OnboardPage7State extends State<OnboardPage7> {
 
           SelectableContainer(
             text: 'Beginner',
-            selectedColor: Colors.yellow,
-            unselectedColor: Colors.white,
-            selectedTextColor: Colors.black,
-            unselectedTextColor: const Color(0xFFFE6C6C),
-            onTap: () {
-              debugPrint("Beginner selected!");
-            },
+            isSelected: selectedLevel == 'Beginner',
+            selectedColor: const Color(0xFFFE6C6C),
+            unselectedColor: Colors.grey[700],
+            selectedTextColor: Colors.white,
+            unselectedTextColor: Colors.white,
+            fontSize: 18,
+            onTap: () => _handleSelection('Beginner'),
           ),
 
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
 
           SelectableContainer(
             text: 'Intermediate',
-            selectedColor: Colors.yellow,
-            unselectedColor: Colors.white,
-            selectedTextColor: Colors.black,
-            unselectedTextColor: const Color(0xFFFE6C6C),
-            onTap: () {
-              debugPrint("Intermediate selected!");
-            },
+            isSelected: selectedLevel == 'Intermediate',
+            selectedColor: const Color(0xFFFE6C6C),
+            unselectedColor: Colors.grey[700],
+            selectedTextColor: Colors.white,
+            unselectedTextColor: Colors.white,
+            fontSize: 18,
+            onTap: () => _handleSelection('Intermediate'),
           ),
 
-          const SizedBox(height: 40),
+          const SizedBox(height: 30),
 
           SelectableContainer(
             text: 'Advanced',
-            selectedColor: Colors.yellow,
-            unselectedColor: Colors.white,
-            selectedTextColor: Colors.black,
-            unselectedTextColor: const Color(0xFFFE6C6C),
-            onTap: () {
-              debugPrint("Advanced selected!");
-            },
+            isSelected: selectedLevel == 'Advanced',
+            selectedColor: const Color(0xFFFE6C6C),
+            unselectedColor: Colors.grey[700],
+            selectedTextColor: Colors.white,
+            unselectedTextColor: Colors.white,
+            fontSize: 18,
+            onTap: () => _handleSelection('Advanced'),
           ),
 
           const Spacer(),
 
-          // Continue Button
           AppButton1(
             textColor: Colors.white,
             backgroundColor: Colors.grey[850],
@@ -145,12 +146,11 @@ class _OnboardPage7State extends State<OnboardPage7> {
             height: 50,
             width: 200,
             onPressed: () {
-              debugPrint("Onboard Page 9...");
+              debugPrint("Going to Profile Onboarding Page..");
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      const OnboardPage8(), // Pass age if needed
+                  builder: (context) => const ProfileOnboarding(),
                 ),
               );
             },

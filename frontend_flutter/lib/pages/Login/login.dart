@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertest/blocs/UserOnboarding/onboarding_bloc.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
@@ -18,6 +20,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final onboardingBloc = BlocProvider.of<OnboardingBloc>(context);
+    debugPrint("OnboardingBloc instance: $onboardingBloc");
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(

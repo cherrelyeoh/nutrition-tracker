@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard2.dart';
+import 'package:fluttertest/pages/UserOnboarding/gender_onboarding.dart';
+import 'package:fluttertest/pages/UserOnboarding/age_weight_height_onboarding.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
-class OnboardPage1 extends StatelessWidget {
-  const OnboardPage1({super.key});
+class IntroOnboardingPage extends StatelessWidget {
+  const IntroOnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +76,11 @@ class OnboardPage1 extends StatelessWidget {
                     height: 50,
                     width: 200,
                     onPressed: () {
-                      debugPrint("Onboarding page 2..");
+                      debugPrint("Gender Onboarding Page....");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const OnboardPage2()),
+                            builder: (context) => const GenderOnboarding()),
                       );
                     },
                   ),

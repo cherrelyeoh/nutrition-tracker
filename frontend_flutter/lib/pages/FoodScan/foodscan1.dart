@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/FoodScan/foodscan2.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
+import 'package:fluttertest/widgets/image_uploader.dart';
 
 class FoodScan1 extends StatefulWidget {
   const FoodScan1({super.key});
@@ -16,10 +19,23 @@ class _FoodScan1State extends State<FoodScan1> {
   bool isLoading = true;
   bool hasError = false;
 
+  File? selectedImageFile;
+  final mealTypeController = TextEditingController();
+  final mealNameController = TextEditingController();
+  final mealDescriptionController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     // fetchData();
+  }
+
+  @override
+  void dispose() {
+    mealTypeController.dispose();
+    mealNameController.dispose();
+    mealDescriptionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -116,17 +132,130 @@ class _FoodScan1State extends State<FoodScan1> {
                     children: [
                       const SizedBox(height: 15),
 
-                      // Top Image
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Container(
-                          height: 250, // ✅ Give it a fixed height
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                      ImageUploader(
+                        height: 250,
+                        borderRadius: 15,
+                        buttonText: 'Upload Food Image',
+                        onImageSelected: (File? image) {
+                          setState(() {
+                            selectedImageFile = image;
+                          });
+                          if (image != null) {
+                            debugPrint("Image selected: ${image.path}");
+                            debugPrint(
+                                "Image size: ${image.lengthSync()} bytes");
+                          } else {
+                            debugPrint("No image selected.");
+                          }
+                        },
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20), // Side padding
+                        child: Column(
+                          children: [
+                            // Meal Type field
+                            TextField(
+                              controller: mealTypeController,
+                              decoration: InputDecoration(
+                                labelText: 'Meal Type',
+                                labelStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black), // Black border
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors
+                                          .black), // Black border when enabled
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors
+                                          .black), // Black border when focused
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 16),
+                              ),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              maxLines: 1,
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Meal Name field
+                            TextField(
+                              controller: mealNameController,
+                              decoration: InputDecoration(
+                                labelText: 'Meal Name',
+                                labelStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 16),
+                              ),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              keyboardType: TextInputType.number,
+                              maxLines: 1,
+                            ),
+
+                            const SizedBox(height: 16),
+
+                            // Meal Description field
+                            TextField(
+                              controller: mealDescriptionController,
+                              decoration: InputDecoration(
+                                labelText: 'Meal Description',
+                                labelStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 12, horizontal: 16),
+                              ),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                              keyboardType: TextInputType.number,
+                              maxLines: 1,
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 15),
+
+                      const SizedBox(height: 24),
 
                       // AppButton1 Widget
                       AppButton1(
@@ -140,7 +269,21 @@ class _FoodScan1State extends State<FoodScan1> {
                         height: 50,
                         width: 200,
                         onPressed: () {
-                          debugPrint("Starting onboarding...");
+                          if (selectedImageFile == null) {
+                            debugPrint("No image selected, cannot proceed.");
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content:
+                                      Text('Please select an image first')),
+                            );
+                            return;
+                          }
+
+                          // ✅ You can upload the image file here
+                          debugPrint(
+                              "Sending to backend: ${selectedImageFile!.path}");
+
+                          // Proceed to next screen (for now)
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -159,4 +302,3 @@ class _FoodScan1State extends State<FoodScan1> {
     );
   }
 }
-

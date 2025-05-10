@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard2.dart';
+import 'package:fluttertest/pages/UserOnboarding/gender_onboarding.dart';
+import 'package:fluttertest/pages/UserOnboarding/age_weight_height_onboarding.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard4.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
@@ -36,7 +37,8 @@ class _OnboardPage3State extends State<OnboardPage3> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const OnboardPage2()),
+                        builder: (context) =>
+                            const AgeWeightHeightOnboarding()),
                   );
                 },
                 child: SvgPicture.asset(

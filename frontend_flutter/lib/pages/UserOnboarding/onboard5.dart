@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/pages/UserOnboarding/onboard4.dart';
-import 'package:fluttertest/pages/UserOnboarding/onboard6.dart';
+import 'package:fluttertest/pages/UserOnboarding/goal_onboarding.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
 class OnboardPage5 extends StatefulWidget {
@@ -164,7 +164,7 @@ class _OnboardPage5State extends State<OnboardPage5> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const OnboardPage6(), // Pass age if needed
+                      const GoalOnboarding(), // Pass age if needed
                 ),
               );
             },
