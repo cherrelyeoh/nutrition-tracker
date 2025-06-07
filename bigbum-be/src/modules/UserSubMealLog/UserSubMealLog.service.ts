@@ -8,4 +8,11 @@ export class UserSubMealLogService extends TypeOrmCrudService<UserSubMealLogEnti
   constructor(@InjectRepository(UserSubMealLogEntity) repo) {
     super(repo);
   }
+
+  async create(
+    input: Partial<UserSubMealLogEntity>,
+  ): Promise<UserSubMealLogEntity> {
+    const entity = this.repo.create(input);
+    return await this.repo.save(entity);
+  }
 }

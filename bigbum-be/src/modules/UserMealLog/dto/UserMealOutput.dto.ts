@@ -11,6 +11,9 @@ export class UserMealOutputDto {
   mealType: string;
 
   @ApiProperty()
+  mealName: string;
+
+  @ApiProperty()
   weight: number;
 
   @ApiProperty()

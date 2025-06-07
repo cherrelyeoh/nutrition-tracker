@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserMealLogEntity } from './UserMealLog.entity';
 import { UserMealInputDto } from './dto/UserMealInput.dto';
@@ -17,9 +18,12 @@ import { UserService } from '../User/User.service';
 import { UserMealQuestionsEntity } from '../UserMealQuestions/UserMealQuestions.entity';
 import { UserMealQuestionsService } from '../UserMealQuestions/UserMealQuestions.service';
 import { AIPromptEntity } from '../AIPrompt/AIPrompt.entity';
+import { UserSubMealLogService } from '../UserSubMealLog/UserSubMealLog.service';
 
 @Injectable()
 export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
+  private readonly logger = new Logger(UserMealLogService.name);
+
   constructor(
     @InjectRepository(UserMealLogEntity) repo,
     private aiIntegrationService: AIIntegrationService,
@@ -27,6 +31,7 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     private aiPromptService: AIPromptService,
     private userService: UserService,
     private userMealQuestionService: UserMealQuestionsService,
+    private userSubMealLogService: UserSubMealLogService,
   ) {
     super(repo);
   }
@@ -90,7 +95,7 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       .replace(/```/g, '') // Remove closing ```
       .replace(/\\n/g, '') // Remove escaped newlines
       .replace(/\\"/g, '"'); // Fix escaped quotes
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+
     const rawContent = JSON.parse(cleanedContent);
 
     if (
@@ -108,13 +113,14 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       } else {
         const temp = this.repo.create(userMealLog);
         userMealLog = await this.repo.save(temp);
+        this.logger.log(`userMealLog ${JSON.stringify(userMealLog)}`);
       }
 
       // let lastResponse = null;
       if (rawContent.ResponseType === 'Question') {
         return this.mapToQuestionResponse(rawContent, userMealLog);
       } else if (rawContent.ResponseType === 'NutrientResult') {
-        userMealLog.id = input.userMealId;
+        // userMealLog.id = input.userMealId;
         return await this.mapToNutrientResult(rawContent, userMealLog);
       }
     }
@@ -160,7 +166,10 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     parsedContent: any,
     userMealLog: UserMealLogEntity,
   ): Promise<MealResultResponse> {
-    const mainMeal = this.mapToUserMealOutput(parsedContent.Result);
+    const mainMeal = this.mapToUserMealOutput(
+      parsedContent.Result,
+      userMealLog,
+    );
     userMealLog.calories = mainMeal.calories;
     userMealLog.protein = mainMeal.protein;
     userMealLog.fats = mainMeal.fats;
@@ -175,9 +184,8 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     const subMealList: UserSubMealOutput[] =
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       parsedContent.Result.FoodDescription.map((food: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         const [foodName, details] = Object.entries(food)[0]; // Extract food name & details
-        return this.mapToUserSubMealOutput(details, foodName);
+        return this.mapToUserSubMealOutput(details, foodName, userMealLog);
       });
 
     return {
@@ -187,41 +195,52 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     };
   }
 
-  mapToUserSubMealOutput(details: any, mealName: string): UserSubMealOutput {
-    return {
-      id: 0, // Assuming this is generated later (or adjust based on your DB setup)
+  async mapToUserSubMealOutput(
+    details: any,
+    mealName: string,
+    userMealLog: UserMealLogEntity,
+  ): Promise<UserSubMealOutput> {
+    const temp = {
       mealName,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       weight: parseFloat(details.Weight), // Convert to number if needed
       calories: parseFloat(details.Calories),
       protein: parseFloat(details.Protein),
       fats: parseFloat(details.Fats),
       carbs: parseFloat(details.Carbs),
-      mainMeal: null,
+      mainMeal: userMealLog,
+    };
+    const userSub = await this.userSubMealLogService.create(temp);
+    return {
+      id: userSub.id, // Assuming this is generated later (or adjust based on your DB setup)
+      mealName,
+
+      weight: parseFloat(details.Weight), // Convert to number if needed
+      calories: parseInt(details.Calories),
+      protein: parseInt(details.Protein),
+      fats: parseInt(details.Fats),
+      carbs: parseInt(details.Carbs),
+      mainMeal: userMealLog,
     };
   }
 
   /**
    * Maps AI food data to UserMealOutputDto
    */
-  private mapToUserMealOutput(data: any): UserMealOutputDto {
+  private mapToUserMealOutput(
+    data: any,
+    userMealLog: UserMealLogEntity,
+  ): UserMealOutputDto {
     return {
-      id: 0, // Generate random ID (replace with real ID logic if needed)
-      mealImage: '', // Set meal image if applicable
-      mealType: 'Main Meal',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+      id: userMealLog.id,
+      mealImage: '',
+      mealType: userMealLog.mealType,
+      mealName: userMealLog.mealName,
       weight: parseFloat(data.Weight) || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       calories: parseInt(data.Calories) || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       protein: parseInt(data.Protein) || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       fats: parseInt(data.Fats) || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       carbs: parseInt(data.Carbs) || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       mealLevel: parseInt(data.Grade) || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
       comments: stringify(data.Comments) || '',
     };
   }

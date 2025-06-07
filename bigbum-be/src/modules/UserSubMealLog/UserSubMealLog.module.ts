@@ -8,5 +8,6 @@ import { UserSubMealLogService } from './UserSubMealLog.service';
   imports: [TypeOrmModule.forFeature([UserSubMealLogEntity])],
   providers: [UserSubMealLogService],
   controllers: [UserSubMealLogController],
+  exports: [UserSubMealLogService],
 })
 export class UserSubMealLogModule {}

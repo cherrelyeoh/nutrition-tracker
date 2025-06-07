@@ -23,16 +23,16 @@ export class UserSubMealLogEntity {
   weight: number;
 
   @Column({ type: 'int' })
-  calories: string;
+  calories: number;
 
   @Column({ type: 'int' })
-  protein: string;
+  protein: number;
 
   @Column({ type: 'int' })
-  fats: string;
+  fats: number;
 
   @Column({ type: 'int' })
-  carbs: string;
+  carbs: number;
 
   @ManyToOne(() => UserMealLogEntity, { nullable: true })
   @JoinColumn({ name: 'mainMeal' })
