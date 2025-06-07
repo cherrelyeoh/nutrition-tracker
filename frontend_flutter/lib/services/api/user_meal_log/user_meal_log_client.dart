@@ -7,7 +7,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../models/create_many_user_meal_log_entity_dto.dart';
 import '../models/get_many_user_meal_log_entity_response_dto.dart';
-import '../models/object1.dart';
+import '../models/user_meal_input_dto.dart';
 import '../models/user_meal_log_entity.dart';
 
 part 'user_meal_log_client.g.dart';
@@ -16,10 +16,9 @@ part 'user_meal_log_client.g.dart';
 abstract class UserMealLogClient {
   factory UserMealLogClient(Dio dio, {String? baseUrl}) = _UserMealLogClient;
 
-  /// [body] - Name not received and was auto-generated.
   @POST('/rest/UserMealLog/extractNutrientDetails')
   Future<dynamic> userMealLogControllerExtractNutrientDetails({
-    @Body() required Object1 body,
+    @Body() required UserMealInputDto body,
   });
 
   /// Retrieve multiple UserMealLogEntities.

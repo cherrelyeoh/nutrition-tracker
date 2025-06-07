@@ -14,6 +14,7 @@ export 'user_biodata/user_biodata_client.dart';
 export 'models/get_many_ai_prompt_entity_response_dto.dart';
 export 'models/ai_prompt_entity.dart';
 export 'models/create_many_ai_prompt_entity_dto.dart';
+export 'models/user_meal_input_dto.dart';
 export 'models/get_many_user_meal_log_entity_response_dto.dart';
 export 'models/user_meal_log_entity.dart';
 export 'models/create_many_user_meal_log_entity_dto.dart';
@@ -40,7 +41,6 @@ export 'models/create_user_biodata_dto.dart';
 export 'models/create_many_user_biodata_entity_dto.dart';
 export 'models/update_user_biodata_dto.dart';
 export 'models/object0.dart';
-export 'models/object1.dart';
 export 'models/post_rest_user_login_response.dart';
 // Root client
 export 'api_client.dart';

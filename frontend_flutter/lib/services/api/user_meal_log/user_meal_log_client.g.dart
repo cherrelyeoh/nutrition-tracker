@@ -20,7 +20,7 @@ class _UserMealLogClient implements UserMealLogClient {
 
   @override
   Future<dynamic> userMealLogControllerExtractNutrientDetails(
-      {required Object1 body}) async {
+      {required UserMealInputDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

@@ -24,16 +24,7 @@ export class UserMealLogController {
   // }
 
   @Post('extractNutrientDetails')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        userId: { type: 'number', description: 'ID of the user' },
-        mealImage: { type: 'string', description: 'Base64-encoded meal image' },
-        mealName: { type: 'string', description: 'Name of the meal' },
-      },
-    },
-  })
+  @ApiBody({ type: UserMealInputDto })
   @ApiOkResponse({
     description: 'Successfully extracted nutrient details',
     content: {

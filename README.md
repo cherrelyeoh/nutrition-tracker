@@ -26,6 +26,11 @@ npm run generate-api
 FrontEnd
 dart run swagger_parser
 dart run build_runner build -d
+
+dart run build_runner clean
+dart run swagger_parser
+dart run build_runner build --delete-conflicting-outputs
+
 ```
 
 flutter pub get
