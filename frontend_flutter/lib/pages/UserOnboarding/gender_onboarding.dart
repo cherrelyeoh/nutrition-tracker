@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertest/pages/UserOnboarding/intro_onboarding.dart';
 import 'package:fluttertest/pages/UserOnboarding/age_weight_height_onboarding.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_bloc.dart';
-import 'package:fluttertest/blocs/UserOnboarding/onboarding_event.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_state.dart';
 
 class GenderOnboarding extends StatefulWidget {

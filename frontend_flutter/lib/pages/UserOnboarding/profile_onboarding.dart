@@ -32,7 +32,7 @@ class _ProfileOnboardingState extends State<ProfileOnboarding> {
         TextField(
           controller: controller,
           decoration: InputDecoration(
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
             filled: true,
             fillColor: Colors.white,
             hintText: hint,

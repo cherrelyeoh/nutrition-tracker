@@ -5,7 +5,7 @@ import 'package:fluttertest/blocs/UserOnboarding/onboarding_event.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
-  OnboardingBloc() : super(OnboardingInitial()) {
+  OnboardingBloc() : super(const OnboardingInitial()) {
     on<UpdateUserDetails>(_onUpdateUserDetails);
     on<UpdateGoal>(_onUpdateGoal);
   }
