@@ -1,8 +1,12 @@
 ## Backend
 
 First time install
+
+
+```
 npm install -g @nestjs/cli
 npm install
+```
 
 ```Database
 Optional
