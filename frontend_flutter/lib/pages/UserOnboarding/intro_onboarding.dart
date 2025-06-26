@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/UserOnboarding/gender_onboarding.dart';
-import 'package:fluttertest/pages/UserOnboarding/age_weight_height_onboarding.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 
 class IntroOnboardingPage extends StatelessWidget {

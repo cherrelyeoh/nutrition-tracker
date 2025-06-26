@@ -43,7 +43,12 @@
 	</array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!-- For permissions adding images in IOS -->
 	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Pick an image from gallery</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Pick image from Camera</string>
 	<true/>
 </dict>
 </plist>

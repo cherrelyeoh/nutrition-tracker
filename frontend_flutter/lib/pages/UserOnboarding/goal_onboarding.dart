@@ -7,7 +7,6 @@ import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/selectable_button.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_bloc.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_event.dart';
-import 'package:fluttertest/blocs/UserOnboarding/onboarding_state.dart';
 
 class GoalOnboarding extends StatefulWidget {
   const GoalOnboarding({super.key});
