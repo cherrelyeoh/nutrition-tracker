@@ -181,12 +181,14 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       await this.repo.update(userMealLog.id, userMealLog);
     }
 
-    const subMealList: UserSubMealOutput[] =
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      parsedContent.Result.FoodDescription.map((food: any) => {
-        const [foodName, details] = Object.entries(food)[0]; // Extract food name & details
-        return this.mapToUserSubMealOutput(details, foodName, userMealLog);
-      });
+    const subMealList: UserSubMealOutput[] = await Promise.all(
+      parsedContent.Result.FoodDescription.map(
+        async (food: any): Promise<UserSubMealOutput> => {
+          const [foodName, details] = Object.entries(food)[0];
+          return this.mapToUserSubMealOutput(details, foodName, userMealLog);
+        },
+      ),
+    );
 
     return {
       ResponseType: 'NutrientResult',
