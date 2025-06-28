@@ -43,6 +43,6 @@ app.*.map.json
 /android/app/release
 /android/app/.cxx
 
-/windows/flutter
-/linux/Flutter
-/macos/flutter
+/windows
+/linux
+/macos
