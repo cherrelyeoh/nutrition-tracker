@@ -3,25 +3,27 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertest/pages/FoodScan/foodscanresults.dart';
+import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
 
-class FoodScan1 extends StatefulWidget {
-  const FoodScan1({super.key});
+class FoodScanMain extends StatefulWidget {
+  final String? mealType;
+  const FoodScanMain({super.key, this.mealType});
 
   @override
-  _FoodScan1State createState() => _FoodScan1State();
+  _FoodScanMainState createState() => _FoodScanMainState();
 }
 
-class _FoodScan1State extends State<FoodScan1> {
+class _FoodScanMainState extends State<FoodScanMain> {
   List<dynamic> data = [];
   bool isLoading = false;
   bool hasError = false;
 
   File? selectedImageFile;
+  String? selectedMealType;
   final mealTypeController = TextEditingController();
   final mealNameController = TextEditingController();
   final mealDescriptionController = TextEditingController();
@@ -34,7 +36,10 @@ class _FoodScan1State extends State<FoodScan1> {
   @override
   void initState() {
     super.initState();
-    // fetchData();
+    selectedMealType = widget.mealType; // ✅ Use param if provided
+    if (selectedMealType != null) {
+      mealTypeController.text = selectedMealType!;
+    }
   }
 
   @override
@@ -90,10 +95,12 @@ class _FoodScan1State extends State<FoodScan1> {
         context,
         MaterialPageRoute(
           builder: (context) => FoodScanResults(
-              mealLog: mealLog,
-              mealImage: base64Image,
-              mealName: mealNameController.text,
-              mealDescription: mealDescriptionController.text),
+            mealLog: mealLog,
+            mealImage: base64Image,
+            mealName: mealNameController.text,
+            mealDescription: mealDescriptionController.text,
+            mealId: 123,
+          ),
         ),
       );
     } on DioException catch (e) {
@@ -187,6 +194,60 @@ class _FoodScan1State extends State<FoodScan1> {
 
               const SizedBox(height: 20),
 
+              Center(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final double containerWidth =
+                        constraints.maxWidth * 0.5; // 90% of available width
+                    final double containerHeight =
+                        containerWidth * (402 / 321.6); // maintain aspect ratio
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        selectedImageFile == null
+                            ? Container(
+                                width: containerWidth,
+                                height: containerHeight,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[500],
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                  image: const DecorationImage(
+                                    image: AssetImage('assets/img/foodpic.png'),
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.file(
+                                  selectedImageFile!,
+                                  width: containerWidth,
+                                  height: containerHeight,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                        const SizedBox(height: 16),
+                        ImagePickerWidget(
+                          showPreview: false,
+                          onImageSelected: (File image) {
+                            setState(() {
+                              selectedImageFile = image;
+                            });
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
               Container(
                 width: double.infinity,
                 decoration: ShapeDecoration(
@@ -196,56 +257,73 @@ class _FoodScan1State extends State<FoodScan1> {
                   ),
                 ),
                 child: SizedBox(
-                  // ✅ Add this to provide a finite height
-                  height: 700, // Set an appropriate height
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const SizedBox(height: 15),
-                        ImagePickerWidget(
-                          onImageSelected: (File image) {
-                            setState(() {
-                              selectedImageFile = image;
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 24),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20), // Side padding
                           child: Column(
                             children: [
+                              const SizedBox(height: 25),
                               // Meal Type field
-                              TextField(
-                                controller: mealTypeController,
+                              DropdownButtonFormField<String>(
+                                value: selectedMealType,
+                                items: [
+                                  'Breakfast',
+                                  'Lunch',
+                                  'Dinner',
+                                  'Snack',
+                                  'Others',
+                                ].map((type) {
+                                  return DropdownMenuItem<String>(
+                                    value: type,
+                                    child: Text(
+                                      type,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontSize:
+                                            16, // Match TextField font size
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedMealType = value!;
+                                    mealTypeController.text = value;
+                                  });
+                                },
                                 decoration: const InputDecoration(
                                   labelText: 'Meal Type',
                                   labelStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
+                                    fontSize:
+                                        16, // Match label style to TextField
                                   ),
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black), // Black border
+                                    borderSide: BorderSide(color: Colors.black),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors
-                                            .black), // Black border when enabled
+                                    borderSide: BorderSide(color: Colors.black),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors
-                                            .black), // Black border when focused
+                                    borderSide: BorderSide(color: Colors.black),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 16),
+                                    vertical:
+                                        12, // Match TextField vertical padding
+                                    horizontal: 16,
+                                  ),
                                 ),
+                                dropdownColor: Colors.white,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
+                                  fontSize: 16, // Match selected item font size
                                 ),
-                                maxLines: 1,
                               ),
 
                               const SizedBox(height: 16),
@@ -313,32 +391,37 @@ class _FoodScan1State extends State<FoodScan1> {
                           ),
                         ),
                         const SizedBox(height: 24),
-                        ElevatedButton(
-                          onPressed: isLoading ? null : mealScan,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey[850],
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                          ),
-                          child: isLoading
-                              ? const CircularProgressIndicator(
-                                  color: Colors.white)
-                              : const Text(
-                                  "Scan Meal",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                        ),
-                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
                 ),
               ),
+
+              const SizedBox(height: 30),
+
+              Center(
+                child: ElevatedButton(
+                  onPressed: isLoading ? null : mealScan,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                  child: isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text(
+                          "Scan Meal",
+                          style: TextStyle(
+                            color: Color(0xFFFE6C6C),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                ),
+              ),
+
+              const SizedBox(height: 30)
             ],
           ),
         ),

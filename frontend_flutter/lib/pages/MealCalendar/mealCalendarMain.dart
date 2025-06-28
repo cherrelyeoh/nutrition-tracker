@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertest/pages/FoodScan/foodscanresults.dart';
+import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
@@ -34,6 +34,12 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
   String getWeekdayLabel(DateTime date) {
     return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.weekday % 7];
   }
+
+  final Map<String, String> mealTypeIcons = {
+    'Breakfast': 'assets/icons/calendar_breakfast.png',
+    'Lunch': 'assets/icons/calendar_lunch.png',
+    'Dinner': 'assets/icons/calendar_dinner.png',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +181,64 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
 
               const SizedBox(height: 20),
 
-              MealCalendarWidget()
+              MealCalendarWidget(
+                mealType: 'Dinner',
+                mealIcon: mealTypeIcons['Dinner'] ??
+                    'assets/icons/calendar_snack.png',
+                calAmount: '500',
+                calTotalAmount: '600',
+                imagePathCarbs: 'assets/icons/carbs.png',
+                imagePathProtein: 'assets/icons/protein.png',
+                imagePathFats: 'assets/icons/fats.png',
+              ),
+
+              const SizedBox(height: 15),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FoodScanResults(
+                          mealId: 123), // 👈 Pass mealId here
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 355,
+                  height: 46,
+                  decoration: ShapeDecoration(
+                    color: Colors.white.withAlpha(40),
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        width: 1,
+                        color: Color(0xFF808080),
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Meal',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 18,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

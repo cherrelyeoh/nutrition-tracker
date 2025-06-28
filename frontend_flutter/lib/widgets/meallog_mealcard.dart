@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
@@ -7,15 +8,40 @@ class MealLogCard extends StatelessWidget {
   final String foodName;
   final String description;
 
-  MealLogCard({
+  const MealLogCard({
     super.key,
     required this.imageBase64,
     required this.foodName,
     required this.description,
   });
 
+  Uint8List? _getImageBytes() {
+    if (imageBase64.trim().isEmpty) return null;
+
+    try {
+      String cleanBase64 = imageBase64.trim();
+
+      // Remove data URL prefix if present
+      if (cleanBase64.contains(',')) {
+        cleanBase64 = cleanBase64.split(',').last;
+      }
+
+      // Fix padding if needed
+      int remainder = cleanBase64.length % 4;
+      if (remainder != 0) {
+        cleanBase64 += '=' * (4 - remainder);
+      }
+
+      return base64Decode(cleanBase64);
+    } catch (_) {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final imageBytes = _getImageBytes();
+
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -24,31 +50,20 @@ class MealLogCard extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(40),
           ),
-          child: Image.memory(
-            base64Decode(imageBase64), // your base64 string here
-            width: double.infinity,
-            height: 300,
-            fit: BoxFit.cover,
-          ),
+          child: imageBytes != null
+              ? Image.memory(
+                  imageBytes,
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                )
+              : Image.asset(
+                  'assets/img/lunch1.png', // fallback image
+                  width: double.infinity,
+                  height: 300,
+                  fit: BoxFit.cover,
+                ),
         ),
-
-        // Left and Right Buttons on top
-        // Positioned(
-        //   top: 40,
-        //   left: 20,
-        //   child: CircleAvatar(
-        //     backgroundColor: Colors.redAccent,
-        //     child: Icon(Icons.close, color: Colors.white),
-        //   ),
-        // ),
-        // Positioned(
-        //   top: 40,
-        //   right: 20,
-        //   child: CircleAvatar(
-        //     backgroundColor: Colors.green,
-        //     child: Icon(Icons.check, color: Colors.white),
-        //   ),
-        // ),
 
         // Bottom Info Card (overlapping image)
         Positioned(

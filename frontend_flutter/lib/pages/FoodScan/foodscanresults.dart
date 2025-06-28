@@ -1,20 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/widgets/meallog_mealcard.dart';
 
 class MealLog {
   final String responseType;
   final MainMeal mainMeal;
   final List<SubMeal> subMealList;
+  final String? mealId;
 
-  MealLog({
-    required this.responseType,
-    required this.mainMeal,
-    required this.subMealList,
-  });
+  MealLog(
+      {required this.responseType,
+      required this.mainMeal,
+      required this.subMealList,
+      this.mealId});
 
   factory MealLog.fromJson(Map<String, dynamic> json) {
     return MealLog(
@@ -105,17 +104,18 @@ class SubMeal {
 }
 
 class FoodScanResults extends StatefulWidget {
-  final Map<String, dynamic> mealLog;
+  final Map<String, dynamic>? mealLog;
   final String? mealImage;
   final String? mealName;
   final String? mealDescription;
 
   const FoodScanResults(
       {super.key,
-      required this.mealLog,
+      this.mealLog,
       this.mealImage,
       this.mealName,
-      this.mealDescription});
+      this.mealDescription,
+      required int mealId});
 
   @override
   _FoodScanResultsState createState() => _FoodScanResultsState();
@@ -164,7 +164,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
     // If you want it in pretty JSON format
     try {
       debugPrint(
-          '📦 Pretty mealLog JSON:\n${JsonEncoder.withIndent('  ').convert(widget.mealLog)}');
+          '📦 Pretty mealLog JSON:\n${const JsonEncoder.withIndent('  ').convert(widget.mealLog)}');
     } catch (e) {
       debugPrint('⚠️ Failed to encode mealLog as JSON: $e');
     }
@@ -176,26 +176,29 @@ class _FoodScanResultsState extends State<FoodScanResults> {
     debugPrint('Load submeals called');
     try {
       // Convert the Map to a MealLog object
-      final parsedMealLog = MealLog.fromJson(widget.mealLog);
-      debugPrint('parsedMealLog.mainMeal: ${parsedMealLog.mainMeal}');
-      debugPrint('parsedMealLog.subMealList: ${parsedMealLog.subMealList}');
+      if (widget.mealLog != null) {
+        final parsedMealLog = MealLog.fromJson(widget.mealLog!);
+        debugPrint('parsedMealLog.mainMeal: ${parsedMealLog.mainMeal}');
+        debugPrint('parsedMealLog.subMealList: ${parsedMealLog.subMealList}');
 
-      setState(() {
-        subMeals = parsedMealLog.subMealList.map((subMeal) {
-          debugPrint('subMeal: $subMeal');
-          return {
-            "name": subMeal.mealName,
-            "values": [
-              subMeal.calories.toString(),
-              subMeal.carbs.toString(),
-              subMeal.fats.toString(),
-              subMeal.protein.toString(),
-            ],
-          };
-        }).toList();
-        mainMeal = parsedMealLog.mainMeal;
-        isLoading = false;
-      });
+        setState(() {
+          subMeals = parsedMealLog.subMealList.map((subMeal) {
+            debugPrint('subMeal: $subMeal');
+            return {
+              "name": subMeal.mealName,
+              "values": [
+                subMeal.calories.toString(),
+                subMeal.carbs.toString(),
+                subMeal.fats.toString(),
+                subMeal.protein.toString(),
+              ],
+            };
+          }).toList();
+          mainMeal = parsedMealLog.mainMeal;
+          isLoading = false;
+        });
+      }
+      ;
     } catch (e) {
       setState(() {
         hasError = true;
@@ -204,21 +207,6 @@ class _FoodScanResultsState extends State<FoodScanResults> {
       debugPrint("Error loading sub meals: $e");
     }
   }
-
-  // final subMeals = [
-  //   {
-  //     "name": "Egg",
-  //     "values": ["667", "65", "65", "65"]
-  //   },
-  //   {
-  //     "name": "Sourdough bread",
-  //     "values": ["667", "65", "65", "65"]
-  //   },
-  //   {
-  //     "name": "Ice milk tea",
-  //     "values": ["667", "65", "65", "65"]
-  //   },
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +255,24 @@ class _FoodScanResultsState extends State<FoodScanResults> {
               ],
             ),
 
-            const SizedBox(height: 80), // Space after card
+            const SizedBox(height: 70), // Space after card
+
+            Center(
+              child: Container(
+                width: 338.01,
+                decoration: const ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 1,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
 
             Center(
               child: Column(
@@ -312,7 +317,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                           top: 9,
                           child: Text(
                             '${mainMeal.carbs}g carbs',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontFamily: 'Sofia Pro',
@@ -325,8 +330,8 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                           left: 218,
                           top: 8,
                           child: Text(
-                            '${mainMeal.protein}g proteins',
-                            style: TextStyle(
+                            '${mainMeal.protein}g protein',
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontFamily: 'Poppins',
@@ -398,7 +403,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                           top: 64,
                           child: Text(
                             '${mainMeal.fats}g fats',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontFamily: 'Sofia Pro',
@@ -412,7 +417,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                           top: 64,
                           child: Text(
                             '${mainMeal.calories} Kcal',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontFamily: 'Sofia Pro',
@@ -453,7 +458,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   Container(
                     width: 338.01,
                     decoration: const ShapeDecoration(
@@ -466,7 +471,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
@@ -494,85 +499,112 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                              decorationColor:
+                                  Colors.white, // or any other color
+                              decorationStyle: TextDecorationStyle.solid,
                             ),
                           ),
-                          const SizedBox(height: 16),
 
-                          // Header Row
-                          Row(
-                            children: [
-                              const SizedBox(
-                                  width: 100), // offset for meal names
-                              ...List.generate(subMealHeaderIcons.length,
-                                  (index) {
-                                final icon = subMealHeaderIcons[index];
-                                final label = subMealHeaderLabels[index];
+                          const SizedBox(height: 25),
 
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4),
-                                  child: Tooltip(
-                                    message: label,
-                                    child: Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[300],
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Icon(icon, color: Colors.red),
-                                    ),
+                          // Header Row - Left Aligned
+                          Align(
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisSize:
+                                  MainAxisSize.min, // Shrink to fit children
+                              mainAxisAlignment:
+                                  MainAxisAlignment.center, // Center contents
+                              children: [
+                                // Placeholder for meal name column
+                                Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                );
-                              }),
-                            ],
+                                ),
+                                ...List.generate(subMealHeaderIcons.length,
+                                    (index) {
+                                  final icon = subMealHeaderIcons[index];
+                                  final label = subMealHeaderLabels[index];
+
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4),
+                                    child: Tooltip(
+                                      message: label,
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        child: Icon(icon, color: Colors.red),
+                                      ),
+                                    ),
+                                  );
+                                }),
+                              ],
+                            ),
                           ),
+
                           const SizedBox(height: 12),
 
-                          // Meal Rows
+                          // Meal Rows - Center Aligned
                           ...subMeals.map((subMeal) => Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
-                                child: Row(
-                                  children: [
-                                    // Meal Name
-                                    Container(
-                                      width: 100,
-                                      padding: const EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[300],
-                                        borderRadius: BorderRadius.circular(8),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      // Meal Name
+                                      Container(
+                                        width: 100,
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Text(
+                                          subMeal["name"] as String,
+                                          style: const TextStyle(
+                                              color: Colors.black),
+                                        ),
                                       ),
-                                      child: Text(
-                                        subMeal["name"] as String,
-                                        style: const TextStyle(
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 4),
+                                      const SizedBox(width: 4),
 
-                                    // Values
-                                    ...(subMeal["values"] as List<String>)
-                                        .map((value) => Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4),
-                                              child: Container(
-                                                width: 40,
-                                                height: 40,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
-                                                child: Text(
-                                                  value,
-                                                  style: const TextStyle(
-                                                      color: Colors.black),
-                                                ),
-                                              ),
-                                            )),
-                                  ],
+                                      // Values
+                                      ...(subMeal["values"] as List<String>)
+                                          .map(
+                                        (value) => Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 4),
+                                          child: Container(
+                                            width: 40,
+                                            height: 40,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: Text(
+                                              value,
+                                              style: const TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               )),
                         ],

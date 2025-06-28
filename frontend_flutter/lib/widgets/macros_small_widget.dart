@@ -1,21 +1,25 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class MacrosSmallWidget extends StatelessWidget {
   final String title;
   final String amount;
-  final IconData icon;
+  final String totalAmount;
+  final IconData? icon;
+  final String? imagePath;
   final Color color;
   final Color barColor1;
   final Color barColor2;
-
-  // You can pass this value as a percentage from 0.0 to 1.0
   final double progressPercent;
 
   const MacrosSmallWidget({
     super.key,
     required this.title,
     required this.amount,
-    required this.icon,
+    required this.totalAmount,
+    this.icon,
+    this.imagePath,
     required this.color,
     this.progressPercent = 0.25,
     this.barColor1 = Colors.white,
@@ -33,7 +37,9 @@ class MacrosSmallWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, size: 27, color: color),
+                imagePath != null
+                    ? Image.asset(imagePath!, width: 27, height: 27)
+                    : Icon(icon, size: 27, color: color),
                 const SizedBox(width: 5),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +53,7 @@ class MacrosSmallWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      amount,
+                      '$amount / ${totalAmount}g',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10,

@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
+import 'package:fluttertest/pages/FoodScan/foodscanresults.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 
 class MealCalendarWidget extends StatefulWidget {
+  final String calAmount;
+  final String calTotalAmount;
+  final String? imagePathProtein;
+  final String? imagePathCarbs;
+  final String? imagePathFats;
+  final String mealType;
+  final String mealIcon;
+
   const MealCalendarWidget({
     super.key,
+    required this.calAmount,
+    required this.calTotalAmount,
+    this.imagePathProtein,
+    this.imagePathCarbs,
+    this.imagePathFats,
+    required this.mealType,
+    required this.mealIcon,
   });
 
   @override
@@ -11,32 +29,44 @@ class MealCalendarWidget extends StatefulWidget {
 }
 
 class _MealCalendarWidgetState extends State<MealCalendarWidget> {
-  final List<Map<String, dynamic>> macros = [
-    {
-      'title': 'Protein',
-      'amount': '400/400g',
-      'icon': Icons.fitness_center,
-      'color': Colors.red,
-      'barColor2': const Color(0xFFC7B290),
-      'barColor1': Colors.white
-    },
-    {
-      'title': 'Carbs',
-      'amount': '300/300g',
-      'icon': Icons.fastfood,
-      'color': Colors.blue,
-      'barColor1': const Color(0xFFC7B290),
-      'barColor2': const Color(0xFFB28F5E)
-    },
-    {
-      'title': 'Fats',
-      'amount': '100/200g',
-      'icon': Icons.local_pizza,
-      'color': Colors.orange,
-      'barColor2': const Color(0xFFC49A2C),
-      'barColor1': const Color(0xFFC7B290)
-    },
-  ];
+  late List<Map<String, dynamic>> macros;
+  @override
+  void initState() {
+    super.initState();
+
+    macros = [
+      {
+        'title': 'Protein',
+        'amount': '400',
+        'totalAmount': '500',
+        'icon': Icons.fitness_center,
+        'imagePath': widget.imagePathProtein,
+        'color': Colors.white,
+        'barColor2': const Color(0xFFC7B290),
+        'barColor1': Colors.white,
+      },
+      {
+        'title': 'Carbs',
+        'amount': '250',
+        'totalAmount': '350',
+        'icon': Icons.fastfood,
+        'imagePath': widget.imagePathCarbs,
+        'color': const Color(0xFFB28F5E),
+        'barColor1': const Color(0xFFC7B290),
+        'barColor2': const Color(0xFFB28F5E),
+      },
+      {
+        'title': 'Fats',
+        'amount': '40',
+        'totalAmount': '100',
+        'icon': Icons.local_pizza,
+        'imagePath': widget.imagePathFats,
+        'color': const Color(0xFFC7B290),
+        'barColor2': const Color(0xFFC49A2C),
+        'barColor1': const Color(0xFFC7B290),
+      },
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,25 +88,24 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
-                children: const [
+                children: [
                   Text(
-                    'Breakfast',
-                    style: TextStyle(
+                    widget.mealType,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(width: 8),
-                  Text(
-                    '🥐',
-                    style: TextStyle(fontSize: 20),
+                  const SizedBox(width: 8),
+                  Image.asset(
+                    widget.mealIcon,
+                    width: 25,
+                    height: 25,
                   ),
                 ],
               ),
-
-              // Right side: 2 round icons
               Row(
                 children: [
                   Container(
@@ -95,24 +124,104 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: const ShapeDecoration(
-                      color: Color(0xFFFE6C6C),
-                      shape: OvalBorder(),
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 16,
-                        color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FoodScanMain(
+                                  mealType: widget.mealType,
+                                )),
+                      );
+                    },
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: const ShapeDecoration(
+                        color: Color(0xFFFE6C6C),
+                        shape: OvalBorder(),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.add,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ],
+          ),
+
+          const SizedBox(height: 20),
+
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final double totalWidth = constraints.maxWidth;
+              final double calAmount = double.tryParse(widget.calAmount) ?? 0;
+              final double calTotal =
+                  double.tryParse(widget.calTotalAmount) ?? 1;
+              final double progressPercent = calAmount / calTotal;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline
+                        .alphabetic, // Required for baseline alignment
+                    children: [
+                      Image.asset(
+                        'assets/icons/fire.png',
+                        width: 25,
+                        height: 25,
+                      ),
+                      const Text(
+                        'Calories',
+                        style: TextStyle(
+                          color: const Color(0xFFFFB09A),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        '${widget.calAmount} / ${widget.calTotalAmount}kCal',
+                        style: const TextStyle(
+                          color: const Color(0xFFFFB09A),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  Stack(
+                    children: [
+                      Container(
+                        width: totalWidth,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFB09A),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      Container(
+                        width: totalWidth * progressPercent.clamp(0.0, 1.0),
+                        height: 6,
+                        margin: const EdgeInsets.only(top: 1),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFE6C6C),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
 
           const SizedBox(height: 16),
@@ -120,17 +229,24 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
           // Macros Row
           Row(
             children: List.generate(macros.length * 2 - 1, (index) {
-              if (index.isOdd) return const SizedBox(width: 8); // spacing
+              if (index.isOdd) return const SizedBox(width: 15); // spacing
               final i = index ~/ 2;
               final macro = macros[i];
               return Expanded(
                 child: MacrosSmallWidget(
                   title: macro['title'],
                   amount: macro['amount'],
+                  totalAmount: macro['totalAmount'],
                   icon: macro['icon'],
                   color: macro['color'],
                   barColor1: macro['barColor1'],
                   barColor2: macro['barColor2'],
+                  imagePath: macro['imagePath'],
+                  progressPercent:
+                      int.parse(macro['totalAmount'].toString()) != 0
+                          ? int.parse(macro['amount'].toString()) /
+                              int.parse(macro['totalAmount'].toString())
+                          : 0.0,
                 ),
               );
             }),
