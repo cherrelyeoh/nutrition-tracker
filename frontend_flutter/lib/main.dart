@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_bloc.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
+import 'package:fluttertest/routes/app_routes.dart';
+import 'package:fluttertest/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,12 +23,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          primarySwatch: Colors.blue, // Add your primary color if you need
-          visualDensity: VisualDensity
-              .adaptivePlatformDensity, // Helps to adapt for different screen sizes
-        ),
+        theme: AppTheme.lightTheme,
+        themeMode: ThemeMode.system, // 🔥 respect phone's setting
+        onGenerateRoute: AppRoutes.generateRoute,
         home: const IntroPage(), // Main screen of the app
       ),
     );
