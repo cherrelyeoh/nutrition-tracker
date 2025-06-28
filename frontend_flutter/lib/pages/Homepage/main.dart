@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
 import 'package:fluttertest/pages/FoodScan/foodscan1.dart';
 import 'package:fluttertest/pages/Login/login.dart';
+import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
@@ -16,6 +18,27 @@ class _MainHomePageState extends State<MainHomePage> {
   List<dynamic> data = [];
   bool isLoading = true;
   bool hasError = false;
+
+  final List<Map<String, dynamic>> macros = [
+    {
+      'title': 'Protein',
+      'amount': '400/400g',
+      'icon': Icons.fitness_center,
+      'color': Colors.red,
+    },
+    {
+      'title': 'Carbs',
+      'amount': '300/300g',
+      'icon': Icons.fastfood,
+      'color': Colors.blue,
+    },
+    {
+      'title': 'Fats',
+      'amount': '100/200g',
+      'icon': Icons.local_pizza,
+      'color': Colors.orange,
+    },
+  ];
 
   final List<Map<String, String>> foodItems = [
     {
@@ -106,7 +129,6 @@ class _MainHomePageState extends State<MainHomePage> {
 
               const SizedBox(height: 10), // Space before the new text
 
-              // Clickable Text (Links to Another Page)
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -118,6 +140,29 @@ class _MainHomePageState extends State<MainHomePage> {
                 },
                 child: const Text(
                   "It's time to log your meal!",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+
+              const SizedBox(height: 5),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BodyScanMain(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "It's time for a body scan!",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -208,27 +253,45 @@ class _MainHomePageState extends State<MainHomePage> {
 
               const SizedBox(height: 20),
 
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MacrosSmallWidget(
-                      title: "Protein",
-                      amount: "400/400g",
-                      icon: Icons.fitness_center,
-                      color: Colors.red),
-                  Spacer(),
-                  MacrosSmallWidget(
-                      title: "Carbs",
-                      amount: "300/300g",
-                      icon: Icons.fastfood,
-                      color: Colors.blue),
-                  Spacer(),
-                  MacrosSmallWidget(
-                      title: "Fats",
-                      amount: "100/200g",
-                      icon: Icons.local_pizza,
-                      color: Colors.orange),
-                ],
+              Row(
+                children: List.generate(macros.length * 2 - 1, (index) {
+                  if (index.isOdd) return const SizedBox(width: 8);
+                  final i = index ~/ 2;
+                  final macro = macros[i];
+                  return Expanded(
+                    child: MacrosSmallWidget(
+                      title: macro['title'],
+                      amount: macro['amount'],
+                      icon: macro['icon'],
+                      color: macro['color'],
+                    ),
+                  );
+                }),
+              ),
+
+              const SizedBox(
+                height: 30,
+              ),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MealCalendarMain(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Check my calendar",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
               ),
 
               const SizedBox(

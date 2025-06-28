@@ -4,8 +4,13 @@ import 'dart:io';
 
 class ImagePickerWidget extends StatefulWidget {
   final Function(File) onImageSelected;
+  final bool showPreview;
 
-  const ImagePickerWidget({super.key, required this.onImageSelected});
+  const ImagePickerWidget({
+    super.key,
+    required this.onImageSelected,
+    this.showPreview = true, // default: true
+  });
 
   @override
   State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
@@ -30,14 +35,13 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _uploadedImage == null
-            ? const Text("No image selected")
-            : Image.file(
-                _uploadedImage!,
-                width: 200,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+        if (_uploadedImage != null && widget.showPreview)
+          Image.file(
+            _uploadedImage!,
+            width: 200,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
         const SizedBox(height: 20),
         ElevatedButton(
           onPressed: _pickImage,

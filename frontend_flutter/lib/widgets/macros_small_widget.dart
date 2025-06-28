@@ -5,6 +5,11 @@ class MacrosSmallWidget extends StatelessWidget {
   final String amount;
   final IconData icon;
   final Color color;
+  final Color barColor1;
+  final Color barColor2;
+
+  // You can pass this value as a percentage from 0.0 to 1.0
+  final double progressPercent;
 
   const MacrosSmallWidget({
     super.key,
@@ -12,66 +17,72 @@ class MacrosSmallWidget extends StatelessWidget {
     required this.amount,
     required this.icon,
     required this.color,
+    this.progressPercent = 0.25,
+    this.barColor1 = Colors.white,
+    this.barColor2 = const Color(0xFFC7B290),
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double totalWidth = constraints.maxWidth;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, size: 27, color: color),
-            const SizedBox(width: 5),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
+                Icon(icon, size: 27, color: color),
+                const SizedBox(width: 5),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      amount,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Stack(
+              children: [
+                Container(
+                  width: totalWidth,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: barColor1,
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                Text(
-                  amount,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w700,
+                Container(
+                  width: totalWidth * progressPercent.clamp(0.0, 1.0),
+                  height: 6,
+                  margin: const EdgeInsets.only(top: 1),
+                  decoration: BoxDecoration(
+                    color: barColor2,
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ],
             ),
           ],
-        ),
-        const SizedBox(height: 4),
-        Stack(
-          children: [
-            Container(
-              width: 100,
-              height: 8,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            Positioned(
-              left: 25,
-              top: 1,
-              child: Container(
-                width: 74,
-                height: 6,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

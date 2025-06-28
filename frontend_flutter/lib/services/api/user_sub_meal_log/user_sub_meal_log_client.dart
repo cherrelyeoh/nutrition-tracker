@@ -5,25 +5,19 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../models/create_many_user_biodata_entity_dto.dart';
-import '../models/create_user_biodata_dto.dart';
-import '../models/extract_biodata_input_dto.dart';
-import '../models/get_many_user_biodata_entity_response_dto.dart';
-import '../models/update_user_biodata_dto.dart';
-import '../models/user_biodata_entity.dart';
+import '../models/create_many_user_sub_meal_log_entity_dto.dart';
+import '../models/create_user_sub_meal_log_dto.dart';
+import '../models/get_many_user_sub_meal_log_entity_response_dto.dart';
+import '../models/update_user_sub_meal_log_dto.dart';
+import '../models/user_sub_meal_log_entity.dart';
 
-part 'user_biodata_client.g.dart';
+part 'user_sub_meal_log_client.g.dart';
 
 @RestApi()
-abstract class UserBiodataClient {
-  factory UserBiodataClient(Dio dio, {String? baseUrl}) = _UserBiodataClient;
+abstract class UserSubMealLogClient {
+  factory UserSubMealLogClient(Dio dio, {String? baseUrl}) = _UserSubMealLogClient;
 
-  @POST('/rest/UserBiodata/extractUserBiodata')
-  Future<void> userBiodataControllerExtractUserBiodata({
-    @Body() required ExtractBiodataInputDto body,
-  });
-
-  /// Retrieve multiple UserBiodataEntities.
+  /// Retrieve multiple UserSubMealLogEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
@@ -44,9 +38,8 @@ abstract class UserBiodataClient {
   /// [page] - Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>.
   ///
   /// [cache] - Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>.
-  @GET('/rest/UserBiodata')
-  Future<GetManyUserBiodataEntityResponseDto>
-      getManyBaseUserBiodataControllerUserBiodataEntity({
+  @GET('/rest/UserSubMealLog')
+  Future<GetManyUserSubMealLogEntityResponseDto> getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -59,57 +52,53 @@ abstract class UserBiodataClient {
     @Query('cache') int? cache,
   });
 
-  /// Create a single UserBiodataEntity
-  @POST('/rest/UserBiodata')
-  Future<UserBiodataEntity>
-      createOneBaseUserBiodataControllerUserBiodataEntity({
-    @Body() required CreateUserBiodataDto body,
+  /// Create a single UserSubMealLogEntity
+  @POST('/rest/UserSubMealLog')
+  Future<UserSubMealLogEntity> createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+    @Body() required CreateUserSubMealLogDto body,
   });
 
-  /// Create multiple UserBiodataEntities
-  @POST('/rest/UserBiodata/bulk')
-  Future<List<UserBiodataEntity>>
-      createManyBaseUserBiodataControllerUserBiodataEntity({
-    @Body() required CreateManyUserBiodataEntityDto body,
+  /// Create multiple UserSubMealLogEntities
+  @POST('/rest/UserSubMealLog/bulk')
+  Future<List<UserSubMealLogEntity>> createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+    @Body() required CreateManyUserSubMealLogEntityDto body,
   });
 
-  /// Update a single UserBiodataEntity
-  @PATCH('/rest/UserBiodata/{id}')
-  Future<UserBiodataEntity>
-      updateOneBaseUserBiodataControllerUserBiodataEntity({
+  /// Update a single UserSubMealLogEntity
+  @PATCH('/rest/UserSubMealLog/{id}')
+  Future<UserSubMealLogEntity> updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num id,
-    @Body() required UpdateUserBiodataDto body,
+    @Body() required UpdateUserSubMealLogDto body,
   });
 
-  /// Replace a single UserBiodataEntity
-  @PUT('/rest/UserBiodata/{id}')
-  Future<UserBiodataEntity>
-      replaceOneBaseUserBiodataControllerUserBiodataEntity({
+  /// Replace a single UserSubMealLogEntity
+  @PUT('/rest/UserSubMealLog/{id}')
+  Future<UserSubMealLogEntity> replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num id,
-    @Body() required UserBiodataEntity body,
+    @Body() required UserSubMealLogEntity body,
   });
 
-  /// Delete a single UserBiodataEntity
-  @DELETE('/rest/UserBiodata/{id}')
-  Future<void> deleteOneBaseUserBiodataControllerUserBiodataEntity({
+  /// Delete a single UserSubMealLogEntity
+  @DELETE('/rest/UserSubMealLog/{id}')
+  Future<void> deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num id,
   });
 
-  /// Retrieve a single UserBiodataEntity.
+  /// Retrieve a single UserSubMealLogEntity.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.
   ///
   /// [join] - Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>.
   ///
   /// [cache] - Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>.
-  @GET('/rest/UserBiodata/{id}')
-  Future<UserBiodataEntity> getOneBaseUserBiodataControllerUserBiodataEntity({
+  @GET('/rest/UserSubMealLog/{id}')
+  Future<UserSubMealLogEntity> getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
     @Query('cache') int? cache,
   });
 
-  @GET('/rest/UserBiodata/metadata')
-  Future<void> userBiodataController();
+  @GET('/rest/UserSubMealLog/metadata')
+  Future<void> userSubMealLogController();
 }

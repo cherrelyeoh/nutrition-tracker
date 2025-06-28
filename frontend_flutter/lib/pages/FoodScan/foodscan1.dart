@@ -4,12 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/FoodScan/foodscanresults.dart';
-import 'package:fluttertest/pages/FoodScan/foodscan2.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
-import 'package:fluttertest/services/api/authentication/authentication_client.dart';
 import 'package:fluttertest/services/api/export.dart';
-import 'package:fluttertest/services/api/models/object1.dart';
-import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
 
@@ -135,7 +131,7 @@ class _FoodScan1State extends State<FoodScan1> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        debugPrint("Onboarding page 3..");
+                        debugPrint("Going back to home page...");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -206,7 +202,6 @@ class _FoodScan1State extends State<FoodScan1> {
                     child: Column(
                       children: [
                         const SizedBox(height: 15),
-
                         ImagePickerWidget(
                           onImageSelected: (File image) {
                             setState(() {
@@ -214,9 +209,7 @@ class _FoodScan1State extends State<FoodScan1> {
                             });
                           },
                         ),
-
                         const SizedBox(height: 24),
-
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20), // Side padding
@@ -319,9 +312,7 @@ class _FoodScan1State extends State<FoodScan1> {
                             ],
                           ),
                         ),
-
                         const SizedBox(height: 24),
-
                         ElevatedButton(
                           onPressed: isLoading ? null : mealScan,
                           style: ElevatedButton.styleFrom(
@@ -342,43 +333,7 @@ class _FoodScan1State extends State<FoodScan1> {
                                   ),
                                 ),
                         ),
-
                         const SizedBox(height: 20),
-
-                        // // AppButton1 Widget
-                        // AppButton1(
-                        //   textColor: Colors.white,
-                        //   backgroundColor: const Color(0xFFFE6C6C),
-                        //   borderColor: const Color(0xFFFE6C6C),
-                        //   borderRadius: 50,
-                        //   text: "Meal Scan",
-                        //   textSize: 20,
-                        //   textWeight: FontWeight.w700,
-                        //   height: 50,
-                        //   width: 200,
-                        //   onPressed: () {
-                        //     if (selectedImageFile == null) {
-                        //       debugPrint("No image selected, cannot proceed.");
-                        //       ScaffoldMessenger.of(context).showSnackBar(
-                        //         const SnackBar(
-                        //             content:
-                        //                 Text('Please select an image first')),
-                        //       );
-                        //       return;
-                        //     }
-
-                        //     // ✅ You can upload the image file here
-                        //     debugPrint(
-                        //         "Sending to backend: ${selectedImageFile!.path}");
-
-                        //     // Proceed to next screen (for now)
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(
-                        //           builder: (context) => const FoodScan2()),
-                        //     );
-                        //   },
-                        // ),
                       ],
                     ),
                   ),
