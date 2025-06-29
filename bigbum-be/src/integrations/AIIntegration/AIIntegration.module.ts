@@ -12,7 +12,7 @@ import { MockAiIntegrationService } from './MockAiIntegration.service';
   providers: [
     {
       provide: AIIntegrationService,
-      useClass: MockAiIntegrationService,
+      useClass: OpenAiIntegrationService,
     },
   ],
   exports: [AIIntegrationService],
