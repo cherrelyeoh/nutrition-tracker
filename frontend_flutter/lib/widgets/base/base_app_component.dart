@@ -19,6 +19,8 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
+import 'package:fluttertest/pages/FoodScan/foodscan1.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
 import 'package:fluttertest/widgets/base/custom_app_bar.dart';
@@ -205,8 +207,9 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    const HomeContent(),
+    const MainHomePage(),
     const MealCalendarMain(),
+    const FoodScan1() //!Replace with FoodScanMain
   ];
 
   Widget _buildDrawerHeader(BuildContext context) {
@@ -297,7 +300,7 @@ class _BaseScreenState extends State<BaseScreen> {
           ),
         ),
       ),
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         title: "widget.title",
         profileImageUrl: "https://i.pravatar.cc/150?img=1",
       ),
@@ -332,7 +335,9 @@ class _BaseScreenState extends State<BaseScreen> {
         child: IconButton(
           icon: const Icon(Icons.add, color: Colors.white),
           onPressed: () {
-            print('Central action tapped');
+            setState(() {
+              _selectedIndex = 2;
+            });
           },
         ),
       ),

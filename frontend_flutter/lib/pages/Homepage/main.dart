@@ -3,12 +3,6 @@ import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
 import 'package:fluttertest/pages/FoodScan/foodscan1.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
-import 'package:fluttertest/widgets/base/base_app_component.dart';
-import 'package:fluttertest/widgets/macros_small_widget.dart';
-import 'package:fluttertest/widgets/meal_idea_widget.dart';
-import 'package:fluttertest/widgets/meal_type_widget.dart';
-
-import 'package:flutter/material.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
@@ -136,7 +130,7 @@ class _MainHomePageState extends State<MainHomePage> {
 
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const FoodScan1(),
@@ -840,13 +834,13 @@ class HomeContent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Custom Header
-            SizedBox(
+            const SizedBox(
               width: double.infinity,
               height: 30,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Hi, Cherrel',
                     style: TextStyle(
                       color: Color(0xFFFE6C6C),
@@ -855,7 +849,7 @@ class HomeContent extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const Row(
+                  Row(
                     children: [
                       Icon(Icons.notifications,
                           size: 27, color: Color(0xFFFE6C6C)),
