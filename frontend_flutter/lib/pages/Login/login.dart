@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final user = await client.userControllerLogin(body: loginData);
-      final userId = user.user.id;
+      final userId = user.id;
       debugPrint("User trying to login!");
       debugPrint("🔁 Response: ${jsonEncode(user)}");
       Navigator.pushReplacement(
