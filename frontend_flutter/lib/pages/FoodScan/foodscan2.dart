@@ -64,8 +64,6 @@ class _FoodScan2State extends State<FoodScan2> {
                         style: TextStyle(
                           color: Color(0xFFFE6C6C),
                           fontSize: 22,
-                          fontFamily: 'League Spartan',
-                          fontWeight: FontWeight.w600,
                         ),
                         textAlign: TextAlign.start,
                       ),
@@ -91,7 +89,6 @@ class _FoodScan2State extends State<FoodScan2> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
-                    fontFamily: 'League Spartan',
                     fontWeight: FontWeight.w900,
                   ),
                 ),

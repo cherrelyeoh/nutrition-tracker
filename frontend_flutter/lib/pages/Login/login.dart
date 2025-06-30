@@ -5,6 +5,7 @@ import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
+import 'package:fluttertest/widgets/base/base_app_component.dart';
 import 'package:fluttertest/widgets/login_input.dart';
 
 class LoginPage extends StatefulWidget {
@@ -113,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                 debugPrint("Starting onboarding...");
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MainHomePage()),
+                  MaterialPageRoute(builder: (context) => const BaseScreen()),
                 );
               },
             ),

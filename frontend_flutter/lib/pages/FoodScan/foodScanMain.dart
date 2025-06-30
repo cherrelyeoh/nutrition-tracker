@@ -118,65 +118,64 @@ class _FoodScanMainState extends State<FoodScanMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+      // backgroundColor: Colors.grey[900],
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      // ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Custom Header
-              SizedBox(
-                width: double.infinity,
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        debugPrint("Going back to home page...");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MainHomePage()),
-                        );
-                      },
-                      child: SvgPicture.asset(
-                        'assets/img/arrow-left.svg',
-                        width: 12,
-                        height: 12,
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    const Expanded(
-                      // Forces "Dinner" to take up available space
-                      child: Text(
-                        'Dinner',
-                        style: TextStyle(
-                          color: Color(0xFFFE6C6C),
-                          fontSize: 22,
-                          fontFamily: 'League Spartan',
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    const Row(
-                      children: [
-                        Icon(Icons.notifications,
-                            size: 27, color: Color(0xFFFE6C6C)),
-                        SizedBox(width: 15),
-                        Icon(Icons.settings,
-                            size: 27, color: Color(0xFFFE6C6C)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              // SizedBox(
+              //   width: double.infinity,
+              //   height: 30,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       GestureDetector(
+              //         onTap: () {
+              //           debugPrint("Going back to home page...");
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //                 builder: (context) => const MainHomePage()),
+              //           );
+              //         },
+              //         child: SvgPicture.asset(
+              //           'assets/img/arrow-left.svg',
+              //           width: 12,
+              //           height: 12,
+              //         ),
+              //       ),
+              //       const SizedBox(width: 20),
+              //       const Expanded(
+              //         // Forces "Dinner" to take up available space
+              //         child: Text(
+              //           'Dinner',
+              //           style: TextStyle(
+              //             color: Color(0xFFFE6C6C),
+              //             fontSize: 22,
+              //             fontWeight: FontWeight.w600,
+              //           ),
+              //           textAlign: TextAlign.start,
+              //         ),
+              //       ),
+              //       const Row(
+              //         children: [
+              //           Icon(Icons.notifications,
+              //               size: 27, color: Color(0xFFFE6C6C)),
+              //           SizedBox(width: 15),
+              //           Icon(Icons.settings,
+              //               size: 27, color: Color(0xFFFE6C6C)),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
               const SizedBox(height: 20),
 
@@ -186,8 +185,6 @@ class _FoodScanMainState extends State<FoodScanMain> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
-                    fontFamily: 'League Spartan',
-                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
