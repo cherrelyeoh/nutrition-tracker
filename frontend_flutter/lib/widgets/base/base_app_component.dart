@@ -205,10 +205,10 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   int _selectedIndex = 0;
-  final List<Widget> _pages = [
-    const MainHomePage(),
-    const MealCalendarMain(),
-    const FoodScanMain() //!Replace with FoodScanMain
+  final List<PageItem> _pages = [
+    PageItem(title: 'Home', page: MainHomePage()),
+    PageItem(title: 'Meal Calendar', page: MealCalendarMain()),
+    PageItem(title: 'Scan Food', page: FoodScanMain()),
   ];
 
   Widget _buildDrawerHeader(BuildContext context) {
@@ -229,7 +229,7 @@ class _BaseScreenState extends State<BaseScreen> {
             ],
           ),
         ),
-        CircleAvatar(
+        const CircleAvatar(
           radius: 40,
           backgroundImage: NetworkImage("https://i.pravatar.cc/150?img=1"),
           backgroundColor: Colors.transparent,
@@ -299,13 +299,13 @@ class _BaseScreenState extends State<BaseScreen> {
           ),
         ),
       ),
-      appBar: const CustomAppBar(
-        title: "widget.title",
+      appBar: CustomAppBar(
+        title: _pages[_selectedIndex].title,
         profileImageUrl: "https://i.pravatar.cc/150?img=1",
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 5),
-        child: _pages[_selectedIndex],
+        child: _pages[_selectedIndex].page,
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -342,4 +342,11 @@ class _BaseScreenState extends State<BaseScreen> {
       ),
     );
   }
+}
+
+class PageItem {
+  final String title;
+  final Widget page;
+
+  const PageItem({required this.title, required this.page});
 }

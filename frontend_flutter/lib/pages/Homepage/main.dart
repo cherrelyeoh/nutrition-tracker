@@ -97,91 +97,8 @@ class _MainHomePageState extends State<MainHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Custom Header
-              SizedBox(
-                width: double.infinity,
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Hi, Cherrel',
-                      style: TextStyle(
-                        color: Color(0xFFFE6C6C),
-                        fontSize: 26,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.brown),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()),
-                        );
-                      },
-                    ),
-                    const Row(
-                      children: [
-                        Icon(Icons.notifications,
-                            size: 27, color: Color(0xFFFE6C6C)),
-                        SizedBox(width: 15),
-                        Icon(Icons.settings,
-                            size: 27, color: Color(0xFFFE6C6C)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
 
               const SizedBox(height: 10), // Space before the new text
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FoodScanMain(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "It's time to log your meal!",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-
-              const SizedBox(height: 5),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BodyScanMain(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "It's time for a body scan!",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-
-              const SizedBox(height: 30),
 
               Row(
                 children: [
@@ -309,6 +226,49 @@ class _MainHomePageState extends State<MainHomePage> {
                   textAlign: TextAlign.start,
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const FoodScanMain(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "It's time to log your meal!",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+
+              const SizedBox(height: 5),
+
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BodyScanMain(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "It's time for a body scan!",
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    decoration: TextDecoration.underline,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ),
 
               const SizedBox(
                 height: 30,
@@ -375,7 +335,6 @@ class _MainHomePageState extends State<MainHomePage> {
                     ),
                   ],
                 ),
-
               ),
               const SizedBox(
                 height: 30,

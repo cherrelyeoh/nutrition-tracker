@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/services/api/export.dart';
+import 'package:fluttertest/theme/app_style.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
 
@@ -20,14 +21,33 @@ class MealCalendarMain extends StatefulWidget {
 
 class _MealCalendarMainState extends State<MealCalendarMain> {
   int? selectedIndex; // 👈 Tracks the selected card index
+  // final ScrollController _scrollController = ScrollController();
+
+  DateTime today = DateTime.now();
+  DateTime currentMonth = DateTime.now();
+
+  List<DateTime> allAvailableDates = []; // All valid dates
+  List<DateTime> visibleDates = []; // Filtered by current month
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      }
+    });
   }
 
   @override
   void dispose() {
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -43,77 +63,34 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
 
   @override
   Widget build(BuildContext context) {
-    final today = DateTime.now(); // ✅ Declare here
-    final dates =
-        List.generate(21, (i) => today.subtract(Duration(days: 10 - i)));
+    final today = DateTime.now();
+    final List<DateTime> dates = [];
+
+    for (int i = 0; i < 7; i++) {
+      final date = today.subtract(Duration(days: i));
+      if (date.month == today.month) {
+        dates.add(date);
+      }
+    }
+
+    dates.sort((a, b) => a.compareTo(b)); // Sort ascending (earliest to latest)
+
+    selectedIndex ??= dates.indexWhere((d) =>
+        d.day == today.day && d.month == today.month && d.year == today.year);
     return Scaffold(
-      backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          padding: AppPadding.page(context),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Custom Header
-              SizedBox(
-                width: double.infinity,
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        debugPrint("Going back to home page...");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MainHomePage()),
-                        );
-                      },
-                      child: SvgPicture.asset(
-                        'assets/img/arrow-left.svg',
-                        width: 12,
-                        height: 12,
-                      ),
-                    ),
-                    const SizedBox(width: 20),
-                    const Expanded(
-                      // Forces "Dinner" to take up available space
-                      child: Text(
-                        'Weekly Calendar',
-                        style: TextStyle(
-                          color: Color(0xFFFE6C6C),
-                          fontSize: 22,
-                          fontFamily: 'League Spartan',
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    const Row(
-                      children: [
-                        Icon(Icons.notifications,
-                            size: 27, color: Color(0xFFFE6C6C)),
-                        SizedBox(width: 15),
-                        Icon(Icons.settings,
-                            size: 27, color: Color(0xFFFE6C6C)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
               SizedBox(
                 height: 80,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  controller: _scrollController,
+                  // padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: dates.asMap().entries.map((entry) {
