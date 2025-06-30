@@ -1,9 +1,13 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertest/blocs/UserOnboarding/onboarding_bloc.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
+import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/base/base_app_component.dart';
 import 'package:fluttertest/widgets/login_input.dart';
@@ -16,8 +20,48 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isLoading = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  Future<void> loginUser() async {
+    debugPrint('Login User called');
+    setState(() {
+      isLoading = true;
+    });
+
+    final loginData = LoginDto(
+        emailAddress: emailController.text, password: passwordController.text);
+
+    final dio = Dio();
+    debugPrint("Login Email ${emailController.text}");
+    debugPrint("Login Password ${passwordController.text}");
+
+    final client = AuthenticationClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+
+    try {
+      final user = await client.userControllerLogin(body: loginData);
+      debugPrint("User trying to login!");
+      debugPrint("🔁 Response: ${jsonEncode(user.toJson())}");
+      debugPrint("🔁 Response: ${user.toJson()}");
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MainHomePage(
+                  loggedInUser: user,
+                )),
+      );
+    } on DioException catch (e) {
+      // Access status code from DioError
+      final statusCode = e.response?.statusCode;
+      debugPrint('❌ Registration failed with status: $statusCode');
+      debugPrint('Response data: ${e.response?.data}');
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,19 +141,11 @@ class _LoginPageState extends State<LoginPage> {
               icon: Icons.lock,
             ),
 
-            const Spacer(),
+            const SizedBox(height: 50),
 
-            // Login Button
-            AppButton1(
-              textColor: Colors.white,
-              backgroundColor: const Color(0xFFFE6C6C),
-              borderColor: const Color(0xFFFE6C6C),
-              borderRadius: 50,
-              text: "Log In",
-              textSize: 20,
-              textWeight: FontWeight.w700,
-              height: 50,
+            Container(
               width: 200,
+<<<<<<< Updated upstream
               onPressed: () {
                 debugPrint("Starting onboarding...");
                 Navigator.push(
@@ -117,9 +153,56 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (context) => const BaseScreen()),
                 );
               },
+=======
+              height: 50,
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x3F000000),
+                    blurRadius: 4,
+                    offset: Offset(0, 4),
+                    spreadRadius: 0,
+                  )
+                ],
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: ElevatedButton(
+                onPressed: isLoading ? null : loginUser,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFE6C6C),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                    side: const BorderSide(color: Color(0xFFFE6C6C)),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  elevation: 0,
+                ),
+                child: isLoading
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : const Text(
+                        "Log In",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+              ),
+>>>>>>> Stashed changes
             ),
 
-            const SizedBox(height: 15),
+            const Spacer(),
 
             const Text(
               "New user? Sign up with us!",
@@ -182,36 +265,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
-
-            // SizedBox(
-            //   height: 10,
-            // ),
-
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     AppButton2(
-            //         textColor: Colors.white,
-            //         backgroundColor: Colors.black,
-            //         borderColor: Colors.black,
-            //         text: "1",
-            //         size: 40,
-            //         isIcon: true,
-            //         icon: Icons.favorite_border),
-            //     SizedBox(
-            //       height: 10,
-            //     ),
-            //     AppButton2(
-            //         textColor: Colors.black,
-            //         backgroundColor: Colors.yellow,
-            //         borderColor: Colors.black,
-            //         text: "2",
-            //         size: 40),
-            //     SizedBox(
-            //       height: 10,
-            //     ),
-            //   ],
-            // )
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
           ],
         ),

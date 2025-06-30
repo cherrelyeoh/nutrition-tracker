@@ -3,12 +3,14 @@ import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
+import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
 
 class MainHomePage extends StatefulWidget {
-  const MainHomePage({super.key});
+  final PostRestUserLoginResponse? loggedInUser;
+  const MainHomePage({super.key, this.loggedInUser});
 
   @override
   _MainHomePageState createState() => _MainHomePageState();
