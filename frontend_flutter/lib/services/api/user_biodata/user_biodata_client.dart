@@ -45,8 +45,7 @@ abstract class UserBiodataClient {
   ///
   /// [cache] - Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>.
   @GET('/rest/UserBiodata')
-  Future<GetManyUserBiodataEntityResponseDto>
-      getManyBaseUserBiodataControllerUserBiodataEntity({
+  Future<GetManyUserBiodataEntityResponseDto> getManyBaseUserBiodataControllerUserBiodataEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -61,30 +60,26 @@ abstract class UserBiodataClient {
 
   /// Create a single UserBiodataEntity
   @POST('/rest/UserBiodata')
-  Future<UserBiodataEntity>
-      createOneBaseUserBiodataControllerUserBiodataEntity({
+  Future<UserBiodataEntity> createOneBaseUserBiodataControllerUserBiodataEntity({
     @Body() required CreateUserBiodataDto body,
   });
 
   /// Create multiple UserBiodataEntities
   @POST('/rest/UserBiodata/bulk')
-  Future<List<UserBiodataEntity>>
-      createManyBaseUserBiodataControllerUserBiodataEntity({
+  Future<List<UserBiodataEntity>> createManyBaseUserBiodataControllerUserBiodataEntity({
     @Body() required CreateManyUserBiodataEntityDto body,
   });
 
   /// Update a single UserBiodataEntity
   @PATCH('/rest/UserBiodata/{id}')
-  Future<UserBiodataEntity>
-      updateOneBaseUserBiodataControllerUserBiodataEntity({
+  Future<UserBiodataEntity> updateOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num id,
     @Body() required UpdateUserBiodataDto body,
   });
 
   /// Replace a single UserBiodataEntity
   @PUT('/rest/UserBiodata/{id}')
-  Future<UserBiodataEntity>
-      replaceOneBaseUserBiodataControllerUserBiodataEntity({
+  Future<UserBiodataEntity> replaceOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num id,
     @Body() required UserBiodataEntity body,
   });

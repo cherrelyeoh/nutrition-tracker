@@ -9,10 +9,10 @@ import '../models/create_many_user_entity_dto.dart';
 import '../models/create_user_dto.dart';
 import '../models/get_many_user_entity_response_dto.dart';
 import '../models/login_dto.dart';
-import '../models/post_rest_user_login_response.dart';
 import '../models/sign_up_dto.dart';
 import '../models/update_user_dto.dart';
 import '../models/user_entity.dart';
+import '../models/user_session_dto.dart';
 
 part 'authentication_client.g.dart';
 
@@ -28,7 +28,7 @@ abstract class AuthenticationClient {
 
   /// Authenticate user
   @POST('/rest/User/login')
-  Future<PostRestUserLoginResponse> userControllerLogin({
+  Future<UserSessionDto> userControllerLogin({
     @Body() required LoginDto body,
   });
 
