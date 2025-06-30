@@ -54,6 +54,8 @@ export class UserService extends TypeOrmCrudService<UserEntity> {
 
     if (!user) {
       throw new NotFoundException('User not found');
+    } else{
+      console.log('User found:', {user})
     }
 
     // const isPasswordValid = await bcrypt.compare(password, user.password);

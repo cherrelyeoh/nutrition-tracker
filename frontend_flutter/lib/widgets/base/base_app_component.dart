@@ -186,7 +186,8 @@ import 'package:fluttertest/widgets/base/custom_bottom_navigation.dart';
 // }
 
 class BaseScreen extends StatefulWidget {
-  const BaseScreen({super.key});
+  final int userId;
+  const BaseScreen({super.key, required this.userId});
 
   // final String title;
   // final Widget body;

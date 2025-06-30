@@ -58,15 +58,14 @@ class _LoginInputState extends State<LoginInput> {
               ),
             ),
             child: Center(
-              // ✅ Centers the icon inside the container
               child: Icon(
-                widget.icon, // Change to any icon you want
-                color: Colors.white, // Adjust color as needed
-                size: widget.height * 0.4, // Icon size relative to container
+                widget.icon,
+                color: Colors.white,
+                size: widget.height * 0.4,
               ),
             ),
           ),
-          const SizedBox(width: 20), // Space between icon box and text
+          const SizedBox(width: 20),
 
           // Password Text
           Expanded(
@@ -74,6 +73,8 @@ class _LoginInputState extends State<LoginInput> {
               controller: widget.controller,
               cursorColor: Colors.black,
               cursorHeight: widget.textSize,
+              textCapitalization: TextCapitalization.none,
+              keyboardType: TextInputType.emailAddress,
               obscureText: widget.isObscureText, // Hide password input
               decoration: InputDecoration(
                 hintText: widget.placeholderInput,

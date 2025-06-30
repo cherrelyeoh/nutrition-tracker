@@ -24,6 +24,11 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Future<void> loginUser() async {
     debugPrint('Login User called');
     setState(() {
@@ -41,14 +46,14 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final user = await client.userControllerLogin(body: loginData);
+      final userId = user.user.id;
       debugPrint("User trying to login!");
-      debugPrint("🔁 Response: ${jsonEncode(user.toJson())}");
-      debugPrint("🔁 Response: ${user.toJson()}");
+      debugPrint("🔁 Response: ${jsonEncode(user)}");
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => MainHomePage(
-                  loggedInUser: user,
+            builder: (context) => BaseScreen(
+                  userId: userId,
                 )),
       );
     } on DioException catch (e) {
@@ -144,16 +149,6 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 50),
 
             Container(
-              width: 200,
-<<<<<<< Updated upstream
-              onPressed: () {
-                debugPrint("Starting onboarding...");
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BaseScreen()),
-                );
-              },
-=======
               height: 50,
               decoration: BoxDecoration(
                 boxShadow: const [
@@ -199,7 +194,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
               ),
->>>>>>> Stashed changes
             ),
 
             const Spacer(),
