@@ -28,6 +28,7 @@ export 'models/sign_up_dto.dart';
 export 'models/get_many_user_entity_response_dto.dart';
 export 'models/user_entity.dart';
 export 'models/login_dto.dart';
+export 'models/user_session_dto.dart';
 export 'models/create_user_dto.dart';
 export 'models/create_many_user_entity_dto.dart';
 export 'models/update_user_dto.dart';
@@ -48,7 +49,6 @@ export 'models/create_user_biodata_dto.dart';
 export 'models/create_many_user_biodata_entity_dto.dart';
 export 'models/update_user_biodata_dto.dart';
 export 'models/object0.dart';
-export 'models/post_rest_user_login_response.dart';
 // Root client
 export 'api_client.dart';
 

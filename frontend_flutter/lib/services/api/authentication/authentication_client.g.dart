@@ -47,15 +47,14 @@ class _AuthenticationClient implements AuthenticationClient {
   }
 
   @override
-  Future<PostRestUserLoginResponse> userControllerLogin(
-      {required LoginDto body}) async {
+  Future<UserSessionDto> userControllerLogin({required LoginDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PostRestUserLoginResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserSessionDto>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -71,7 +70,7 @@ class _AuthenticationClient implements AuthenticationClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PostRestUserLoginResponse.fromJson(_result.data!);
+    final value = UserSessionDto.fromJson(_result.data!);
     return value;
   }
 

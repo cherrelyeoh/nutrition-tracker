@@ -13,12 +13,14 @@ import {
   ApiResponse,
   ApiOperation,
   ApiOkResponse,
+  ApiBody,
 } from '@nestjs/swagger';
 import { SignUpDto } from './dto/SignUp.dto';
 import { LoginDto } from './dto/Login.dto';
 import { UserService } from './User.service';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import { UpdateUserDto } from './dto/UpdateUser.dto';
+import { UserSessionDto } from './dto/UserSession.dto';
 @RouteMetadata()
 @Crud({
   model: { type: UserEntity },
@@ -54,20 +56,27 @@ export class UserController implements CrudController<UserEntity> {
   @ApiOperation({ summary: 'Authenticate user' })
   @ApiOkResponse({
     description: 'Login successful',
-    schema: {
-      type: 'object',
-      properties: {
-        user: { $ref: '#/components/schemas/UserEntity' },
-      },
-    },
+    type: UserSessionDto,
   })
+  @ApiBody({ type: LoginDto })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async login(@Body() loginDto: LoginDto): Promise<{ user: UserEntity }> {
+  async login(@Body() loginDto: LoginDto): Promise<{ user: UserSessionDto }> {
     const user = await this.service.validateUser(
       loginDto.emailAddress,
       loginDto.password,
     );
-    return { user };
+
+    // Explicitly map to only required fields
+    const userSession: UserSessionDto = {
+      id: user.id,
+      name: user.name,
+      emailAddress: user.emailAddress,
+      mobileNumber: user.mobileNumber,
+      accountStatus: user.accountStatus,
+      subscriptionId: user.subscriptionId,
+    };
+
+    return { user: userSession };
   }
 }
