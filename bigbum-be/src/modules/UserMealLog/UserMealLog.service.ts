@@ -170,12 +170,15 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       parsedContent.Result,
       userMealLog,
     );
+    userMealLog.comments = mainMeal.comments;
     userMealLog.calories = mainMeal.calories;
     userMealLog.protein = mainMeal.protein;
     userMealLog.fats = mainMeal.fats;
     userMealLog.carbs = mainMeal.carbs;
     userMealLog.mealLevel = mainMeal.mealLevel;
     userMealLog.comments = mainMeal.comments;
+    userMealLog.mealName = mainMeal.mealName;
+    userMealLog.weight = mainMeal.weight;
 
     if (userMealLog.id != null && userMealLog.id > 0) {
       await this.repo.update(userMealLog.id, userMealLog);
@@ -237,13 +240,19 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       mealImage: '',
       mealType: userMealLog.mealType,
       mealName: userMealLog.mealName,
-      weight: parseFloat(data.Weight) || 0,
-      calories: parseInt(data.Calories) || 0,
-      protein: parseInt(data.Protein) || 0,
-      fats: parseInt(data.Fats) || 0,
-      carbs: parseInt(data.Carbs) || 0,
-      mealLevel: parseInt(data.Grade) || 0,
-      comments: stringify(data.Comments) || '',
+      weight: this.extractNumber(data.Weight),
+      calories: this.extractNumber(data.Calories),
+      protein: this.extractNumber(data.Protein),
+      fats: this.extractNumber(data.Fats),
+      carbs: this.extractNumber(data.Carbs),
+      mealLevel: this.extractNumber(data.Grade),
+      comments: data.Comments,
     };
+  }
+
+  private extractNumber(value: any): number {
+    if (!value) return 0;
+    const numberOnly = String(value).replace(/[^\d.]/g, '');
+    return parseFloat(numberOnly) || 0;
   }
 }
