@@ -187,7 +187,8 @@ import 'package:fluttertest/widgets/base/custom_bottom_navigation.dart';
 
 class BaseScreen extends StatefulWidget {
   final num userId;
-  const BaseScreen({super.key, required this.userId});
+  final String userName;
+  const BaseScreen({super.key, required this.userId, required this.userName});
 
   // final String title;
   // final Widget body;
@@ -206,11 +207,22 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   int _selectedIndex = 0;
-  final List<PageItem> _pages = [
-    PageItem(title: 'Home', page: MainHomePage()),
-    PageItem(title: 'Meal Calendar', page: MealCalendarMain()),
-    PageItem(title: 'Scan Food', page: FoodScanMain()),
-  ];
+  late List<PageItem> _pages;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pages = [
+      PageItem(
+          title: 'Home',
+          page: MainHomePage(userId: widget.userId, userName: widget.userName)),
+      PageItem(
+          title: 'Meal Calendar',
+          page: MealCalendarMain(userId: widget.userId)),
+      PageItem(title: 'Scan Food', page: FoodScanMain()),
+    ];
+  }
 
   Widget _buildDrawerHeader(BuildContext context) {
     return Column(

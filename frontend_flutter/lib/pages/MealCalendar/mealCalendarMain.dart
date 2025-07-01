@@ -13,7 +13,7 @@ import 'dart:convert';
 import 'package:fluttertest/widgets/meal_calendar_widget.dart';
 
 class MealCalendarMain extends StatefulWidget {
-  final int? userId;
+  final num? userId;
   const MealCalendarMain({super.key, this.userId});
 
   @override

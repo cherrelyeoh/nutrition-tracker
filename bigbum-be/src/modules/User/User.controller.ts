@@ -77,6 +77,8 @@ export class UserController implements CrudController<UserEntity> {
       subscriptionId: user.subscriptionId,
     };
 
+    console.log(userSession);
+
     return { user: userSession };
   }
 }

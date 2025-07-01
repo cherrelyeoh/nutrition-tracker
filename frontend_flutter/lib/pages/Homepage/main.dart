@@ -9,7 +9,9 @@ import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
 
 class MainHomePage extends StatefulWidget {
-  const MainHomePage({super.key});
+  final num? userId;
+  final String? userName;
+  const MainHomePage({super.key, this.userId, this.userName});
 
   @override
   _MainHomePageState createState() => _MainHomePageState();

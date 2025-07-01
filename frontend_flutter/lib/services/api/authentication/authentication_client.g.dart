@@ -53,12 +53,13 @@ class _AuthenticationClient implements AuthenticationClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserSessionDto>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<UserSessionDto>(
+        Options(
+          method: 'POST',
+          headers: _headers,
+          extra: _extra,
+        )
             .compose(
               _dio.options,
               '/rest/User/login',
@@ -66,11 +67,13 @@ class _AuthenticationClient implements AuthenticationClient {
               data: _data,
             )
             .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = UserSessionDto.fromJson(_result.data!);
+              baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+            ),
+      ),
+    );
+
+// ✅ Log the full response
+    final value = UserSessionDto.fromJson(_result.data!['user']);
     return value;
   }
 

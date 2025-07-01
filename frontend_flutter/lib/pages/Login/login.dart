@@ -46,14 +46,17 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final user = await client.userControllerLogin(body: loginData);
-      final userId = user.id;
       debugPrint("User trying to login!");
       debugPrint("🔁 Response: ${jsonEncode(user)}");
+      final userId = user.id;
+      final userName = user.name;
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
             builder: (context) => BaseScreen(
                   userId: userId,
+                  userName: userName,
                 )),
       );
     } on DioException catch (e) {
@@ -70,8 +73,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final onboardingBloc = BlocProvider.of<OnboardingBloc>(context);
-    debugPrint("OnboardingBloc instance: $onboardingBloc");
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
