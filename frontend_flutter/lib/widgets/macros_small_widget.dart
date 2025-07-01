@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class MacrosSmallWidget extends StatelessWidget {
@@ -28,6 +26,14 @@ class MacrosSmallWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imagePaths = {
+      'carbs': 'assets/icons/carbs.png',
+      'protein': 'assets/icons/protein.png',
+      'fats': 'assets/icons/fats.png',
+    };
+
+    final imagePath = imagePaths[title.toLowerCase()];
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final double totalWidth = constraints.maxWidth;

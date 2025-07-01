@@ -40,7 +40,6 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
         'amount': '400',
         'totalAmount': '500',
         'icon': Icons.fitness_center,
-        'imagePath': widget.imagePathProtein,
         'color': Colors.white,
         'barColor2': const Color(0xFFC7B290),
         'barColor1': Colors.white,
@@ -50,7 +49,6 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
         'amount': '250',
         'totalAmount': '350',
         'icon': Icons.fastfood,
-        'imagePath': widget.imagePathCarbs,
         'color': const Color(0xFFB28F5E),
         'barColor1': const Color(0xFFC7B290),
         'barColor2': const Color(0xFFB28F5E),
@@ -60,7 +58,6 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
         'amount': '40',
         'totalAmount': '100',
         'icon': Icons.local_pizza,
-        'imagePath': widget.imagePathFats,
         'color': const Color(0xFFC7B290),
         'barColor2': const Color(0xFFC49A2C),
         'barColor1': const Color(0xFFC7B290),
@@ -181,7 +178,7 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
                       const Text(
                         'Calories',
                         style: TextStyle(
-                          color: const Color(0xFFFFB09A),
+                          color: Color(0xFFFFB09A),
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                         ),
@@ -190,7 +187,7 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
                       Text(
                         '${widget.calAmount} / ${widget.calTotalAmount}kCal',
                         style: const TextStyle(
-                          color: const Color(0xFFFFB09A),
+                          color: Color(0xFFFFB09A),
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
@@ -213,7 +210,7 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
                         height: 6,
                         margin: const EdgeInsets.only(top: 1),
                         decoration: BoxDecoration(
-                          color: Color(0xFFFE6C6C),
+                          color: const Color(0xFFFE6C6C),
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),

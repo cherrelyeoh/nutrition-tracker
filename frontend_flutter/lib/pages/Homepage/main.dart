@@ -3,7 +3,6 @@ import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
-import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
@@ -100,90 +99,178 @@ class _MainHomePageState extends State<MainHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Custom Header
+              SizedBox(
+                width: double.infinity,
+                height: 30,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Hi, ${widget.userName}',
+                      style: const TextStyle(
+                        color: Color(0xFFFE6C6C),
+                        fontSize: 26,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.brown),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
+                        );
+                      },
+                    ),
+                    const Row(
+                      children: [
+                        Icon(Icons.notifications,
+                            size: 27, color: Color(0xFFFE6C6C)),
+                        SizedBox(width: 15),
+                        Icon(Icons.settings,
+                            size: 27, color: Color(0xFFFE6C6C)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
 
-              const SizedBox(height: 10), // Space before the new text
+              const SizedBox(height: 10),
 
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  //Circle Widget
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      // Background circle (red)
-                      const SizedBox(
-                        width: 120,
-                        height: 120,
-                        child: CircularProgressIndicator(
-                          value: 1.0, // Full circle
-                          strokeWidth: 10,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.redAccent),
-                          backgroundColor: Colors.transparent,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BodyScanMain(),
                         ),
+                      );
+                    },
+                    child: const Text(
+                      "It's time for a body scan!",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
                       ),
-
-                      // Foreground progress arc (yellow)
-                      const SizedBox(
-                        width: 120,
-                        height: 120,
-                        child: CircularProgressIndicator(
-                          value: 0.75, // 75% progress
-                          strokeWidth: 10,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.yellow),
-                          backgroundColor: Colors.transparent,
-                        ),
-                      ),
-
-                      // Percentage Text
-                      Text(
-                        "${(0.75 * 100).toInt()}%",
-                        style: const TextStyle(
-                          color: Colors.yellow,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                      textAlign: TextAlign.start,
+                    ),
                   ),
-
-                  const SizedBox(
-                    width: 10,
-                  ),
-
-                  const Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Remaining Calories',
-                          style: TextStyle(
-                            color: Color(0xFFFE6C6C),
-                            fontSize: 18,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w700,
-                          ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FoodScanMain(),
                         ),
-                        Text(
-                          '2452kal',
-                          style: TextStyle(
-                            color: Color(0xFFFFD700),
-                            fontSize: 44,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
+                      );
+                    },
+                    child: const Text(
+                      "It's time to log your meal!",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                        decoration: TextDecoration.underline,
+                      ),
+                      textAlign: TextAlign.end,
                     ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 30), // Space before the new text
+
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final double spacerWidth = constraints.maxWidth * 0.1;
+
+                  return Center(
+                    child: Row(
+                      mainAxisSize:
+                          MainAxisSize.min, // Only use as much space as needed
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Circle widget
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SizedBox(
+                              width: 120,
+                              height: 120,
+                              child: CircularProgressIndicator(
+                                value: 1.0,
+                                strokeWidth: 15,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.yellow),
+                                backgroundColor: Colors.transparent,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 120,
+                              height: 120,
+                              child: CircularProgressIndicator(
+                                value: 0.75,
+                                strokeWidth: 13,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.redAccent),
+                                backgroundColor: Colors.transparent,
+                              ),
+                            ),
+                            Text(
+                              "${(0.75 * 100).toInt()}%",
+                              style: const TextStyle(
+                                color: Colors.yellow,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: spacerWidth),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Remaining Calories',
+                              style: TextStyle(
+                                color: Color(0xFFFE6C6C),
+                                fontSize: 18,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                                height: 1.1,
+                              ),
+                            ),
+                            Text(
+                              '2452kcal',
+                              style: TextStyle(
+                                color: Color(0xFFFFD700),
+                                fontSize: 44,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                                height: 1.1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+
+              const SizedBox(height: 25),
 
               Row(
                 children: List.generate(macros.length * 2 - 1, (index) {
-                  if (index.isOdd) return const SizedBox(width: 8);
+                  if (index.isOdd) return const SizedBox(width: 20);
                   final i = index ~/ 2;
                   final macro = macros[i];
                   return Expanded(
@@ -220,49 +307,6 @@ class _MainHomePageState extends State<MainHomePage> {
                 },
                 child: const Text(
                   "Check my calendar",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const FoodScanMain(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "It's time to log your meal!",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-
-              const SizedBox(height: 5),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BodyScanMain(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "It's time for a body scan!",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,

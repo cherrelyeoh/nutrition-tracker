@@ -115,7 +115,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
                             height: 78,
                             decoration: BoxDecoration(
                               color: isSelected
-                                  ? Color(0xFFFE6C6C)
+                                  ? const Color(0xFFFE6C6C)
                                   : const Color(0xFFF3F3F3),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -160,15 +160,11 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
               const SizedBox(height: 20),
 
               MealCalendarWidget(
-                mealType: 'Dinner',
-                mealIcon: mealTypeIcons['Dinner'] ??
-                    'assets/icons/calendar_snack.png',
-                calAmount: '500',
-                calTotalAmount: '600',
-                imagePathCarbs: 'assets/icons/carbs.png',
-                imagePathProtein: 'assets/icons/protein.png',
-                imagePathFats: 'assets/icons/fats.png',
-              ),
+                  mealType: 'Dinner',
+                  mealIcon: mealTypeIcons['Dinner'] ??
+                      'assets/icons/calendar_snack.png',
+                  calAmount: '500',
+                  calTotalAmount: '600'),
 
               const SizedBox(height: 15),
 
