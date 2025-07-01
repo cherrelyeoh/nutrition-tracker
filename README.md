@@ -2,7 +2,6 @@
 
 First time install
 
-
 ```
 npm install -g @nestjs/cli
 npm install
@@ -34,6 +33,9 @@ dart run build_runner build -d
 dart run build_runner clean
 dart run swagger_parser
 dart run build_runner build --delete-conflicting-outputs
+
+dart run build_runner clean && dart run swagger_parser && dart run build_runner build --delete-conflicting-outputs
+
 
 ```
 
