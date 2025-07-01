@@ -17,6 +17,11 @@ part 'user_sub_meal_log_client.g.dart';
 abstract class UserSubMealLogClient {
   factory UserSubMealLogClient(Dio dio, {String? baseUrl}) = _UserSubMealLogClient;
 
+  @GET('/rest/UserSubMealLog/main-meal/{id}')
+  Future<List<UserSubMealLogEntity>> userSubMealLogControllerGetByMainMealId({
+    @Path('id') required num id,
+  });
+
   /// Retrieve multiple UserSubMealLogEntities.
   ///
   /// [fields] - Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>.

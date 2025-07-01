@@ -15,4 +15,13 @@ export class UserSubMealLogService extends TypeOrmCrudService<UserSubMealLogEnti
     const entity = this.repo.create(input);
     return await this.repo.save(entity);
   }
+
+  async findByMainMealId(mainMealId: number): Promise<UserSubMealLogEntity[]> {
+    return this.repo.find({
+      where: {
+        mainMeal: { id: mainMealId },
+      },
+      relations: ['mainMeal'],
+    });
+  }
 }

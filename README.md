@@ -34,7 +34,7 @@ dart run build_runner clean
 dart run swagger_parser
 dart run build_runner build --delete-conflicting-outputs
 
-dart run build_runner clean && dart run swagger_parser && dart run build_runner build --delete-conflicting-outputs
+dart run build_runner clean; dart run swagger_parser; dart run build_runner build --delete-conflicting-outputs
 
 
 ```
