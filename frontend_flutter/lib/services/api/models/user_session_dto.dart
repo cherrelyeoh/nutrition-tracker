@@ -16,10 +16,9 @@ class UserSessionDto {
     required this.accountStatus,
     required this.subscriptionId,
   });
-
-  factory UserSessionDto.fromJson(Map<String, Object?> json) =>
-      _$UserSessionDtoFromJson(json);
-
+  
+  factory UserSessionDto.fromJson(Map<String, Object?> json) => _$UserSessionDtoFromJson(json);
+  
   final num id;
   final String name;
   final String emailAddress;

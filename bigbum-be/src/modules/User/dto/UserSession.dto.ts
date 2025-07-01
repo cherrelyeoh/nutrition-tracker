@@ -39,3 +39,8 @@ export class UserSessionDto {
   @IsInt()
   subscriptionId?: number;
 }
+
+export class LoginResponseDto {
+  @ApiProperty({ type: () => UserSessionDto })
+  user: UserSessionDto;
+}

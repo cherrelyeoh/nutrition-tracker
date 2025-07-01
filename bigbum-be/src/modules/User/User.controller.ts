@@ -20,7 +20,7 @@ import { LoginDto } from './dto/Login.dto';
 import { UserService } from './User.service';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import { UpdateUserDto } from './dto/UpdateUser.dto';
-import { UserSessionDto } from './dto/UserSession.dto';
+import { LoginResponseDto, UserSessionDto } from './dto/UserSession.dto';
 @RouteMetadata()
 @Crud({
   model: { type: UserEntity },
@@ -56,25 +56,25 @@ export class UserController implements CrudController<UserEntity> {
   @ApiOperation({ summary: 'Authenticate user' })
   @ApiOkResponse({
     description: 'Login successful',
-    type: UserSessionDto,
+    type: LoginResponseDto,
   })
   @ApiBody({ type: LoginDto })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async login(@Body() loginDto: LoginDto): Promise<{ user: UserSessionDto }> {
-    const user = await this.service.validateUser(
+  async login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
+    const userFound = await this.service.validateUser(
       loginDto.emailAddress,
       loginDto.password,
     );
 
     // Explicitly map to only required fields
     const userSession: UserSessionDto = {
-      id: user.id,
-      name: user.name,
-      emailAddress: user.emailAddress,
-      mobileNumber: user.mobileNumber,
-      accountStatus: user.accountStatus,
-      subscriptionId: user.subscriptionId,
+      id: userFound.id,
+      name: userFound.name,
+      emailAddress: userFound.emailAddress,
+      mobileNumber: userFound.mobileNumber,
+      accountStatus: userFound.accountStatus,
+      subscriptionId: userFound.subscriptionId,
     };
 
     console.log(userSession);

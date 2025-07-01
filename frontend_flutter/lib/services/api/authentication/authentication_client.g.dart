@@ -47,19 +47,18 @@ class _AuthenticationClient implements AuthenticationClient {
   }
 
   @override
-  Future<UserSessionDto> userControllerLogin({required LoginDto body}) async {
+  Future<LoginResponseDto> userControllerLogin({required LoginDto body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-      _setStreamType<UserSessionDto>(
-        Options(
-          method: 'POST',
-          headers: _headers,
-          extra: _extra,
-        )
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponseDto>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
             .compose(
               _dio.options,
               '/rest/User/login',
@@ -67,13 +66,11 @@ class _AuthenticationClient implements AuthenticationClient {
               data: _data,
             )
             .copyWith(
-              baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-            ),
-      ),
-    );
-
-// ✅ Log the full response
-    final value = UserSessionDto.fromJson(_result.data!['user']);
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = LoginResponseDto.fromJson(_result.data!);
     return value;
   }
 

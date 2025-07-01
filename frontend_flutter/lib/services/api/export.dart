@@ -29,6 +29,7 @@ export 'models/get_many_user_entity_response_dto.dart';
 export 'models/user_entity.dart';
 export 'models/login_dto.dart';
 export 'models/user_session_dto.dart';
+export 'models/login_response_dto.dart';
 export 'models/create_user_dto.dart';
 export 'models/create_many_user_entity_dto.dart';
 export 'models/update_user_dto.dart';
