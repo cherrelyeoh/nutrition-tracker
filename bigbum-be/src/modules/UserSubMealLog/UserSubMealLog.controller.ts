@@ -27,6 +27,6 @@ export class UserSubMealLogController {
   async getByMainMealId(
     @Param('id') id: number,
   ): Promise<UserSubMealLogEntity[]> {
-    return this.service.findByMainMealId(id);
+    return await this.service.findByMainMealId(id);
   }
 }
