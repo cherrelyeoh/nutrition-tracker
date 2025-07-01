@@ -5,6 +5,11 @@ First time install
 ```
 npm install -g @nestjs/cli
 npm install
+
+flutter pub get
+flutter run
+--> Install dart and flutter exetnsions in VSCode to be able to run
+
 ```
 
 ```Database
@@ -38,7 +43,3 @@ dart run build_runner clean; dart run swagger_parser; dart run build_runner buil
 
 
 ```
-
-flutter pub get
-flutter run
---> Install dart and flutter exetnsions in VSCode to be able to run
