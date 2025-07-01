@@ -15,52 +15,71 @@ import { ApiProperty } from '@nestjs/swagger';
 @Entity('UserSubMealLog')
 export class UserSubMealLogEntity {
   @PrimaryGeneratedColumn()
-  @ApiProperty()
+  @ApiProperty({ required: false, nullable: true })
   id: number;
 
-  @Column({ type: 'text' })
-  @ApiProperty()
-  mealName: string;
+  @Column({ type: 'text', nullable: true })
+  @ApiProperty({ required: false, nullable: true })
+  mealName?: string;
 
-  @Column({ type: 'int' })
-  @ApiProperty()
-  weight: number;
+  @Column({ type: 'int', nullable: true })
+  @ApiProperty({ required: false, nullable: true })
+  weight?: number;
 
-  @Column({ type: 'int' })
-  @ApiProperty()
-  calories: number;
+  @Column({ type: 'int', nullable: true })
+  @ApiProperty({ required: false, nullable: true })
+  calories?: number;
 
-  @Column({ type: 'int' })
-  @ApiProperty()
-  protein: number;
+  @Column({ type: 'int', nullable: true })
+  @ApiProperty({ required: false, nullable: true })
+  protein?: number;
 
-  @Column({ type: 'int' })
-  @ApiProperty()
-  fats: number;
+  @Column({ type: 'int', nullable: true })
+  @ApiProperty({ required: false, nullable: true })
+  fats?: number;
 
-  @Column({ type: 'int' })
-  @ApiProperty()
-  carbs: number;
+  @Column({ type: 'int', nullable: true })
+  @ApiProperty({ required: false, nullable: true })
+  carbs?: number;
 
   @ManyToOne(() => UserMealLogEntity, { nullable: true })
   @JoinColumn({ name: 'mainMeal' })
-  @ApiProperty({ type: () => UserMealLogEntity, required: false })
-  mainMeal: UserMealLogEntity;
+  @ApiProperty({
+    type: () => UserMealLogEntity,
+    required: false,
+    nullable: true,
+  })
+  mainMeal?: UserMealLogEntity;
 
-  @ManyToOne(() => UserEntity)
+  @ManyToOne(() => UserEntity, { nullable: true })
   @JoinColumn({ name: 'createdBy' })
-  @ApiProperty({ type: () => UserEntity })
-  createdBy: UserEntity;
+  @ApiProperty({ type: () => UserEntity, required: false, nullable: true })
+  createdBy?: UserEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
-  @ApiProperty({ type: String, format: 'date-time' })
-  createdDate: Date;
+  @ApiProperty({
+    type: String,
+    format: 'date-time',
+    required: false,
+    nullable: true,
+  })
+  createdDate?: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  @ApiProperty({ type: String, format: 'date-time' })
-  lastUpdatedDate: Date;
+  @ApiProperty({
+    type: String,
+    format: 'date-time',
+    required: false,
+    nullable: true,
+  })
+  lastUpdatedDate?: Date;
 
   @DeleteDateColumn({ type: 'timestamp', nullable: true })
-  @ApiProperty({ type: String, format: 'date-time', required: false })
+  @ApiProperty({
+    type: String,
+    format: 'date-time',
+    required: false,
+    nullable: true,
+  })
   deletedAt?: Date;
 }

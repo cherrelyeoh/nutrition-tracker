@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertest/pages/FoodScan/foodscanresults.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
