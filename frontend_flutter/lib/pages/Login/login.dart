@@ -1,10 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertest/blocs/UserOnboarding/onboarding_bloc.dart';
-import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/services/api/export.dart';
@@ -51,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
       final userId = user.user.id;
       final userName = user.user.name;
 
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

@@ -2,6 +2,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, unused_import
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -43,7 +45,8 @@ abstract class UserMealLogClient {
   ///
   /// [cache] - Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>.
   @GET('/rest/UserMealLog')
-  Future<GetManyUserMealLogEntityResponseDto> getManyBaseUserMealLogControllerUserMealLogEntity({
+  Future<GetManyUserMealLogEntityResponseDto>
+      getManyBaseUserMealLogControllerUserMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -58,26 +61,30 @@ abstract class UserMealLogClient {
 
   /// Create a single UserMealLogEntity
   @POST('/rest/UserMealLog')
-  Future<UserMealLogEntity> createOneBaseUserMealLogControllerUserMealLogEntity({
+  Future<UserMealLogEntity>
+      createOneBaseUserMealLogControllerUserMealLogEntity({
     @Body() required UserMealLogEntity body,
   });
 
   /// Create multiple UserMealLogEntities
   @POST('/rest/UserMealLog/bulk')
-  Future<List<UserMealLogEntity>> createManyBaseUserMealLogControllerUserMealLogEntity({
+  Future<List<UserMealLogEntity>>
+      createManyBaseUserMealLogControllerUserMealLogEntity({
     @Body() required CreateManyUserMealLogEntityDto body,
   });
 
   /// Update a single UserMealLogEntity
   @PATCH('/rest/UserMealLog/{id}')
-  Future<UserMealLogEntity> updateOneBaseUserMealLogControllerUserMealLogEntity({
+  Future<UserMealLogEntity>
+      updateOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num id,
     @Body() required UserMealLogEntity body,
   });
 
   /// Replace a single UserMealLogEntity
   @PUT('/rest/UserMealLog/{id}')
-  Future<UserMealLogEntity> replaceOneBaseUserMealLogControllerUserMealLogEntity({
+  Future<UserMealLogEntity>
+      replaceOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num id,
     @Body() required UserMealLogEntity body,
   });

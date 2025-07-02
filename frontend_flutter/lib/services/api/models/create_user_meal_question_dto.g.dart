@@ -8,7 +8,7 @@ part of 'create_user_meal_question_dto.dart';
 
 CreateUserMealQuestionDto _$CreateUserMealQuestionDtoFromJson(
         Map<String, dynamic> json) =>
-    CreateUserMealQuestionDto();
+    const CreateUserMealQuestionDto();
 
 Map<String, dynamic> _$CreateUserMealQuestionDtoToJson(
         CreateUserMealQuestionDto instance) =>

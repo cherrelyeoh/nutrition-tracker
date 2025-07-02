@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Login/login.dart';
@@ -67,7 +69,9 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       final user = await client.userControllerSignUp(body: signUpData);
       debugPrint("User registered!");
+      debugPrint("User created: ${jsonEncode(user)}}");
 
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const IntroOnboardingPage()),

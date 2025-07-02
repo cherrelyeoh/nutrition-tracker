@@ -8,7 +8,7 @@ part of 'update_user_biodata_dto.dart';
 
 UpdateUserBiodataDto _$UpdateUserBiodataDtoFromJson(
         Map<String, dynamic> json) =>
-    UpdateUserBiodataDto();
+    const UpdateUserBiodataDto();
 
 Map<String, dynamic> _$UpdateUserBiodataDtoToJson(
         UpdateUserBiodataDto instance) =>

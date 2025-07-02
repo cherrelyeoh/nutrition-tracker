@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, library_private_types_in_public_api
+
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -89,6 +91,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
       debugPrint("Meal logged!");
       debugPrint(jsonEncode(mealLog)); //
 
+      if (!mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(

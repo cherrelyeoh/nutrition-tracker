@@ -1,5 +1,6 @@
-import 'dart:io';
+// ignore_for_file: file_names
 
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,6 +13,8 @@ class BodyScanMain extends StatefulWidget {
   const BodyScanMain({super.key});
 
   @override
+  //THis tells Dart to ignore the warning that you're exposing a private type (_BodyScanMainState) in a public method signature (createState()).
+  // ignore: library_private_types_in_public_api
   _BodyScanMainState createState() => _BodyScanMainState();
 }
 
@@ -92,7 +95,7 @@ class _BodyScanMainState extends State<BodyScanMain> {
     try {
       final bodyScanResult = await client
           .userBiodataControllerExtractUserBiodata(body: bodyScanObject);
-      debugPrint("Meal logged!");
+      debugPrint("Body Scan!");
       // debugPrint(jsonEncode(bodyScanResult));
     } on DioException catch (e) {
       final statusCode = e.response?.statusCode;

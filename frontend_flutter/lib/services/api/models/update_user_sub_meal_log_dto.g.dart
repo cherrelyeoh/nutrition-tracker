@@ -8,7 +8,7 @@ part of 'update_user_sub_meal_log_dto.dart';
 
 UpdateUserSubMealLogDto _$UpdateUserSubMealLogDtoFromJson(
         Map<String, dynamic> json) =>
-    UpdateUserSubMealLogDto();
+    const UpdateUserSubMealLogDto();
 
 Map<String, dynamic> _$UpdateUserSubMealLogDtoToJson(
         UpdateUserSubMealLogDto instance) =>

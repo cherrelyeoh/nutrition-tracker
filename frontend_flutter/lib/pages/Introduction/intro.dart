@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:ui'; // Import for BackdropFilter
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/Login/login.dart'; // Import your login page
@@ -28,6 +30,7 @@ class _IntroPageState extends State<IntroPage>
 
     // Navigate to login page after 3 seconds
     Future.delayed(const Duration(seconds: 6), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -59,6 +62,7 @@ class _IntroPageState extends State<IntroPage>
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
                     child: Container(
+                      // ignore: deprecated_member_use
                       color: Colors.black.withOpacity(0.1),
                     ),
                   ),

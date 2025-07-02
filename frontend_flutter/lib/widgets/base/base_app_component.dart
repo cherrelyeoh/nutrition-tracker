@@ -236,7 +236,7 @@ class _BaseScreenState extends State<BaseScreen> {
               IconButton(
                 icon: const Icon(Icons.logout, color: Colors.grey),
                 onPressed: () {
-                  print('Logout tapped');
+                  debugPrint('Logout tapped');
                 },
               ),
             ],
@@ -252,7 +252,7 @@ class _BaseScreenState extends State<BaseScreen> {
         const SizedBox(height: 5),
         TextButton(
           onPressed: () {
-            print('View Profile clicked');
+            debugPrint('View Profile clicked');
           },
           child: const Text("View Profile"),
         )
@@ -271,7 +271,7 @@ class _BaseScreenState extends State<BaseScreen> {
           leading: Icon(Icons.accessibility, color: textColor),
           title: Text('Body Details', style: TextStyle(color: textColor)),
           onTap: () {
-            print('Body Details tapped');
+            debugPrint('Body Details tapped');
             Navigator.pop(context);
           },
         ),
@@ -279,7 +279,7 @@ class _BaseScreenState extends State<BaseScreen> {
           leading: Icon(Icons.settings, color: textColor),
           title: Text('Settings', style: TextStyle(color: textColor)),
           onTap: () {
-            print('Settings tapped');
+            debugPrint('Settings tapped');
           },
         ),
       ],

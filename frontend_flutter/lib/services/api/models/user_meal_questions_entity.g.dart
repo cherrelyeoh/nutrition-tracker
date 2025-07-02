@@ -8,7 +8,7 @@ part of 'user_meal_questions_entity.dart';
 
 UserMealQuestionsEntity _$UserMealQuestionsEntityFromJson(
         Map<String, dynamic> json) =>
-    UserMealQuestionsEntity();
+    const UserMealQuestionsEntity();
 
 Map<String, dynamic> _$UserMealQuestionsEntityToJson(
         UserMealQuestionsEntity instance) =>
