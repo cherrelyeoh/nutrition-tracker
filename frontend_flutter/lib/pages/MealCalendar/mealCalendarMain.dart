@@ -1,14 +1,6 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
-import 'package:fluttertest/pages/Homepage/main.dart';
-import 'package:fluttertest/services/api/export.dart';
 import 'package:fluttertest/theme/app_style.dart';
-import 'package:fluttertest/widgets/image_picker_widget.dart';
-import 'dart:convert';
 
 import 'package:fluttertest/widgets/meal_calendar_widget.dart';
 
@@ -173,8 +165,8 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const FoodScanResults(
-                          mealId: 123), // 👈 Pass mealId here
+                      builder: (context) =>
+                          FoodScanResults(mealId: 1), // 👈 Pass mealId here
                     ),
                   );
                 },
