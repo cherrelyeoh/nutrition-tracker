@@ -36,13 +36,14 @@ abstract class Bigbum extends ChopperService {
     }
 
     final newClient = ChopperClient(
-        services: [_$Bigbum()],
-        converter: converter ?? $JsonSerializableConverter(),
-        interceptors: interceptors ?? [],
-        client: httpClient,
-        authenticator: authenticator,
-        errorConverter: errorConverter,
-        baseUrl: baseUrl ?? Uri.parse('http://'));
+      services: [_$Bigbum()],
+      converter: converter ?? $JsonSerializableConverter(),
+      interceptors: interceptors ?? [],
+      client: httpClient,
+      authenticator: authenticator,
+      errorConverter: errorConverter,
+      baseUrl: baseUrl ?? Uri.parse('http://'),
+    );
     return _$Bigbum(newClient);
   }
 
@@ -52,22 +53,21 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/')
+  @GET(path: '/')
   Future<chopper.Response<String>> _AppController_getHello();
 
   ///
-  Future<chopper.Response> AIPromptController_testFunction(
-      {required RestAIPromptTestFunctionPost$RequestBody? body}) {
+  Future<chopper.Response> AIPromptController_testFunction({
+    required RestAIPromptTestFunctionPost$RequestBody? body,
+  }) {
     return _AIPromptController_testFunction(body: body);
   }
 
   ///
-  @Post(
-    path: '/rest/AIPrompt/testFunction',
-    optionalBody: true,
-  )
-  Future<chopper.Response> _AIPromptController_testFunction(
-      {@Body() required RestAIPromptTestFunctionPost$RequestBody? body});
+  @POST(path: '/rest/AIPrompt/testFunction', optionalBody: true)
+  Future<chopper.Response> _AIPromptController_testFunction({
+    @Body() required RestAIPromptTestFunctionPost$RequestBody? body,
+  });
 
   ///Retrieve multiple AIPromptEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -81,7 +81,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyAIPromptEntityResponseDto>>
-      getManyBaseAIPromptControllerAIPromptEntity({
+  getManyBaseAIPromptControllerAIPromptEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -93,20 +93,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyAIPromptEntityResponseDto,
-        () => GetManyAIPromptEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyAIPromptEntityResponseDto,
+      () => GetManyAIPromptEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseAIPromptControllerAIPromptEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple AIPromptEntities
@@ -120,9 +123,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/AIPrompt')
+  @GET(path: '/rest/AIPrompt')
   Future<chopper.Response<GetManyAIPromptEntityResponseDto>>
-      _getManyBaseAIPromptControllerAIPromptEntity({
+  _getManyBaseAIPromptControllerAIPromptEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -137,63 +140,64 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single AIPromptEntity
   Future<chopper.Response<AIPromptEntity>>
-      createOneBaseAIPromptControllerAIPromptEntity(
-          {required AIPromptEntity? body}) {
+  createOneBaseAIPromptControllerAIPromptEntity({
+    required AIPromptEntity? body,
+  }) {
     generatedMapping.putIfAbsent(
-        AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
+      AIPromptEntity,
+      () => AIPromptEntity.fromJsonFactory,
+    );
 
     return _createOneBaseAIPromptControllerAIPromptEntity(body: body);
   }
 
   ///Create a single AIPromptEntity
-  @Post(
-    path: '/rest/AIPrompt',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/AIPrompt', optionalBody: true)
   Future<chopper.Response<AIPromptEntity>>
-      _createOneBaseAIPromptControllerAIPromptEntity(
-          {@Body() required AIPromptEntity? body});
+  _createOneBaseAIPromptControllerAIPromptEntity({
+    @Body() required AIPromptEntity? body,
+  });
 
   ///Create multiple AIPromptEntities
   Future<chopper.Response<List<AIPromptEntity>>>
-      createManyBaseAIPromptControllerAIPromptEntity(
-          {required CreateManyAIPromptEntityDto? body}) {
+  createManyBaseAIPromptControllerAIPromptEntity({
+    required CreateManyAIPromptEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
+      AIPromptEntity,
+      () => AIPromptEntity.fromJsonFactory,
+    );
 
     return _createManyBaseAIPromptControllerAIPromptEntity(body: body);
   }
 
   ///Create multiple AIPromptEntities
-  @Post(
-    path: '/rest/AIPrompt/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/AIPrompt/bulk', optionalBody: true)
   Future<chopper.Response<List<AIPromptEntity>>>
-      _createManyBaseAIPromptControllerAIPromptEntity(
-          {@Body() required CreateManyAIPromptEntityDto? body});
+  _createManyBaseAIPromptControllerAIPromptEntity({
+    @Body() required CreateManyAIPromptEntityDto? body,
+  });
 
   ///Update a single AIPromptEntity
   ///@param id
   Future<chopper.Response<AIPromptEntity>>
-      updateOneBaseAIPromptControllerAIPromptEntity({
+  updateOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
+      AIPromptEntity,
+      () => AIPromptEntity.fromJsonFactory,
+    );
 
     return _updateOneBaseAIPromptControllerAIPromptEntity(id: id, body: body);
   }
 
   ///Update a single AIPromptEntity
   ///@param id
-  @Patch(
-    path: '/rest/AIPrompt/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/AIPrompt/{id}', optionalBody: true)
   Future<chopper.Response<AIPromptEntity>>
-      _updateOneBaseAIPromptControllerAIPromptEntity({
+  _updateOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Body() required AIPromptEntity? body,
   });
@@ -201,40 +205,41 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single AIPromptEntity
   ///@param id
   Future<chopper.Response<AIPromptEntity>>
-      replaceOneBaseAIPromptControllerAIPromptEntity({
+  replaceOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
+      AIPromptEntity,
+      () => AIPromptEntity.fromJsonFactory,
+    );
 
     return _replaceOneBaseAIPromptControllerAIPromptEntity(id: id, body: body);
   }
 
   ///Replace a single AIPromptEntity
   ///@param id
-  @Put(
-    path: '/rest/AIPrompt/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/AIPrompt/{id}', optionalBody: true)
   Future<chopper.Response<AIPromptEntity>>
-      _replaceOneBaseAIPromptControllerAIPromptEntity({
+  _replaceOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Body() required AIPromptEntity? body,
   });
 
   ///Delete a single AIPromptEntity
   ///@param id
-  Future<chopper.Response> deleteOneBaseAIPromptControllerAIPromptEntity(
-      {required num? id}) {
+  Future<chopper.Response> deleteOneBaseAIPromptControllerAIPromptEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseAIPromptControllerAIPromptEntity(id: id);
   }
 
   ///Delete a single AIPromptEntity
   ///@param id
-  @Delete(path: '/rest/AIPrompt/{id}')
-  Future<chopper.Response> _deleteOneBaseAIPromptControllerAIPromptEntity(
-      {@Path('id') required num? id});
+  @DELETE(path: '/rest/AIPrompt/{id}')
+  Future<chopper.Response> _deleteOneBaseAIPromptControllerAIPromptEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single AIPromptEntity
   ///@param id
@@ -242,17 +247,23 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<AIPromptEntity>>
-      getOneBaseAIPromptControllerAIPromptEntity({
+  getOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
     int? cache,
   }) {
     generatedMapping.putIfAbsent(
-        AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
+      AIPromptEntity,
+      () => AIPromptEntity.fromJsonFactory,
+    );
 
     return _getOneBaseAIPromptControllerAIPromptEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single AIPromptEntity
@@ -260,9 +271,9 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/AIPrompt/{id}')
+  @GET(path: '/rest/AIPrompt/{id}')
   Future<chopper.Response<AIPromptEntity>>
-      _getOneBaseAIPromptControllerAIPromptEntity({
+  _getOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -275,22 +286,21 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/AIPrompt/metadata')
+  @GET(path: '/rest/AIPrompt/metadata')
   Future<chopper.Response> _AIPromptController_();
 
   ///
-  Future<chopper.Response> UserMealLogController_extractNutrientDetails(
-      {required UserMealInputDto? body}) {
+  Future<chopper.Response> UserMealLogController_extractNutrientDetails({
+    required UserMealInputDto? body,
+  }) {
     return _UserMealLogController_extractNutrientDetails(body: body);
   }
 
   ///
-  @Post(
-    path: '/rest/UserMealLog/extractNutrientDetails',
-    optionalBody: true,
-  )
-  Future<chopper.Response> _UserMealLogController_extractNutrientDetails(
-      {@Body() required UserMealInputDto? body});
+  @POST(path: '/rest/UserMealLog/extractNutrientDetails', optionalBody: true)
+  Future<chopper.Response> _UserMealLogController_extractNutrientDetails({
+    @Body() required UserMealInputDto? body,
+  });
 
   ///Retrieve multiple UserMealLogEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -304,7 +314,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserMealLogEntityResponseDto>>
-      getManyBaseUserMealLogControllerUserMealLogEntity({
+  getManyBaseUserMealLogControllerUserMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -316,20 +326,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyUserMealLogEntityResponseDto,
-        () => GetManyUserMealLogEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyUserMealLogEntityResponseDto,
+      () => GetManyUserMealLogEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseUserMealLogControllerUserMealLogEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple UserMealLogEntities
@@ -343,9 +356,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserMealLog')
+  @GET(path: '/rest/UserMealLog')
   Future<chopper.Response<GetManyUserMealLogEntityResponseDto>>
-      _getManyBaseUserMealLogControllerUserMealLogEntity({
+  _getManyBaseUserMealLogControllerUserMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -360,64 +373,67 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserMealLogEntity
   Future<chopper.Response<UserMealLogEntity>>
-      createOneBaseUserMealLogControllerUserMealLogEntity(
-          {required UserMealLogEntity? body}) {
+  createOneBaseUserMealLogControllerUserMealLogEntity({
+    required UserMealLogEntity? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
+      UserMealLogEntity,
+      () => UserMealLogEntity.fromJsonFactory,
+    );
 
     return _createOneBaseUserMealLogControllerUserMealLogEntity(body: body);
   }
 
   ///Create a single UserMealLogEntity
-  @Post(
-    path: '/rest/UserMealLog',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserMealLog', optionalBody: true)
   Future<chopper.Response<UserMealLogEntity>>
-      _createOneBaseUserMealLogControllerUserMealLogEntity(
-          {@Body() required UserMealLogEntity? body});
+  _createOneBaseUserMealLogControllerUserMealLogEntity({
+    @Body() required UserMealLogEntity? body,
+  });
 
   ///Create multiple UserMealLogEntities
   Future<chopper.Response<List<UserMealLogEntity>>>
-      createManyBaseUserMealLogControllerUserMealLogEntity(
-          {required CreateManyUserMealLogEntityDto? body}) {
+  createManyBaseUserMealLogControllerUserMealLogEntity({
+    required CreateManyUserMealLogEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
+      UserMealLogEntity,
+      () => UserMealLogEntity.fromJsonFactory,
+    );
 
     return _createManyBaseUserMealLogControllerUserMealLogEntity(body: body);
   }
 
   ///Create multiple UserMealLogEntities
-  @Post(
-    path: '/rest/UserMealLog/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserMealLog/bulk', optionalBody: true)
   Future<chopper.Response<List<UserMealLogEntity>>>
-      _createManyBaseUserMealLogControllerUserMealLogEntity(
-          {@Body() required CreateManyUserMealLogEntityDto? body});
+  _createManyBaseUserMealLogControllerUserMealLogEntity({
+    @Body() required CreateManyUserMealLogEntityDto? body,
+  });
 
   ///Update a single UserMealLogEntity
   ///@param id
   Future<chopper.Response<UserMealLogEntity>>
-      updateOneBaseUserMealLogControllerUserMealLogEntity({
+  updateOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
+      UserMealLogEntity,
+      () => UserMealLogEntity.fromJsonFactory,
+    );
 
     return _updateOneBaseUserMealLogControllerUserMealLogEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Update a single UserMealLogEntity
   ///@param id
-  @Patch(
-    path: '/rest/UserMealLog/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/UserMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserMealLogEntity>>
-      _updateOneBaseUserMealLogControllerUserMealLogEntity({
+  _updateOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserMealLogEntity? body,
   });
@@ -425,41 +441,45 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserMealLogEntity
   ///@param id
   Future<chopper.Response<UserMealLogEntity>>
-      replaceOneBaseUserMealLogControllerUserMealLogEntity({
+  replaceOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
+      UserMealLogEntity,
+      () => UserMealLogEntity.fromJsonFactory,
+    );
 
     return _replaceOneBaseUserMealLogControllerUserMealLogEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Replace a single UserMealLogEntity
   ///@param id
-  @Put(
-    path: '/rest/UserMealLog/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/UserMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserMealLogEntity>>
-      _replaceOneBaseUserMealLogControllerUserMealLogEntity({
+  _replaceOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserMealLogEntity? body,
   });
 
   ///Delete a single UserMealLogEntity
   ///@param id
-  Future<chopper.Response> deleteOneBaseUserMealLogControllerUserMealLogEntity(
-      {required num? id}) {
+  Future<chopper.Response> deleteOneBaseUserMealLogControllerUserMealLogEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseUserMealLogControllerUserMealLogEntity(id: id);
   }
 
   ///Delete a single UserMealLogEntity
   ///@param id
-  @Delete(path: '/rest/UserMealLog/{id}')
-  Future<chopper.Response> _deleteOneBaseUserMealLogControllerUserMealLogEntity(
-      {@Path('id') required num? id});
+  @DELETE(path: '/rest/UserMealLog/{id}')
+  Future<chopper.Response>
+  _deleteOneBaseUserMealLogControllerUserMealLogEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single UserMealLogEntity
   ///@param id
@@ -467,17 +487,23 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserMealLogEntity>>
-      getOneBaseUserMealLogControllerUserMealLogEntity({
+  getOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
     int? cache,
   }) {
     generatedMapping.putIfAbsent(
-        UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
+      UserMealLogEntity,
+      () => UserMealLogEntity.fromJsonFactory,
+    );
 
     return _getOneBaseUserMealLogControllerUserMealLogEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single UserMealLogEntity
@@ -485,9 +511,9 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserMealLog/{id}')
+  @GET(path: '/rest/UserMealLog/{id}')
   Future<chopper.Response<UserMealLogEntity>>
-      _getOneBaseUserMealLogControllerUserMealLogEntity({
+  _getOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -500,7 +526,7 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/UserMealLog/metadata')
+  @GET(path: '/rest/UserMealLog/metadata')
   Future<chopper.Response> _UserMealLogController_();
 
   ///Retrieve multiple AIIntegrationLogsEntities
@@ -515,7 +541,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyAIIntegrationLogsEntityResponseDto>>
-      getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -527,20 +553,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyAIIntegrationLogsEntityResponseDto,
-        () => GetManyAIIntegrationLogsEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyAIIntegrationLogsEntityResponseDto,
+      () => GetManyAIIntegrationLogsEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple AIIntegrationLogsEntities
@@ -554,9 +583,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/AIIntegrationLogs')
+  @GET(path: '/rest/AIIntegrationLogs')
   Future<chopper.Response<GetManyAIIntegrationLogsEntityResponseDto>>
-      _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -571,66 +600,71 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single AIIntegrationLogsEntity
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {required CreateAIIntegrationLogDto? body}) {
+  createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+    required CreateAIIntegrationLogDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
+      AIIntegrationLogsEntity,
+      () => AIIntegrationLogsEntity.fromJsonFactory,
+    );
 
     return _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        body: body);
+      body: body,
+    );
   }
 
   ///Create a single AIIntegrationLogsEntity
-  @Post(
-    path: '/rest/AIIntegrationLogs',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/AIIntegrationLogs', optionalBody: true)
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {@Body() required CreateAIIntegrationLogDto? body});
+  _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+    @Body() required CreateAIIntegrationLogDto? body,
+  });
 
   ///Create multiple AIIntegrationLogsEntities
   Future<chopper.Response<List<AIIntegrationLogsEntity>>>
-      createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {required CreateManyAIIntegrationLogsEntityDto? body}) {
+  createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+    required CreateManyAIIntegrationLogsEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
+      AIIntegrationLogsEntity,
+      () => AIIntegrationLogsEntity.fromJsonFactory,
+    );
 
     return _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        body: body);
+      body: body,
+    );
   }
 
   ///Create multiple AIIntegrationLogsEntities
-  @Post(
-    path: '/rest/AIIntegrationLogs/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/AIIntegrationLogs/bulk', optionalBody: true)
   Future<chopper.Response<List<AIIntegrationLogsEntity>>>
-      _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {@Body() required CreateManyAIIntegrationLogsEntityDto? body});
+  _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+    @Body() required CreateManyAIIntegrationLogsEntityDto? body,
+  });
 
   ///Update a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required UpdateAIIntegrationLogDto? body,
   }) {
     generatedMapping.putIfAbsent(
-        AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
+      AIIntegrationLogsEntity,
+      () => AIIntegrationLogsEntity.fromJsonFactory,
+    );
 
     return _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Update a single AIIntegrationLogsEntity
   ///@param id
-  @Patch(
-    path: '/rest/AIIntegrationLogs/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/AIIntegrationLogs/{id}', optionalBody: true)
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Body() required UpdateAIIntegrationLogDto? body,
   });
@@ -638,25 +672,26 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required AIIntegrationLogsEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
+      AIIntegrationLogsEntity,
+      () => AIIntegrationLogsEntity.fromJsonFactory,
+    );
 
     return _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Replace a single AIIntegrationLogsEntity
   ///@param id
-  @Put(
-    path: '/rest/AIIntegrationLogs/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/AIIntegrationLogs/{id}', optionalBody: true)
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Body() required AIIntegrationLogsEntity? body,
   });
@@ -664,18 +699,21 @@ abstract class Bigbum extends ChopperService {
   ///Delete a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response>
-      deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {required num? id}) {
+  deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        id: id);
+      id: id,
+    );
   }
 
   ///Delete a single AIIntegrationLogsEntity
   ///@param id
-  @Delete(path: '/rest/AIIntegrationLogs/{id}')
+  @DELETE(path: '/rest/AIIntegrationLogs/{id}')
   Future<chopper.Response>
-      _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-          {@Path('id') required num? id});
+  _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single AIIntegrationLogsEntity
   ///@param id
@@ -683,17 +721,23 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
     int? cache,
   }) {
     generatedMapping.putIfAbsent(
-        AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
+      AIIntegrationLogsEntity,
+      () => AIIntegrationLogsEntity.fromJsonFactory,
+    );
 
     return _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single AIIntegrationLogsEntity
@@ -701,9 +745,9 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/AIIntegrationLogs/{id}')
+  @GET(path: '/rest/AIIntegrationLogs/{id}')
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+  _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -716,57 +760,56 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/AIIntegrationLogs/metadata')
+  @GET(path: '/rest/AIIntegrationLogs/metadata')
   Future<chopper.Response> _AIIntegrationLogsController_();
 
   ///Register a new user
-  Future<chopper.Response<UserEntity>> UserController_signUp(
-      {required SignUpDto? body}) {
+  Future<chopper.Response<UserEntity>> UserController_signUp({
+    required SignUpDto? body,
+  }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
     return _UserController_signUp(body: body);
   }
 
   ///Register a new user
-  @Post(
-    path: '/rest/User/signup',
-    optionalBody: true,
-  )
-  Future<chopper.Response<UserEntity>> _UserController_signUp(
-      {@Body() required SignUpDto? body});
+  @POST(path: '/rest/User/signup', optionalBody: true)
+  Future<chopper.Response<UserEntity>> _UserController_signUp({
+    @Body() required SignUpDto? body,
+  });
 
   ///Authenticate user
-  Future<chopper.Response<LoginResponseDto>> UserController_login(
-      {required LoginDto? body}) {
+  Future<chopper.Response<LoginResponseDto>> UserController_login({
+    required LoginDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        LoginResponseDto, () => LoginResponseDto.fromJsonFactory);
+      LoginResponseDto,
+      () => LoginResponseDto.fromJsonFactory,
+    );
 
     return _UserController_login(body: body);
   }
 
   ///Authenticate user
-  @Post(
-    path: '/rest/User/login',
-    optionalBody: true,
-  )
-  Future<chopper.Response<LoginResponseDto>> _UserController_login(
-      {@Body() required LoginDto? body});
+  @POST(path: '/rest/User/login', optionalBody: true)
+  Future<chopper.Response<LoginResponseDto>> _UserController_login({
+    @Body() required LoginDto? body,
+  });
 
   ///Create a single UserEntity
-  Future<chopper.Response<UserEntity>> createOneBaseUserControllerUserEntity(
-      {required CreateUserDto? body}) {
+  Future<chopper.Response<UserEntity>> createOneBaseUserControllerUserEntity({
+    required CreateUserDto? body,
+  }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
     return _createOneBaseUserControllerUserEntity(body: body);
   }
 
   ///Create a single UserEntity
-  @Post(
-    path: '/rest/User',
-    optionalBody: true,
-  )
-  Future<chopper.Response<UserEntity>> _createOneBaseUserControllerUserEntity(
-      {@Body() required CreateUserDto? body});
+  @POST(path: '/rest/User', optionalBody: true)
+  Future<chopper.Response<UserEntity>> _createOneBaseUserControllerUserEntity({
+    @Body() required CreateUserDto? body,
+  });
 
   ///Retrieve multiple UserEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -780,7 +823,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserEntityResponseDto>>
-      getManyBaseUserControllerUserEntity({
+  getManyBaseUserControllerUserEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -792,20 +835,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyUserEntityResponseDto,
-        () => GetManyUserEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyUserEntityResponseDto,
+      () => GetManyUserEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseUserControllerUserEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple UserEntities
@@ -819,9 +865,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/User')
+  @GET(path: '/rest/User')
   Future<chopper.Response<GetManyUserEntityResponseDto>>
-      _getManyBaseUserControllerUserEntity({
+  _getManyBaseUserControllerUserEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -836,21 +882,20 @@ abstract class Bigbum extends ChopperService {
 
   ///Create multiple UserEntities
   Future<chopper.Response<List<UserEntity>>>
-      createManyBaseUserControllerUserEntity(
-          {required CreateManyUserEntityDto? body}) {
+  createManyBaseUserControllerUserEntity({
+    required CreateManyUserEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
     return _createManyBaseUserControllerUserEntity(body: body);
   }
 
   ///Create multiple UserEntities
-  @Post(
-    path: '/rest/User/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/User/bulk', optionalBody: true)
   Future<chopper.Response<List<UserEntity>>>
-      _createManyBaseUserControllerUserEntity(
-          {@Body() required CreateManyUserEntityDto? body});
+  _createManyBaseUserControllerUserEntity({
+    @Body() required CreateManyUserEntityDto? body,
+  });
 
   ///Update a single UserEntity
   ///@param id
@@ -865,10 +910,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Update a single UserEntity
   ///@param id
-  @Patch(
-    path: '/rest/User/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/User/{id}', optionalBody: true)
   Future<chopper.Response<UserEntity>> _updateOneBaseUserControllerUserEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserDto? body,
@@ -887,10 +929,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Replace a single UserEntity
   ///@param id
-  @Put(
-    path: '/rest/User/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/User/{id}', optionalBody: true)
   Future<chopper.Response<UserEntity>> _replaceOneBaseUserControllerUserEntity({
     @Path('id') required num? id,
     @Body() required UserEntity? body,
@@ -898,16 +937,18 @@ abstract class Bigbum extends ChopperService {
 
   ///Delete a single UserEntity
   ///@param id
-  Future<chopper.Response> deleteOneBaseUserControllerUserEntity(
-      {required num? id}) {
+  Future<chopper.Response> deleteOneBaseUserControllerUserEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseUserControllerUserEntity(id: id);
   }
 
   ///Delete a single UserEntity
   ///@param id
-  @Delete(path: '/rest/User/{id}')
-  Future<chopper.Response> _deleteOneBaseUserControllerUserEntity(
-      {@Path('id') required num? id});
+  @DELETE(path: '/rest/User/{id}')
+  Future<chopper.Response> _deleteOneBaseUserControllerUserEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single UserEntity
   ///@param id
@@ -923,7 +964,11 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
     return _getOneBaseUserControllerUserEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single UserEntity
@@ -931,7 +976,7 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/User/{id}')
+  @GET(path: '/rest/User/{id}')
   Future<chopper.Response<UserEntity>> _getOneBaseUserControllerUserEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
@@ -945,7 +990,7 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/User/metadata')
+  @GET(path: '/rest/User/metadata')
   Future<chopper.Response> _UserController_();
 
   ///Retrieve multiple UserMealQuestionsEntities
@@ -960,7 +1005,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserMealQuestionsEntityResponseDto>>
-      getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -972,20 +1017,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyUserMealQuestionsEntityResponseDto,
-        () => GetManyUserMealQuestionsEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyUserMealQuestionsEntityResponseDto,
+      () => GetManyUserMealQuestionsEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple UserMealQuestionsEntities
@@ -999,9 +1047,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserMealQuestions')
+  @GET(path: '/rest/UserMealQuestions')
   Future<chopper.Response<GetManyUserMealQuestionsEntityResponseDto>>
-      _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1016,66 +1064,71 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserMealQuestionsEntity
   Future<chopper.Response<UserMealQuestionsEntity>>
-      createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {required CreateUserMealQuestionDto? body}) {
+  createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+    required CreateUserMealQuestionDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
+      UserMealQuestionsEntity,
+      () => UserMealQuestionsEntity.fromJsonFactory,
+    );
 
     return _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        body: body);
+      body: body,
+    );
   }
 
   ///Create a single UserMealQuestionsEntity
-  @Post(
-    path: '/rest/UserMealQuestions',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserMealQuestions', optionalBody: true)
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {@Body() required CreateUserMealQuestionDto? body});
+  _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+    @Body() required CreateUserMealQuestionDto? body,
+  });
 
   ///Create multiple UserMealQuestionsEntities
   Future<chopper.Response<List<UserMealQuestionsEntity>>>
-      createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {required CreateManyUserMealQuestionsEntityDto? body}) {
+  createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+    required CreateManyUserMealQuestionsEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
+      UserMealQuestionsEntity,
+      () => UserMealQuestionsEntity.fromJsonFactory,
+    );
 
     return _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        body: body);
+      body: body,
+    );
   }
 
   ///Create multiple UserMealQuestionsEntities
-  @Post(
-    path: '/rest/UserMealQuestions/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserMealQuestions/bulk', optionalBody: true)
   Future<chopper.Response<List<UserMealQuestionsEntity>>>
-      _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {@Body() required CreateManyUserMealQuestionsEntityDto? body});
+  _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+    @Body() required CreateManyUserMealQuestionsEntityDto? body,
+  });
 
   ///Update a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response<UserMealQuestionsEntity>>
-      updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UpdateUserMealQuestionDto? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
+      UserMealQuestionsEntity,
+      () => UserMealQuestionsEntity.fromJsonFactory,
+    );
 
     return _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Update a single UserMealQuestionsEntity
   ///@param id
-  @Patch(
-    path: '/rest/UserMealQuestions/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/UserMealQuestions/{id}', optionalBody: true)
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserMealQuestionDto? body,
   });
@@ -1083,25 +1136,26 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response<UserMealQuestionsEntity>>
-      replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UserMealQuestionsEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
+      UserMealQuestionsEntity,
+      () => UserMealQuestionsEntity.fromJsonFactory,
+    );
 
     return _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Replace a single UserMealQuestionsEntity
   ///@param id
-  @Put(
-    path: '/rest/UserMealQuestions/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/UserMealQuestions/{id}', optionalBody: true)
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Body() required UserMealQuestionsEntity? body,
   });
@@ -1109,18 +1163,21 @@ abstract class Bigbum extends ChopperService {
   ///Delete a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response>
-      deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {required num? id}) {
+  deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        id: id);
+      id: id,
+    );
   }
 
   ///Delete a single UserMealQuestionsEntity
   ///@param id
-  @Delete(path: '/rest/UserMealQuestions/{id}')
+  @DELETE(path: '/rest/UserMealQuestions/{id}')
   Future<chopper.Response>
-      _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-          {@Path('id') required num? id});
+  _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single UserMealQuestionsEntity
   ///@param id
@@ -1128,17 +1185,23 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserMealQuestionsEntity>>
-      getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
     int? cache,
   }) {
     generatedMapping.putIfAbsent(
-        UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
+      UserMealQuestionsEntity,
+      () => UserMealQuestionsEntity.fromJsonFactory,
+    );
 
     return _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single UserMealQuestionsEntity
@@ -1146,9 +1209,9 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserMealQuestions/{id}')
+  @GET(path: '/rest/UserMealQuestions/{id}')
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+  _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1161,24 +1224,26 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/UserMealQuestions/metadata')
+  @GET(path: '/rest/UserMealQuestions/metadata')
   Future<chopper.Response> _UserMealQuestionsController_();
 
   ///
   ///@param id
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      UserSubMealLogController_getByMainMealId({required num? id}) {
+  UserSubMealLogController_getByMainMealId({required num? id}) {
     generatedMapping.putIfAbsent(
-        UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
+      UserSubMealLogEntity,
+      () => UserSubMealLogEntity.fromJsonFactory,
+    );
 
     return _UserSubMealLogController_getByMainMealId(id: id);
   }
 
   ///
   ///@param id
-  @Get(path: '/rest/UserSubMealLog/main-meal/{id}')
+  @GET(path: '/rest/UserSubMealLog/main-meal/{id}')
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      _UserSubMealLogController_getByMainMealId({@Path('id') required num? id});
+  _UserSubMealLogController_getByMainMealId({@Path('id') required num? id});
 
   ///Retrieve multiple UserSubMealLogEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -1192,7 +1257,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserSubMealLogEntityResponseDto>>
-      getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+  getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1204,20 +1269,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyUserSubMealLogEntityResponseDto,
-        () => GetManyUserSubMealLogEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyUserSubMealLogEntityResponseDto,
+      () => GetManyUserSubMealLogEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseUserSubMealLogControllerUserSubMealLogEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple UserSubMealLogEntities
@@ -1231,9 +1299,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserSubMealLog')
+  @GET(path: '/rest/UserSubMealLog')
   Future<chopper.Response<GetManyUserSubMealLogEntityResponseDto>>
-      _getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+  _getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1248,66 +1316,71 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserSubMealLogEntity
   Future<chopper.Response<UserSubMealLogEntity>>
-      createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-          {required CreateUserSubMealLogDto? body}) {
+  createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+    required CreateUserSubMealLogDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
+      UserSubMealLogEntity,
+      () => UserSubMealLogEntity.fromJsonFactory,
+    );
 
     return _createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-        body: body);
+      body: body,
+    );
   }
 
   ///Create a single UserSubMealLogEntity
-  @Post(
-    path: '/rest/UserSubMealLog',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserSubMealLog', optionalBody: true)
   Future<chopper.Response<UserSubMealLogEntity>>
-      _createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-          {@Body() required CreateUserSubMealLogDto? body});
+  _createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+    @Body() required CreateUserSubMealLogDto? body,
+  });
 
   ///Create multiple UserSubMealLogEntities
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
-          {required CreateManyUserSubMealLogEntityDto? body}) {
+  createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+    required CreateManyUserSubMealLogEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
+      UserSubMealLogEntity,
+      () => UserSubMealLogEntity.fromJsonFactory,
+    );
 
     return _createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
-        body: body);
+      body: body,
+    );
   }
 
   ///Create multiple UserSubMealLogEntities
-  @Post(
-    path: '/rest/UserSubMealLog/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserSubMealLog/bulk', optionalBody: true)
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      _createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
-          {@Body() required CreateManyUserSubMealLogEntityDto? body});
+  _createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+    @Body() required CreateManyUserSubMealLogEntityDto? body,
+  });
 
   ///Update a single UserSubMealLogEntity
   ///@param id
   Future<chopper.Response<UserSubMealLogEntity>>
-      updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+  updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UpdateUserSubMealLogDto? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
+      UserSubMealLogEntity,
+      () => UserSubMealLogEntity.fromJsonFactory,
+    );
 
     return _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Update a single UserSubMealLogEntity
   ///@param id
-  @Patch(
-    path: '/rest/UserSubMealLog/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/UserSubMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserSubMealLogEntity>>
-      _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+  _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserSubMealLogDto? body,
   });
@@ -1315,25 +1388,26 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserSubMealLogEntity
   ///@param id
   Future<chopper.Response<UserSubMealLogEntity>>
-      replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+  replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UserSubMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
+      UserSubMealLogEntity,
+      () => UserSubMealLogEntity.fromJsonFactory,
+    );
 
     return _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Replace a single UserSubMealLogEntity
   ///@param id
-  @Put(
-    path: '/rest/UserSubMealLog/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/UserSubMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserSubMealLogEntity>>
-      _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+  _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserSubMealLogEntity? body,
   });
@@ -1341,17 +1415,19 @@ abstract class Bigbum extends ChopperService {
   ///Delete a single UserSubMealLogEntity
   ///@param id
   Future<chopper.Response>
-      deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-          {required num? id}) {
+  deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(id: id);
   }
 
   ///Delete a single UserSubMealLogEntity
   ///@param id
-  @Delete(path: '/rest/UserSubMealLog/{id}')
+  @DELETE(path: '/rest/UserSubMealLog/{id}')
   Future<chopper.Response>
-      _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-          {@Path('id') required num? id});
+  _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single UserSubMealLogEntity
   ///@param id
@@ -1359,17 +1435,23 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserSubMealLogEntity>>
-      getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+  getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
     int? cache,
   }) {
     generatedMapping.putIfAbsent(
-        UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
+      UserSubMealLogEntity,
+      () => UserSubMealLogEntity.fromJsonFactory,
+    );
 
     return _getOneBaseUserSubMealLogControllerUserSubMealLogEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single UserSubMealLogEntity
@@ -1377,9 +1459,9 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserSubMealLog/{id}')
+  @GET(path: '/rest/UserSubMealLog/{id}')
   Future<chopper.Response<UserSubMealLogEntity>>
-      _getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+  _getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1392,27 +1474,28 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/UserSubMealLog/metadata')
+  @GET(path: '/rest/UserSubMealLog/metadata')
   Future<chopper.Response> _UserSubMealLogController_();
 
   ///
   Future<chopper.Response<ExtractBiodataOutputDto>>
-      UserBiodataController_extractUserBiodata(
-          {required ExtractBiodataInputDto? body}) {
+  UserBiodataController_extractUserBiodata({
+    required ExtractBiodataInputDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        ExtractBiodataOutputDto, () => ExtractBiodataOutputDto.fromJsonFactory);
+      ExtractBiodataOutputDto,
+      () => ExtractBiodataOutputDto.fromJsonFactory,
+    );
 
     return _UserBiodataController_extractUserBiodata(body: body);
   }
 
   ///
-  @Post(
-    path: '/rest/UserBiodata/extractUserBiodata',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserBiodata/extractUserBiodata', optionalBody: true)
   Future<chopper.Response<ExtractBiodataOutputDto>>
-      _UserBiodataController_extractUserBiodata(
-          {@Body() required ExtractBiodataInputDto? body});
+  _UserBiodataController_extractUserBiodata({
+    @Body() required ExtractBiodataInputDto? body,
+  });
 
   ///Retrieve multiple UserBiodataEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -1426,7 +1509,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserBiodataEntityResponseDto>>
-      getManyBaseUserBiodataControllerUserBiodataEntity({
+  getManyBaseUserBiodataControllerUserBiodataEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1438,20 +1521,23 @@ abstract class Bigbum extends ChopperService {
     int? page,
     int? cache,
   }) {
-    generatedMapping.putIfAbsent(GetManyUserBiodataEntityResponseDto,
-        () => GetManyUserBiodataEntityResponseDto.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+      GetManyUserBiodataEntityResponseDto,
+      () => GetManyUserBiodataEntityResponseDto.fromJsonFactory,
+    );
 
     return _getManyBaseUserBiodataControllerUserBiodataEntity(
-        fields: fields,
-        s: s,
-        filter: filter,
-        or: or,
-        sort: sort,
-        join: join,
-        limit: limit,
-        offset: offset,
-        page: page,
-        cache: cache);
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
   }
 
   ///Retrieve multiple UserBiodataEntities
@@ -1465,9 +1551,9 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserBiodata')
+  @GET(path: '/rest/UserBiodata')
   Future<chopper.Response<GetManyUserBiodataEntityResponseDto>>
-      _getManyBaseUserBiodataControllerUserBiodataEntity({
+  _getManyBaseUserBiodataControllerUserBiodataEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1482,64 +1568,67 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserBiodataEntity
   Future<chopper.Response<UserBiodataEntity>>
-      createOneBaseUserBiodataControllerUserBiodataEntity(
-          {required CreateUserBiodataDto? body}) {
+  createOneBaseUserBiodataControllerUserBiodataEntity({
+    required CreateUserBiodataDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
+      UserBiodataEntity,
+      () => UserBiodataEntity.fromJsonFactory,
+    );
 
     return _createOneBaseUserBiodataControllerUserBiodataEntity(body: body);
   }
 
   ///Create a single UserBiodataEntity
-  @Post(
-    path: '/rest/UserBiodata',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserBiodata', optionalBody: true)
   Future<chopper.Response<UserBiodataEntity>>
-      _createOneBaseUserBiodataControllerUserBiodataEntity(
-          {@Body() required CreateUserBiodataDto? body});
+  _createOneBaseUserBiodataControllerUserBiodataEntity({
+    @Body() required CreateUserBiodataDto? body,
+  });
 
   ///Create multiple UserBiodataEntities
   Future<chopper.Response<List<UserBiodataEntity>>>
-      createManyBaseUserBiodataControllerUserBiodataEntity(
-          {required CreateManyUserBiodataEntityDto? body}) {
+  createManyBaseUserBiodataControllerUserBiodataEntity({
+    required CreateManyUserBiodataEntityDto? body,
+  }) {
     generatedMapping.putIfAbsent(
-        UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
+      UserBiodataEntity,
+      () => UserBiodataEntity.fromJsonFactory,
+    );
 
     return _createManyBaseUserBiodataControllerUserBiodataEntity(body: body);
   }
 
   ///Create multiple UserBiodataEntities
-  @Post(
-    path: '/rest/UserBiodata/bulk',
-    optionalBody: true,
-  )
+  @POST(path: '/rest/UserBiodata/bulk', optionalBody: true)
   Future<chopper.Response<List<UserBiodataEntity>>>
-      _createManyBaseUserBiodataControllerUserBiodataEntity(
-          {@Body() required CreateManyUserBiodataEntityDto? body});
+  _createManyBaseUserBiodataControllerUserBiodataEntity({
+    @Body() required CreateManyUserBiodataEntityDto? body,
+  });
 
   ///Update a single UserBiodataEntity
   ///@param id
   Future<chopper.Response<UserBiodataEntity>>
-      updateOneBaseUserBiodataControllerUserBiodataEntity({
+  updateOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UpdateUserBiodataDto? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
+      UserBiodataEntity,
+      () => UserBiodataEntity.fromJsonFactory,
+    );
 
     return _updateOneBaseUserBiodataControllerUserBiodataEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Update a single UserBiodataEntity
   ///@param id
-  @Patch(
-    path: '/rest/UserBiodata/{id}',
-    optionalBody: true,
-  )
+  @PATCH(path: '/rest/UserBiodata/{id}', optionalBody: true)
   Future<chopper.Response<UserBiodataEntity>>
-      _updateOneBaseUserBiodataControllerUserBiodataEntity({
+  _updateOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserBiodataDto? body,
   });
@@ -1547,41 +1636,45 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserBiodataEntity
   ///@param id
   Future<chopper.Response<UserBiodataEntity>>
-      replaceOneBaseUserBiodataControllerUserBiodataEntity({
+  replaceOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UserBiodataEntity? body,
   }) {
     generatedMapping.putIfAbsent(
-        UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
+      UserBiodataEntity,
+      () => UserBiodataEntity.fromJsonFactory,
+    );
 
     return _replaceOneBaseUserBiodataControllerUserBiodataEntity(
-        id: id, body: body);
+      id: id,
+      body: body,
+    );
   }
 
   ///Replace a single UserBiodataEntity
   ///@param id
-  @Put(
-    path: '/rest/UserBiodata/{id}',
-    optionalBody: true,
-  )
+  @PUT(path: '/rest/UserBiodata/{id}', optionalBody: true)
   Future<chopper.Response<UserBiodataEntity>>
-      _replaceOneBaseUserBiodataControllerUserBiodataEntity({
+  _replaceOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Body() required UserBiodataEntity? body,
   });
 
   ///Delete a single UserBiodataEntity
   ///@param id
-  Future<chopper.Response> deleteOneBaseUserBiodataControllerUserBiodataEntity(
-      {required num? id}) {
+  Future<chopper.Response> deleteOneBaseUserBiodataControllerUserBiodataEntity({
+    required num? id,
+  }) {
     return _deleteOneBaseUserBiodataControllerUserBiodataEntity(id: id);
   }
 
   ///Delete a single UserBiodataEntity
   ///@param id
-  @Delete(path: '/rest/UserBiodata/{id}')
-  Future<chopper.Response> _deleteOneBaseUserBiodataControllerUserBiodataEntity(
-      {@Path('id') required num? id});
+  @DELETE(path: '/rest/UserBiodata/{id}')
+  Future<chopper.Response>
+  _deleteOneBaseUserBiodataControllerUserBiodataEntity({
+    @Path('id') required num? id,
+  });
 
   ///Retrieve a single UserBiodataEntity
   ///@param id
@@ -1589,17 +1682,23 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserBiodataEntity>>
-      getOneBaseUserBiodataControllerUserBiodataEntity({
+  getOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
     int? cache,
   }) {
     generatedMapping.putIfAbsent(
-        UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
+      UserBiodataEntity,
+      () => UserBiodataEntity.fromJsonFactory,
+    );
 
     return _getOneBaseUserBiodataControllerUserBiodataEntity(
-        id: id, fields: fields, join: join, cache: cache);
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
   }
 
   ///Retrieve a single UserBiodataEntity
@@ -1607,9 +1706,9 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  @Get(path: '/rest/UserBiodata/{id}')
+  @GET(path: '/rest/UserBiodata/{id}')
   Future<chopper.Response<UserBiodataEntity>>
-      _getOneBaseUserBiodataControllerUserBiodataEntity({
+  _getOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1622,7 +1721,7 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  @Get(path: '/rest/UserBiodata/metadata')
+  @GET(path: '/rest/UserBiodata/metadata')
   Future<chopper.Response> _UserBiodataController_();
 }
 
@@ -1637,8 +1736,8 @@ class GetManyAIPromptEntityResponseDto {
   });
 
   factory GetManyAIPromptEntityResponseDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetManyAIPromptEntityResponseDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetManyAIPromptEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyAIPromptEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -1669,8 +1768,10 @@ class GetManyAIPromptEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -1688,32 +1789,36 @@ class GetManyAIPromptEntityResponseDto {
 
 extension $GetManyAIPromptEntityResponseDtoExtension
     on GetManyAIPromptEntityResponseDto {
-  GetManyAIPromptEntityResponseDto copyWith(
-      {List<AIPromptEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyAIPromptEntityResponseDto copyWith({
+    List<AIPromptEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyAIPromptEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyAIPromptEntityResponseDto copyWithWrapped(
-      {Wrapped<List<AIPromptEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyAIPromptEntityResponseDto copyWithWrapped({
+    Wrapped<List<AIPromptEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyAIPromptEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
@@ -1758,23 +1863,35 @@ class AIPromptEntity {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.promptName, promptName) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptName, promptName)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptName,
+                  promptName,
+                )) &&
             (identical(other.promptRequest, promptRequest) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptRequest, promptRequest)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptRequest,
+                  promptRequest,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.creationDate, creationDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.creationDate, creationDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.creationDate,
+                  creationDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -1793,52 +1910,55 @@ class AIPromptEntity {
 }
 
 extension $AIPromptEntityExtension on AIPromptEntity {
-  AIPromptEntity copyWith(
-      {double? id,
-      String? promptName,
-      String? promptRequest,
-      String? createdBy,
-      DateTime? creationDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  AIPromptEntity copyWith({
+    double? id,
+    String? promptName,
+    String? promptRequest,
+    String? createdBy,
+    DateTime? creationDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return AIPromptEntity(
-        id: id ?? this.id,
-        promptName: promptName ?? this.promptName,
-        promptRequest: promptRequest ?? this.promptRequest,
-        createdBy: createdBy ?? this.createdBy,
-        creationDate: creationDate ?? this.creationDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      promptName: promptName ?? this.promptName,
+      promptRequest: promptRequest ?? this.promptRequest,
+      createdBy: createdBy ?? this.createdBy,
+      creationDate: creationDate ?? this.creationDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  AIPromptEntity copyWithWrapped(
-      {Wrapped<double>? id,
-      Wrapped<String>? promptName,
-      Wrapped<String>? promptRequest,
-      Wrapped<String>? createdBy,
-      Wrapped<DateTime>? creationDate,
-      Wrapped<DateTime>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  AIPromptEntity copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String>? promptName,
+    Wrapped<String>? promptRequest,
+    Wrapped<String>? createdBy,
+    Wrapped<DateTime>? creationDate,
+    Wrapped<DateTime>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return AIPromptEntity(
-        id: (id != null ? id.value : this.id),
-        promptName: (promptName != null ? promptName.value : this.promptName),
-        promptRequest:
-            (promptRequest != null ? promptRequest.value : this.promptRequest),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        creationDate:
-            (creationDate != null ? creationDate.value : this.creationDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      promptName: (promptName != null ? promptName.value : this.promptName),
+      promptRequest:
+          (promptRequest != null ? promptRequest.value : this.promptRequest),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      creationDate:
+          (creationDate != null ? creationDate.value : this.creationDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyAIPromptEntityDto {
-  const CreateManyAIPromptEntityDto({
-    required this.bulk,
-  });
+  const CreateManyAIPromptEntityDto({required this.bulk});
 
   factory CreateManyAIPromptEntityDto.fromJson(Map<String, dynamic> json) =>
       _$CreateManyAIPromptEntityDtoFromJson(json);
@@ -1871,10 +1991,12 @@ extension $CreateManyAIPromptEntityDtoExtension on CreateManyAIPromptEntityDto {
     return CreateManyAIPromptEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyAIPromptEntityDto copyWithWrapped(
-      {Wrapped<List<AIPromptEntity>>? bulk}) {
+  CreateManyAIPromptEntityDto copyWithWrapped({
+    Wrapped<List<AIPromptEntity>>? bulk,
+  }) {
     return CreateManyAIPromptEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -1913,17 +2035,25 @@ class UserMealInputDto {
             (identical(other.userId, userId) ||
                 const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.userMealId, userMealId) ||
-                const DeepCollectionEquality()
-                    .equals(other.userMealId, userMealId)) &&
+                const DeepCollectionEquality().equals(
+                  other.userMealId,
+                  userMealId,
+                )) &&
             (identical(other.mealImage, mealImage) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealImage, mealImage)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealImage,
+                  mealImage,
+                )) &&
             (identical(other.mealName, mealName) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealName, mealName)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealName,
+                  mealName,
+                )) &&
             (identical(other.dateOfMeal, dateOfMeal) ||
-                const DeepCollectionEquality()
-                    .equals(other.dateOfMeal, dateOfMeal)));
+                const DeepCollectionEquality().equals(
+                  other.dateOfMeal,
+                  dateOfMeal,
+                )));
   }
 
   @override
@@ -1940,32 +2070,36 @@ class UserMealInputDto {
 }
 
 extension $UserMealInputDtoExtension on UserMealInputDto {
-  UserMealInputDto copyWith(
-      {double? userId,
-      double? userMealId,
-      String? mealImage,
-      String? mealName,
-      DateTime? dateOfMeal}) {
+  UserMealInputDto copyWith({
+    double? userId,
+    double? userMealId,
+    String? mealImage,
+    String? mealName,
+    DateTime? dateOfMeal,
+  }) {
     return UserMealInputDto(
-        userId: userId ?? this.userId,
-        userMealId: userMealId ?? this.userMealId,
-        mealImage: mealImage ?? this.mealImage,
-        mealName: mealName ?? this.mealName,
-        dateOfMeal: dateOfMeal ?? this.dateOfMeal);
+      userId: userId ?? this.userId,
+      userMealId: userMealId ?? this.userMealId,
+      mealImage: mealImage ?? this.mealImage,
+      mealName: mealName ?? this.mealName,
+      dateOfMeal: dateOfMeal ?? this.dateOfMeal,
+    );
   }
 
-  UserMealInputDto copyWithWrapped(
-      {Wrapped<double>? userId,
-      Wrapped<double?>? userMealId,
-      Wrapped<String?>? mealImage,
-      Wrapped<String>? mealName,
-      Wrapped<DateTime>? dateOfMeal}) {
+  UserMealInputDto copyWithWrapped({
+    Wrapped<double>? userId,
+    Wrapped<double?>? userMealId,
+    Wrapped<String?>? mealImage,
+    Wrapped<String>? mealName,
+    Wrapped<DateTime>? dateOfMeal,
+  }) {
     return UserMealInputDto(
-        userId: (userId != null ? userId.value : this.userId),
-        userMealId: (userMealId != null ? userMealId.value : this.userMealId),
-        mealImage: (mealImage != null ? mealImage.value : this.mealImage),
-        mealName: (mealName != null ? mealName.value : this.mealName),
-        dateOfMeal: (dateOfMeal != null ? dateOfMeal.value : this.dateOfMeal));
+      userId: (userId != null ? userId.value : this.userId),
+      userMealId: (userMealId != null ? userMealId.value : this.userMealId),
+      mealImage: (mealImage != null ? mealImage.value : this.mealImage),
+      mealName: (mealName != null ? mealName.value : this.mealName),
+      dateOfMeal: (dateOfMeal != null ? dateOfMeal.value : this.dateOfMeal),
+    );
   }
 }
 
@@ -1980,8 +2114,8 @@ class GetManyUserMealLogEntityResponseDto {
   });
 
   factory GetManyUserMealLogEntityResponseDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetManyUserMealLogEntityResponseDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetManyUserMealLogEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyUserMealLogEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -2012,8 +2146,10 @@ class GetManyUserMealLogEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -2031,32 +2167,36 @@ class GetManyUserMealLogEntityResponseDto {
 
 extension $GetManyUserMealLogEntityResponseDtoExtension
     on GetManyUserMealLogEntityResponseDto {
-  GetManyUserMealLogEntityResponseDto copyWith(
-      {List<UserMealLogEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyUserMealLogEntityResponseDto copyWith({
+    List<UserMealLogEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyUserMealLogEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyUserMealLogEntityResponseDto copyWithWrapped(
-      {Wrapped<List<UserMealLogEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyUserMealLogEntityResponseDto copyWithWrapped({
+    Wrapped<List<UserMealLogEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyUserMealLogEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
@@ -2071,8 +2211,8 @@ class GetManyAIIntegrationLogsEntityResponseDto {
   });
 
   factory GetManyAIIntegrationLogsEntityResponseDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetManyAIIntegrationLogsEntityResponseDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetManyAIIntegrationLogsEntityResponseDtoFromJson(json);
 
   static const toJsonFactory =
       _$GetManyAIIntegrationLogsEntityResponseDtoToJson;
@@ -2105,8 +2245,10 @@ class GetManyAIIntegrationLogsEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -2124,32 +2266,36 @@ class GetManyAIIntegrationLogsEntityResponseDto {
 
 extension $GetManyAIIntegrationLogsEntityResponseDtoExtension
     on GetManyAIIntegrationLogsEntityResponseDto {
-  GetManyAIIntegrationLogsEntityResponseDto copyWith(
-      {List<AIIntegrationLogsEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyAIIntegrationLogsEntityResponseDto copyWith({
+    List<AIIntegrationLogsEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyAIIntegrationLogsEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyAIIntegrationLogsEntityResponseDto copyWithWrapped(
-      {Wrapped<List<AIIntegrationLogsEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyAIIntegrationLogsEntityResponseDto copyWithWrapped({
+    Wrapped<List<AIIntegrationLogsEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyAIIntegrationLogsEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
@@ -2214,38 +2360,60 @@ class UserEntity {
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.emailAddress, emailAddress) ||
-                const DeepCollectionEquality()
-                    .equals(other.emailAddress, emailAddress)) &&
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
             (identical(other.mobileNumber, mobileNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileNumber, mobileNumber)) &&
+                const DeepCollectionEquality().equals(
+                  other.mobileNumber,
+                  mobileNumber,
+                )) &&
             (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)) &&
+                const DeepCollectionEquality().equals(
+                  other.password,
+                  password,
+                )) &&
             (identical(other.passwordResetCode, passwordResetCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.passwordResetCode, passwordResetCode)) &&
+                const DeepCollectionEquality().equals(
+                  other.passwordResetCode,
+                  passwordResetCode,
+                )) &&
             (identical(other.accountStatus, accountStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.accountStatus, accountStatus)) &&
+                const DeepCollectionEquality().equals(
+                  other.accountStatus,
+                  accountStatus,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.lastUpdatedBy, lastUpdatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedBy, lastUpdatedBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedBy,
+                  lastUpdatedBy,
+                )) &&
             (identical(other.subscriptionId, subscriptionId) ||
-                const DeepCollectionEquality()
-                    .equals(other.subscriptionId, subscriptionId)) &&
+                const DeepCollectionEquality().equals(
+                  other.subscriptionId,
+                  subscriptionId,
+                )) &&
             (identical(other.creationDate, creationDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.creationDate, creationDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.creationDate,
+                  creationDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -2270,75 +2438,80 @@ class UserEntity {
 }
 
 extension $UserEntityExtension on UserEntity {
-  UserEntity copyWith(
-      {double? id,
-      String? name,
-      String? emailAddress,
-      String? mobileNumber,
-      String? password,
-      String? passwordResetCode,
-      double? accountStatus,
-      String? createdBy,
-      String? lastUpdatedBy,
-      double? subscriptionId,
-      DateTime? creationDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  UserEntity copyWith({
+    double? id,
+    String? name,
+    String? emailAddress,
+    String? mobileNumber,
+    String? password,
+    String? passwordResetCode,
+    double? accountStatus,
+    String? createdBy,
+    String? lastUpdatedBy,
+    double? subscriptionId,
+    DateTime? creationDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return UserEntity(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        emailAddress: emailAddress ?? this.emailAddress,
-        mobileNumber: mobileNumber ?? this.mobileNumber,
-        password: password ?? this.password,
-        passwordResetCode: passwordResetCode ?? this.passwordResetCode,
-        accountStatus: accountStatus ?? this.accountStatus,
-        createdBy: createdBy ?? this.createdBy,
-        lastUpdatedBy: lastUpdatedBy ?? this.lastUpdatedBy,
-        subscriptionId: subscriptionId ?? this.subscriptionId,
-        creationDate: creationDate ?? this.creationDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      emailAddress: emailAddress ?? this.emailAddress,
+      mobileNumber: mobileNumber ?? this.mobileNumber,
+      password: password ?? this.password,
+      passwordResetCode: passwordResetCode ?? this.passwordResetCode,
+      accountStatus: accountStatus ?? this.accountStatus,
+      createdBy: createdBy ?? this.createdBy,
+      lastUpdatedBy: lastUpdatedBy ?? this.lastUpdatedBy,
+      subscriptionId: subscriptionId ?? this.subscriptionId,
+      creationDate: creationDate ?? this.creationDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  UserEntity copyWithWrapped(
-      {Wrapped<double>? id,
-      Wrapped<String>? name,
-      Wrapped<String>? emailAddress,
-      Wrapped<String>? mobileNumber,
-      Wrapped<String>? password,
-      Wrapped<String?>? passwordResetCode,
-      Wrapped<double>? accountStatus,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? lastUpdatedBy,
-      Wrapped<double?>? subscriptionId,
-      Wrapped<DateTime>? creationDate,
-      Wrapped<DateTime>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  UserEntity copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String>? name,
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? mobileNumber,
+    Wrapped<String>? password,
+    Wrapped<String?>? passwordResetCode,
+    Wrapped<double>? accountStatus,
+    Wrapped<String>? createdBy,
+    Wrapped<String>? lastUpdatedBy,
+    Wrapped<double?>? subscriptionId,
+    Wrapped<DateTime>? creationDate,
+    Wrapped<DateTime>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return UserEntity(
-        id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
-        emailAddress:
-            (emailAddress != null ? emailAddress.value : this.emailAddress),
-        mobileNumber:
-            (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
-        password: (password != null ? password.value : this.password),
-        passwordResetCode: (passwordResetCode != null
-            ? passwordResetCode.value
-            : this.passwordResetCode),
-        accountStatus:
-            (accountStatus != null ? accountStatus.value : this.accountStatus),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        lastUpdatedBy:
-            (lastUpdatedBy != null ? lastUpdatedBy.value : this.lastUpdatedBy),
-        subscriptionId: (subscriptionId != null
-            ? subscriptionId.value
-            : this.subscriptionId),
-        creationDate:
-            (creationDate != null ? creationDate.value : this.creationDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      name: (name != null ? name.value : this.name),
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      mobileNumber:
+          (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
+      password: (password != null ? password.value : this.password),
+      passwordResetCode:
+          (passwordResetCode != null
+              ? passwordResetCode.value
+              : this.passwordResetCode),
+      accountStatus:
+          (accountStatus != null ? accountStatus.value : this.accountStatus),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      lastUpdatedBy:
+          (lastUpdatedBy != null ? lastUpdatedBy.value : this.lastUpdatedBy),
+      subscriptionId:
+          (subscriptionId != null ? subscriptionId.value : this.subscriptionId),
+      creationDate:
+          (creationDate != null ? creationDate.value : this.creationDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
@@ -2401,40 +2574,62 @@ class AIIntegrationLogsEntity {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.actionUrl, actionUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.actionUrl, actionUrl)) &&
+                const DeepCollectionEquality().equals(
+                  other.actionUrl,
+                  actionUrl,
+                )) &&
             (identical(other.request, request) ||
-                const DeepCollectionEquality()
-                    .equals(other.request, request)) &&
+                const DeepCollectionEquality().equals(
+                  other.request,
+                  request,
+                )) &&
             (identical(other.response, response) ||
-                const DeepCollectionEquality()
-                    .equals(other.response, response)) &&
+                const DeepCollectionEquality().equals(
+                  other.response,
+                  response,
+                )) &&
             (identical(other.responseType, responseType) ||
-                const DeepCollectionEquality()
-                    .equals(other.responseType, responseType)) &&
+                const DeepCollectionEquality().equals(
+                  other.responseType,
+                  responseType,
+                )) &&
             (identical(other.promptType, promptType) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptType, promptType)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptType,
+                  promptType,
+                )) &&
             (identical(other.requestDuration, requestDuration) ||
-                const DeepCollectionEquality()
-                    .equals(other.requestDuration, requestDuration)) &&
+                const DeepCollectionEquality().equals(
+                  other.requestDuration,
+                  requestDuration,
+                )) &&
             (identical(other.promptToken, promptToken) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptToken, promptToken)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptToken,
+                  promptToken,
+                )) &&
             (identical(other.cost, cost) ||
                 const DeepCollectionEquality().equals(other.cost, cost)) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.createdDate, createdDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdDate, createdDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdDate,
+                  createdDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -2459,71 +2654,75 @@ class AIIntegrationLogsEntity {
 }
 
 extension $AIIntegrationLogsEntityExtension on AIIntegrationLogsEntity {
-  AIIntegrationLogsEntity copyWith(
-      {double? id,
-      String? actionUrl,
-      String? request,
-      String? response,
-      String? responseType,
-      AIPromptEntity? promptType,
-      double? requestDuration,
-      double? promptToken,
-      double? cost,
-      UserEntity? createdBy,
-      DateTime? createdDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  AIIntegrationLogsEntity copyWith({
+    double? id,
+    String? actionUrl,
+    String? request,
+    String? response,
+    String? responseType,
+    AIPromptEntity? promptType,
+    double? requestDuration,
+    double? promptToken,
+    double? cost,
+    UserEntity? createdBy,
+    DateTime? createdDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return AIIntegrationLogsEntity(
-        id: id ?? this.id,
-        actionUrl: actionUrl ?? this.actionUrl,
-        request: request ?? this.request,
-        response: response ?? this.response,
-        responseType: responseType ?? this.responseType,
-        promptType: promptType ?? this.promptType,
-        requestDuration: requestDuration ?? this.requestDuration,
-        promptToken: promptToken ?? this.promptToken,
-        cost: cost ?? this.cost,
-        createdBy: createdBy ?? this.createdBy,
-        createdDate: createdDate ?? this.createdDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      actionUrl: actionUrl ?? this.actionUrl,
+      request: request ?? this.request,
+      response: response ?? this.response,
+      responseType: responseType ?? this.responseType,
+      promptType: promptType ?? this.promptType,
+      requestDuration: requestDuration ?? this.requestDuration,
+      promptToken: promptToken ?? this.promptToken,
+      cost: cost ?? this.cost,
+      createdBy: createdBy ?? this.createdBy,
+      createdDate: createdDate ?? this.createdDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  AIIntegrationLogsEntity copyWithWrapped(
-      {Wrapped<double>? id,
-      Wrapped<String>? actionUrl,
-      Wrapped<String>? request,
-      Wrapped<String>? response,
-      Wrapped<String>? responseType,
-      Wrapped<AIPromptEntity>? promptType,
-      Wrapped<double>? requestDuration,
-      Wrapped<double>? promptToken,
-      Wrapped<double>? cost,
-      Wrapped<UserEntity?>? createdBy,
-      Wrapped<DateTime>? createdDate,
-      Wrapped<DateTime>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  AIIntegrationLogsEntity copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String>? actionUrl,
+    Wrapped<String>? request,
+    Wrapped<String>? response,
+    Wrapped<String>? responseType,
+    Wrapped<AIPromptEntity>? promptType,
+    Wrapped<double>? requestDuration,
+    Wrapped<double>? promptToken,
+    Wrapped<double>? cost,
+    Wrapped<UserEntity?>? createdBy,
+    Wrapped<DateTime>? createdDate,
+    Wrapped<DateTime>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return AIIntegrationLogsEntity(
-        id: (id != null ? id.value : this.id),
-        actionUrl: (actionUrl != null ? actionUrl.value : this.actionUrl),
-        request: (request != null ? request.value : this.request),
-        response: (response != null ? response.value : this.response),
-        responseType:
-            (responseType != null ? responseType.value : this.responseType),
-        promptType: (promptType != null ? promptType.value : this.promptType),
-        requestDuration: (requestDuration != null
-            ? requestDuration.value
-            : this.requestDuration),
-        promptToken:
-            (promptToken != null ? promptToken.value : this.promptToken),
-        cost: (cost != null ? cost.value : this.cost),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        createdDate:
-            (createdDate != null ? createdDate.value : this.createdDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      actionUrl: (actionUrl != null ? actionUrl.value : this.actionUrl),
+      request: (request != null ? request.value : this.request),
+      response: (response != null ? response.value : this.response),
+      responseType:
+          (responseType != null ? responseType.value : this.responseType),
+      promptType: (promptType != null ? promptType.value : this.promptType),
+      requestDuration:
+          (requestDuration != null
+              ? requestDuration.value
+              : this.requestDuration),
+      promptToken: (promptToken != null ? promptToken.value : this.promptToken),
+      cost: (cost != null ? cost.value : this.cost),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      createdDate: (createdDate != null ? createdDate.value : this.createdDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
@@ -2601,53 +2800,81 @@ class UserMealLogEntity {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.mealImage, mealImage) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealImage, mealImage)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealImage,
+                  mealImage,
+                )) &&
             (identical(other.mealType, mealType) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealType, mealType)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealType,
+                  mealType,
+                )) &&
             (identical(other.isComplete, isComplete) ||
-                const DeepCollectionEquality()
-                    .equals(other.isComplete, isComplete)) &&
+                const DeepCollectionEquality().equals(
+                  other.isComplete,
+                  isComplete,
+                )) &&
             (identical(other.dateOfMeal, dateOfMeal) ||
-                const DeepCollectionEquality()
-                    .equals(other.dateOfMeal, dateOfMeal)) &&
+                const DeepCollectionEquality().equals(
+                  other.dateOfMeal,
+                  dateOfMeal,
+                )) &&
             (identical(other.mealName, mealName) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealName, mealName)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealName,
+                  mealName,
+                )) &&
             (identical(other.weight, weight) ||
                 const DeepCollectionEquality().equals(other.weight, weight)) &&
             (identical(other.calories, calories) ||
-                const DeepCollectionEquality()
-                    .equals(other.calories, calories)) &&
+                const DeepCollectionEquality().equals(
+                  other.calories,
+                  calories,
+                )) &&
             (identical(other.protein, protein) ||
-                const DeepCollectionEquality()
-                    .equals(other.protein, protein)) &&
+                const DeepCollectionEquality().equals(
+                  other.protein,
+                  protein,
+                )) &&
             (identical(other.fats, fats) ||
                 const DeepCollectionEquality().equals(other.fats, fats)) &&
             (identical(other.carbs, carbs) ||
                 const DeepCollectionEquality().equals(other.carbs, carbs)) &&
             (identical(other.mealLevel, mealLevel) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealLevel, mealLevel)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealLevel,
+                  mealLevel,
+                )) &&
             (identical(other.comments, comments) ||
-                const DeepCollectionEquality()
-                    .equals(other.comments, comments)) &&
+                const DeepCollectionEquality().equals(
+                  other.comments,
+                  comments,
+                )) &&
             (identical(other.promptLog, promptLog) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptLog, promptLog)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptLog,
+                  promptLog,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.createdDate, createdDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdDate, createdDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdDate,
+                  createdDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -2677,95 +2904,97 @@ class UserMealLogEntity {
 }
 
 extension $UserMealLogEntityExtension on UserMealLogEntity {
-  UserMealLogEntity copyWith(
-      {double? id,
-      String? mealImage,
-      String? mealType,
-      bool? isComplete,
-      DateTime? dateOfMeal,
-      String? mealName,
-      double? weight,
-      double? calories,
-      double? protein,
-      double? fats,
-      double? carbs,
-      double? mealLevel,
-      String? comments,
-      AIIntegrationLogsEntity? promptLog,
-      UserEntity? createdBy,
-      DateTime? createdDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  UserMealLogEntity copyWith({
+    double? id,
+    String? mealImage,
+    String? mealType,
+    bool? isComplete,
+    DateTime? dateOfMeal,
+    String? mealName,
+    double? weight,
+    double? calories,
+    double? protein,
+    double? fats,
+    double? carbs,
+    double? mealLevel,
+    String? comments,
+    AIIntegrationLogsEntity? promptLog,
+    UserEntity? createdBy,
+    DateTime? createdDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return UserMealLogEntity(
-        id: id ?? this.id,
-        mealImage: mealImage ?? this.mealImage,
-        mealType: mealType ?? this.mealType,
-        isComplete: isComplete ?? this.isComplete,
-        dateOfMeal: dateOfMeal ?? this.dateOfMeal,
-        mealName: mealName ?? this.mealName,
-        weight: weight ?? this.weight,
-        calories: calories ?? this.calories,
-        protein: protein ?? this.protein,
-        fats: fats ?? this.fats,
-        carbs: carbs ?? this.carbs,
-        mealLevel: mealLevel ?? this.mealLevel,
-        comments: comments ?? this.comments,
-        promptLog: promptLog ?? this.promptLog,
-        createdBy: createdBy ?? this.createdBy,
-        createdDate: createdDate ?? this.createdDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      mealImage: mealImage ?? this.mealImage,
+      mealType: mealType ?? this.mealType,
+      isComplete: isComplete ?? this.isComplete,
+      dateOfMeal: dateOfMeal ?? this.dateOfMeal,
+      mealName: mealName ?? this.mealName,
+      weight: weight ?? this.weight,
+      calories: calories ?? this.calories,
+      protein: protein ?? this.protein,
+      fats: fats ?? this.fats,
+      carbs: carbs ?? this.carbs,
+      mealLevel: mealLevel ?? this.mealLevel,
+      comments: comments ?? this.comments,
+      promptLog: promptLog ?? this.promptLog,
+      createdBy: createdBy ?? this.createdBy,
+      createdDate: createdDate ?? this.createdDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  UserMealLogEntity copyWithWrapped(
-      {Wrapped<double?>? id,
-      Wrapped<String?>? mealImage,
-      Wrapped<String?>? mealType,
-      Wrapped<bool?>? isComplete,
-      Wrapped<DateTime?>? dateOfMeal,
-      Wrapped<String?>? mealName,
-      Wrapped<double?>? weight,
-      Wrapped<double?>? calories,
-      Wrapped<double?>? protein,
-      Wrapped<double?>? fats,
-      Wrapped<double?>? carbs,
-      Wrapped<double?>? mealLevel,
-      Wrapped<String?>? comments,
-      Wrapped<AIIntegrationLogsEntity?>? promptLog,
-      Wrapped<UserEntity?>? createdBy,
-      Wrapped<DateTime?>? createdDate,
-      Wrapped<DateTime?>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  UserMealLogEntity copyWithWrapped({
+    Wrapped<double?>? id,
+    Wrapped<String?>? mealImage,
+    Wrapped<String?>? mealType,
+    Wrapped<bool?>? isComplete,
+    Wrapped<DateTime?>? dateOfMeal,
+    Wrapped<String?>? mealName,
+    Wrapped<double?>? weight,
+    Wrapped<double?>? calories,
+    Wrapped<double?>? protein,
+    Wrapped<double?>? fats,
+    Wrapped<double?>? carbs,
+    Wrapped<double?>? mealLevel,
+    Wrapped<String?>? comments,
+    Wrapped<AIIntegrationLogsEntity?>? promptLog,
+    Wrapped<UserEntity?>? createdBy,
+    Wrapped<DateTime?>? createdDate,
+    Wrapped<DateTime?>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return UserMealLogEntity(
-        id: (id != null ? id.value : this.id),
-        mealImage: (mealImage != null ? mealImage.value : this.mealImage),
-        mealType: (mealType != null ? mealType.value : this.mealType),
-        isComplete: (isComplete != null ? isComplete.value : this.isComplete),
-        dateOfMeal: (dateOfMeal != null ? dateOfMeal.value : this.dateOfMeal),
-        mealName: (mealName != null ? mealName.value : this.mealName),
-        weight: (weight != null ? weight.value : this.weight),
-        calories: (calories != null ? calories.value : this.calories),
-        protein: (protein != null ? protein.value : this.protein),
-        fats: (fats != null ? fats.value : this.fats),
-        carbs: (carbs != null ? carbs.value : this.carbs),
-        mealLevel: (mealLevel != null ? mealLevel.value : this.mealLevel),
-        comments: (comments != null ? comments.value : this.comments),
-        promptLog: (promptLog != null ? promptLog.value : this.promptLog),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        createdDate:
-            (createdDate != null ? createdDate.value : this.createdDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      mealImage: (mealImage != null ? mealImage.value : this.mealImage),
+      mealType: (mealType != null ? mealType.value : this.mealType),
+      isComplete: (isComplete != null ? isComplete.value : this.isComplete),
+      dateOfMeal: (dateOfMeal != null ? dateOfMeal.value : this.dateOfMeal),
+      mealName: (mealName != null ? mealName.value : this.mealName),
+      weight: (weight != null ? weight.value : this.weight),
+      calories: (calories != null ? calories.value : this.calories),
+      protein: (protein != null ? protein.value : this.protein),
+      fats: (fats != null ? fats.value : this.fats),
+      carbs: (carbs != null ? carbs.value : this.carbs),
+      mealLevel: (mealLevel != null ? mealLevel.value : this.mealLevel),
+      comments: (comments != null ? comments.value : this.comments),
+      promptLog: (promptLog != null ? promptLog.value : this.promptLog),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      createdDate: (createdDate != null ? createdDate.value : this.createdDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyUserMealLogEntityDto {
-  const CreateManyUserMealLogEntityDto({
-    required this.bulk,
-  });
+  const CreateManyUserMealLogEntityDto({required this.bulk});
 
   factory CreateManyUserMealLogEntityDto.fromJson(Map<String, dynamic> json) =>
       _$CreateManyUserMealLogEntityDtoFromJson(json);
@@ -2799,10 +3028,12 @@ extension $CreateManyUserMealLogEntityDtoExtension
     return CreateManyUserMealLogEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyUserMealLogEntityDto copyWithWrapped(
-      {Wrapped<List<UserMealLogEntity>>? bulk}) {
+  CreateManyUserMealLogEntityDto copyWithWrapped({
+    Wrapped<List<UserMealLogEntity>>? bulk,
+  }) {
     return CreateManyUserMealLogEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -2851,31 +3082,47 @@ class CreateAIIntegrationLogDto {
     return identical(this, other) ||
         (other is CreateAIIntegrationLogDto &&
             (identical(other.actionUrl, actionUrl) ||
-                const DeepCollectionEquality()
-                    .equals(other.actionUrl, actionUrl)) &&
+                const DeepCollectionEquality().equals(
+                  other.actionUrl,
+                  actionUrl,
+                )) &&
             (identical(other.request, request) ||
-                const DeepCollectionEquality()
-                    .equals(other.request, request)) &&
+                const DeepCollectionEquality().equals(
+                  other.request,
+                  request,
+                )) &&
             (identical(other.response, response) ||
-                const DeepCollectionEquality()
-                    .equals(other.response, response)) &&
+                const DeepCollectionEquality().equals(
+                  other.response,
+                  response,
+                )) &&
             (identical(other.responseType, responseType) ||
-                const DeepCollectionEquality()
-                    .equals(other.responseType, responseType)) &&
+                const DeepCollectionEquality().equals(
+                  other.responseType,
+                  responseType,
+                )) &&
             (identical(other.requestDuration, requestDuration) ||
-                const DeepCollectionEquality()
-                    .equals(other.requestDuration, requestDuration)) &&
+                const DeepCollectionEquality().equals(
+                  other.requestDuration,
+                  requestDuration,
+                )) &&
             (identical(other.promptToken, promptToken) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptToken, promptToken)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptToken,
+                  promptToken,
+                )) &&
             (identical(other.cost, cost) ||
                 const DeepCollectionEquality().equals(other.cost, cost)) &&
             (identical(other.promptTypeId, promptTypeId) ||
-                const DeepCollectionEquality()
-                    .equals(other.promptTypeId, promptTypeId)) &&
+                const DeepCollectionEquality().equals(
+                  other.promptTypeId,
+                  promptTypeId,
+                )) &&
             (identical(other.createdById, createdById) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdById, createdById)));
+                const DeepCollectionEquality().equals(
+                  other.createdById,
+                  createdById,
+                )));
   }
 
   @override
@@ -2896,66 +3143,67 @@ class CreateAIIntegrationLogDto {
 }
 
 extension $CreateAIIntegrationLogDtoExtension on CreateAIIntegrationLogDto {
-  CreateAIIntegrationLogDto copyWith(
-      {String? actionUrl,
-      String? request,
-      String? response,
-      String? responseType,
-      double? requestDuration,
-      double? promptToken,
-      double? cost,
-      double? promptTypeId,
-      double? createdById}) {
+  CreateAIIntegrationLogDto copyWith({
+    String? actionUrl,
+    String? request,
+    String? response,
+    String? responseType,
+    double? requestDuration,
+    double? promptToken,
+    double? cost,
+    double? promptTypeId,
+    double? createdById,
+  }) {
     return CreateAIIntegrationLogDto(
-        actionUrl: actionUrl ?? this.actionUrl,
-        request: request ?? this.request,
-        response: response ?? this.response,
-        responseType: responseType ?? this.responseType,
-        requestDuration: requestDuration ?? this.requestDuration,
-        promptToken: promptToken ?? this.promptToken,
-        cost: cost ?? this.cost,
-        promptTypeId: promptTypeId ?? this.promptTypeId,
-        createdById: createdById ?? this.createdById);
+      actionUrl: actionUrl ?? this.actionUrl,
+      request: request ?? this.request,
+      response: response ?? this.response,
+      responseType: responseType ?? this.responseType,
+      requestDuration: requestDuration ?? this.requestDuration,
+      promptToken: promptToken ?? this.promptToken,
+      cost: cost ?? this.cost,
+      promptTypeId: promptTypeId ?? this.promptTypeId,
+      createdById: createdById ?? this.createdById,
+    );
   }
 
-  CreateAIIntegrationLogDto copyWithWrapped(
-      {Wrapped<String>? actionUrl,
-      Wrapped<String>? request,
-      Wrapped<String>? response,
-      Wrapped<String>? responseType,
-      Wrapped<double?>? requestDuration,
-      Wrapped<double>? promptToken,
-      Wrapped<double?>? cost,
-      Wrapped<double?>? promptTypeId,
-      Wrapped<double?>? createdById}) {
+  CreateAIIntegrationLogDto copyWithWrapped({
+    Wrapped<String>? actionUrl,
+    Wrapped<String>? request,
+    Wrapped<String>? response,
+    Wrapped<String>? responseType,
+    Wrapped<double?>? requestDuration,
+    Wrapped<double>? promptToken,
+    Wrapped<double?>? cost,
+    Wrapped<double?>? promptTypeId,
+    Wrapped<double?>? createdById,
+  }) {
     return CreateAIIntegrationLogDto(
-        actionUrl: (actionUrl != null ? actionUrl.value : this.actionUrl),
-        request: (request != null ? request.value : this.request),
-        response: (response != null ? response.value : this.response),
-        responseType:
-            (responseType != null ? responseType.value : this.responseType),
-        requestDuration: (requestDuration != null
-            ? requestDuration.value
-            : this.requestDuration),
-        promptToken:
-            (promptToken != null ? promptToken.value : this.promptToken),
-        cost: (cost != null ? cost.value : this.cost),
-        promptTypeId:
-            (promptTypeId != null ? promptTypeId.value : this.promptTypeId),
-        createdById:
-            (createdById != null ? createdById.value : this.createdById));
+      actionUrl: (actionUrl != null ? actionUrl.value : this.actionUrl),
+      request: (request != null ? request.value : this.request),
+      response: (response != null ? response.value : this.response),
+      responseType:
+          (responseType != null ? responseType.value : this.responseType),
+      requestDuration:
+          (requestDuration != null
+              ? requestDuration.value
+              : this.requestDuration),
+      promptToken: (promptToken != null ? promptToken.value : this.promptToken),
+      cost: (cost != null ? cost.value : this.cost),
+      promptTypeId:
+          (promptTypeId != null ? promptTypeId.value : this.promptTypeId),
+      createdById: (createdById != null ? createdById.value : this.createdById),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyAIIntegrationLogsEntityDto {
-  const CreateManyAIIntegrationLogsEntityDto({
-    required this.bulk,
-  });
+  const CreateManyAIIntegrationLogsEntityDto({required this.bulk});
 
   factory CreateManyAIIntegrationLogsEntityDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$CreateManyAIIntegrationLogsEntityDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$CreateManyAIIntegrationLogsEntityDtoFromJson(json);
 
   static const toJsonFactory = _$CreateManyAIIntegrationLogsEntityDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -2983,15 +3231,18 @@ class CreateManyAIIntegrationLogsEntityDto {
 
 extension $CreateManyAIIntegrationLogsEntityDtoExtension
     on CreateManyAIIntegrationLogsEntityDto {
-  CreateManyAIIntegrationLogsEntityDto copyWith(
-      {List<CreateAIIntegrationLogDto>? bulk}) {
+  CreateManyAIIntegrationLogsEntityDto copyWith({
+    List<CreateAIIntegrationLogDto>? bulk,
+  }) {
     return CreateManyAIIntegrationLogsEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyAIIntegrationLogsEntityDto copyWithWrapped(
-      {Wrapped<List<CreateAIIntegrationLogDto>>? bulk}) {
+  CreateManyAIIntegrationLogsEntityDto copyWithWrapped({
+    Wrapped<List<CreateAIIntegrationLogDto>>? bulk,
+  }) {
     return CreateManyAIIntegrationLogsEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -3046,14 +3297,20 @@ class SignUpDto {
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.emailAddress, emailAddress) ||
-                const DeepCollectionEquality()
-                    .equals(other.emailAddress, emailAddress)) &&
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
             (identical(other.mobileNumber, mobileNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileNumber, mobileNumber)) &&
+                const DeepCollectionEquality().equals(
+                  other.mobileNumber,
+                  mobileNumber,
+                )) &&
             (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                const DeepCollectionEquality().equals(
+                  other.password,
+                  password,
+                )));
   }
 
   @override
@@ -3069,30 +3326,34 @@ class SignUpDto {
 }
 
 extension $SignUpDtoExtension on SignUpDto {
-  SignUpDto copyWith(
-      {String? name,
-      String? emailAddress,
-      String? mobileNumber,
-      String? password}) {
+  SignUpDto copyWith({
+    String? name,
+    String? emailAddress,
+    String? mobileNumber,
+    String? password,
+  }) {
     return SignUpDto(
-        name: name ?? this.name,
-        emailAddress: emailAddress ?? this.emailAddress,
-        mobileNumber: mobileNumber ?? this.mobileNumber,
-        password: password ?? this.password);
+      name: name ?? this.name,
+      emailAddress: emailAddress ?? this.emailAddress,
+      mobileNumber: mobileNumber ?? this.mobileNumber,
+      password: password ?? this.password,
+    );
   }
 
-  SignUpDto copyWithWrapped(
-      {Wrapped<String>? name,
-      Wrapped<String>? emailAddress,
-      Wrapped<String>? mobileNumber,
-      Wrapped<String>? password}) {
+  SignUpDto copyWithWrapped({
+    Wrapped<String>? name,
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? mobileNumber,
+    Wrapped<String>? password,
+  }) {
     return SignUpDto(
-        name: (name != null ? name.value : this.name),
-        emailAddress:
-            (emailAddress != null ? emailAddress.value : this.emailAddress),
-        mobileNumber:
-            (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
-        password: (password != null ? password.value : this.password));
+      name: (name != null ? name.value : this.name),
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      mobileNumber:
+          (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
+      password: (password != null ? password.value : this.password),
+    );
   }
 }
 
@@ -3137,8 +3398,10 @@ class GetManyUserEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -3156,41 +3419,42 @@ class GetManyUserEntityResponseDto {
 
 extension $GetManyUserEntityResponseDtoExtension
     on GetManyUserEntityResponseDto {
-  GetManyUserEntityResponseDto copyWith(
-      {List<UserEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyUserEntityResponseDto copyWith({
+    List<UserEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyUserEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyUserEntityResponseDto copyWithWrapped(
-      {Wrapped<List<UserEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyUserEntityResponseDto copyWithWrapped({
+    Wrapped<List<UserEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyUserEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class LoginDto {
-  const LoginDto({
-    required this.emailAddress,
-    required this.password,
-  });
+  const LoginDto({required this.emailAddress, required this.password});
 
   factory LoginDto.fromJson(Map<String, dynamic> json) =>
       _$LoginDtoFromJson(json);
@@ -3209,11 +3473,15 @@ class LoginDto {
     return identical(this, other) ||
         (other is LoginDto &&
             (identical(other.emailAddress, emailAddress) ||
-                const DeepCollectionEquality()
-                    .equals(other.emailAddress, emailAddress)) &&
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
             (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                const DeepCollectionEquality().equals(
+                  other.password,
+                  password,
+                )));
   }
 
   @override
@@ -3229,16 +3497,20 @@ class LoginDto {
 extension $LoginDtoExtension on LoginDto {
   LoginDto copyWith({String? emailAddress, String? password}) {
     return LoginDto(
-        emailAddress: emailAddress ?? this.emailAddress,
-        password: password ?? this.password);
+      emailAddress: emailAddress ?? this.emailAddress,
+      password: password ?? this.password,
+    );
   }
 
-  LoginDto copyWithWrapped(
-      {Wrapped<String>? emailAddress, Wrapped<String>? password}) {
+  LoginDto copyWithWrapped({
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? password,
+  }) {
     return LoginDto(
-        emailAddress:
-            (emailAddress != null ? emailAddress.value : this.emailAddress),
-        password: (password != null ? password.value : this.password));
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      password: (password != null ? password.value : this.password),
+    );
   }
 }
 
@@ -3282,17 +3554,25 @@ class UserSessionDto {
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.emailAddress, emailAddress) ||
-                const DeepCollectionEquality()
-                    .equals(other.emailAddress, emailAddress)) &&
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
             (identical(other.mobileNumber, mobileNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileNumber, mobileNumber)) &&
+                const DeepCollectionEquality().equals(
+                  other.mobileNumber,
+                  mobileNumber,
+                )) &&
             (identical(other.accountStatus, accountStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.accountStatus, accountStatus)) &&
+                const DeepCollectionEquality().equals(
+                  other.accountStatus,
+                  accountStatus,
+                )) &&
             (identical(other.subscriptionId, subscriptionId) ||
-                const DeepCollectionEquality()
-                    .equals(other.subscriptionId, subscriptionId)));
+                const DeepCollectionEquality().equals(
+                  other.subscriptionId,
+                  subscriptionId,
+                )));
   }
 
   @override
@@ -3310,49 +3590,50 @@ class UserSessionDto {
 }
 
 extension $UserSessionDtoExtension on UserSessionDto {
-  UserSessionDto copyWith(
-      {Object? id,
-      String? name,
-      String? emailAddress,
-      String? mobileNumber,
-      double? accountStatus,
-      double? subscriptionId}) {
+  UserSessionDto copyWith({
+    Object? id,
+    String? name,
+    String? emailAddress,
+    String? mobileNumber,
+    double? accountStatus,
+    double? subscriptionId,
+  }) {
     return UserSessionDto(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        emailAddress: emailAddress ?? this.emailAddress,
-        mobileNumber: mobileNumber ?? this.mobileNumber,
-        accountStatus: accountStatus ?? this.accountStatus,
-        subscriptionId: subscriptionId ?? this.subscriptionId);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      emailAddress: emailAddress ?? this.emailAddress,
+      mobileNumber: mobileNumber ?? this.mobileNumber,
+      accountStatus: accountStatus ?? this.accountStatus,
+      subscriptionId: subscriptionId ?? this.subscriptionId,
+    );
   }
 
-  UserSessionDto copyWithWrapped(
-      {Wrapped<Object>? id,
-      Wrapped<String>? name,
-      Wrapped<String>? emailAddress,
-      Wrapped<String>? mobileNumber,
-      Wrapped<double>? accountStatus,
-      Wrapped<double?>? subscriptionId}) {
+  UserSessionDto copyWithWrapped({
+    Wrapped<Object>? id,
+    Wrapped<String>? name,
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? mobileNumber,
+    Wrapped<double>? accountStatus,
+    Wrapped<double?>? subscriptionId,
+  }) {
     return UserSessionDto(
-        id: (id != null ? id.value : this.id),
-        name: (name != null ? name.value : this.name),
-        emailAddress:
-            (emailAddress != null ? emailAddress.value : this.emailAddress),
-        mobileNumber:
-            (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
-        accountStatus:
-            (accountStatus != null ? accountStatus.value : this.accountStatus),
-        subscriptionId: (subscriptionId != null
-            ? subscriptionId.value
-            : this.subscriptionId));
+      id: (id != null ? id.value : this.id),
+      name: (name != null ? name.value : this.name),
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      mobileNumber:
+          (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
+      accountStatus:
+          (accountStatus != null ? accountStatus.value : this.accountStatus),
+      subscriptionId:
+          (subscriptionId != null ? subscriptionId.value : this.subscriptionId),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class LoginResponseDto {
-  const LoginResponseDto({
-    required this.user,
-  });
+  const LoginResponseDto({required this.user});
 
   factory LoginResponseDto.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseDtoFromJson(json);
@@ -3392,9 +3673,7 @@ extension $LoginResponseDtoExtension on LoginResponseDto {
 
 @JsonSerializable(explicitToJson: true)
 class TestDto {
-  const TestDto({
-    this.bio,
-  });
+  const TestDto({this.bio});
 
   factory TestDto.fromJson(Map<String, dynamic> json) =>
       _$TestDtoFromJson(json);
@@ -3479,29 +3758,45 @@ class CreateUserDto {
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.emailAddress, emailAddress) ||
-                const DeepCollectionEquality()
-                    .equals(other.emailAddress, emailAddress)) &&
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
             (identical(other.mobileNumber, mobileNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.mobileNumber, mobileNumber)) &&
+                const DeepCollectionEquality().equals(
+                  other.mobileNumber,
+                  mobileNumber,
+                )) &&
             (identical(other.password, password) ||
-                const DeepCollectionEquality()
-                    .equals(other.password, password)) &&
+                const DeepCollectionEquality().equals(
+                  other.password,
+                  password,
+                )) &&
             (identical(other.passwordResetCode, passwordResetCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.passwordResetCode, passwordResetCode)) &&
+                const DeepCollectionEquality().equals(
+                  other.passwordResetCode,
+                  passwordResetCode,
+                )) &&
             (identical(other.accountStatus, accountStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.accountStatus, accountStatus)) &&
+                const DeepCollectionEquality().equals(
+                  other.accountStatus,
+                  accountStatus,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.lastUpdatedBy, lastUpdatedBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedBy, lastUpdatedBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedBy,
+                  lastUpdatedBy,
+                )) &&
             (identical(other.subscriptionId, subscriptionId) ||
-                const DeepCollectionEquality()
-                    .equals(other.subscriptionId, subscriptionId)));
+                const DeepCollectionEquality().equals(
+                  other.subscriptionId,
+                  subscriptionId,
+                )));
   }
 
   @override
@@ -3522,64 +3817,66 @@ class CreateUserDto {
 }
 
 extension $CreateUserDtoExtension on CreateUserDto {
-  CreateUserDto copyWith(
-      {String? name,
-      String? emailAddress,
-      String? mobileNumber,
-      String? password,
-      String? passwordResetCode,
-      double? accountStatus,
-      String? createdBy,
-      String? lastUpdatedBy,
-      double? subscriptionId}) {
+  CreateUserDto copyWith({
+    String? name,
+    String? emailAddress,
+    String? mobileNumber,
+    String? password,
+    String? passwordResetCode,
+    double? accountStatus,
+    String? createdBy,
+    String? lastUpdatedBy,
+    double? subscriptionId,
+  }) {
     return CreateUserDto(
-        name: name ?? this.name,
-        emailAddress: emailAddress ?? this.emailAddress,
-        mobileNumber: mobileNumber ?? this.mobileNumber,
-        password: password ?? this.password,
-        passwordResetCode: passwordResetCode ?? this.passwordResetCode,
-        accountStatus: accountStatus ?? this.accountStatus,
-        createdBy: createdBy ?? this.createdBy,
-        lastUpdatedBy: lastUpdatedBy ?? this.lastUpdatedBy,
-        subscriptionId: subscriptionId ?? this.subscriptionId);
+      name: name ?? this.name,
+      emailAddress: emailAddress ?? this.emailAddress,
+      mobileNumber: mobileNumber ?? this.mobileNumber,
+      password: password ?? this.password,
+      passwordResetCode: passwordResetCode ?? this.passwordResetCode,
+      accountStatus: accountStatus ?? this.accountStatus,
+      createdBy: createdBy ?? this.createdBy,
+      lastUpdatedBy: lastUpdatedBy ?? this.lastUpdatedBy,
+      subscriptionId: subscriptionId ?? this.subscriptionId,
+    );
   }
 
-  CreateUserDto copyWithWrapped(
-      {Wrapped<String>? name,
-      Wrapped<String>? emailAddress,
-      Wrapped<String>? mobileNumber,
-      Wrapped<String>? password,
-      Wrapped<String?>? passwordResetCode,
-      Wrapped<double>? accountStatus,
-      Wrapped<String>? createdBy,
-      Wrapped<String>? lastUpdatedBy,
-      Wrapped<double?>? subscriptionId}) {
+  CreateUserDto copyWithWrapped({
+    Wrapped<String>? name,
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? mobileNumber,
+    Wrapped<String>? password,
+    Wrapped<String?>? passwordResetCode,
+    Wrapped<double>? accountStatus,
+    Wrapped<String>? createdBy,
+    Wrapped<String>? lastUpdatedBy,
+    Wrapped<double?>? subscriptionId,
+  }) {
     return CreateUserDto(
-        name: (name != null ? name.value : this.name),
-        emailAddress:
-            (emailAddress != null ? emailAddress.value : this.emailAddress),
-        mobileNumber:
-            (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
-        password: (password != null ? password.value : this.password),
-        passwordResetCode: (passwordResetCode != null
-            ? passwordResetCode.value
-            : this.passwordResetCode),
-        accountStatus:
-            (accountStatus != null ? accountStatus.value : this.accountStatus),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        lastUpdatedBy:
-            (lastUpdatedBy != null ? lastUpdatedBy.value : this.lastUpdatedBy),
-        subscriptionId: (subscriptionId != null
-            ? subscriptionId.value
-            : this.subscriptionId));
+      name: (name != null ? name.value : this.name),
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      mobileNumber:
+          (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
+      password: (password != null ? password.value : this.password),
+      passwordResetCode:
+          (passwordResetCode != null
+              ? passwordResetCode.value
+              : this.passwordResetCode),
+      accountStatus:
+          (accountStatus != null ? accountStatus.value : this.accountStatus),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      lastUpdatedBy:
+          (lastUpdatedBy != null ? lastUpdatedBy.value : this.lastUpdatedBy),
+      subscriptionId:
+          (subscriptionId != null ? subscriptionId.value : this.subscriptionId),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyUserEntityDto {
-  const CreateManyUserEntityDto({
-    required this.bulk,
-  });
+  const CreateManyUserEntityDto({required this.bulk});
 
   factory CreateManyUserEntityDto.fromJson(Map<String, dynamic> json) =>
       _$CreateManyUserEntityDtoFromJson(json);
@@ -3612,10 +3909,12 @@ extension $CreateManyUserEntityDtoExtension on CreateManyUserEntityDto {
     return CreateManyUserEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyUserEntityDto copyWithWrapped(
-      {Wrapped<List<CreateUserDto>>? bulk}) {
+  CreateManyUserEntityDto copyWithWrapped({
+    Wrapped<List<CreateUserDto>>? bulk,
+  }) {
     return CreateManyUserEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -3649,8 +3948,8 @@ class GetManyUserMealQuestionsEntityResponseDto {
   });
 
   factory GetManyUserMealQuestionsEntityResponseDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetManyUserMealQuestionsEntityResponseDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetManyUserMealQuestionsEntityResponseDtoFromJson(json);
 
   static const toJsonFactory =
       _$GetManyUserMealQuestionsEntityResponseDtoToJson;
@@ -3683,8 +3982,10 @@ class GetManyUserMealQuestionsEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -3702,32 +4003,36 @@ class GetManyUserMealQuestionsEntityResponseDto {
 
 extension $GetManyUserMealQuestionsEntityResponseDtoExtension
     on GetManyUserMealQuestionsEntityResponseDto {
-  GetManyUserMealQuestionsEntityResponseDto copyWith(
-      {List<UserMealQuestionsEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyUserMealQuestionsEntityResponseDto copyWith({
+    List<UserMealQuestionsEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyUserMealQuestionsEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyUserMealQuestionsEntityResponseDto copyWithWrapped(
-      {Wrapped<List<UserMealQuestionsEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyUserMealQuestionsEntityResponseDto copyWithWrapped({
+    Wrapped<List<UserMealQuestionsEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyUserMealQuestionsEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
@@ -3775,25 +4080,37 @@ class UserMealQuestionsEntity {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.question, question) ||
-                const DeepCollectionEquality()
-                    .equals(other.question, question)) &&
+                const DeepCollectionEquality().equals(
+                  other.question,
+                  question,
+                )) &&
             (identical(other.options, options) ||
-                const DeepCollectionEquality()
-                    .equals(other.options, options)) &&
+                const DeepCollectionEquality().equals(
+                  other.options,
+                  options,
+                )) &&
             (identical(other.answer, answer) ||
                 const DeepCollectionEquality().equals(other.answer, answer)) &&
             (identical(other.userMealLog, userMealLog) ||
-                const DeepCollectionEquality()
-                    .equals(other.userMealLog, userMealLog)) &&
+                const DeepCollectionEquality().equals(
+                  other.userMealLog,
+                  userMealLog,
+                )) &&
             (identical(other.createdDate, createdDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdDate, createdDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdDate,
+                  createdDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -3813,48 +4130,51 @@ class UserMealQuestionsEntity {
 }
 
 extension $UserMealQuestionsEntityExtension on UserMealQuestionsEntity {
-  UserMealQuestionsEntity copyWith(
-      {double? id,
-      String? question,
-      List<String>? options,
-      String? answer,
-      UserMealLogEntity? userMealLog,
-      DateTime? createdDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  UserMealQuestionsEntity copyWith({
+    double? id,
+    String? question,
+    List<String>? options,
+    String? answer,
+    UserMealLogEntity? userMealLog,
+    DateTime? createdDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return UserMealQuestionsEntity(
-        id: id ?? this.id,
-        question: question ?? this.question,
-        options: options ?? this.options,
-        answer: answer ?? this.answer,
-        userMealLog: userMealLog ?? this.userMealLog,
-        createdDate: createdDate ?? this.createdDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      question: question ?? this.question,
+      options: options ?? this.options,
+      answer: answer ?? this.answer,
+      userMealLog: userMealLog ?? this.userMealLog,
+      createdDate: createdDate ?? this.createdDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  UserMealQuestionsEntity copyWithWrapped(
-      {Wrapped<double>? id,
-      Wrapped<String>? question,
-      Wrapped<List<String>>? options,
-      Wrapped<String>? answer,
-      Wrapped<UserMealLogEntity>? userMealLog,
-      Wrapped<DateTime>? createdDate,
-      Wrapped<DateTime>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  UserMealQuestionsEntity copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String>? question,
+    Wrapped<List<String>>? options,
+    Wrapped<String>? answer,
+    Wrapped<UserMealLogEntity>? userMealLog,
+    Wrapped<DateTime>? createdDate,
+    Wrapped<DateTime>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return UserMealQuestionsEntity(
-        id: (id != null ? id.value : this.id),
-        question: (question != null ? question.value : this.question),
-        options: (options != null ? options.value : this.options),
-        answer: (answer != null ? answer.value : this.answer),
-        userMealLog:
-            (userMealLog != null ? userMealLog.value : this.userMealLog),
-        createdDate:
-            (createdDate != null ? createdDate.value : this.createdDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      question: (question != null ? question.value : this.question),
+      options: (options != null ? options.value : this.options),
+      answer: (answer != null ? answer.value : this.answer),
+      userMealLog: (userMealLog != null ? userMealLog.value : this.userMealLog),
+      createdDate: (createdDate != null ? createdDate.value : this.createdDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
@@ -3882,8 +4202,10 @@ class CreateUserMealQuestionDto {
     return identical(this, other) ||
         (other is CreateUserMealQuestionDto &&
             (identical(other.question, question) ||
-                const DeepCollectionEquality()
-                    .equals(other.question, question)) &&
+                const DeepCollectionEquality().equals(
+                  other.question,
+                  question,
+                )) &&
             (identical(other.options, options) ||
                 const DeepCollectionEquality().equals(other.options, options)));
   }
@@ -3899,29 +4221,34 @@ class CreateUserMealQuestionDto {
 }
 
 extension $CreateUserMealQuestionDtoExtension on CreateUserMealQuestionDto {
-  CreateUserMealQuestionDto copyWith(
-      {String? question, List<String>? options}) {
+  CreateUserMealQuestionDto copyWith({
+    String? question,
+    List<String>? options,
+  }) {
     return CreateUserMealQuestionDto(
-        question: question ?? this.question, options: options ?? this.options);
+      question: question ?? this.question,
+      options: options ?? this.options,
+    );
   }
 
-  CreateUserMealQuestionDto copyWithWrapped(
-      {Wrapped<String>? question, Wrapped<List<String>>? options}) {
+  CreateUserMealQuestionDto copyWithWrapped({
+    Wrapped<String>? question,
+    Wrapped<List<String>>? options,
+  }) {
     return CreateUserMealQuestionDto(
-        question: (question != null ? question.value : this.question),
-        options: (options != null ? options.value : this.options));
+      question: (question != null ? question.value : this.question),
+      options: (options != null ? options.value : this.options),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyUserMealQuestionsEntityDto {
-  const CreateManyUserMealQuestionsEntityDto({
-    required this.bulk,
-  });
+  const CreateManyUserMealQuestionsEntityDto({required this.bulk});
 
   factory CreateManyUserMealQuestionsEntityDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$CreateManyUserMealQuestionsEntityDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$CreateManyUserMealQuestionsEntityDtoFromJson(json);
 
   static const toJsonFactory = _$CreateManyUserMealQuestionsEntityDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -3949,15 +4276,18 @@ class CreateManyUserMealQuestionsEntityDto {
 
 extension $CreateManyUserMealQuestionsEntityDtoExtension
     on CreateManyUserMealQuestionsEntityDto {
-  CreateManyUserMealQuestionsEntityDto copyWith(
-      {List<CreateUserMealQuestionDto>? bulk}) {
+  CreateManyUserMealQuestionsEntityDto copyWith({
+    List<CreateUserMealQuestionDto>? bulk,
+  }) {
     return CreateManyUserMealQuestionsEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyUserMealQuestionsEntityDto copyWithWrapped(
-      {Wrapped<List<CreateUserMealQuestionDto>>? bulk}) {
+  CreateManyUserMealQuestionsEntityDto copyWithWrapped({
+    Wrapped<List<CreateUserMealQuestionDto>>? bulk,
+  }) {
     return CreateManyUserMealQuestionsEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -3993,11 +4323,15 @@ class UpdateUserMealQuestionDto {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.question, question) ||
-                const DeepCollectionEquality()
-                    .equals(other.question, question)) &&
+                const DeepCollectionEquality().equals(
+                  other.question,
+                  question,
+                )) &&
             (identical(other.options, options) ||
-                const DeepCollectionEquality()
-                    .equals(other.options, options)) &&
+                const DeepCollectionEquality().equals(
+                  other.options,
+                  options,
+                )) &&
             (identical(other.answer, answer) ||
                 const DeepCollectionEquality().equals(other.answer, answer)));
   }
@@ -4015,25 +4349,32 @@ class UpdateUserMealQuestionDto {
 }
 
 extension $UpdateUserMealQuestionDtoExtension on UpdateUserMealQuestionDto {
-  UpdateUserMealQuestionDto copyWith(
-      {double? id, String? question, List<String>? options, String? answer}) {
+  UpdateUserMealQuestionDto copyWith({
+    double? id,
+    String? question,
+    List<String>? options,
+    String? answer,
+  }) {
     return UpdateUserMealQuestionDto(
-        id: id ?? this.id,
-        question: question ?? this.question,
-        options: options ?? this.options,
-        answer: answer ?? this.answer);
+      id: id ?? this.id,
+      question: question ?? this.question,
+      options: options ?? this.options,
+      answer: answer ?? this.answer,
+    );
   }
 
-  UpdateUserMealQuestionDto copyWithWrapped(
-      {Wrapped<double>? id,
-      Wrapped<String?>? question,
-      Wrapped<List<String>?>? options,
-      Wrapped<String?>? answer}) {
+  UpdateUserMealQuestionDto copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String?>? question,
+    Wrapped<List<String>?>? options,
+    Wrapped<String?>? answer,
+  }) {
     return UpdateUserMealQuestionDto(
-        id: (id != null ? id.value : this.id),
-        question: (question != null ? question.value : this.question),
-        options: (options != null ? options.value : this.options),
-        answer: (answer != null ? answer.value : this.answer));
+      id: (id != null ? id.value : this.id),
+      question: (question != null ? question.value : this.question),
+      options: (options != null ? options.value : this.options),
+      answer: (answer != null ? answer.value : this.answer),
+    );
   }
 }
 
@@ -4048,8 +4389,8 @@ class GetManyUserSubMealLogEntityResponseDto {
   });
 
   factory GetManyUserSubMealLogEntityResponseDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetManyUserSubMealLogEntityResponseDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetManyUserSubMealLogEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyUserSubMealLogEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -4081,8 +4422,10 @@ class GetManyUserSubMealLogEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -4100,32 +4443,36 @@ class GetManyUserSubMealLogEntityResponseDto {
 
 extension $GetManyUserSubMealLogEntityResponseDtoExtension
     on GetManyUserSubMealLogEntityResponseDto {
-  GetManyUserSubMealLogEntityResponseDto copyWith(
-      {List<UserSubMealLogEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyUserSubMealLogEntityResponseDto copyWith({
+    List<UserSubMealLogEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyUserSubMealLogEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyUserSubMealLogEntityResponseDto copyWithWrapped(
-      {Wrapped<List<UserSubMealLogEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyUserSubMealLogEntityResponseDto copyWithWrapped({
+    Wrapped<List<UserSubMealLogEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyUserSubMealLogEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
@@ -4185,35 +4532,51 @@ class UserSubMealLogEntity {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.mealName, mealName) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealName, mealName)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealName,
+                  mealName,
+                )) &&
             (identical(other.weight, weight) ||
                 const DeepCollectionEquality().equals(other.weight, weight)) &&
             (identical(other.calories, calories) ||
-                const DeepCollectionEquality()
-                    .equals(other.calories, calories)) &&
+                const DeepCollectionEquality().equals(
+                  other.calories,
+                  calories,
+                )) &&
             (identical(other.protein, protein) ||
-                const DeepCollectionEquality()
-                    .equals(other.protein, protein)) &&
+                const DeepCollectionEquality().equals(
+                  other.protein,
+                  protein,
+                )) &&
             (identical(other.fats, fats) ||
                 const DeepCollectionEquality().equals(other.fats, fats)) &&
             (identical(other.carbs, carbs) ||
                 const DeepCollectionEquality().equals(other.carbs, carbs)) &&
             (identical(other.mainMeal, mainMeal) ||
-                const DeepCollectionEquality()
-                    .equals(other.mainMeal, mainMeal)) &&
+                const DeepCollectionEquality().equals(
+                  other.mainMeal,
+                  mainMeal,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.createdDate, createdDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdDate, createdDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdDate,
+                  createdDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -4237,63 +4600,67 @@ class UserSubMealLogEntity {
 }
 
 extension $UserSubMealLogEntityExtension on UserSubMealLogEntity {
-  UserSubMealLogEntity copyWith(
-      {double? id,
-      String? mealName,
-      double? weight,
-      double? calories,
-      double? protein,
-      double? fats,
-      double? carbs,
-      UserMealLogEntity? mainMeal,
-      UserEntity? createdBy,
-      DateTime? createdDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  UserSubMealLogEntity copyWith({
+    double? id,
+    String? mealName,
+    double? weight,
+    double? calories,
+    double? protein,
+    double? fats,
+    double? carbs,
+    UserMealLogEntity? mainMeal,
+    UserEntity? createdBy,
+    DateTime? createdDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return UserSubMealLogEntity(
-        id: id ?? this.id,
-        mealName: mealName ?? this.mealName,
-        weight: weight ?? this.weight,
-        calories: calories ?? this.calories,
-        protein: protein ?? this.protein,
-        fats: fats ?? this.fats,
-        carbs: carbs ?? this.carbs,
-        mainMeal: mainMeal ?? this.mainMeal,
-        createdBy: createdBy ?? this.createdBy,
-        createdDate: createdDate ?? this.createdDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      mealName: mealName ?? this.mealName,
+      weight: weight ?? this.weight,
+      calories: calories ?? this.calories,
+      protein: protein ?? this.protein,
+      fats: fats ?? this.fats,
+      carbs: carbs ?? this.carbs,
+      mainMeal: mainMeal ?? this.mainMeal,
+      createdBy: createdBy ?? this.createdBy,
+      createdDate: createdDate ?? this.createdDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  UserSubMealLogEntity copyWithWrapped(
-      {Wrapped<double?>? id,
-      Wrapped<String?>? mealName,
-      Wrapped<double?>? weight,
-      Wrapped<double?>? calories,
-      Wrapped<double?>? protein,
-      Wrapped<double?>? fats,
-      Wrapped<double?>? carbs,
-      Wrapped<UserMealLogEntity?>? mainMeal,
-      Wrapped<UserEntity?>? createdBy,
-      Wrapped<DateTime?>? createdDate,
-      Wrapped<DateTime?>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  UserSubMealLogEntity copyWithWrapped({
+    Wrapped<double?>? id,
+    Wrapped<String?>? mealName,
+    Wrapped<double?>? weight,
+    Wrapped<double?>? calories,
+    Wrapped<double?>? protein,
+    Wrapped<double?>? fats,
+    Wrapped<double?>? carbs,
+    Wrapped<UserMealLogEntity?>? mainMeal,
+    Wrapped<UserEntity?>? createdBy,
+    Wrapped<DateTime?>? createdDate,
+    Wrapped<DateTime?>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return UserSubMealLogEntity(
-        id: (id != null ? id.value : this.id),
-        mealName: (mealName != null ? mealName.value : this.mealName),
-        weight: (weight != null ? weight.value : this.weight),
-        calories: (calories != null ? calories.value : this.calories),
-        protein: (protein != null ? protein.value : this.protein),
-        fats: (fats != null ? fats.value : this.fats),
-        carbs: (carbs != null ? carbs.value : this.carbs),
-        mainMeal: (mainMeal != null ? mainMeal.value : this.mainMeal),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        createdDate:
-            (createdDate != null ? createdDate.value : this.createdDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      mealName: (mealName != null ? mealName.value : this.mealName),
+      weight: (weight != null ? weight.value : this.weight),
+      calories: (calories != null ? calories.value : this.calories),
+      protein: (protein != null ? protein.value : this.protein),
+      fats: (fats != null ? fats.value : this.fats),
+      carbs: (carbs != null ? carbs.value : this.carbs),
+      mainMeal: (mainMeal != null ? mainMeal.value : this.mainMeal),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      createdDate: (createdDate != null ? createdDate.value : this.createdDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
@@ -4339,26 +4706,36 @@ class CreateUserSubMealLogDto {
     return identical(this, other) ||
         (other is CreateUserSubMealLogDto &&
             (identical(other.mealName, mealName) ||
-                const DeepCollectionEquality()
-                    .equals(other.mealName, mealName)) &&
+                const DeepCollectionEquality().equals(
+                  other.mealName,
+                  mealName,
+                )) &&
             (identical(other.weight, weight) ||
                 const DeepCollectionEquality().equals(other.weight, weight)) &&
             (identical(other.calories, calories) ||
-                const DeepCollectionEquality()
-                    .equals(other.calories, calories)) &&
+                const DeepCollectionEquality().equals(
+                  other.calories,
+                  calories,
+                )) &&
             (identical(other.protein, protein) ||
-                const DeepCollectionEquality()
-                    .equals(other.protein, protein)) &&
+                const DeepCollectionEquality().equals(
+                  other.protein,
+                  protein,
+                )) &&
             (identical(other.fats, fats) ||
                 const DeepCollectionEquality().equals(other.fats, fats)) &&
             (identical(other.carbs, carbs) ||
                 const DeepCollectionEquality().equals(other.carbs, carbs)) &&
             (identical(other.mainMealId, mainMealId) ||
-                const DeepCollectionEquality()
-                    .equals(other.mainMealId, mainMealId)) &&
+                const DeepCollectionEquality().equals(
+                  other.mainMealId,
+                  mainMealId,
+                )) &&
             (identical(other.createdById, createdById) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdById, createdById)));
+                const DeepCollectionEquality().equals(
+                  other.createdById,
+                  createdById,
+                )));
   }
 
   @override
@@ -4378,57 +4755,58 @@ class CreateUserSubMealLogDto {
 }
 
 extension $CreateUserSubMealLogDtoExtension on CreateUserSubMealLogDto {
-  CreateUserSubMealLogDto copyWith(
-      {String? mealName,
-      double? weight,
-      double? calories,
-      double? protein,
-      double? fats,
-      double? carbs,
-      double? mainMealId,
-      double? createdById}) {
+  CreateUserSubMealLogDto copyWith({
+    String? mealName,
+    double? weight,
+    double? calories,
+    double? protein,
+    double? fats,
+    double? carbs,
+    double? mainMealId,
+    double? createdById,
+  }) {
     return CreateUserSubMealLogDto(
-        mealName: mealName ?? this.mealName,
-        weight: weight ?? this.weight,
-        calories: calories ?? this.calories,
-        protein: protein ?? this.protein,
-        fats: fats ?? this.fats,
-        carbs: carbs ?? this.carbs,
-        mainMealId: mainMealId ?? this.mainMealId,
-        createdById: createdById ?? this.createdById);
+      mealName: mealName ?? this.mealName,
+      weight: weight ?? this.weight,
+      calories: calories ?? this.calories,
+      protein: protein ?? this.protein,
+      fats: fats ?? this.fats,
+      carbs: carbs ?? this.carbs,
+      mainMealId: mainMealId ?? this.mainMealId,
+      createdById: createdById ?? this.createdById,
+    );
   }
 
-  CreateUserSubMealLogDto copyWithWrapped(
-      {Wrapped<String>? mealName,
-      Wrapped<double>? weight,
-      Wrapped<double>? calories,
-      Wrapped<double>? protein,
-      Wrapped<double>? fats,
-      Wrapped<double>? carbs,
-      Wrapped<double?>? mainMealId,
-      Wrapped<double>? createdById}) {
+  CreateUserSubMealLogDto copyWithWrapped({
+    Wrapped<String>? mealName,
+    Wrapped<double>? weight,
+    Wrapped<double>? calories,
+    Wrapped<double>? protein,
+    Wrapped<double>? fats,
+    Wrapped<double>? carbs,
+    Wrapped<double?>? mainMealId,
+    Wrapped<double>? createdById,
+  }) {
     return CreateUserSubMealLogDto(
-        mealName: (mealName != null ? mealName.value : this.mealName),
-        weight: (weight != null ? weight.value : this.weight),
-        calories: (calories != null ? calories.value : this.calories),
-        protein: (protein != null ? protein.value : this.protein),
-        fats: (fats != null ? fats.value : this.fats),
-        carbs: (carbs != null ? carbs.value : this.carbs),
-        mainMealId: (mainMealId != null ? mainMealId.value : this.mainMealId),
-        createdById:
-            (createdById != null ? createdById.value : this.createdById));
+      mealName: (mealName != null ? mealName.value : this.mealName),
+      weight: (weight != null ? weight.value : this.weight),
+      calories: (calories != null ? calories.value : this.calories),
+      protein: (protein != null ? protein.value : this.protein),
+      fats: (fats != null ? fats.value : this.fats),
+      carbs: (carbs != null ? carbs.value : this.carbs),
+      mainMealId: (mainMealId != null ? mainMealId.value : this.mainMealId),
+      createdById: (createdById != null ? createdById.value : this.createdById),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyUserSubMealLogEntityDto {
-  const CreateManyUserSubMealLogEntityDto({
-    required this.bulk,
-  });
+  const CreateManyUserSubMealLogEntityDto({required this.bulk});
 
   factory CreateManyUserSubMealLogEntityDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$CreateManyUserSubMealLogEntityDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$CreateManyUserSubMealLogEntityDtoFromJson(json);
 
   static const toJsonFactory = _$CreateManyUserSubMealLogEntityDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -4456,15 +4834,18 @@ class CreateManyUserSubMealLogEntityDto {
 
 extension $CreateManyUserSubMealLogEntityDtoExtension
     on CreateManyUserSubMealLogEntityDto {
-  CreateManyUserSubMealLogEntityDto copyWith(
-      {List<CreateUserSubMealLogDto>? bulk}) {
+  CreateManyUserSubMealLogEntityDto copyWith({
+    List<CreateUserSubMealLogDto>? bulk,
+  }) {
     return CreateManyUserSubMealLogEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyUserSubMealLogEntityDto copyWithWrapped(
-      {Wrapped<List<CreateUserSubMealLogDto>>? bulk}) {
+  CreateManyUserSubMealLogEntityDto copyWithWrapped({
+    Wrapped<List<CreateUserSubMealLogDto>>? bulk,
+  }) {
     return CreateManyUserSubMealLogEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -4531,11 +4912,15 @@ class ExtractBiodataInputDto {
             (identical(other.userId, userId) ||
                 const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.bodyImageFront, bodyImageFront) ||
-                const DeepCollectionEquality()
-                    .equals(other.bodyImageFront, bodyImageFront)) &&
+                const DeepCollectionEquality().equals(
+                  other.bodyImageFront,
+                  bodyImageFront,
+                )) &&
             (identical(other.bodyImageSide, bodyImageSide) ||
-                const DeepCollectionEquality()
-                    .equals(other.bodyImageSide, bodyImageSide)) &&
+                const DeepCollectionEquality().equals(
+                  other.bodyImageSide,
+                  bodyImageSide,
+                )) &&
             (identical(other.height, height) ||
                 const DeepCollectionEquality().equals(other.height, height)) &&
             (identical(other.weight, weight) ||
@@ -4545,8 +4930,10 @@ class ExtractBiodataInputDto {
             (identical(other.goal, goal) ||
                 const DeepCollectionEquality().equals(other.goal, goal)) &&
             (identical(other.physicalActivity, physicalActivity) ||
-                const DeepCollectionEquality()
-                    .equals(other.physicalActivity, physicalActivity)));
+                const DeepCollectionEquality().equals(
+                  other.physicalActivity,
+                  physicalActivity,
+                )));
   }
 
   @override
@@ -4566,49 +4953,53 @@ class ExtractBiodataInputDto {
 }
 
 extension $ExtractBiodataInputDtoExtension on ExtractBiodataInputDto {
-  ExtractBiodataInputDto copyWith(
-      {double? userId,
-      String? bodyImageFront,
-      String? bodyImageSide,
-      double? height,
-      double? weight,
-      double? age,
-      double? goal,
-      double? physicalActivity}) {
+  ExtractBiodataInputDto copyWith({
+    double? userId,
+    String? bodyImageFront,
+    String? bodyImageSide,
+    double? height,
+    double? weight,
+    double? age,
+    double? goal,
+    double? physicalActivity,
+  }) {
     return ExtractBiodataInputDto(
-        userId: userId ?? this.userId,
-        bodyImageFront: bodyImageFront ?? this.bodyImageFront,
-        bodyImageSide: bodyImageSide ?? this.bodyImageSide,
-        height: height ?? this.height,
-        weight: weight ?? this.weight,
-        age: age ?? this.age,
-        goal: goal ?? this.goal,
-        physicalActivity: physicalActivity ?? this.physicalActivity);
+      userId: userId ?? this.userId,
+      bodyImageFront: bodyImageFront ?? this.bodyImageFront,
+      bodyImageSide: bodyImageSide ?? this.bodyImageSide,
+      height: height ?? this.height,
+      weight: weight ?? this.weight,
+      age: age ?? this.age,
+      goal: goal ?? this.goal,
+      physicalActivity: physicalActivity ?? this.physicalActivity,
+    );
   }
 
-  ExtractBiodataInputDto copyWithWrapped(
-      {Wrapped<double>? userId,
-      Wrapped<String?>? bodyImageFront,
-      Wrapped<String?>? bodyImageSide,
-      Wrapped<double>? height,
-      Wrapped<double>? weight,
-      Wrapped<double>? age,
-      Wrapped<double>? goal,
-      Wrapped<double>? physicalActivity}) {
+  ExtractBiodataInputDto copyWithWrapped({
+    Wrapped<double>? userId,
+    Wrapped<String?>? bodyImageFront,
+    Wrapped<String?>? bodyImageSide,
+    Wrapped<double>? height,
+    Wrapped<double>? weight,
+    Wrapped<double>? age,
+    Wrapped<double>? goal,
+    Wrapped<double>? physicalActivity,
+  }) {
     return ExtractBiodataInputDto(
-        userId: (userId != null ? userId.value : this.userId),
-        bodyImageFront: (bodyImageFront != null
-            ? bodyImageFront.value
-            : this.bodyImageFront),
-        bodyImageSide:
-            (bodyImageSide != null ? bodyImageSide.value : this.bodyImageSide),
-        height: (height != null ? height.value : this.height),
-        weight: (weight != null ? weight.value : this.weight),
-        age: (age != null ? age.value : this.age),
-        goal: (goal != null ? goal.value : this.goal),
-        physicalActivity: (physicalActivity != null
-            ? physicalActivity.value
-            : this.physicalActivity));
+      userId: (userId != null ? userId.value : this.userId),
+      bodyImageFront:
+          (bodyImageFront != null ? bodyImageFront.value : this.bodyImageFront),
+      bodyImageSide:
+          (bodyImageSide != null ? bodyImageSide.value : this.bodyImageSide),
+      height: (height != null ? height.value : this.height),
+      weight: (weight != null ? weight.value : this.weight),
+      age: (age != null ? age.value : this.age),
+      goal: (goal != null ? goal.value : this.goal),
+      physicalActivity:
+          (physicalActivity != null
+              ? physicalActivity.value
+              : this.physicalActivity),
+    );
   }
 }
 
@@ -4669,18 +5060,24 @@ class ExtractBiodataOutputDto {
     return identical(this, other) ||
         (other is ExtractBiodataOutputDto &&
             (identical(other.calories, calories) ||
-                const DeepCollectionEquality()
-                    .equals(other.calories, calories)) &&
+                const DeepCollectionEquality().equals(
+                  other.calories,
+                  calories,
+                )) &&
             (identical(other.protein, protein) ||
-                const DeepCollectionEquality()
-                    .equals(other.protein, protein)) &&
+                const DeepCollectionEquality().equals(
+                  other.protein,
+                  protein,
+                )) &&
             (identical(other.fats, fats) ||
                 const DeepCollectionEquality().equals(other.fats, fats)) &&
             (identical(other.carbs, carbs) ||
                 const DeepCollectionEquality().equals(other.carbs, carbs)) &&
             (identical(other.mainMacro, mainMacro) ||
-                const DeepCollectionEquality()
-                    .equals(other.mainMacro, mainMacro)) &&
+                const DeepCollectionEquality().equals(
+                  other.mainMacro,
+                  mainMacro,
+                )) &&
             (identical(other.age, age) ||
                 const DeepCollectionEquality().equals(other.age, age)) &&
             (identical(other.weight, weight) ||
@@ -4690,16 +5087,22 @@ class ExtractBiodataOutputDto {
             (identical(other.bmi, bmi) ||
                 const DeepCollectionEquality().equals(other.bmi, bmi)) &&
             (identical(other.bodyFat, bodyFat) ||
-                const DeepCollectionEquality()
-                    .equals(other.bodyFat, bodyFat)) &&
+                const DeepCollectionEquality().equals(
+                  other.bodyFat,
+                  bodyFat,
+                )) &&
             (identical(other.muscleMass, muscleMass) ||
-                const DeepCollectionEquality()
-                    .equals(other.muscleMass, muscleMass)) &&
+                const DeepCollectionEquality().equals(
+                  other.muscleMass,
+                  muscleMass,
+                )) &&
             (identical(other.goal, goal) ||
                 const DeepCollectionEquality().equals(other.goal, goal)) &&
             (identical(other.physicalActivity, physicalActivity) ||
-                const DeepCollectionEquality()
-                    .equals(other.physicalActivity, physicalActivity)));
+                const DeepCollectionEquality().equals(
+                  other.physicalActivity,
+                  physicalActivity,
+                )));
   }
 
   @override
@@ -4724,66 +5127,71 @@ class ExtractBiodataOutputDto {
 }
 
 extension $ExtractBiodataOutputDtoExtension on ExtractBiodataOutputDto {
-  ExtractBiodataOutputDto copyWith(
-      {double? calories,
-      double? protein,
-      double? fats,
-      double? carbs,
-      String? mainMacro,
-      double? age,
-      double? weight,
-      double? height,
-      double? bmi,
-      double? bodyFat,
-      double? muscleMass,
-      double? goal,
-      double? physicalActivity}) {
+  ExtractBiodataOutputDto copyWith({
+    double? calories,
+    double? protein,
+    double? fats,
+    double? carbs,
+    String? mainMacro,
+    double? age,
+    double? weight,
+    double? height,
+    double? bmi,
+    double? bodyFat,
+    double? muscleMass,
+    double? goal,
+    double? physicalActivity,
+  }) {
     return ExtractBiodataOutputDto(
-        calories: calories ?? this.calories,
-        protein: protein ?? this.protein,
-        fats: fats ?? this.fats,
-        carbs: carbs ?? this.carbs,
-        mainMacro: mainMacro ?? this.mainMacro,
-        age: age ?? this.age,
-        weight: weight ?? this.weight,
-        height: height ?? this.height,
-        bmi: bmi ?? this.bmi,
-        bodyFat: bodyFat ?? this.bodyFat,
-        muscleMass: muscleMass ?? this.muscleMass,
-        goal: goal ?? this.goal,
-        physicalActivity: physicalActivity ?? this.physicalActivity);
+      calories: calories ?? this.calories,
+      protein: protein ?? this.protein,
+      fats: fats ?? this.fats,
+      carbs: carbs ?? this.carbs,
+      mainMacro: mainMacro ?? this.mainMacro,
+      age: age ?? this.age,
+      weight: weight ?? this.weight,
+      height: height ?? this.height,
+      bmi: bmi ?? this.bmi,
+      bodyFat: bodyFat ?? this.bodyFat,
+      muscleMass: muscleMass ?? this.muscleMass,
+      goal: goal ?? this.goal,
+      physicalActivity: physicalActivity ?? this.physicalActivity,
+    );
   }
 
-  ExtractBiodataOutputDto copyWithWrapped(
-      {Wrapped<double>? calories,
-      Wrapped<double>? protein,
-      Wrapped<double>? fats,
-      Wrapped<double>? carbs,
-      Wrapped<String>? mainMacro,
-      Wrapped<double>? age,
-      Wrapped<double>? weight,
-      Wrapped<double>? height,
-      Wrapped<double>? bmi,
-      Wrapped<double>? bodyFat,
-      Wrapped<double>? muscleMass,
-      Wrapped<double>? goal,
-      Wrapped<double>? physicalActivity}) {
+  ExtractBiodataOutputDto copyWithWrapped({
+    Wrapped<double>? calories,
+    Wrapped<double>? protein,
+    Wrapped<double>? fats,
+    Wrapped<double>? carbs,
+    Wrapped<String>? mainMacro,
+    Wrapped<double>? age,
+    Wrapped<double>? weight,
+    Wrapped<double>? height,
+    Wrapped<double>? bmi,
+    Wrapped<double>? bodyFat,
+    Wrapped<double>? muscleMass,
+    Wrapped<double>? goal,
+    Wrapped<double>? physicalActivity,
+  }) {
     return ExtractBiodataOutputDto(
-        calories: (calories != null ? calories.value : this.calories),
-        protein: (protein != null ? protein.value : this.protein),
-        fats: (fats != null ? fats.value : this.fats),
-        carbs: (carbs != null ? carbs.value : this.carbs),
-        mainMacro: (mainMacro != null ? mainMacro.value : this.mainMacro),
-        age: (age != null ? age.value : this.age),
-        weight: (weight != null ? weight.value : this.weight),
-        height: (height != null ? height.value : this.height),
-        bmi: (bmi != null ? bmi.value : this.bmi),
-        bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
-        muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
-        goal: (goal != null ? goal.value : this.goal),
-        physicalActivity: (physicalActivity != null
-            ? physicalActivity.value
-            : this.physicalActivity));
+      calories: (calories != null ? calories.value : this.calories),
+      protein: (protein != null ? protein.value : this.protein),
+      fats: (fats != null ? fats.value : this.fats),
+      carbs: (carbs != null ? carbs.value : this.carbs),
+      mainMacro: (mainMacro != null ? mainMacro.value : this.mainMacro),
+      age: (age != null ? age.value : this.age),
+      weight: (weight != null ? weight.value : this.weight),
+      height: (height != null ? height.value : this.height),
+      bmi: (bmi != null ? bmi.value : this.bmi),
+      bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
+      muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
+      goal: (goal != null ? goal.value : this.goal),
+      physicalActivity:
+          (physicalActivity != null
+              ? physicalActivity.value
+              : this.physicalActivity),
+    );
   }
 }
 
@@ -4798,8 +5206,8 @@ class GetManyUserBiodataEntityResponseDto {
   });
 
   factory GetManyUserBiodataEntityResponseDto.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetManyUserBiodataEntityResponseDtoFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetManyUserBiodataEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyUserBiodataEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -4830,8 +5238,10 @@ class GetManyUserBiodataEntityResponseDto {
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageCount, pageCount)));
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
   }
 
   @override
@@ -4849,32 +5259,36 @@ class GetManyUserBiodataEntityResponseDto {
 
 extension $GetManyUserBiodataEntityResponseDtoExtension
     on GetManyUserBiodataEntityResponseDto {
-  GetManyUserBiodataEntityResponseDto copyWith(
-      {List<UserBiodataEntity>? data,
-      double? count,
-      double? total,
-      double? page,
-      double? pageCount}) {
+  GetManyUserBiodataEntityResponseDto copyWith({
+    List<UserBiodataEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
     return GetManyUserBiodataEntityResponseDto(
-        data: data ?? this.data,
-        count: count ?? this.count,
-        total: total ?? this.total,
-        page: page ?? this.page,
-        pageCount: pageCount ?? this.pageCount);
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
   }
 
-  GetManyUserBiodataEntityResponseDto copyWithWrapped(
-      {Wrapped<List<UserBiodataEntity>>? data,
-      Wrapped<double>? count,
-      Wrapped<double>? total,
-      Wrapped<double>? page,
-      Wrapped<double>? pageCount}) {
+  GetManyUserBiodataEntityResponseDto copyWithWrapped({
+    Wrapped<List<UserBiodataEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
     return GetManyUserBiodataEntityResponseDto(
-        data: (data != null ? data.value : this.data),
-        count: (count != null ? count.value : this.count),
-        total: (total != null ? total.value : this.total),
-        page: (page != null ? page.value : this.page),
-        pageCount: (pageCount != null ? pageCount.value : this.pageCount));
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
   }
 }
 
@@ -4950,28 +5364,42 @@ class UserBiodataEntity {
             (identical(other.bmi, bmi) ||
                 const DeepCollectionEquality().equals(other.bmi, bmi)) &&
             (identical(other.bodyFat, bodyFat) ||
-                const DeepCollectionEquality()
-                    .equals(other.bodyFat, bodyFat)) &&
+                const DeepCollectionEquality().equals(
+                  other.bodyFat,
+                  bodyFat,
+                )) &&
             (identical(other.muscleMass, muscleMass) ||
-                const DeepCollectionEquality()
-                    .equals(other.muscleMass, muscleMass)) &&
+                const DeepCollectionEquality().equals(
+                  other.muscleMass,
+                  muscleMass,
+                )) &&
             (identical(other.goal, goal) ||
                 const DeepCollectionEquality().equals(other.goal, goal)) &&
             (identical(other.physicalActivity, physicalActivity) ||
-                const DeepCollectionEquality()
-                    .equals(other.physicalActivity, physicalActivity)) &&
+                const DeepCollectionEquality().equals(
+                  other.physicalActivity,
+                  physicalActivity,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)) &&
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )) &&
             (identical(other.creationDate, creationDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.creationDate, creationDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.creationDate,
+                  creationDate,
+                )) &&
             (identical(other.lastUpdatedDate, lastUpdatedDate) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastUpdatedDate, lastUpdatedDate)) &&
+                const DeepCollectionEquality().equals(
+                  other.lastUpdatedDate,
+                  lastUpdatedDate,
+                )) &&
             (identical(other.deletedAt, deletedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.deletedAt, deletedAt)));
+                const DeepCollectionEquality().equals(
+                  other.deletedAt,
+                  deletedAt,
+                )));
   }
 
   @override
@@ -4997,73 +5425,79 @@ class UserBiodataEntity {
 }
 
 extension $UserBiodataEntityExtension on UserBiodataEntity {
-  UserBiodataEntity copyWith(
-      {double? id,
-      UserEntity? user,
-      double? age,
-      double? weight,
-      double? height,
-      double? bmi,
-      double? bodyFat,
-      double? muscleMass,
-      double? goal,
-      double? physicalActivity,
-      String? createdBy,
-      DateTime? creationDate,
-      DateTime? lastUpdatedDate,
-      DateTime? deletedAt}) {
+  UserBiodataEntity copyWith({
+    double? id,
+    UserEntity? user,
+    double? age,
+    double? weight,
+    double? height,
+    double? bmi,
+    double? bodyFat,
+    double? muscleMass,
+    double? goal,
+    double? physicalActivity,
+    String? createdBy,
+    DateTime? creationDate,
+    DateTime? lastUpdatedDate,
+    DateTime? deletedAt,
+  }) {
     return UserBiodataEntity(
-        id: id ?? this.id,
-        user: user ?? this.user,
-        age: age ?? this.age,
-        weight: weight ?? this.weight,
-        height: height ?? this.height,
-        bmi: bmi ?? this.bmi,
-        bodyFat: bodyFat ?? this.bodyFat,
-        muscleMass: muscleMass ?? this.muscleMass,
-        goal: goal ?? this.goal,
-        physicalActivity: physicalActivity ?? this.physicalActivity,
-        createdBy: createdBy ?? this.createdBy,
-        creationDate: creationDate ?? this.creationDate,
-        lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
-        deletedAt: deletedAt ?? this.deletedAt);
+      id: id ?? this.id,
+      user: user ?? this.user,
+      age: age ?? this.age,
+      weight: weight ?? this.weight,
+      height: height ?? this.height,
+      bmi: bmi ?? this.bmi,
+      bodyFat: bodyFat ?? this.bodyFat,
+      muscleMass: muscleMass ?? this.muscleMass,
+      goal: goal ?? this.goal,
+      physicalActivity: physicalActivity ?? this.physicalActivity,
+      createdBy: createdBy ?? this.createdBy,
+      creationDate: creationDate ?? this.creationDate,
+      lastUpdatedDate: lastUpdatedDate ?? this.lastUpdatedDate,
+      deletedAt: deletedAt ?? this.deletedAt,
+    );
   }
 
-  UserBiodataEntity copyWithWrapped(
-      {Wrapped<double>? id,
-      Wrapped<UserEntity>? user,
-      Wrapped<double>? age,
-      Wrapped<double>? weight,
-      Wrapped<double>? height,
-      Wrapped<double>? bmi,
-      Wrapped<double>? bodyFat,
-      Wrapped<double>? muscleMass,
-      Wrapped<double>? goal,
-      Wrapped<double>? physicalActivity,
-      Wrapped<String>? createdBy,
-      Wrapped<DateTime>? creationDate,
-      Wrapped<DateTime>? lastUpdatedDate,
-      Wrapped<DateTime?>? deletedAt}) {
+  UserBiodataEntity copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<UserEntity>? user,
+    Wrapped<double>? age,
+    Wrapped<double>? weight,
+    Wrapped<double>? height,
+    Wrapped<double>? bmi,
+    Wrapped<double>? bodyFat,
+    Wrapped<double>? muscleMass,
+    Wrapped<double>? goal,
+    Wrapped<double>? physicalActivity,
+    Wrapped<String>? createdBy,
+    Wrapped<DateTime>? creationDate,
+    Wrapped<DateTime>? lastUpdatedDate,
+    Wrapped<DateTime?>? deletedAt,
+  }) {
     return UserBiodataEntity(
-        id: (id != null ? id.value : this.id),
-        user: (user != null ? user.value : this.user),
-        age: (age != null ? age.value : this.age),
-        weight: (weight != null ? weight.value : this.weight),
-        height: (height != null ? height.value : this.height),
-        bmi: (bmi != null ? bmi.value : this.bmi),
-        bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
-        muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
-        goal: (goal != null ? goal.value : this.goal),
-        physicalActivity: (physicalActivity != null
-            ? physicalActivity.value
-            : this.physicalActivity),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy),
-        creationDate:
-            (creationDate != null ? creationDate.value : this.creationDate),
-        lastUpdatedDate: (lastUpdatedDate != null
-            ? lastUpdatedDate.value
-            : this.lastUpdatedDate),
-        deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt));
+      id: (id != null ? id.value : this.id),
+      user: (user != null ? user.value : this.user),
+      age: (age != null ? age.value : this.age),
+      weight: (weight != null ? weight.value : this.weight),
+      height: (height != null ? height.value : this.height),
+      bmi: (bmi != null ? bmi.value : this.bmi),
+      bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
+      muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
+      goal: (goal != null ? goal.value : this.goal),
+      physicalActivity:
+          (physicalActivity != null
+              ? physicalActivity.value
+              : this.physicalActivity),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+      creationDate:
+          (creationDate != null ? creationDate.value : this.creationDate),
+      lastUpdatedDate:
+          (lastUpdatedDate != null
+              ? lastUpdatedDate.value
+              : this.lastUpdatedDate),
+      deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
+    );
   }
 }
 
@@ -5125,19 +5559,27 @@ class CreateUserBiodataDto {
             (identical(other.bmi, bmi) ||
                 const DeepCollectionEquality().equals(other.bmi, bmi)) &&
             (identical(other.bodyFat, bodyFat) ||
-                const DeepCollectionEquality()
-                    .equals(other.bodyFat, bodyFat)) &&
+                const DeepCollectionEquality().equals(
+                  other.bodyFat,
+                  bodyFat,
+                )) &&
             (identical(other.muscleMass, muscleMass) ||
-                const DeepCollectionEquality()
-                    .equals(other.muscleMass, muscleMass)) &&
+                const DeepCollectionEquality().equals(
+                  other.muscleMass,
+                  muscleMass,
+                )) &&
             (identical(other.goal, goal) ||
                 const DeepCollectionEquality().equals(other.goal, goal)) &&
             (identical(other.physicalActivity, physicalActivity) ||
-                const DeepCollectionEquality()
-                    .equals(other.physicalActivity, physicalActivity)) &&
+                const DeepCollectionEquality().equals(
+                  other.physicalActivity,
+                  physicalActivity,
+                )) &&
             (identical(other.createdBy, createdBy) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdBy, createdBy)));
+                const DeepCollectionEquality().equals(
+                  other.createdBy,
+                  createdBy,
+                )));
   }
 
   @override
@@ -5159,62 +5601,65 @@ class CreateUserBiodataDto {
 }
 
 extension $CreateUserBiodataDtoExtension on CreateUserBiodataDto {
-  CreateUserBiodataDto copyWith(
-      {double? userId,
-      double? age,
-      double? weight,
-      double? height,
-      double? bmi,
-      double? bodyFat,
-      double? muscleMass,
-      double? goal,
-      double? physicalActivity,
-      String? createdBy}) {
+  CreateUserBiodataDto copyWith({
+    double? userId,
+    double? age,
+    double? weight,
+    double? height,
+    double? bmi,
+    double? bodyFat,
+    double? muscleMass,
+    double? goal,
+    double? physicalActivity,
+    String? createdBy,
+  }) {
     return CreateUserBiodataDto(
-        userId: userId ?? this.userId,
-        age: age ?? this.age,
-        weight: weight ?? this.weight,
-        height: height ?? this.height,
-        bmi: bmi ?? this.bmi,
-        bodyFat: bodyFat ?? this.bodyFat,
-        muscleMass: muscleMass ?? this.muscleMass,
-        goal: goal ?? this.goal,
-        physicalActivity: physicalActivity ?? this.physicalActivity,
-        createdBy: createdBy ?? this.createdBy);
+      userId: userId ?? this.userId,
+      age: age ?? this.age,
+      weight: weight ?? this.weight,
+      height: height ?? this.height,
+      bmi: bmi ?? this.bmi,
+      bodyFat: bodyFat ?? this.bodyFat,
+      muscleMass: muscleMass ?? this.muscleMass,
+      goal: goal ?? this.goal,
+      physicalActivity: physicalActivity ?? this.physicalActivity,
+      createdBy: createdBy ?? this.createdBy,
+    );
   }
 
-  CreateUserBiodataDto copyWithWrapped(
-      {Wrapped<double>? userId,
-      Wrapped<double>? age,
-      Wrapped<double>? weight,
-      Wrapped<double>? height,
-      Wrapped<double>? bmi,
-      Wrapped<double>? bodyFat,
-      Wrapped<double>? muscleMass,
-      Wrapped<double>? goal,
-      Wrapped<double>? physicalActivity,
-      Wrapped<String>? createdBy}) {
+  CreateUserBiodataDto copyWithWrapped({
+    Wrapped<double>? userId,
+    Wrapped<double>? age,
+    Wrapped<double>? weight,
+    Wrapped<double>? height,
+    Wrapped<double>? bmi,
+    Wrapped<double>? bodyFat,
+    Wrapped<double>? muscleMass,
+    Wrapped<double>? goal,
+    Wrapped<double>? physicalActivity,
+    Wrapped<String>? createdBy,
+  }) {
     return CreateUserBiodataDto(
-        userId: (userId != null ? userId.value : this.userId),
-        age: (age != null ? age.value : this.age),
-        weight: (weight != null ? weight.value : this.weight),
-        height: (height != null ? height.value : this.height),
-        bmi: (bmi != null ? bmi.value : this.bmi),
-        bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
-        muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
-        goal: (goal != null ? goal.value : this.goal),
-        physicalActivity: (physicalActivity != null
-            ? physicalActivity.value
-            : this.physicalActivity),
-        createdBy: (createdBy != null ? createdBy.value : this.createdBy));
+      userId: (userId != null ? userId.value : this.userId),
+      age: (age != null ? age.value : this.age),
+      weight: (weight != null ? weight.value : this.weight),
+      height: (height != null ? height.value : this.height),
+      bmi: (bmi != null ? bmi.value : this.bmi),
+      bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
+      muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
+      goal: (goal != null ? goal.value : this.goal),
+      physicalActivity:
+          (physicalActivity != null
+              ? physicalActivity.value
+              : this.physicalActivity),
+      createdBy: (createdBy != null ? createdBy.value : this.createdBy),
+    );
   }
 }
 
 @JsonSerializable(explicitToJson: true)
 class CreateManyUserBiodataEntityDto {
-  const CreateManyUserBiodataEntityDto({
-    required this.bulk,
-  });
+  const CreateManyUserBiodataEntityDto({required this.bulk});
 
   factory CreateManyUserBiodataEntityDto.fromJson(Map<String, dynamic> json) =>
       _$CreateManyUserBiodataEntityDtoFromJson(json);
@@ -5248,10 +5693,12 @@ extension $CreateManyUserBiodataEntityDtoExtension
     return CreateManyUserBiodataEntityDto(bulk: bulk ?? this.bulk);
   }
 
-  CreateManyUserBiodataEntityDto copyWithWrapped(
-      {Wrapped<List<CreateUserBiodataDto>>? bulk}) {
+  CreateManyUserBiodataEntityDto copyWithWrapped({
+    Wrapped<List<CreateUserBiodataDto>>? bulk,
+  }) {
     return CreateManyUserBiodataEntityDto(
-        bulk: (bulk != null ? bulk.value : this.bulk));
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
   }
 }
 
@@ -5276,13 +5723,11 @@ class UpdateUserBiodataDto {
 
 @JsonSerializable(explicitToJson: true)
 class RestAIPromptTestFunctionPost$RequestBody {
-  const RestAIPromptTestFunctionPost$RequestBody({
-    this.imageBase64,
-  });
+  const RestAIPromptTestFunctionPost$RequestBody({this.imageBase64});
 
   factory RestAIPromptTestFunctionPost$RequestBody.fromJson(
-          Map<String, dynamic> json) =>
-      _$RestAIPromptTestFunctionPost$RequestBodyFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$RestAIPromptTestFunctionPost$RequestBodyFromJson(json);
 
   static const toJsonFactory = _$RestAIPromptTestFunctionPost$RequestBodyToJson;
   Map<String, dynamic> toJson() =>
@@ -5298,8 +5743,10 @@ class RestAIPromptTestFunctionPost$RequestBody {
     return identical(this, other) ||
         (other is RestAIPromptTestFunctionPost$RequestBody &&
             (identical(other.imageBase64, imageBase64) ||
-                const DeepCollectionEquality()
-                    .equals(other.imageBase64, imageBase64)));
+                const DeepCollectionEquality().equals(
+                  other.imageBase64,
+                  imageBase64,
+                )));
   }
 
   @override
@@ -5314,14 +5761,16 @@ extension $RestAIPromptTestFunctionPost$RequestBodyExtension
     on RestAIPromptTestFunctionPost$RequestBody {
   RestAIPromptTestFunctionPost$RequestBody copyWith({String? imageBase64}) {
     return RestAIPromptTestFunctionPost$RequestBody(
-        imageBase64: imageBase64 ?? this.imageBase64);
+      imageBase64: imageBase64 ?? this.imageBase64,
+    );
   }
 
-  RestAIPromptTestFunctionPost$RequestBody copyWithWrapped(
-      {Wrapped<String?>? imageBase64}) {
+  RestAIPromptTestFunctionPost$RequestBody copyWithWrapped({
+    Wrapped<String?>? imageBase64,
+  }) {
     return RestAIPromptTestFunctionPost$RequestBody(
-        imageBase64:
-            (imageBase64 != null ? imageBase64.value : this.imageBase64));
+      imageBase64: (imageBase64 != null ? imageBase64.value : this.imageBase64),
+    );
   }
 }
 
@@ -5372,7 +5821,8 @@ class $CustomJsonDecoder {
 class $JsonSerializableConverter extends chopper.JsonConverter {
   @override
   FutureOr<chopper.Response<ResultType>> convertResponse<ResultType, Item>(
-      chopper.Response response) async {
+    chopper.Response response,
+  ) async {
     if (response.bodyString.isEmpty) {
       // In rare cases, when let's say 204 (no content) is returned -
       // we cannot decode the missing json with the result type specified
@@ -5385,13 +5835,16 @@ class $JsonSerializableConverter extends chopper.JsonConverter {
 
     if (ResultType == DateTime) {
       return response.copyWith(
-          body: DateTime.parse((response.body as String).replaceAll('"', ''))
-              as ResultType);
+        body:
+            DateTime.parse((response.body as String).replaceAll('"', ''))
+                as ResultType,
+      );
     }
 
     final jsonRes = await super.convertResponse(response);
     return jsonRes.copyWith<ResultType>(
-        body: $jsonDecoder.decode<Item>(jsonRes.body) as ResultType);
+      body: $jsonDecoder.decode<Item>(jsonRes.body) as ResultType,
+    );
   }
 }
 
