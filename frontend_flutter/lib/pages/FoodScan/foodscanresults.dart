@@ -176,7 +176,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
 
   Future<void> _loadMealData() async {
     //This is for flow when user picks meal from meal_calendar page
-    if (widget.mealId != null) {
+    if (widget.mealLog == null) {
       // final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
       final bigbumService = Bigbum.create(
         baseUrl:
@@ -238,11 +238,11 @@ class _FoodScanResultsState extends State<FoodScanResults> {
     try {
       // This is for for flow when user selects meal from calendar
 
-      if (mealId != null) {
+      if (widget.mealLog == null) {
         final subMealClient =
             UserSubMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
         final subMealLogs = await subMealClient
-            .userSubMealLogControllerGetByMainMealId(id: mealId);
+            .userSubMealLogControllerGetByMainMealId(id: mealId!);
 
         debugPrint(
             "Querying a sub meals with from main meal id of ${widget.mealId}!");

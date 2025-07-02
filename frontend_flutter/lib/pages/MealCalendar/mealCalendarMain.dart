@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api, file_names
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
+import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/theme/app_style.dart';
 
 import 'package:fluttertest/widgets/meal_calendar_widget.dart';
@@ -20,6 +22,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
 
   DateTime today = DateTime.now();
   DateTime currentMonth = DateTime.now();
+  List<Widget> mealWidgets = [];
 
   List<DateTime> allAvailableDates = []; // All valid dates
   List<DateTime> visibleDates = []; // Filtered by current month
@@ -29,6 +32,8 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
   @override
   void initState() {
     super.initState();
+    debugPrint('🟨 MealCalendarMain init - userId: ${widget.userId}');
+    _loadUserMealData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
@@ -38,6 +43,58 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
         );
       }
     });
+  }
+
+  Future<void> _loadUserMealData() async {
+    debugPrint('Calling user meal data');
+    final bigbumService = Bigbum.create(
+      baseUrl:
+          Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
+    );
+    try {
+      final response = await bigbumService.UserMealLogController_getUserMeals(
+          userId: widget.userId,
+          startDate: '2025-07-01',
+          endDate: '2025-07-03');
+      if (response.isSuccessful && response.body != null) {
+        final userMealLogs = response.body!;
+
+        debugPrint("Querying meals from user of id ${widget.userId}!");
+        debugPrint("🔁 Response: $userMealLogs");
+        for (var meal in userMealLogs) {
+          debugPrint("Meal ID: ${meal.id}");
+          debugPrint("Meal Name: ${meal.mealName}");
+          debugPrint("Meal Type: ${meal.mealType}");
+          debugPrint("Calories: ${meal.calories}");
+          debugPrint("Protein: ${meal.protein}");
+          debugPrint("Fats: ${meal.fats}");
+          debugPrint("Carbs: ${meal.carbs}");
+          debugPrint("Comments: ${meal.comments}");
+          debugPrint("--------");
+        }
+
+        setState(() {
+          mealWidgets = userMealLogs.map((meal) {
+            return Column(
+              children: [
+                MealCalendarWidget(
+                  mealType: meal.mealType ?? 'Lunch',
+                  mealIcon: mealTypeIcons[meal.mealType] ??
+                      'assets/icons/calendar_snack.png',
+                  calAmount: meal.calories?.toString() ?? '0',
+                  calTotalAmount: '600',
+                ),
+                const SizedBox(height: 15),
+              ],
+            );
+          }).toList();
+        });
+      }
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      debugPrint('❌ Single Meal Retrieval: $statusCode');
+      debugPrint('Response data: ${e.response?.data}');
+    }
   }
 
   @override
@@ -206,7 +263,9 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
                     ],
                   ),
                 ),
-              )
+              ),
+
+              ...mealWidgets,
             ],
           ),
         ),

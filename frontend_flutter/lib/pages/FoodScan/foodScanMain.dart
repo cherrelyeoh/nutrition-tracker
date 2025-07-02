@@ -74,7 +74,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
         userId: 1,
         mealImage: base64Image,
         mealName: mealNameController.text,
-        userMealId: 123,
+        userMealId: null,
         dateOfMeal: DateTime.now());
 
     final dio = Dio();
@@ -90,7 +90,10 @@ class _FoodScanMainState extends State<FoodScanMain> {
           body: mealScanObject);
       debugPrint("Meal logged!");
       debugPrint(jsonEncode(mealLog)); //
-
+      // if (mealLog.responseType == "Question") {
+      //   debugPrint('The Scanning returned a question');
+      // } else {
+      debugPrint('The Scanning logged a meal');
       if (!mounted) return;
       Navigator.push(
         context,
@@ -99,8 +102,9 @@ class _FoodScanMainState extends State<FoodScanMain> {
             mealLog: mealLog,
             mealImage: base64Image,
             mealName: mealNameController.text,
-            mealDescription: mealDescriptionController.text,
-            mealId: 123,
+            mealDescription:
+                mealLog.body.mainMeal?.comments ?? 'No description available',
+            mealId: mealScanObject.userMealId,
           ),
         ),
       );

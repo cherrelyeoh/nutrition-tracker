@@ -10,16 +10,17 @@ part 'user_meal_input_dto.g.dart';
 class UserMealInputDto {
   const UserMealInputDto({
     required this.userId,
-    required this.userMealId,
+    this.userMealId,
     required this.mealImage,
     required this.mealName,
     required this.dateOfMeal,
   });
-  
-  factory UserMealInputDto.fromJson(Map<String, Object?> json) => _$UserMealInputDtoFromJson(json);
-  
+
+  factory UserMealInputDto.fromJson(Map<String, Object?> json) =>
+      _$UserMealInputDtoFromJson(json);
+
   final num userId;
-  final num userMealId;
+  final num? userMealId;
   final String mealImage;
   final String mealName;
   final DateTime dateOfMeal;
