@@ -201,7 +201,7 @@ class _MainHomePageState extends State<MainHomePage> {
                         Stack(
                           alignment: Alignment.center,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 120,
                               height: 120,
                               child: CircularProgressIndicator(
@@ -212,7 +212,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 120,
                               height: 120,
                               child: CircularProgressIndicator(
@@ -383,6 +383,7 @@ class _MainHomePageState extends State<MainHomePage> {
                   ],
                 ),
               ),
+
               const SizedBox(
                 height: 30,
               ),

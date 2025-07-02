@@ -220,7 +220,7 @@ class _BaseScreenState extends State<BaseScreen> {
       PageItem(
           title: 'Meal Calendar',
           page: MealCalendarMain(userId: widget.userId)),
-      PageItem(title: 'Scan Food', page: FoodScanMain()),
+      const PageItem(title: 'Scan Food', page: FoodScanMain()),
     ];
   }
 

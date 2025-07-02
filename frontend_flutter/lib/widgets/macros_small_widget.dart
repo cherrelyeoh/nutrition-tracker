@@ -44,7 +44,7 @@ class MacrosSmallWidget extends StatelessWidget {
             Row(
               children: [
                 imagePath != null
-                    ? Image.asset(imagePath!, width: 27, height: 27)
+                    ? Image.asset(imagePath, width: 27, height: 27)
                     : Icon(icon, size: 27, color: color),
                 const SizedBox(width: 5),
                 Column(

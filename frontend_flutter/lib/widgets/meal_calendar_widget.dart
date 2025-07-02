@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
-import 'package:fluttertest/pages/FoodScan/foodscanresults.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 
 class MealCalendarWidget extends StatefulWidget {
