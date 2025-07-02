@@ -302,6 +302,40 @@ abstract class Bigbum extends ChopperService {
     @Body() required UserMealInputDto? body,
   });
 
+  ///
+  ///@param userId
+  ///@param startDate
+  ///@param endDate
+  Future<chopper.Response<List<UserMealLogEntity>>>
+  UserMealLogController_getUserMeals({
+    required num? userId,
+    required String? startDate,
+    required String? endDate,
+  }) {
+    generatedMapping.putIfAbsent(
+      UserMealLogEntity,
+      () => UserMealLogEntity.fromJsonFactory,
+    );
+
+    return _UserMealLogController_getUserMeals(
+      userId: userId,
+      startDate: startDate,
+      endDate: endDate,
+    );
+  }
+
+  ///
+  ///@param userId
+  ///@param startDate
+  ///@param endDate
+  @GET(path: '/rest/UserMealLog/mealsByUser/{userId}')
+  Future<chopper.Response<List<UserMealLogEntity>>>
+  _UserMealLogController_getUserMeals({
+    @Path('userId') required num? userId,
+    @Query('startDate') required String? startDate,
+    @Query('endDate') required String? endDate,
+  });
+
   ///Retrieve multiple UserMealLogEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param s Adds search condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#search" target="_blank">Docs</a>

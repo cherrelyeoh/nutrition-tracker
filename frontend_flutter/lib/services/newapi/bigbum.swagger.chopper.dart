@@ -204,6 +204,27 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
+  Future<Response<List<UserMealLogEntity>>>
+      _UserMealLogController_getUserMeals({
+    required num? userId,
+    required String? startDate,
+    required String? endDate,
+  }) {
+    final Uri $url = Uri.parse('/rest/UserMealLog/mealsByUser/${userId}');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'startDate': startDate,
+      'endDate': endDate,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<List<UserMealLogEntity>, UserMealLogEntity>($request);
+  }
+
+  @override
   Future<Response<GetManyUserMealLogEntityResponseDto>>
       _getManyBaseUserMealLogControllerUserMealLogEntity({
     List<String>? fields,

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { Crud } from '@dataui/crud';
 import { UserMealLogService } from './UserMealLog.service';
 import { UserMealLogEntity } from './UserMealLog.entity';
@@ -44,5 +44,18 @@ export class UserMealLogController {
     @Body() userMealInput: UserMealInputDto,
   ): Promise<MealQuestionResponse | MealResultResponse> {
     return await this.service.extractNutrientData(userMealInput);
+  }
+
+  @Get('mealsByUser/:userId')
+  async getUserMeals(
+    @Param('userId') userId: number,
+    @Query('startDate') startDate: string,
+    @Query('endDate') endDate: string,
+  ) {
+    return this.service.getByUserAndDateRange(
+      Number(userId),
+      new Date(startDate),
+      new Date(endDate),
+    );
   }
 }

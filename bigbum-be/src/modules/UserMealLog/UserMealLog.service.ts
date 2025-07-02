@@ -19,6 +19,7 @@ import { UserMealQuestionsEntity } from '../UserMealQuestions/UserMealQuestions.
 import { UserMealQuestionsService } from '../UserMealQuestions/UserMealQuestions.service';
 import { AIPromptEntity } from '../AIPrompt/AIPrompt.entity';
 import { UserSubMealLogService } from '../UserSubMealLog/UserSubMealLog.service';
+import { Between, IsNull } from 'typeorm';
 
 @Injectable()
 export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
@@ -34,6 +35,22 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     private userSubMealLogService: UserSubMealLogService,
   ) {
     super(repo);
+  }
+
+  async getByUserAndDateRange(
+    userId: number,
+    startDate: Date,
+    endDate: Date,
+  ): Promise<UserMealLogEntity[]> {
+    return this.repo.find({
+      where: {
+        createdBy: { id: userId },
+        dateOfMeal: Between(startDate, endDate),
+        deletedAt: IsNull(),
+      },
+      relations: ['createdBy'],
+      order: { dateOfMeal: 'ASC' },
+    });
   }
 
   async extractNutrientData(
