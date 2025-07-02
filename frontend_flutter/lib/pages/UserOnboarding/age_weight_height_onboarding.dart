@@ -11,6 +11,7 @@ class AgeWeightHeightOnboarding extends StatefulWidget {
   const AgeWeightHeightOnboarding({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AgeWeightHeightOnboardingState createState() =>
       _AgeWeightHeightOnboardingState();
 }
@@ -20,7 +21,7 @@ class _AgeWeightHeightOnboardingState extends State<AgeWeightHeightOnboarding> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
-  bool _isNavigating = false;
+  // bool _isNavigating = false;
 
   @override
   void dispose() {
@@ -49,11 +50,11 @@ class _AgeWeightHeightOnboardingState extends State<AgeWeightHeightOnboarding> {
     return BlocListener<OnboardingBloc, OnboardingState>(
       listener: (context, state) {
         if (state is OnboardingData) {
-          _isNavigating = true;
-          print('User Details:');
-          print('Age: ${state.age}');
-          print('Weight: ${state.weight}');
-          print('Height: ${state.height}');
+          // _isNavigating = true;
+          // print('User Details:');
+          // print('Age: ${state.age}');
+          // print('Weight: ${state.weight}');
+          // print('Height: ${state.height}');
 
           // Navigate to next page *after* state is updated
           WidgetsBinding.instance.addPostFrameCallback((_) {

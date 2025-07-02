@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertest/services/api/user_meal_log/user_meal_log_client.dart';
 import 'package:fluttertest/services/api/user_sub_meal_log/user_sub_meal_log_client.dart';
+import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/meallog_mealcard.dart';
 
 class MealLog {
@@ -106,6 +105,7 @@ class SubMeal {
   }
 }
 
+// ignore: must_be_immutable
 class FoodScanResults extends StatefulWidget {
   Map<String, dynamic>? mealLog;
   String? mealImage;
@@ -123,6 +123,7 @@ class FoodScanResults extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _FoodScanResultsState createState() => _FoodScanResultsState();
 }
 
@@ -173,38 +174,43 @@ class _FoodScanResultsState extends State<FoodScanResults> {
   }
 
   Future<void> _loadMealData() async {
-    final dio = Dio();
-
     //This is for flow when user picks meal from meal_calendar page
     if (widget.mealId != null) {
-      final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+      // final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+      final bigbumService = Bigbum.create(
+        baseUrl:
+            Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
+      );
       try {
         // hardcoded value - please remove once implementation is done
-        final userMealLog = await client
+        final response = await bigbumService
             .getOneBaseUserMealLogControllerUserMealLogEntity(id: 4);
-        debugPrint("Querying a single meal with id ${widget.mealId}!");
-        debugPrint("🔁 Response: ${(userMealLog.toJson())}");
+        if (response.isSuccessful && response.body != null) {
+          final userMealLog = response.body!;
 
-        setState(() {
-          mainMeal = MainMeal(
-            id: userMealLog.id!.toInt(),
-            mealImage: userMealLog.mealImage!,
-            mealType: userMealLog.mealType!,
-            weight: userMealLog.weight!.toInt(),
-            calories: userMealLog.calories!.toInt(),
-            protein: userMealLog.protein!.toInt(),
-            fats: userMealLog.fats!.toInt(),
-            carbs: userMealLog.carbs!.toInt(),
-            mealLevel: userMealLog.mealLevel!.toInt(),
-            comments: userMealLog.comments,
-          );
+          debugPrint("Querying a single meal with id ${widget.mealId}!");
+          debugPrint("🔁 Response: ${userMealLog.toJson()}");
 
-          mealName = userMealLog.mealName;
-          mealImage = userMealLog.mealImage;
-          mealDescription = userMealLog.comments;
-          mealId = widget.mealId;
-          // isLoading = false;
-        });
+          setState(() {
+            mainMeal = MainMeal(
+              id: userMealLog.id!.toInt(),
+              mealImage: userMealLog.mealImage!,
+              mealType: userMealLog.mealType!,
+              weight: userMealLog.weight!.toInt(),
+              calories: userMealLog.calories!.toInt(),
+              protein: userMealLog.protein!.toInt(),
+              fats: userMealLog.fats!.toInt(),
+              carbs: userMealLog.carbs!.toInt(),
+              mealLevel: userMealLog.mealLevel!.toInt(),
+              comments: userMealLog.comments ?? '',
+            );
+
+            mealName = userMealLog.mealName;
+            mealImage = userMealLog.mealImage;
+            mealDescription = userMealLog.comments;
+            mealId = widget.mealId;
+          });
+        }
         await _loadSubMeals(widget.mealId);
       } on DioException catch (e) {
         final statusCode = e.response?.statusCode;
@@ -235,14 +241,13 @@ class _FoodScanResultsState extends State<FoodScanResults> {
         final subMealClient =
             UserSubMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
         final subMealLogs = await subMealClient
-            .userSubMealLogControllerGetByMainMealId(id: mealId!);
-
-        final rawList = subMealLogs as List<dynamic>;
+            .userSubMealLogControllerGetByMainMealId(id: mealId);
 
         debugPrint(
             "Querying a sub meals with from main meal id of ${widget.mealId}!");
         isLoading = false;
-        debugPrint("🔁 Response: ${jsonEncode(subMealLogs)}");
+        debugPrint(
+            "🔁 Response from submeallog call: ${jsonEncode(subMealLogs)}");
 
         setState(() {
           subMeals = subMealLogs.map((subMeal) {

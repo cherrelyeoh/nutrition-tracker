@@ -19,17 +19,18 @@ class NutritionInfoCard extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _NutritionInfoCardState createState() => _NutritionInfoCardState();
 }
 
 class _NutritionInfoCardState extends State<NutritionInfoCard> {
-  bool _showDetails = true;
+  final bool _showDetails = true;
 
-  void _toggleDetails() {
-    setState(() {
-      _showDetails = !_showDetails;
-    });
-  }
+  // void _toggleDetails() {
+  //   setState(() {
+  //     _showDetails = !_showDetails;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

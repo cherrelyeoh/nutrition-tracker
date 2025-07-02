@@ -8,37 +8,31 @@ part of 'user_meal_log_entity.dart';
 
 UserMealLogEntity _$UserMealLogEntityFromJson(Map<String, dynamic> json) =>
     UserMealLogEntity(
-      id: json['id'] as num?,
-      mealImage: json['mealImage'] as String?,
-      mealType: json['mealType'] as String?,
-      isComplete: json['isComplete'] as bool?,
-      dateOfMeal: json['dateOfMeal'] == null
-          ? null
-          : DateTime.parse(json['dateOfMeal'] as String),
-      mealName: json['mealName'] as String?,
-      weight: json['weight'] as num?,
-      calories: json['calories'] as num?,
-      protein: json['protein'] as num?,
-      fats: json['fats'] as num?,
-      carbs: json['carbs'] as num?,
-      mealLevel: json['mealLevel'] as num?,
-      comments: json['comments'] as String?,
-      promptLog: json['promptLog'] == null
-          ? null
-          : AIIntegrationLogsEntity.fromJson(
-              json['promptLog'] as Map<String, dynamic>),
-      createdBy: json['createdBy'] == null
-          ? null
-          : UserEntity.fromJson(json['createdBy'] as Map<String, dynamic>),
-      createdDate: json['createdDate'] == null
-          ? null
-          : DateTime.parse(json['createdDate'] as String),
-      lastUpdatedDate: json['lastUpdatedDate'] == null
-          ? null
-          : DateTime.parse(json['lastUpdatedDate'] as String),
-      deletedAt: json['deletedAt'] == null
-          ? null
-          : DateTime.parse(json['deletedAt'] as String),
+      id: json['id'] as num,
+      mealImage: json['mealImage'] as String,
+      mealType: json['mealType'] as String,
+      isComplete: json['isComplete'] as bool,
+      dateOfMeal: DateTime.parse(json['dateOfMeal'] as String),
+      mealName: json['mealName'] as String,
+      weight: json['weight'] as num,
+      calories: json['calories'] as num,
+      protein: json['protein'] as num,
+      fats: json['fats'] as num,
+      carbs: json['carbs'] as num,
+      mealLevel: json['mealLevel'] as num,
+      comments: json['comments'] as String,
+      promptLog: json['promptLog'] != null
+          ? AIIntegrationLogsEntity.fromJson(
+              json['promptLog'] as Map<String, dynamic>)
+          : null,
+      createdBy: json['createdBy'] != null
+          ? UserEntity.fromJson(json['createdBy'] as Map<String, dynamic>)
+          : null,
+      createdDate: DateTime.parse(json['createdDate'] as String),
+      lastUpdatedDate: DateTime.parse(json['lastUpdatedDate'] as String),
+      deletedAt: json['deletedAt'] != null
+          ? DateTime.parse(json['deletedAt'] as String)
+          : null,
     );
 
 Map<String, dynamic> _$UserMealLogEntityToJson(UserMealLogEntity instance) =>
