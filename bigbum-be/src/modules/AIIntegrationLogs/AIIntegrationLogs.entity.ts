@@ -43,7 +43,7 @@ export class AIIntegrationLogsEntity {
 
   @ManyToOne(() => UserEntity, { nullable: true })
   @JoinColumn({ name: 'createdBy' })
-  createdBy: UserEntity;
+  createdBy?: UserEntity;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdDate: Date;

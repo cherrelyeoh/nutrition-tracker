@@ -21,6 +21,7 @@ import { UserService } from './User.service';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import { UpdateUserDto } from './dto/UpdateUser.dto';
 import { LoginResponseDto, UserSessionDto } from './dto/UserSession.dto';
+import { TestDto } from './dto/Test.dto';
 @RouteMetadata()
 @Crud({
   model: { type: UserEntity },
@@ -80,5 +81,10 @@ export class UserController implements CrudController<UserEntity> {
     console.log(userSession);
 
     return { user: userSession };
+  }
+
+  @Post()
+  create(@Body() body: TestDto) {
+    return body;
   }
 }

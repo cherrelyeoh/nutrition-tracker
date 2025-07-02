@@ -40,6 +40,9 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     input: UserMealInputDto,
   ): Promise<MealQuestionResponse | MealResultResponse> {
     let questionsAndAnswer = [];
+    const user = await this.userService.findOne({
+      where: { id: input.userId },
+    });
 
     if (input.userMealId) {
       questionsAndAnswer = await this.userMealQuestionService.find({
@@ -72,7 +75,7 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     const timeTaken = endTime - startTime; // Calculate duration in milliseconds
 
     // Prepare AI log data
-    const aiLog = new AIIntegrationLogsEntity();
+    let aiLog = new AIIntegrationLogsEntity();
     aiLog.actionUrl = 'ChatGPT';
     aiLog.request = prompt.promptRequest;
     aiLog.response = JSON.stringify(response);
@@ -83,12 +86,10 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       Number(response.usage.prompt_tokens),
       Number(response.usage.completion_tokens),
     );
-    aiLog.createdBy = await this.userService.findOne({
-      where: { id: input.userId },
-    });
+    aiLog.createdBy = user;
     aiLog.promptType = prompt;
 
-    await this.aiLogService.create(aiLog);
+    aiLog = await this.aiLogService.create(aiLog);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     const cleanedContent = response.choices[0].message.content
       .replace(/```json/g, '') // Remove ```json
@@ -104,8 +105,10 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
     ) {
       let userMealLog: UserMealLogEntity = {
         mealType: input.mealName,
-        mealImage: 'input.mealImage',
+        mealImage: input.mealImage,
         dateOfMeal: input.dateOfMeal,
+        createdBy: user,
+        promptLog: aiLog,
       } as UserMealLogEntity;
 
       if (input.userMealId != null && input.userMealId > 0) {

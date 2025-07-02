@@ -19,7 +19,7 @@ export class UserMealLogEntity {
   id?: number;
 
   // Request
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'text', nullable: true })
   @ApiProperty({ required: false, nullable: true })
   mealImage?: string;
 
