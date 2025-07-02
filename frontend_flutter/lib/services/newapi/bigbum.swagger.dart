@@ -47,18 +47,18 @@ abstract class Bigbum extends ChopperService {
   }
 
   ///
-  Future<chopper.Response<String>> get() {
-    return _get();
+  Future<chopper.Response<String>> AppController_getHello() {
+    return _AppController_getHello();
   }
 
   ///
   @Get(path: '/')
-  Future<chopper.Response<String>> _get();
+  Future<chopper.Response<String>> _AppController_getHello();
 
   ///
-  Future<chopper.Response> restAIPromptTestFunctionPost(
+  Future<chopper.Response> AIPromptController_testFunction(
       {required RestAIPromptTestFunctionPost$RequestBody? body}) {
-    return _restAIPromptTestFunctionPost(body: body);
+    return _AIPromptController_testFunction(body: body);
   }
 
   ///
@@ -66,7 +66,7 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/AIPrompt/testFunction',
     optionalBody: true,
   )
-  Future<chopper.Response> _restAIPromptTestFunctionPost(
+  Future<chopper.Response> _AIPromptController_testFunction(
       {@Body() required RestAIPromptTestFunctionPost$RequestBody? body});
 
   ///Retrieve multiple AIPromptEntities
@@ -80,7 +80,8 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<GetManyAIPromptEntityResponseDto>> restAIPromptGet({
+  Future<chopper.Response<GetManyAIPromptEntityResponseDto>>
+      getManyBaseAIPromptControllerAIPromptEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -95,7 +96,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyAIPromptEntityResponseDto,
         () => GetManyAIPromptEntityResponseDto.fromJsonFactory);
 
-    return _restAIPromptGet(
+    return _getManyBaseAIPromptControllerAIPromptEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -120,7 +121,8 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/AIPrompt')
-  Future<chopper.Response<GetManyAIPromptEntityResponseDto>> _restAIPromptGet({
+  Future<chopper.Response<GetManyAIPromptEntityResponseDto>>
+      _getManyBaseAIPromptControllerAIPromptEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -134,12 +136,13 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create a single AIPromptEntity
-  Future<chopper.Response<AIPromptEntity>> restAIPromptPost(
-      {required AIPromptEntity? body}) {
+  Future<chopper.Response<AIPromptEntity>>
+      createOneBaseAIPromptControllerAIPromptEntity(
+          {required AIPromptEntity? body}) {
     generatedMapping.putIfAbsent(
         AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
 
-    return _restAIPromptPost(body: body);
+    return _createOneBaseAIPromptControllerAIPromptEntity(body: body);
   }
 
   ///Create a single AIPromptEntity
@@ -147,16 +150,18 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/AIPrompt',
     optionalBody: true,
   )
-  Future<chopper.Response<AIPromptEntity>> _restAIPromptPost(
-      {@Body() required AIPromptEntity? body});
+  Future<chopper.Response<AIPromptEntity>>
+      _createOneBaseAIPromptControllerAIPromptEntity(
+          {@Body() required AIPromptEntity? body});
 
   ///Create multiple AIPromptEntities
-  Future<chopper.Response<List<AIPromptEntity>>> restAIPromptBulkPost(
-      {required CreateManyAIPromptEntityDto? body}) {
+  Future<chopper.Response<List<AIPromptEntity>>>
+      createManyBaseAIPromptControllerAIPromptEntity(
+          {required CreateManyAIPromptEntityDto? body}) {
     generatedMapping.putIfAbsent(
         AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
 
-    return _restAIPromptBulkPost(body: body);
+    return _createManyBaseAIPromptControllerAIPromptEntity(body: body);
   }
 
   ///Create multiple AIPromptEntities
@@ -164,19 +169,21 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/AIPrompt/bulk',
     optionalBody: true,
   )
-  Future<chopper.Response<List<AIPromptEntity>>> _restAIPromptBulkPost(
-      {@Body() required CreateManyAIPromptEntityDto? body});
+  Future<chopper.Response<List<AIPromptEntity>>>
+      _createManyBaseAIPromptControllerAIPromptEntity(
+          {@Body() required CreateManyAIPromptEntityDto? body});
 
   ///Update a single AIPromptEntity
   ///@param id
-  Future<chopper.Response<AIPromptEntity>> restAIPromptIdPatch({
+  Future<chopper.Response<AIPromptEntity>>
+      updateOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
 
-    return _restAIPromptIdPatch(id: id, body: body);
+    return _updateOneBaseAIPromptControllerAIPromptEntity(id: id, body: body);
   }
 
   ///Update a single AIPromptEntity
@@ -185,21 +192,23 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/AIPrompt/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<AIPromptEntity>> _restAIPromptIdPatch({
+  Future<chopper.Response<AIPromptEntity>>
+      _updateOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Body() required AIPromptEntity? body,
   });
 
   ///Replace a single AIPromptEntity
   ///@param id
-  Future<chopper.Response<AIPromptEntity>> restAIPromptIdPut({
+  Future<chopper.Response<AIPromptEntity>>
+      replaceOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
 
-    return _restAIPromptIdPut(id: id, body: body);
+    return _replaceOneBaseAIPromptControllerAIPromptEntity(id: id, body: body);
   }
 
   ///Replace a single AIPromptEntity
@@ -208,21 +217,23 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/AIPrompt/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<AIPromptEntity>> _restAIPromptIdPut({
+  Future<chopper.Response<AIPromptEntity>>
+      _replaceOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Body() required AIPromptEntity? body,
   });
 
   ///Delete a single AIPromptEntity
   ///@param id
-  Future<chopper.Response> restAIPromptIdDelete({required num? id}) {
-    return _restAIPromptIdDelete(id: id);
+  Future<chopper.Response> deleteOneBaseAIPromptControllerAIPromptEntity(
+      {required num? id}) {
+    return _deleteOneBaseAIPromptControllerAIPromptEntity(id: id);
   }
 
   ///Delete a single AIPromptEntity
   ///@param id
   @Delete(path: '/rest/AIPrompt/{id}')
-  Future<chopper.Response> _restAIPromptIdDelete(
+  Future<chopper.Response> _deleteOneBaseAIPromptControllerAIPromptEntity(
       {@Path('id') required num? id});
 
   ///Retrieve a single AIPromptEntity
@@ -230,7 +241,8 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<AIPromptEntity>> restAIPromptIdGet({
+  Future<chopper.Response<AIPromptEntity>>
+      getOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -239,7 +251,8 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(
         AIPromptEntity, () => AIPromptEntity.fromJsonFactory);
 
-    return _restAIPromptIdGet(id: id, fields: fields, join: join, cache: cache);
+    return _getOneBaseAIPromptControllerAIPromptEntity(
+        id: id, fields: fields, join: join, cache: cache);
   }
 
   ///Retrieve a single AIPromptEntity
@@ -248,7 +261,8 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/AIPrompt/{id}')
-  Future<chopper.Response<AIPromptEntity>> _restAIPromptIdGet({
+  Future<chopper.Response<AIPromptEntity>>
+      _getOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -256,18 +270,18 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restAIPromptMetadataGet() {
-    return _restAIPromptMetadataGet();
+  Future<chopper.Response> AIPromptController_() {
+    return _AIPromptController_();
   }
 
   ///
   @Get(path: '/rest/AIPrompt/metadata')
-  Future<chopper.Response> _restAIPromptMetadataGet();
+  Future<chopper.Response> _AIPromptController_();
 
   ///
-  Future<chopper.Response> restUserMealLogExtractNutrientDetailsPost(
+  Future<chopper.Response> UserMealLogController_extractNutrientDetails(
       {required UserMealInputDto? body}) {
-    return _restUserMealLogExtractNutrientDetailsPost(body: body);
+    return _UserMealLogController_extractNutrientDetails(body: body);
   }
 
   ///
@@ -275,7 +289,7 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserMealLog/extractNutrientDetails',
     optionalBody: true,
   )
-  Future<chopper.Response> _restUserMealLogExtractNutrientDetailsPost(
+  Future<chopper.Response> _UserMealLogController_extractNutrientDetails(
       {@Body() required UserMealInputDto? body});
 
   ///Retrieve multiple UserMealLogEntities
@@ -290,7 +304,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserMealLogEntityResponseDto>>
-      restUserMealLogGet({
+      getManyBaseUserMealLogControllerUserMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -305,7 +319,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyUserMealLogEntityResponseDto,
         () => GetManyUserMealLogEntityResponseDto.fromJsonFactory);
 
-    return _restUserMealLogGet(
+    return _getManyBaseUserMealLogControllerUserMealLogEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -331,7 +345,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserMealLog')
   Future<chopper.Response<GetManyUserMealLogEntityResponseDto>>
-      _restUserMealLogGet({
+      _getManyBaseUserMealLogControllerUserMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -345,12 +359,13 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create a single UserMealLogEntity
-  Future<chopper.Response<UserMealLogEntity>> restUserMealLogPost(
-      {required UserMealLogEntity? body}) {
+  Future<chopper.Response<UserMealLogEntity>>
+      createOneBaseUserMealLogControllerUserMealLogEntity(
+          {required UserMealLogEntity? body}) {
     generatedMapping.putIfAbsent(
         UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
 
-    return _restUserMealLogPost(body: body);
+    return _createOneBaseUserMealLogControllerUserMealLogEntity(body: body);
   }
 
   ///Create a single UserMealLogEntity
@@ -358,16 +373,18 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserMealLog',
     optionalBody: true,
   )
-  Future<chopper.Response<UserMealLogEntity>> _restUserMealLogPost(
-      {@Body() required UserMealLogEntity? body});
+  Future<chopper.Response<UserMealLogEntity>>
+      _createOneBaseUserMealLogControllerUserMealLogEntity(
+          {@Body() required UserMealLogEntity? body});
 
   ///Create multiple UserMealLogEntities
-  Future<chopper.Response<List<UserMealLogEntity>>> restUserMealLogBulkPost(
-      {required CreateManyUserMealLogEntityDto? body}) {
+  Future<chopper.Response<List<UserMealLogEntity>>>
+      createManyBaseUserMealLogControllerUserMealLogEntity(
+          {required CreateManyUserMealLogEntityDto? body}) {
     generatedMapping.putIfAbsent(
         UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
 
-    return _restUserMealLogBulkPost(body: body);
+    return _createManyBaseUserMealLogControllerUserMealLogEntity(body: body);
   }
 
   ///Create multiple UserMealLogEntities
@@ -375,19 +392,22 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserMealLog/bulk',
     optionalBody: true,
   )
-  Future<chopper.Response<List<UserMealLogEntity>>> _restUserMealLogBulkPost(
-      {@Body() required CreateManyUserMealLogEntityDto? body});
+  Future<chopper.Response<List<UserMealLogEntity>>>
+      _createManyBaseUserMealLogControllerUserMealLogEntity(
+          {@Body() required CreateManyUserMealLogEntityDto? body});
 
   ///Update a single UserMealLogEntity
   ///@param id
-  Future<chopper.Response<UserMealLogEntity>> restUserMealLogIdPatch({
+  Future<chopper.Response<UserMealLogEntity>>
+      updateOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
 
-    return _restUserMealLogIdPatch(id: id, body: body);
+    return _updateOneBaseUserMealLogControllerUserMealLogEntity(
+        id: id, body: body);
   }
 
   ///Update a single UserMealLogEntity
@@ -396,21 +416,24 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserMealLog/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserMealLogEntity>> _restUserMealLogIdPatch({
+  Future<chopper.Response<UserMealLogEntity>>
+      _updateOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserMealLogEntity? body,
   });
 
   ///Replace a single UserMealLogEntity
   ///@param id
-  Future<chopper.Response<UserMealLogEntity>> restUserMealLogIdPut({
+  Future<chopper.Response<UserMealLogEntity>>
+      replaceOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
 
-    return _restUserMealLogIdPut(id: id, body: body);
+    return _replaceOneBaseUserMealLogControllerUserMealLogEntity(
+        id: id, body: body);
   }
 
   ///Replace a single UserMealLogEntity
@@ -419,21 +442,23 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserMealLog/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserMealLogEntity>> _restUserMealLogIdPut({
+  Future<chopper.Response<UserMealLogEntity>>
+      _replaceOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserMealLogEntity? body,
   });
 
   ///Delete a single UserMealLogEntity
   ///@param id
-  Future<chopper.Response> restUserMealLogIdDelete({required num? id}) {
-    return _restUserMealLogIdDelete(id: id);
+  Future<chopper.Response> deleteOneBaseUserMealLogControllerUserMealLogEntity(
+      {required num? id}) {
+    return _deleteOneBaseUserMealLogControllerUserMealLogEntity(id: id);
   }
 
   ///Delete a single UserMealLogEntity
   ///@param id
   @Delete(path: '/rest/UserMealLog/{id}')
-  Future<chopper.Response> _restUserMealLogIdDelete(
+  Future<chopper.Response> _deleteOneBaseUserMealLogControllerUserMealLogEntity(
       {@Path('id') required num? id});
 
   ///Retrieve a single UserMealLogEntity
@@ -441,7 +466,8 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<UserMealLogEntity>> restUserMealLogIdGet({
+  Future<chopper.Response<UserMealLogEntity>>
+      getOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -450,7 +476,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(
         UserMealLogEntity, () => UserMealLogEntity.fromJsonFactory);
 
-    return _restUserMealLogIdGet(
+    return _getOneBaseUserMealLogControllerUserMealLogEntity(
         id: id, fields: fields, join: join, cache: cache);
   }
 
@@ -460,7 +486,8 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserMealLog/{id}')
-  Future<chopper.Response<UserMealLogEntity>> _restUserMealLogIdGet({
+  Future<chopper.Response<UserMealLogEntity>>
+      _getOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -468,13 +495,13 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restUserMealLogMetadataGet() {
-    return _restUserMealLogMetadataGet();
+  Future<chopper.Response> UserMealLogController_() {
+    return _UserMealLogController_();
   }
 
   ///
   @Get(path: '/rest/UserMealLog/metadata')
-  Future<chopper.Response> _restUserMealLogMetadataGet();
+  Future<chopper.Response> _UserMealLogController_();
 
   ///Retrieve multiple AIIntegrationLogsEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -488,7 +515,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyAIIntegrationLogsEntityResponseDto>>
-      restAIIntegrationLogsGet({
+      getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -503,7 +530,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyAIIntegrationLogsEntityResponseDto,
         () => GetManyAIIntegrationLogsEntityResponseDto.fromJsonFactory);
 
-    return _restAIIntegrationLogsGet(
+    return _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -529,7 +556,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/AIIntegrationLogs')
   Future<chopper.Response<GetManyAIIntegrationLogsEntityResponseDto>>
-      _restAIIntegrationLogsGet({
+      _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -543,12 +570,14 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create a single AIIntegrationLogsEntity
-  Future<chopper.Response<AIIntegrationLogsEntity>> restAIIntegrationLogsPost(
-      {required CreateAIIntegrationLogDto? body}) {
+  Future<chopper.Response<AIIntegrationLogsEntity>>
+      createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+          {required CreateAIIntegrationLogDto? body}) {
     generatedMapping.putIfAbsent(
         AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
 
-    return _restAIIntegrationLogsPost(body: body);
+    return _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+        body: body);
   }
 
   ///Create a single AIIntegrationLogsEntity
@@ -556,17 +585,19 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/AIIntegrationLogs',
     optionalBody: true,
   )
-  Future<chopper.Response<AIIntegrationLogsEntity>> _restAIIntegrationLogsPost(
-      {@Body() required CreateAIIntegrationLogDto? body});
+  Future<chopper.Response<AIIntegrationLogsEntity>>
+      _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+          {@Body() required CreateAIIntegrationLogDto? body});
 
   ///Create multiple AIIntegrationLogsEntities
   Future<chopper.Response<List<AIIntegrationLogsEntity>>>
-      restAIIntegrationLogsBulkPost(
+      createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
           {required CreateManyAIIntegrationLogsEntityDto? body}) {
     generatedMapping.putIfAbsent(
         AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
 
-    return _restAIIntegrationLogsBulkPost(body: body);
+    return _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+        body: body);
   }
 
   ///Create multiple AIIntegrationLogsEntities
@@ -575,20 +606,21 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<List<AIIntegrationLogsEntity>>>
-      _restAIIntegrationLogsBulkPost(
+      _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
           {@Body() required CreateManyAIIntegrationLogsEntityDto? body});
 
   ///Update a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      restAIIntegrationLogsIdPatch({
+      updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required UpdateAIIntegrationLogDto? body,
   }) {
     generatedMapping.putIfAbsent(
         AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
 
-    return _restAIIntegrationLogsIdPatch(id: id, body: body);
+    return _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+        id: id, body: body);
   }
 
   ///Update a single AIIntegrationLogsEntity
@@ -598,21 +630,23 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _restAIIntegrationLogsIdPatch({
+      _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Body() required UpdateAIIntegrationLogDto? body,
   });
 
   ///Replace a single AIIntegrationLogsEntity
   ///@param id
-  Future<chopper.Response<AIIntegrationLogsEntity>> restAIIntegrationLogsIdPut({
+  Future<chopper.Response<AIIntegrationLogsEntity>>
+      replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required AIIntegrationLogsEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
 
-    return _restAIIntegrationLogsIdPut(id: id, body: body);
+    return _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+        id: id, body: body);
   }
 
   ///Replace a single AIIntegrationLogsEntity
@@ -622,29 +656,34 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _restAIIntegrationLogsIdPut({
+      _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Body() required AIIntegrationLogsEntity? body,
   });
 
   ///Delete a single AIIntegrationLogsEntity
   ///@param id
-  Future<chopper.Response> restAIIntegrationLogsIdDelete({required num? id}) {
-    return _restAIIntegrationLogsIdDelete(id: id);
+  Future<chopper.Response>
+      deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+          {required num? id}) {
+    return _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+        id: id);
   }
 
   ///Delete a single AIIntegrationLogsEntity
   ///@param id
   @Delete(path: '/rest/AIIntegrationLogs/{id}')
-  Future<chopper.Response> _restAIIntegrationLogsIdDelete(
-      {@Path('id') required num? id});
+  Future<chopper.Response>
+      _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+          {@Path('id') required num? id});
 
   ///Retrieve a single AIIntegrationLogsEntity
   ///@param id
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<AIIntegrationLogsEntity>> restAIIntegrationLogsIdGet({
+  Future<chopper.Response<AIIntegrationLogsEntity>>
+      getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -653,7 +692,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(
         AIIntegrationLogsEntity, () => AIIntegrationLogsEntity.fromJsonFactory);
 
-    return _restAIIntegrationLogsIdGet(
+    return _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
         id: id, fields: fields, join: join, cache: cache);
   }
 
@@ -664,7 +703,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/AIIntegrationLogs/{id}')
   Future<chopper.Response<AIIntegrationLogsEntity>>
-      _restAIIntegrationLogsIdGet({
+      _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -672,20 +711,20 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restAIIntegrationLogsMetadataGet() {
-    return _restAIIntegrationLogsMetadataGet();
+  Future<chopper.Response> AIIntegrationLogsController_() {
+    return _AIIntegrationLogsController_();
   }
 
   ///
   @Get(path: '/rest/AIIntegrationLogs/metadata')
-  Future<chopper.Response> _restAIIntegrationLogsMetadataGet();
+  Future<chopper.Response> _AIIntegrationLogsController_();
 
   ///Register a new user
-  Future<chopper.Response<UserEntity>> restUserSignupPost(
+  Future<chopper.Response<UserEntity>> UserController_signUp(
       {required SignUpDto? body}) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
-    return _restUserSignupPost(body: body);
+    return _UserController_signUp(body: body);
   }
 
   ///Register a new user
@@ -693,16 +732,16 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/User/signup',
     optionalBody: true,
   )
-  Future<chopper.Response<UserEntity>> _restUserSignupPost(
+  Future<chopper.Response<UserEntity>> _UserController_signUp(
       {@Body() required SignUpDto? body});
 
   ///Authenticate user
-  Future<chopper.Response<LoginResponseDto>> restUserLoginPost(
+  Future<chopper.Response<LoginResponseDto>> UserController_login(
       {required LoginDto? body}) {
     generatedMapping.putIfAbsent(
         LoginResponseDto, () => LoginResponseDto.fromJsonFactory);
 
-    return _restUserLoginPost(body: body);
+    return _UserController_login(body: body);
   }
 
   ///Authenticate user
@@ -710,15 +749,15 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/User/login',
     optionalBody: true,
   )
-  Future<chopper.Response<LoginResponseDto>> _restUserLoginPost(
+  Future<chopper.Response<LoginResponseDto>> _UserController_login(
       {@Body() required LoginDto? body});
 
   ///Create a single UserEntity
-  Future<chopper.Response<UserEntity>> restUserPost(
+  Future<chopper.Response<UserEntity>> createOneBaseUserControllerUserEntity(
       {required CreateUserDto? body}) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
-    return _restUserPost(body: body);
+    return _createOneBaseUserControllerUserEntity(body: body);
   }
 
   ///Create a single UserEntity
@@ -726,7 +765,7 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/User',
     optionalBody: true,
   )
-  Future<chopper.Response<UserEntity>> _restUserPost(
+  Future<chopper.Response<UserEntity>> _createOneBaseUserControllerUserEntity(
       {@Body() required CreateUserDto? body});
 
   ///Retrieve multiple UserEntities
@@ -740,7 +779,8 @@ abstract class Bigbum extends ChopperService {
   ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<GetManyUserEntityResponseDto>> restUserGet({
+  Future<chopper.Response<GetManyUserEntityResponseDto>>
+      getManyBaseUserControllerUserEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -755,7 +795,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyUserEntityResponseDto,
         () => GetManyUserEntityResponseDto.fromJsonFactory);
 
-    return _restUserGet(
+    return _getManyBaseUserControllerUserEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -780,7 +820,8 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/User')
-  Future<chopper.Response<GetManyUserEntityResponseDto>> _restUserGet({
+  Future<chopper.Response<GetManyUserEntityResponseDto>>
+      _getManyBaseUserControllerUserEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -794,11 +835,12 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create multiple UserEntities
-  Future<chopper.Response<List<UserEntity>>> restUserBulkPost(
-      {required CreateManyUserEntityDto? body}) {
+  Future<chopper.Response<List<UserEntity>>>
+      createManyBaseUserControllerUserEntity(
+          {required CreateManyUserEntityDto? body}) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
-    return _restUserBulkPost(body: body);
+    return _createManyBaseUserControllerUserEntity(body: body);
   }
 
   ///Create multiple UserEntities
@@ -806,18 +848,19 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/User/bulk',
     optionalBody: true,
   )
-  Future<chopper.Response<List<UserEntity>>> _restUserBulkPost(
-      {@Body() required CreateManyUserEntityDto? body});
+  Future<chopper.Response<List<UserEntity>>>
+      _createManyBaseUserControllerUserEntity(
+          {@Body() required CreateManyUserEntityDto? body});
 
   ///Update a single UserEntity
   ///@param id
-  Future<chopper.Response<UserEntity>> restUserIdPatch({
+  Future<chopper.Response<UserEntity>> updateOneBaseUserControllerUserEntity({
     required num? id,
     required UpdateUserDto? body,
   }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
-    return _restUserIdPatch(id: id, body: body);
+    return _updateOneBaseUserControllerUserEntity(id: id, body: body);
   }
 
   ///Update a single UserEntity
@@ -826,20 +869,20 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/User/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserEntity>> _restUserIdPatch({
+  Future<chopper.Response<UserEntity>> _updateOneBaseUserControllerUserEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserDto? body,
   });
 
   ///Replace a single UserEntity
   ///@param id
-  Future<chopper.Response<UserEntity>> restUserIdPut({
+  Future<chopper.Response<UserEntity>> replaceOneBaseUserControllerUserEntity({
     required num? id,
     required UserEntity? body,
   }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
-    return _restUserIdPut(id: id, body: body);
+    return _replaceOneBaseUserControllerUserEntity(id: id, body: body);
   }
 
   ///Replace a single UserEntity
@@ -848,28 +891,30 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/User/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserEntity>> _restUserIdPut({
+  Future<chopper.Response<UserEntity>> _replaceOneBaseUserControllerUserEntity({
     @Path('id') required num? id,
     @Body() required UserEntity? body,
   });
 
   ///Delete a single UserEntity
   ///@param id
-  Future<chopper.Response> restUserIdDelete({required num? id}) {
-    return _restUserIdDelete(id: id);
+  Future<chopper.Response> deleteOneBaseUserControllerUserEntity(
+      {required num? id}) {
+    return _deleteOneBaseUserControllerUserEntity(id: id);
   }
 
   ///Delete a single UserEntity
   ///@param id
   @Delete(path: '/rest/User/{id}')
-  Future<chopper.Response> _restUserIdDelete({@Path('id') required num? id});
+  Future<chopper.Response> _deleteOneBaseUserControllerUserEntity(
+      {@Path('id') required num? id});
 
   ///Retrieve a single UserEntity
   ///@param id
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<UserEntity>> restUserIdGet({
+  Future<chopper.Response<UserEntity>> getOneBaseUserControllerUserEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -877,7 +922,8 @@ abstract class Bigbum extends ChopperService {
   }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
 
-    return _restUserIdGet(id: id, fields: fields, join: join, cache: cache);
+    return _getOneBaseUserControllerUserEntity(
+        id: id, fields: fields, join: join, cache: cache);
   }
 
   ///Retrieve a single UserEntity
@@ -886,7 +932,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/User/{id}')
-  Future<chopper.Response<UserEntity>> _restUserIdGet({
+  Future<chopper.Response<UserEntity>> _getOneBaseUserControllerUserEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -894,13 +940,13 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restUserMetadataGet() {
-    return _restUserMetadataGet();
+  Future<chopper.Response> UserController_() {
+    return _UserController_();
   }
 
   ///
   @Get(path: '/rest/User/metadata')
-  Future<chopper.Response> _restUserMetadataGet();
+  Future<chopper.Response> _UserController_();
 
   ///Retrieve multiple UserMealQuestionsEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -914,7 +960,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserMealQuestionsEntityResponseDto>>
-      restUserMealQuestionsGet({
+      getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -929,7 +975,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyUserMealQuestionsEntityResponseDto,
         () => GetManyUserMealQuestionsEntityResponseDto.fromJsonFactory);
 
-    return _restUserMealQuestionsGet(
+    return _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -955,7 +1001,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserMealQuestions')
   Future<chopper.Response<GetManyUserMealQuestionsEntityResponseDto>>
-      _restUserMealQuestionsGet({
+      _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -969,12 +1015,14 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create a single UserMealQuestionsEntity
-  Future<chopper.Response<UserMealQuestionsEntity>> restUserMealQuestionsPost(
-      {required CreateUserMealQuestionDto? body}) {
+  Future<chopper.Response<UserMealQuestionsEntity>>
+      createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+          {required CreateUserMealQuestionDto? body}) {
     generatedMapping.putIfAbsent(
         UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
 
-    return _restUserMealQuestionsPost(body: body);
+    return _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+        body: body);
   }
 
   ///Create a single UserMealQuestionsEntity
@@ -982,17 +1030,19 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserMealQuestions',
     optionalBody: true,
   )
-  Future<chopper.Response<UserMealQuestionsEntity>> _restUserMealQuestionsPost(
-      {@Body() required CreateUserMealQuestionDto? body});
+  Future<chopper.Response<UserMealQuestionsEntity>>
+      _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+          {@Body() required CreateUserMealQuestionDto? body});
 
   ///Create multiple UserMealQuestionsEntities
   Future<chopper.Response<List<UserMealQuestionsEntity>>>
-      restUserMealQuestionsBulkPost(
+      createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
           {required CreateManyUserMealQuestionsEntityDto? body}) {
     generatedMapping.putIfAbsent(
         UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
 
-    return _restUserMealQuestionsBulkPost(body: body);
+    return _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+        body: body);
   }
 
   ///Create multiple UserMealQuestionsEntities
@@ -1001,20 +1051,21 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<List<UserMealQuestionsEntity>>>
-      _restUserMealQuestionsBulkPost(
+      _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
           {@Body() required CreateManyUserMealQuestionsEntityDto? body});
 
   ///Update a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response<UserMealQuestionsEntity>>
-      restUserMealQuestionsIdPatch({
+      updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UpdateUserMealQuestionDto? body,
   }) {
     generatedMapping.putIfAbsent(
         UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
 
-    return _restUserMealQuestionsIdPatch(id: id, body: body);
+    return _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+        id: id, body: body);
   }
 
   ///Update a single UserMealQuestionsEntity
@@ -1024,21 +1075,23 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _restUserMealQuestionsIdPatch({
+      _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserMealQuestionDto? body,
   });
 
   ///Replace a single UserMealQuestionsEntity
   ///@param id
-  Future<chopper.Response<UserMealQuestionsEntity>> restUserMealQuestionsIdPut({
+  Future<chopper.Response<UserMealQuestionsEntity>>
+      replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UserMealQuestionsEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
 
-    return _restUserMealQuestionsIdPut(id: id, body: body);
+    return _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+        id: id, body: body);
   }
 
   ///Replace a single UserMealQuestionsEntity
@@ -1048,29 +1101,34 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _restUserMealQuestionsIdPut({
+      _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Body() required UserMealQuestionsEntity? body,
   });
 
   ///Delete a single UserMealQuestionsEntity
   ///@param id
-  Future<chopper.Response> restUserMealQuestionsIdDelete({required num? id}) {
-    return _restUserMealQuestionsIdDelete(id: id);
+  Future<chopper.Response>
+      deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+          {required num? id}) {
+    return _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+        id: id);
   }
 
   ///Delete a single UserMealQuestionsEntity
   ///@param id
   @Delete(path: '/rest/UserMealQuestions/{id}')
-  Future<chopper.Response> _restUserMealQuestionsIdDelete(
-      {@Path('id') required num? id});
+  Future<chopper.Response>
+      _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+          {@Path('id') required num? id});
 
   ///Retrieve a single UserMealQuestionsEntity
   ///@param id
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<UserMealQuestionsEntity>> restUserMealQuestionsIdGet({
+  Future<chopper.Response<UserMealQuestionsEntity>>
+      getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1079,7 +1137,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(
         UserMealQuestionsEntity, () => UserMealQuestionsEntity.fromJsonFactory);
 
-    return _restUserMealQuestionsIdGet(
+    return _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
         id: id, fields: fields, join: join, cache: cache);
   }
 
@@ -1090,7 +1148,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserMealQuestions/{id}')
   Future<chopper.Response<UserMealQuestionsEntity>>
-      _restUserMealQuestionsIdGet({
+      _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1098,29 +1156,29 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restUserMealQuestionsMetadataGet() {
-    return _restUserMealQuestionsMetadataGet();
+  Future<chopper.Response> UserMealQuestionsController_() {
+    return _UserMealQuestionsController_();
   }
 
   ///
   @Get(path: '/rest/UserMealQuestions/metadata')
-  Future<chopper.Response> _restUserMealQuestionsMetadataGet();
+  Future<chopper.Response> _UserMealQuestionsController_();
 
   ///
   ///@param id
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      restUserSubMealLogMainMealIdGet({required num? id}) {
+      UserSubMealLogController_getByMainMealId({required num? id}) {
     generatedMapping.putIfAbsent(
         UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
 
-    return _restUserSubMealLogMainMealIdGet(id: id);
+    return _UserSubMealLogController_getByMainMealId(id: id);
   }
 
   ///
   ///@param id
   @Get(path: '/rest/UserSubMealLog/main-meal/{id}')
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      _restUserSubMealLogMainMealIdGet({@Path('id') required num? id});
+      _UserSubMealLogController_getByMainMealId({@Path('id') required num? id});
 
   ///Retrieve multiple UserSubMealLogEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -1134,7 +1192,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserSubMealLogEntityResponseDto>>
-      restUserSubMealLogGet({
+      getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1149,7 +1207,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyUserSubMealLogEntityResponseDto,
         () => GetManyUserSubMealLogEntityResponseDto.fromJsonFactory);
 
-    return _restUserSubMealLogGet(
+    return _getManyBaseUserSubMealLogControllerUserSubMealLogEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -1175,7 +1233,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserSubMealLog')
   Future<chopper.Response<GetManyUserSubMealLogEntityResponseDto>>
-      _restUserSubMealLogGet({
+      _getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1189,12 +1247,14 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create a single UserSubMealLogEntity
-  Future<chopper.Response<UserSubMealLogEntity>> restUserSubMealLogPost(
-      {required CreateUserSubMealLogDto? body}) {
+  Future<chopper.Response<UserSubMealLogEntity>>
+      createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {required CreateUserSubMealLogDto? body}) {
     generatedMapping.putIfAbsent(
         UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
 
-    return _restUserSubMealLogPost(body: body);
+    return _createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+        body: body);
   }
 
   ///Create a single UserSubMealLogEntity
@@ -1202,17 +1262,19 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserSubMealLog',
     optionalBody: true,
   )
-  Future<chopper.Response<UserSubMealLogEntity>> _restUserSubMealLogPost(
-      {@Body() required CreateUserSubMealLogDto? body});
+  Future<chopper.Response<UserSubMealLogEntity>>
+      _createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {@Body() required CreateUserSubMealLogDto? body});
 
   ///Create multiple UserSubMealLogEntities
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      restUserSubMealLogBulkPost(
+      createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
           {required CreateManyUserSubMealLogEntityDto? body}) {
     generatedMapping.putIfAbsent(
         UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
 
-    return _restUserSubMealLogBulkPost(body: body);
+    return _createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
+        body: body);
   }
 
   ///Create multiple UserSubMealLogEntities
@@ -1221,19 +1283,21 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-      _restUserSubMealLogBulkPost(
+      _createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
           {@Body() required CreateManyUserSubMealLogEntityDto? body});
 
   ///Update a single UserSubMealLogEntity
   ///@param id
-  Future<chopper.Response<UserSubMealLogEntity>> restUserSubMealLogIdPatch({
+  Future<chopper.Response<UserSubMealLogEntity>>
+      updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UpdateUserSubMealLogDto? body,
   }) {
     generatedMapping.putIfAbsent(
         UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
 
-    return _restUserSubMealLogIdPatch(id: id, body: body);
+    return _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+        id: id, body: body);
   }
 
   ///Update a single UserSubMealLogEntity
@@ -1242,21 +1306,24 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserSubMealLog/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserSubMealLogEntity>> _restUserSubMealLogIdPatch({
+  Future<chopper.Response<UserSubMealLogEntity>>
+      _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserSubMealLogDto? body,
   });
 
   ///Replace a single UserSubMealLogEntity
   ///@param id
-  Future<chopper.Response<UserSubMealLogEntity>> restUserSubMealLogIdPut({
+  Future<chopper.Response<UserSubMealLogEntity>>
+      replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UserSubMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
 
-    return _restUserSubMealLogIdPut(id: id, body: body);
+    return _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+        id: id, body: body);
   }
 
   ///Replace a single UserSubMealLogEntity
@@ -1265,29 +1332,34 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserSubMealLog/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserSubMealLogEntity>> _restUserSubMealLogIdPut({
+  Future<chopper.Response<UserSubMealLogEntity>>
+      _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserSubMealLogEntity? body,
   });
 
   ///Delete a single UserSubMealLogEntity
   ///@param id
-  Future<chopper.Response> restUserSubMealLogIdDelete({required num? id}) {
-    return _restUserSubMealLogIdDelete(id: id);
+  Future<chopper.Response>
+      deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {required num? id}) {
+    return _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(id: id);
   }
 
   ///Delete a single UserSubMealLogEntity
   ///@param id
   @Delete(path: '/rest/UserSubMealLog/{id}')
-  Future<chopper.Response> _restUserSubMealLogIdDelete(
-      {@Path('id') required num? id});
+  Future<chopper.Response>
+      _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {@Path('id') required num? id});
 
   ///Retrieve a single UserSubMealLogEntity
   ///@param id
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<UserSubMealLogEntity>> restUserSubMealLogIdGet({
+  Future<chopper.Response<UserSubMealLogEntity>>
+      getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1296,7 +1368,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(
         UserSubMealLogEntity, () => UserSubMealLogEntity.fromJsonFactory);
 
-    return _restUserSubMealLogIdGet(
+    return _getOneBaseUserSubMealLogControllerUserSubMealLogEntity(
         id: id, fields: fields, join: join, cache: cache);
   }
 
@@ -1306,7 +1378,8 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserSubMealLog/{id}')
-  Future<chopper.Response<UserSubMealLogEntity>> _restUserSubMealLogIdGet({
+  Future<chopper.Response<UserSubMealLogEntity>>
+      _getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1314,22 +1387,22 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restUserSubMealLogMetadataGet() {
-    return _restUserSubMealLogMetadataGet();
+  Future<chopper.Response> UserSubMealLogController_() {
+    return _UserSubMealLogController_();
   }
 
   ///
   @Get(path: '/rest/UserSubMealLog/metadata')
-  Future<chopper.Response> _restUserSubMealLogMetadataGet();
+  Future<chopper.Response> _UserSubMealLogController_();
 
   ///
   Future<chopper.Response<ExtractBiodataOutputDto>>
-      restUserBiodataExtractUserBiodataPost(
+      UserBiodataController_extractUserBiodata(
           {required ExtractBiodataInputDto? body}) {
     generatedMapping.putIfAbsent(
         ExtractBiodataOutputDto, () => ExtractBiodataOutputDto.fromJsonFactory);
 
-    return _restUserBiodataExtractUserBiodataPost(body: body);
+    return _UserBiodataController_extractUserBiodata(body: body);
   }
 
   ///
@@ -1338,7 +1411,7 @@ abstract class Bigbum extends ChopperService {
     optionalBody: true,
   )
   Future<chopper.Response<ExtractBiodataOutputDto>>
-      _restUserBiodataExtractUserBiodataPost(
+      _UserBiodataController_extractUserBiodata(
           {@Body() required ExtractBiodataInputDto? body});
 
   ///Retrieve multiple UserBiodataEntities
@@ -1353,7 +1426,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserBiodataEntityResponseDto>>
-      restUserBiodataGet({
+      getManyBaseUserBiodataControllerUserBiodataEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1368,7 +1441,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(GetManyUserBiodataEntityResponseDto,
         () => GetManyUserBiodataEntityResponseDto.fromJsonFactory);
 
-    return _restUserBiodataGet(
+    return _getManyBaseUserBiodataControllerUserBiodataEntity(
         fields: fields,
         s: s,
         filter: filter,
@@ -1394,7 +1467,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserBiodata')
   Future<chopper.Response<GetManyUserBiodataEntityResponseDto>>
-      _restUserBiodataGet({
+      _getManyBaseUserBiodataControllerUserBiodataEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1408,12 +1481,13 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///Create a single UserBiodataEntity
-  Future<chopper.Response<UserBiodataEntity>> restUserBiodataPost(
-      {required CreateUserBiodataDto? body}) {
+  Future<chopper.Response<UserBiodataEntity>>
+      createOneBaseUserBiodataControllerUserBiodataEntity(
+          {required CreateUserBiodataDto? body}) {
     generatedMapping.putIfAbsent(
         UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
 
-    return _restUserBiodataPost(body: body);
+    return _createOneBaseUserBiodataControllerUserBiodataEntity(body: body);
   }
 
   ///Create a single UserBiodataEntity
@@ -1421,16 +1495,18 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserBiodata',
     optionalBody: true,
   )
-  Future<chopper.Response<UserBiodataEntity>> _restUserBiodataPost(
-      {@Body() required CreateUserBiodataDto? body});
+  Future<chopper.Response<UserBiodataEntity>>
+      _createOneBaseUserBiodataControllerUserBiodataEntity(
+          {@Body() required CreateUserBiodataDto? body});
 
   ///Create multiple UserBiodataEntities
-  Future<chopper.Response<List<UserBiodataEntity>>> restUserBiodataBulkPost(
-      {required CreateManyUserBiodataEntityDto? body}) {
+  Future<chopper.Response<List<UserBiodataEntity>>>
+      createManyBaseUserBiodataControllerUserBiodataEntity(
+          {required CreateManyUserBiodataEntityDto? body}) {
     generatedMapping.putIfAbsent(
         UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
 
-    return _restUserBiodataBulkPost(body: body);
+    return _createManyBaseUserBiodataControllerUserBiodataEntity(body: body);
   }
 
   ///Create multiple UserBiodataEntities
@@ -1438,19 +1514,22 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserBiodata/bulk',
     optionalBody: true,
   )
-  Future<chopper.Response<List<UserBiodataEntity>>> _restUserBiodataBulkPost(
-      {@Body() required CreateManyUserBiodataEntityDto? body});
+  Future<chopper.Response<List<UserBiodataEntity>>>
+      _createManyBaseUserBiodataControllerUserBiodataEntity(
+          {@Body() required CreateManyUserBiodataEntityDto? body});
 
   ///Update a single UserBiodataEntity
   ///@param id
-  Future<chopper.Response<UserBiodataEntity>> restUserBiodataIdPatch({
+  Future<chopper.Response<UserBiodataEntity>>
+      updateOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UpdateUserBiodataDto? body,
   }) {
     generatedMapping.putIfAbsent(
         UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
 
-    return _restUserBiodataIdPatch(id: id, body: body);
+    return _updateOneBaseUserBiodataControllerUserBiodataEntity(
+        id: id, body: body);
   }
 
   ///Update a single UserBiodataEntity
@@ -1459,21 +1538,24 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserBiodata/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserBiodataEntity>> _restUserBiodataIdPatch({
+  Future<chopper.Response<UserBiodataEntity>>
+      _updateOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserBiodataDto? body,
   });
 
   ///Replace a single UserBiodataEntity
   ///@param id
-  Future<chopper.Response<UserBiodataEntity>> restUserBiodataIdPut({
+  Future<chopper.Response<UserBiodataEntity>>
+      replaceOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UserBiodataEntity? body,
   }) {
     generatedMapping.putIfAbsent(
         UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
 
-    return _restUserBiodataIdPut(id: id, body: body);
+    return _replaceOneBaseUserBiodataControllerUserBiodataEntity(
+        id: id, body: body);
   }
 
   ///Replace a single UserBiodataEntity
@@ -1482,21 +1564,23 @@ abstract class Bigbum extends ChopperService {
     path: '/rest/UserBiodata/{id}',
     optionalBody: true,
   )
-  Future<chopper.Response<UserBiodataEntity>> _restUserBiodataIdPut({
+  Future<chopper.Response<UserBiodataEntity>>
+      _replaceOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Body() required UserBiodataEntity? body,
   });
 
   ///Delete a single UserBiodataEntity
   ///@param id
-  Future<chopper.Response> restUserBiodataIdDelete({required num? id}) {
-    return _restUserBiodataIdDelete(id: id);
+  Future<chopper.Response> deleteOneBaseUserBiodataControllerUserBiodataEntity(
+      {required num? id}) {
+    return _deleteOneBaseUserBiodataControllerUserBiodataEntity(id: id);
   }
 
   ///Delete a single UserBiodataEntity
   ///@param id
   @Delete(path: '/rest/UserBiodata/{id}')
-  Future<chopper.Response> _restUserBiodataIdDelete(
+  Future<chopper.Response> _deleteOneBaseUserBiodataControllerUserBiodataEntity(
       {@Path('id') required num? id});
 
   ///Retrieve a single UserBiodataEntity
@@ -1504,7 +1588,8 @@ abstract class Bigbum extends ChopperService {
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
-  Future<chopper.Response<UserBiodataEntity>> restUserBiodataIdGet({
+  Future<chopper.Response<UserBiodataEntity>>
+      getOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1513,7 +1598,7 @@ abstract class Bigbum extends ChopperService {
     generatedMapping.putIfAbsent(
         UserBiodataEntity, () => UserBiodataEntity.fromJsonFactory);
 
-    return _restUserBiodataIdGet(
+    return _getOneBaseUserBiodataControllerUserBiodataEntity(
         id: id, fields: fields, join: join, cache: cache);
   }
 
@@ -1523,7 +1608,8 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @Get(path: '/rest/UserBiodata/{id}')
-  Future<chopper.Response<UserBiodataEntity>> _restUserBiodataIdGet({
+  Future<chopper.Response<UserBiodataEntity>>
+      _getOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1531,13 +1617,13 @@ abstract class Bigbum extends ChopperService {
   });
 
   ///
-  Future<chopper.Response> restUserBiodataMetadataGet() {
-    return _restUserBiodataMetadataGet();
+  Future<chopper.Response> UserBiodataController_() {
+    return _UserBiodataController_();
   }
 
   ///
   @Get(path: '/rest/UserBiodata/metadata')
-  Future<chopper.Response> _restUserBiodataMetadataGet();
+  Future<chopper.Response> _UserBiodataController_();
 }
 
 @JsonSerializable(explicitToJson: true)

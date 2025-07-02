@@ -18,7 +18,7 @@ final class _$Bigbum extends Bigbum {
   final Type definitionType = Bigbum;
 
   @override
-  Future<Response<String>> _get() {
+  Future<Response<String>> _AppController_getHello() {
     final Uri $url = Uri.parse('/');
     final Request $request = Request(
       'GET',
@@ -29,7 +29,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restAIPromptTestFunctionPost(
+  Future<Response<dynamic>> _AIPromptController_testFunction(
       {required RestAIPromptTestFunctionPost$RequestBody? body}) {
     final Uri $url = Uri.parse('/rest/AIPrompt/testFunction');
     final $body = body;
@@ -43,7 +43,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<GetManyAIPromptEntityResponseDto>> _restAIPromptGet({
+  Future<Response<GetManyAIPromptEntityResponseDto>>
+      _getManyBaseAIPromptControllerAIPromptEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -79,8 +80,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIPromptEntity>> _restAIPromptPost(
-      {required AIPromptEntity? body}) {
+  Future<Response<AIPromptEntity>>
+      _createOneBaseAIPromptControllerAIPromptEntity(
+          {required AIPromptEntity? body}) {
     final Uri $url = Uri.parse('/rest/AIPrompt');
     final $body = body;
     final Request $request = Request(
@@ -93,8 +95,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<List<AIPromptEntity>>> _restAIPromptBulkPost(
-      {required CreateManyAIPromptEntityDto? body}) {
+  Future<Response<List<AIPromptEntity>>>
+      _createManyBaseAIPromptControllerAIPromptEntity(
+          {required CreateManyAIPromptEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/AIPrompt/bulk');
     final $body = body;
     final Request $request = Request(
@@ -107,7 +110,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIPromptEntity>> _restAIPromptIdPatch({
+  Future<Response<AIPromptEntity>>
+      _updateOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
@@ -123,7 +127,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIPromptEntity>> _restAIPromptIdPut({
+  Future<Response<AIPromptEntity>>
+      _replaceOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
@@ -139,7 +144,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restAIPromptIdDelete({required num? id}) {
+  Future<Response<dynamic>> _deleteOneBaseAIPromptControllerAIPromptEntity(
+      {required num? id}) {
     final Uri $url = Uri.parse('/rest/AIPrompt/${id}');
     final Request $request = Request(
       'DELETE',
@@ -150,7 +156,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIPromptEntity>> _restAIPromptIdGet({
+  Future<Response<AIPromptEntity>> _getOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -172,7 +178,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restAIPromptMetadataGet() {
+  Future<Response<dynamic>> _AIPromptController_() {
     final Uri $url = Uri.parse('/rest/AIPrompt/metadata');
     final Request $request = Request(
       'GET',
@@ -183,7 +189,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserMealLogExtractNutrientDetailsPost(
+  Future<Response<dynamic>> _UserMealLogController_extractNutrientDetails(
       {required UserMealInputDto? body}) {
     final Uri $url = Uri.parse('/rest/UserMealLog/extractNutrientDetails');
     final $body = body;
@@ -197,7 +203,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<GetManyUserMealLogEntityResponseDto>> _restUserMealLogGet({
+  Future<Response<GetManyUserMealLogEntityResponseDto>>
+      _getManyBaseUserMealLogControllerUserMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -233,8 +240,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealLogEntity>> _restUserMealLogPost(
-      {required UserMealLogEntity? body}) {
+  Future<Response<UserMealLogEntity>>
+      _createOneBaseUserMealLogControllerUserMealLogEntity(
+          {required UserMealLogEntity? body}) {
     final Uri $url = Uri.parse('/rest/UserMealLog');
     final $body = body;
     final Request $request = Request(
@@ -247,8 +255,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<List<UserMealLogEntity>>> _restUserMealLogBulkPost(
-      {required CreateManyUserMealLogEntityDto? body}) {
+  Future<Response<List<UserMealLogEntity>>>
+      _createManyBaseUserMealLogControllerUserMealLogEntity(
+          {required CreateManyUserMealLogEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/UserMealLog/bulk');
     final $body = body;
     final Request $request = Request(
@@ -261,7 +270,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealLogEntity>> _restUserMealLogIdPatch({
+  Future<Response<UserMealLogEntity>>
+      _updateOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
@@ -277,7 +287,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealLogEntity>> _restUserMealLogIdPut({
+  Future<Response<UserMealLogEntity>>
+      _replaceOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
@@ -293,7 +304,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserMealLogIdDelete({required num? id}) {
+  Future<Response<dynamic>>
+      _deleteOneBaseUserMealLogControllerUserMealLogEntity({required num? id}) {
     final Uri $url = Uri.parse('/rest/UserMealLog/${id}');
     final Request $request = Request(
       'DELETE',
@@ -304,7 +316,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealLogEntity>> _restUserMealLogIdGet({
+  Future<Response<UserMealLogEntity>>
+      _getOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -326,7 +339,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserMealLogMetadataGet() {
+  Future<Response<dynamic>> _UserMealLogController_() {
     final Uri $url = Uri.parse('/rest/UserMealLog/metadata');
     final Request $request = Request(
       'GET',
@@ -338,7 +351,7 @@ final class _$Bigbum extends Bigbum {
 
   @override
   Future<Response<GetManyAIIntegrationLogsEntityResponseDto>>
-      _restAIIntegrationLogsGet({
+      _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -374,8 +387,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIIntegrationLogsEntity>> _restAIIntegrationLogsPost(
-      {required CreateAIIntegrationLogDto? body}) {
+  Future<Response<AIIntegrationLogsEntity>>
+      _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+          {required CreateAIIntegrationLogDto? body}) {
     final Uri $url = Uri.parse('/rest/AIIntegrationLogs');
     final $body = body;
     final Request $request = Request(
@@ -390,7 +404,7 @@ final class _$Bigbum extends Bigbum {
 
   @override
   Future<Response<List<AIIntegrationLogsEntity>>>
-      _restAIIntegrationLogsBulkPost(
+      _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
           {required CreateManyAIIntegrationLogsEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/AIIntegrationLogs/bulk');
     final $body = body;
@@ -405,7 +419,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIIntegrationLogsEntity>> _restAIIntegrationLogsIdPatch({
+  Future<Response<AIIntegrationLogsEntity>>
+      _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required UpdateAIIntegrationLogDto? body,
   }) {
@@ -422,7 +437,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIIntegrationLogsEntity>> _restAIIntegrationLogsIdPut({
+  Future<Response<AIIntegrationLogsEntity>>
+      _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required AIIntegrationLogsEntity? body,
   }) {
@@ -439,7 +455,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restAIIntegrationLogsIdDelete({required num? id}) {
+  Future<Response<dynamic>>
+      _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
+          {required num? id}) {
     final Uri $url = Uri.parse('/rest/AIIntegrationLogs/${id}');
     final Request $request = Request(
       'DELETE',
@@ -450,7 +468,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<AIIntegrationLogsEntity>> _restAIIntegrationLogsIdGet({
+  Future<Response<AIIntegrationLogsEntity>>
+      _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -473,7 +492,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restAIIntegrationLogsMetadataGet() {
+  Future<Response<dynamic>> _AIIntegrationLogsController_() {
     final Uri $url = Uri.parse('/rest/AIIntegrationLogs/metadata');
     final Request $request = Request(
       'GET',
@@ -484,7 +503,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserEntity>> _restUserSignupPost({required SignUpDto? body}) {
+  Future<Response<UserEntity>> _UserController_signUp(
+      {required SignUpDto? body}) {
     final Uri $url = Uri.parse('/rest/User/signup');
     final $body = body;
     final Request $request = Request(
@@ -497,7 +517,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<LoginResponseDto>> _restUserLoginPost(
+  Future<Response<LoginResponseDto>> _UserController_login(
       {required LoginDto? body}) {
     final Uri $url = Uri.parse('/rest/User/login');
     final $body = body;
@@ -511,7 +531,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserEntity>> _restUserPost({required CreateUserDto? body}) {
+  Future<Response<UserEntity>> _createOneBaseUserControllerUserEntity(
+      {required CreateUserDto? body}) {
     final Uri $url = Uri.parse('/rest/User');
     final $body = body;
     final Request $request = Request(
@@ -524,7 +545,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<GetManyUserEntityResponseDto>> _restUserGet({
+  Future<Response<GetManyUserEntityResponseDto>>
+      _getManyBaseUserControllerUserEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -560,7 +582,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<List<UserEntity>>> _restUserBulkPost(
+  Future<Response<List<UserEntity>>> _createManyBaseUserControllerUserEntity(
       {required CreateManyUserEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/User/bulk');
     final $body = body;
@@ -574,7 +596,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserEntity>> _restUserIdPatch({
+  Future<Response<UserEntity>> _updateOneBaseUserControllerUserEntity({
     required num? id,
     required UpdateUserDto? body,
   }) {
@@ -590,7 +612,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserEntity>> _restUserIdPut({
+  Future<Response<UserEntity>> _replaceOneBaseUserControllerUserEntity({
     required num? id,
     required UserEntity? body,
   }) {
@@ -606,7 +628,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserIdDelete({required num? id}) {
+  Future<Response<dynamic>> _deleteOneBaseUserControllerUserEntity(
+      {required num? id}) {
     final Uri $url = Uri.parse('/rest/User/${id}');
     final Request $request = Request(
       'DELETE',
@@ -617,7 +640,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserEntity>> _restUserIdGet({
+  Future<Response<UserEntity>> _getOneBaseUserControllerUserEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -639,7 +662,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserMetadataGet() {
+  Future<Response<dynamic>> _UserController_() {
     final Uri $url = Uri.parse('/rest/User/metadata');
     final Request $request = Request(
       'GET',
@@ -651,7 +674,7 @@ final class _$Bigbum extends Bigbum {
 
   @override
   Future<Response<GetManyUserMealQuestionsEntityResponseDto>>
-      _restUserMealQuestionsGet({
+      _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -687,8 +710,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealQuestionsEntity>> _restUserMealQuestionsPost(
-      {required CreateUserMealQuestionDto? body}) {
+  Future<Response<UserMealQuestionsEntity>>
+      _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+          {required CreateUserMealQuestionDto? body}) {
     final Uri $url = Uri.parse('/rest/UserMealQuestions');
     final $body = body;
     final Request $request = Request(
@@ -703,7 +727,7 @@ final class _$Bigbum extends Bigbum {
 
   @override
   Future<Response<List<UserMealQuestionsEntity>>>
-      _restUserMealQuestionsBulkPost(
+      _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity(
           {required CreateManyUserMealQuestionsEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/UserMealQuestions/bulk');
     final $body = body;
@@ -718,7 +742,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealQuestionsEntity>> _restUserMealQuestionsIdPatch({
+  Future<Response<UserMealQuestionsEntity>>
+      _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UpdateUserMealQuestionDto? body,
   }) {
@@ -735,7 +760,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealQuestionsEntity>> _restUserMealQuestionsIdPut({
+  Future<Response<UserMealQuestionsEntity>>
+      _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UserMealQuestionsEntity? body,
   }) {
@@ -752,7 +778,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserMealQuestionsIdDelete({required num? id}) {
+  Future<Response<dynamic>>
+      _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
+          {required num? id}) {
     final Uri $url = Uri.parse('/rest/UserMealQuestions/${id}');
     final Request $request = Request(
       'DELETE',
@@ -763,7 +791,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserMealQuestionsEntity>> _restUserMealQuestionsIdGet({
+  Future<Response<UserMealQuestionsEntity>>
+      _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -786,7 +815,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserMealQuestionsMetadataGet() {
+  Future<Response<dynamic>> _UserMealQuestionsController_() {
     final Uri $url = Uri.parse('/rest/UserMealQuestions/metadata');
     final Request $request = Request(
       'GET',
@@ -797,8 +826,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<List<UserSubMealLogEntity>>> _restUserSubMealLogMainMealIdGet(
-      {required num? id}) {
+  Future<Response<List<UserSubMealLogEntity>>>
+      _UserSubMealLogController_getByMainMealId({required num? id}) {
     final Uri $url = Uri.parse('/rest/UserSubMealLog/main-meal/${id}');
     final Request $request = Request(
       'GET',
@@ -811,7 +840,7 @@ final class _$Bigbum extends Bigbum {
 
   @override
   Future<Response<GetManyUserSubMealLogEntityResponseDto>>
-      _restUserSubMealLogGet({
+      _getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -847,8 +876,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserSubMealLogEntity>> _restUserSubMealLogPost(
-      {required CreateUserSubMealLogDto? body}) {
+  Future<Response<UserSubMealLogEntity>>
+      _createOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {required CreateUserSubMealLogDto? body}) {
     final Uri $url = Uri.parse('/rest/UserSubMealLog');
     final $body = body;
     final Request $request = Request(
@@ -861,8 +891,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<List<UserSubMealLogEntity>>> _restUserSubMealLogBulkPost(
-      {required CreateManyUserSubMealLogEntityDto? body}) {
+  Future<Response<List<UserSubMealLogEntity>>>
+      _createManyBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {required CreateManyUserSubMealLogEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/UserSubMealLog/bulk');
     final $body = body;
     final Request $request = Request(
@@ -876,7 +907,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserSubMealLogEntity>> _restUserSubMealLogIdPatch({
+  Future<Response<UserSubMealLogEntity>>
+      _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UpdateUserSubMealLogDto? body,
   }) {
@@ -892,7 +924,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserSubMealLogEntity>> _restUserSubMealLogIdPut({
+  Future<Response<UserSubMealLogEntity>>
+      _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UserSubMealLogEntity? body,
   }) {
@@ -908,7 +941,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserSubMealLogIdDelete({required num? id}) {
+  Future<Response<dynamic>>
+      _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(
+          {required num? id}) {
     final Uri $url = Uri.parse('/rest/UserSubMealLog/${id}');
     final Request $request = Request(
       'DELETE',
@@ -919,7 +954,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserSubMealLogEntity>> _restUserSubMealLogIdGet({
+  Future<Response<UserSubMealLogEntity>>
+      _getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -941,7 +977,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserSubMealLogMetadataGet() {
+  Future<Response<dynamic>> _UserSubMealLogController_() {
     final Uri $url = Uri.parse('/rest/UserSubMealLog/metadata');
     final Request $request = Request(
       'GET',
@@ -953,7 +989,7 @@ final class _$Bigbum extends Bigbum {
 
   @override
   Future<Response<ExtractBiodataOutputDto>>
-      _restUserBiodataExtractUserBiodataPost(
+      _UserBiodataController_extractUserBiodata(
           {required ExtractBiodataInputDto? body}) {
     final Uri $url = Uri.parse('/rest/UserBiodata/extractUserBiodata');
     final $body = body;
@@ -968,7 +1004,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<GetManyUserBiodataEntityResponseDto>> _restUserBiodataGet({
+  Future<Response<GetManyUserBiodataEntityResponseDto>>
+      _getManyBaseUserBiodataControllerUserBiodataEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1004,8 +1041,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserBiodataEntity>> _restUserBiodataPost(
-      {required CreateUserBiodataDto? body}) {
+  Future<Response<UserBiodataEntity>>
+      _createOneBaseUserBiodataControllerUserBiodataEntity(
+          {required CreateUserBiodataDto? body}) {
     final Uri $url = Uri.parse('/rest/UserBiodata');
     final $body = body;
     final Request $request = Request(
@@ -1018,8 +1056,9 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<List<UserBiodataEntity>>> _restUserBiodataBulkPost(
-      {required CreateManyUserBiodataEntityDto? body}) {
+  Future<Response<List<UserBiodataEntity>>>
+      _createManyBaseUserBiodataControllerUserBiodataEntity(
+          {required CreateManyUserBiodataEntityDto? body}) {
     final Uri $url = Uri.parse('/rest/UserBiodata/bulk');
     final $body = body;
     final Request $request = Request(
@@ -1032,7 +1071,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserBiodataEntity>> _restUserBiodataIdPatch({
+  Future<Response<UserBiodataEntity>>
+      _updateOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UpdateUserBiodataDto? body,
   }) {
@@ -1048,7 +1088,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserBiodataEntity>> _restUserBiodataIdPut({
+  Future<Response<UserBiodataEntity>>
+      _replaceOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UserBiodataEntity? body,
   }) {
@@ -1064,7 +1105,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserBiodataIdDelete({required num? id}) {
+  Future<Response<dynamic>>
+      _deleteOneBaseUserBiodataControllerUserBiodataEntity({required num? id}) {
     final Uri $url = Uri.parse('/rest/UserBiodata/${id}');
     final Request $request = Request(
       'DELETE',
@@ -1075,7 +1117,8 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<UserBiodataEntity>> _restUserBiodataIdGet({
+  Future<Response<UserBiodataEntity>>
+      _getOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1097,7 +1140,7 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
-  Future<Response<dynamic>> _restUserBiodataMetadataGet() {
+  Future<Response<dynamic>> _UserBiodataController_() {
     final Uri $url = Uri.parse('/rest/UserBiodata/metadata');
     final Request $request = Request(
       'GET',
