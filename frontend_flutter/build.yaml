@@ -1,0 +1,8 @@
+targets:
+  $default:
+    builders:
+      swagger_dart_code_generator:
+        options:
+          input_folder: "lib/services/swagger"
+          output_folder: "lib/services/newapi"
+          use_path_for_request_names: true
