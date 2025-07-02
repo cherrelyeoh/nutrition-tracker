@@ -237,25 +237,25 @@ class _FoodScanResultsState extends State<FoodScanResults> {
         final subMealLogs = await subMealClient
             .userSubMealLogControllerGetByMainMealId(id: mealId!);
 
+        final rawList = subMealLogs as List<dynamic>;
+
         debugPrint(
             "Querying a sub meals with from main meal id of ${widget.mealId}!");
         isLoading = false;
         debugPrint("🔁 Response: ${jsonEncode(subMealLogs)}");
 
         setState(() {
-          // subMeals = parsedMealLog.subMealList.map((subMeal) {
-          //   debugPrint('subMeal: $subMeal');
-          //   return {
-          //     "name": subMeal.mealName,
-          //     "values": [
-          //       subMeal.calories.toString(),
-          //       subMeal.carbs.toString(),
-          //       subMeal.fats.toString(),
-          //       subMeal.protein.toString(),
-          //     ],
-          //   };
-          // }).toList();
-          // mainMeal = parsedMealLog.mainMeal;
+          subMeals = subMealLogs.map((subMeal) {
+            return {
+              "name": subMeal.mealName,
+              "values": [
+                subMeal.calories.toString(),
+                subMeal.carbs.toString(),
+                subMeal.fats.toString(),
+                subMeal.protein.toString(),
+              ],
+            };
+          }).toList();
           isLoading = false;
         });
       } else {
@@ -659,10 +659,18 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
-                                              child: Text(
-                                                subMeal["name"] as String,
-                                                style: const TextStyle(
-                                                    color: Colors.black),
+                                              child: FittedBox(
+                                                fit: BoxFit.scaleDown,
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  subMeal["name"] as String,
+                                                  style: const TextStyle(
+                                                      color: Colors.black),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  softWrap: false,
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(width: 4),
