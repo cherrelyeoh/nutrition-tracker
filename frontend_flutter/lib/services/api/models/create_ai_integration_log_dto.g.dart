@@ -8,7 +8,7 @@ part of 'create_ai_integration_log_dto.dart';
 
 CreateAIIntegrationLogDto _$CreateAIIntegrationLogDtoFromJson(
         Map<String, dynamic> json) =>
-    CreateAIIntegrationLogDto();
+    const CreateAIIntegrationLogDto();
 
 Map<String, dynamic> _$CreateAIIntegrationLogDtoToJson(
         CreateAIIntegrationLogDto instance) =>

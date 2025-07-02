@@ -8,7 +8,7 @@ part of 'ai_integration_logs_entity.dart';
 
 AIIntegrationLogsEntity _$AIIntegrationLogsEntityFromJson(
         Map<String, dynamic> json) =>
-    AIIntegrationLogsEntity();
+    const AIIntegrationLogsEntity();
 
 Map<String, dynamic> _$AIIntegrationLogsEntityToJson(
         AIIntegrationLogsEntity instance) =>

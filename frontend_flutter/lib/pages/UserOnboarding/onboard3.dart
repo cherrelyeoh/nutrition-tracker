@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/UserOnboarding/age_weight_height_onboarding.dart';
 import 'package:flutter_svg/flutter_svg.dart';

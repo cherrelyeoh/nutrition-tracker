@@ -29,14 +29,14 @@ class _ImageUploaderState extends State<ImageUploader> {
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         // Debugging: Print file info
-        print('Image path: ${pickedFile.path}');
-        print('File exists: ${File(pickedFile.path).existsSync()}');
+        // print('Image path: ${pickedFile.path}');
+        // print('File exists: ${File(pickedFile.path).existsSync()}');
 
         final imageFile = File(pickedFile.path);
 
         // Verify the file can be read
-        final bytes = await imageFile.readAsBytes();
-        print('File size: ${bytes.length} bytes');
+        // final bytes = await imageFile.readAsBytes();
+        // print('File size: ${bytes.length} bytes');
 
         setState(() {
           _uploadedImage = imageFile;
@@ -47,7 +47,7 @@ class _ImageUploaderState extends State<ImageUploader> {
         }
       }
     } catch (e) {
-      print('Error picking image: $e');
+      // print('Error picking image: $e');
     }
   }
 

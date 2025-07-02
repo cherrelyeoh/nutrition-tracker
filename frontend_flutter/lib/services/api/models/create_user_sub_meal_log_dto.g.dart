@@ -8,7 +8,7 @@ part of 'create_user_sub_meal_log_dto.dart';
 
 CreateUserSubMealLogDto _$CreateUserSubMealLogDtoFromJson(
         Map<String, dynamic> json) =>
-    CreateUserSubMealLogDto();
+    const CreateUserSubMealLogDto();
 
 Map<String, dynamic> _$CreateUserSubMealLogDtoToJson(
         CreateUserSubMealLogDto instance) =>
