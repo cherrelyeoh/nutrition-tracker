@@ -163,26 +163,26 @@ class _MainHomePageState extends State<MainHomePage> {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FoodScanMain(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      "It's time to log your meal!",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                      ),
-                      textAlign: TextAlign.end,
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const FoodScanMain(),
+                  //       ),
+                  //     );
+                  //   },
+                  //   child: const Text(
+                  //     "It's time to log your meal!",
+                  //     style: TextStyle(
+                  //       fontSize: 12,
+                  //       fontWeight: FontWeight.w500,
+                  //       color: Colors.white,
+                  //       decoration: TextDecoration.underline,
+                  //     ),
+                  //     textAlign: TextAlign.end,
+                  //   ),
+                  // ),
                 ],
               ),
 
@@ -297,26 +297,26 @@ class _MainHomePageState extends State<MainHomePage> {
                 height: 30,
               ),
 
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MealCalendarMain(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "Check my calendar",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    decoration: TextDecoration.underline,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const MealCalendarMain(),
+              //       ),
+              //     );
+              //   },
+              //   child: const Text(
+              //     "Check my calendar",
+              //     style: TextStyle(
+              //       fontSize: 12,
+              //       fontWeight: FontWeight.w500,
+              //       color: Colors.white,
+              //       decoration: TextDecoration.underline,
+              //     ),
+              //     textAlign: TextAlign.start,
+              //   ),
+              // ),
 
               const SizedBox(
                 height: 30,

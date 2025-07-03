@@ -27,6 +27,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
 
   List<DateTime> allAvailableDates = []; // All valid dates
   List<DateTime> visibleDates = []; // Filtered by current month
+  DateTime? selectedDate;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -34,7 +35,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
   void initState() {
     super.initState();
     debugPrint('🟨 MealCalendarMain init - userId: ${widget.userId}');
-    _loadUserMealData();
+    _loadUserMealData(DateTime.now());
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
@@ -46,22 +47,36 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
     });
   }
 
-  Future<void> _loadUserMealData() async {
-    debugPrint('Calling user meal data');
+  Future<void> _loadUserMealData(DateTime clickedDate) async {
+    debugPrint('Calling user meal data for $clickedDate');
     final bigbumService = Bigbum.create(
       baseUrl:
           Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
     );
+    final String dateString =
+        '${clickedDate.year.toString().padLeft(4, '0')}-${clickedDate.month.toString().padLeft(2, '0')}-${clickedDate.day.toString().padLeft(2, '0')}';
+
+    final startDate = '$dateString 00:00:00';
+    final endDate = '$dateString 23:59:59';
     try {
       final response = await bigbumService.UserMealLogController_getUserMeals(
-          userId: widget.userId,
-          startDate: '2025-07-01',
-          endDate: '2025-07-03');
+        userId: widget.userId,
+        startDate: startDate,
+        endDate: endDate,
+      );
       if (response.isSuccessful && response.body != null) {
         final userMealLogs = response.body!;
 
         debugPrint("Querying meals from user of id ${widget.userId}!");
         debugPrint("🔁 Response: $userMealLogs");
+
+        // Reset all totals to 0 before aggregating new data
+        mealTypeTotals.forEach((key, value) {
+          value['calories'] = 0;
+          value['protein'] = 0;
+          value['carbs'] = 0;
+          value['fats'] = 0;
+        });
 
         for (var meal in userMealLogs) {
           String type = meal.mealType ?? 'Lunch';
@@ -175,10 +190,15 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6), // spacing between items
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            final clickedDate = dates[index];
+
                             setState(() {
                               selectedIndex = index;
+                              selectedDate = clickedDate;
                             });
+
+                            await _loadUserMealData(clickedDate);
                           },
                           child: Container(
                             width: 69,
