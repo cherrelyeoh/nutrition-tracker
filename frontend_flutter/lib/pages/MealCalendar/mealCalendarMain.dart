@@ -49,10 +49,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
 
   Future<void> _loadUserMealData(DateTime clickedDate) async {
     debugPrint('Calling user meal data for $clickedDate');
-    final bigbumService = Bigbum.create(
-      baseUrl:
-          Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
-    );
+    final bigbumService = Bigbum.create();
     final String dateString =
         '${clickedDate.year.toString().padLeft(4, '0')}-${clickedDate.month.toString().padLeft(2, '0')}-${clickedDate.day.toString().padLeft(2, '0')}';
 

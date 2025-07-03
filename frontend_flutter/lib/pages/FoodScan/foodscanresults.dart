@@ -179,10 +179,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
     if (widget.mealLog == null) {
       debugPrint('Flow coming from mealCalendarMain');
       // final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
-      final bigbumService = Bigbum.create(
-        baseUrl:
-            Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
-      );
+      final bigbumService = Bigbum.create();
       try {
         // hardcoded value - please remove once implementation is done
         final response = await bigbumService

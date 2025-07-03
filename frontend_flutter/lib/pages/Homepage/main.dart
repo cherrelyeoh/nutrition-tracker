@@ -1,10 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
+import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
 import 'package:fluttertest/widgets/meal_type_widget.dart';
@@ -12,7 +14,12 @@ import 'package:fluttertest/widgets/meal_type_widget.dart';
 class MainHomePage extends StatefulWidget {
   final num? userId;
   final String? userName;
-  const MainHomePage({super.key, this.userId, this.userName});
+
+  const MainHomePage({
+    super.key,
+    this.userId,
+    this.userName,
+  });
 
   @override
   _MainHomePageState createState() => _MainHomePageState();
@@ -22,36 +29,11 @@ class _MainHomePageState extends State<MainHomePage> {
   List<dynamic> data = [];
   bool isLoading = true;
   bool hasError = false;
-
-  final List<Map<String, dynamic>> macros = [
-    {
-      'title': 'Protein',
-      'amount': '400',
-      'totalAmount': '500',
-      'icon': Icons.fitness_center,
-      'color': Colors.white,
-      'barColor2': const Color(0xFFC7B290),
-      'barColor1': Colors.white,
-    },
-    {
-      'title': 'Carbs',
-      'amount': '250',
-      'totalAmount': '350',
-      'icon': Icons.fastfood,
-      'color': const Color(0xFFB28F5E),
-      'barColor1': const Color(0xFFC7B290),
-      'barColor2': const Color(0xFFB28F5E),
-    },
-    {
-      'title': 'Fats',
-      'amount': '40',
-      'totalAmount': '100',
-      'icon': Icons.local_pizza,
-      'color': const Color(0xFFC7B290),
-      'barColor2': const Color(0xFFC49A2C),
-      'barColor1': const Color(0xFFC7B290),
-    },
-  ];
+  List<UserMealLogEntity> userMealLogs = [];
+  double totalCalories = 0;
+  double totalProtein = 0;
+  double totalCarbs = 0;
+  double totalFats = 0;
 
   final List<Map<String, String>> foodItems = [
     {
@@ -84,10 +66,93 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   void initState() {
     super.initState();
+    _loadUserMealData(DateTime.now());
+  }
+
+  Future<void> _loadUserMealData(DateTime clickedDate) async {
+    debugPrint('Calling user meal data for $clickedDate');
+    final bigbumService = Bigbum.create();
+    final String dateString =
+        '${clickedDate.year.toString().padLeft(4, '0')}-${clickedDate.month.toString().padLeft(2, '0')}-${clickedDate.day.toString().padLeft(2, '0')}';
+
+    final startDate = '$dateString 00:00:00';
+    final endDate = '$dateString 23:59:59';
+    try {
+      final response = await bigbumService.UserMealLogController_getUserMeals(
+        userId: widget.userId,
+        startDate: startDate,
+        endDate: endDate,
+      );
+      if (response.isSuccessful && response.body != null) {
+        final userMealLogs = response.body!;
+
+        debugPrint("Querying meals from user of id ${widget.userId}!");
+        debugPrint("🔁 Response: $userMealLogs");
+
+        setState(() {
+          this.userMealLogs = response.body!;
+          isLoading = false;
+        });
+      }
+
+      for (var meal in userMealLogs) {
+        totalCalories += meal.calories ?? 0;
+        totalProtein += meal.protein ?? 0;
+        totalCarbs += meal.carbs ?? 0;
+        totalFats += meal.fats ?? 0;
+      }
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      debugPrint('❌ Single Meal Retrieval: $statusCode');
+      debugPrint('Response data: ${e.response?.data}');
+      setState(() {
+        hasError = true;
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Colors.redAccent,
+          ),
+        ),
+      );
+    }
+    final List<Map<String, dynamic>> macros = [
+      {
+        'title': 'Protein',
+        'amount': totalProtein.toStringAsFixed(0),
+        'totalAmount': '80',
+        'icon': Icons.fitness_center,
+        'color': Colors.white,
+        'barColor2': const Color(0xFFC7B290),
+        'barColor1': Colors.white,
+      },
+      {
+        'title': 'Carbs',
+        'amount': totalCarbs.toStringAsFixed(0),
+        'totalAmount': '75',
+        'icon': Icons.fastfood,
+        'color': const Color(0xFFB28F5E),
+        'barColor1': const Color(0xFFC7B290),
+        'barColor2': const Color(0xFFB28F5E),
+      },
+      {
+        'title': 'Fats',
+        'amount': totalFats.toStringAsFixed(0),
+        'totalAmount': '40',
+        'icon': Icons.local_pizza,
+        'color': const Color(0xFFC7B290),
+        'barColor2': const Color(0xFFC49A2C),
+        'barColor1': const Color(0xFFC7B290),
+      },
+    ];
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -163,30 +228,10 @@ class _MainHomePageState extends State<MainHomePage> {
                       textAlign: TextAlign.start,
                     ),
                   ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => const FoodScanMain(),
-                  //       ),
-                  //     );
-                  //   },
-                  //   child: const Text(
-                  //     "It's time to log your meal!",
-                  //     style: TextStyle(
-                  //       fontSize: 12,
-                  //       fontWeight: FontWeight.w500,
-                  //       color: Colors.white,
-                  //       decoration: TextDecoration.underline,
-                  //     ),
-                  //     textAlign: TextAlign.end,
-                  //   ),
-                  // ),
                 ],
               ),
 
-              const SizedBox(height: 30), // Space before the new text
+              const SizedBox(height: 30),
 
               LayoutBuilder(
                 builder: (context, constraints) {
@@ -194,8 +239,7 @@ class _MainHomePageState extends State<MainHomePage> {
 
                   return Center(
                     child: Row(
-                      mainAxisSize:
-                          MainAxisSize.min, // Only use as much space as needed
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         // Circle widget
@@ -213,19 +257,20 @@ class _MainHomePageState extends State<MainHomePage> {
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 120,
                               height: 120,
                               child: CircularProgressIndicator(
-                                value: 0.75,
+                                value: (totalCalories) / 2500,
                                 strokeWidth: 13,
-                                valueColor: AlwaysStoppedAnimation<Color>(
+                                valueColor: const AlwaysStoppedAnimation<Color>(
                                     Colors.redAccent),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),
                             Text(
-                              "${(0.75 * 100).toInt()}%",
+                              //TO-DO TO QUERY USER'S PERSONAL CALORIE AMOUNT
+                              "${(totalCalories / 2500 * 100).toInt()}%",
                               style: const TextStyle(
                                 color: Colors.yellow,
                                 fontSize: 40,
@@ -235,7 +280,7 @@ class _MainHomePageState extends State<MainHomePage> {
                           ],
                         ),
                         SizedBox(width: spacerWidth),
-                        const Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -250,10 +295,11 @@ class _MainHomePageState extends State<MainHomePage> {
                               ),
                             ),
                             Text(
-                              '2452kcal',
+                              //TO-DO TO QUERY USER'S PERSONAL CALORIE AMOUNT
+                              '${(2500 - (totalCalories ?? 0)).toStringAsFixed(0)}kCal',
                               style: TextStyle(
                                 color: Color(0xFFFFD700),
-                                fontSize: 44,
+                                fontSize: 40,
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w700,
                                 height: 1.1,
@@ -297,27 +343,6 @@ class _MainHomePageState extends State<MainHomePage> {
                 height: 30,
               ),
 
-              // GestureDetector(
-              //   onTap: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => const MealCalendarMain(),
-              //       ),
-              //     );
-              //   },
-              //   child: const Text(
-              //     "Check my calendar",
-              //     style: TextStyle(
-              //       fontSize: 12,
-              //       fontWeight: FontWeight.w500,
-              //       color: Colors.white,
-              //       decoration: TextDecoration.underline,
-              //     ),
-              //     textAlign: TextAlign.start,
-              //   ),
-              // ),
-
               const SizedBox(
                 height: 30,
               ),
@@ -336,52 +361,28 @@ class _MainHomePageState extends State<MainHomePage> {
               ),
 
               SizedBox(
-                height: 120, // Set the height of the scrolling area
+                height: 120,
                 child: ListView(
-                  scrollDirection:
-                      Axis.horizontal, // Enable horizontal scrolling
-                  children: const [
-                    // First card
-                    SizedBox(
-                      width: 300,
-                      child: NutritionInfoCard(
-                        mealType: 'Breakfast',
-                        calories: 200,
-                        protein: 56,
-                        carbs: 100,
-                        fats: 50,
-                        imagePath: 'assets/img/breakfast1.png',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      child: NutritionInfoCard(
-                        mealType: 'Lunch',
-                        calories: 600,
-                        protein: 20,
-                        carbs: 800,
-                        fats: 99,
-                        imagePath: 'assets/img/lunch1.png',
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    SizedBox(
-                      width: 300,
-                      child: NutritionInfoCard(
-                        mealType: 'Dinner',
-                        calories: 100,
-                        protein: 555,
-                        carbs: 9999,
-                        fats: 1234,
-                        imagePath: 'assets/img/dinner1.png',
-                      ),
-                    ),
-                  ],
+                  scrollDirection: Axis.horizontal,
+                  children: userMealLogs.map((meal) {
+                    return Row(
+                      children: [
+                        SizedBox(
+                          width: 300,
+                          child: NutritionInfoCard(
+                            mealId: meal.id,
+                            mealType: meal.mealType ?? 'Unknown',
+                            calories: (meal.calories ?? 0).toInt(),
+                            protein: (meal.protein ?? 0).toInt(),
+                            carbs: (meal.carbs ?? 0).toInt(),
+                            fats: (meal.fats ?? 0).toInt(),
+                            imageFile: (meal.mealImage!),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                      ],
+                    );
+                  }).toList(),
                 ),
               ),
 

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
 
 class NutritionInfoCard extends StatefulWidget {
   final String mealType;
@@ -6,7 +9,8 @@ class NutritionInfoCard extends StatefulWidget {
   final int protein;
   final int carbs;
   final int fats;
-  final String imagePath;
+  final String imageFile;
+  final double? mealId;
 
   const NutritionInfoCard({
     super.key,
@@ -15,7 +19,8 @@ class NutritionInfoCard extends StatefulWidget {
     required this.protein,
     required this.carbs,
     required this.fats,
-    required this.imagePath,
+    required this.imageFile,
+    this.mealId,
   });
 
   @override
@@ -53,15 +58,29 @@ class _NutritionInfoCardState extends State<NutritionInfoCard> {
           left: 0,
           top: 0,
           bottom: 0,
-          child: Container(
-            width: 160,
-            height: 120,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(widget.imagePath),
-                fit: BoxFit.fill,
+          child: GestureDetector(
+            onTap: () {
+              if (widget.mealId != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FoodScanResults(
+                      mealId: widget.mealId!.toInt(),
+                    ),
+                  ),
+                );
+              }
+            },
+            child: Container(
+              width: 160,
+              height: 120,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: MemoryImage(base64Decode(widget.imageFile)),
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.circular(20),
               ),
-              borderRadius: BorderRadius.circular(20),
             ),
           ),
         ),

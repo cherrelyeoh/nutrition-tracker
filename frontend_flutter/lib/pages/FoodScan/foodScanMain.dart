@@ -87,46 +87,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
     debugPrint("MealImage $base64Image");
     debugPrint("MealName ${mealNameController.text}");
 
-    final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
-
-    final bigbumService = Bigbum.create(
-      baseUrl:
-          Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
-    );
-
-    // try {
-    //   final response =
-    //       await bigbumService.UserMealLogController_extractNutrientDetails(
-    //           body: mealScanObject);
-    //   // final mealLog = await client.userMealLogControllerExtractNutrientDetails(
-    //   //     body: mealScanObject);
-    //   final mealLog = response.body;
-    //   debugPrint("Meal logged!");
-    //   debugPrint("🔁 Response: $mealLog"); //
-    //   // if (mealLog.responseType == "Question") {
-    //   //   debugPrint('The Scanning returned a question');
-    //   // } else {
-    //   debugPrint('The Scanning logged a meal');
-    //   if (!mounted) return;
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => FoodScanResults(
-    //         mealLog: mealLog,
-    //         mealImage: base64Image,
-    //         mealName: mealNameController.text,
-    //         mealDescription:
-    //             mealLog['mainMeal']?['comments'] ?? 'No description available',
-    //         mealId: mealScanObject.userMealId,
-    //       ),
-    //     ),
-    //   );
-    // } on DioException catch (e) {
-    //   // Access status code from DioError
-    //   final statusCode = e.response?.statusCode;
-    //   debugPrint('❌ Food Scan Failed with: $statusCode');
-    //   debugPrint('Response data: ${e.response?.data}');
-    // }
+    final bigbumService = Bigbum.create();
 
     try {
       final response =
