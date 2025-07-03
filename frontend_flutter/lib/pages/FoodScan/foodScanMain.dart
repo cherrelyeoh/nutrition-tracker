@@ -53,7 +53,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
     super.dispose();
   }
 
-  Future<void> mealScan() async {
+  Future<void> mealScan(double? mealId) async {
     debugPrint('Meal Scan called');
     setState(() {
       isLoading = true;
@@ -77,7 +77,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
         userId: 1,
         mealImage: base64Image,
         mealName: mealNameController.text,
-        userMealId: null,
+        userMealId: mealId,
         dateOfMeal: DateTime.now(),
         mealType: mealTypeController.text);
 
@@ -143,7 +143,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
         final rawList = mealLog['questionList'];
         final List<Map<String, dynamic>> questions =
             List<Map<String, dynamic>>.from(rawList);
-        showQuestionDeckDialog(context, questions);
+        showQuestionDeckDialog(context, questions, null);
       } else {
         debugPrint('✅ Scanning logged a meal result');
 
@@ -174,16 +174,15 @@ class _FoodScanMainState extends State<FoodScanMain> {
     });
   }
 
-  void showQuestionDeckDialog(
-      BuildContext context, List<Map<String, dynamic>> questions) {
+  void showQuestionDeckDialog(BuildContext context,
+      List<Map<String, dynamic>> questions, double? mealId) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) => QuestionDeck(
         questions: questions,
-        onCompleted: () {
-          // Trigger mealScan again
-          mealScan();
+        onCompleted: (double mealId) {
+          mealScan(mealId);
         },
       ),
     );
@@ -412,7 +411,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
               const SizedBox(height: 30),
               Center(
                 child: ElevatedButton(
-                  onPressed: isLoading ? null : mealScan,
+                  onPressed: isLoading ? null : () => mealScan(null),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(

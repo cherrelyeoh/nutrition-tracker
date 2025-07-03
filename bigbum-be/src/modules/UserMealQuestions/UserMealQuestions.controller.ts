@@ -22,6 +22,6 @@ export class UserMealQuestionsController {
   async bulkUpdate(
     @Body() updates: UpdateUserMealQuestionDto[],
   ): Promise<UserMealQuestionsEntity[]> {
-    return this.service.bulkUpdate(updates);
+    return await this.service.bulkUpdate(updates);
   }
 }

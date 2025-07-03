@@ -6,7 +6,7 @@ import 'questionCard.dart';
 
 class QuestionDeck extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
-  final VoidCallback? onCompleted;
+  final void Function(double mealId)? onCompleted;
 
   const QuestionDeck({
     super.key,
@@ -23,7 +23,10 @@ class _QuestionDeckState extends State<QuestionDeck> {
   int currentIndex = 0;
   Map<int, String> selectedAnswers = {};
 
-  final bigbumService = Bigbum.create();
+  final bigbumService = Bigbum.create(
+    baseUrl:
+        Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
+  );
   void handleAnswer(String answer) async {
     final currentQuestion = widget.questions[currentIndex];
     final questionId = currentQuestion['id'];
@@ -63,10 +66,33 @@ class _QuestionDeckState extends State<QuestionDeck> {
           await bigbumService.UserMealQuestionsController_bulkUpdate(
         body: payload,
       );
-      debugPrint("✅ Bulk update success: ${response.body}");
-      widget.onCompleted?.call();
-    } catch (e) {
+
+      debugPrint("📦 Response status: ${response.statusCode}");
+      debugPrint("📦 Response error: ${response.error}");
+
+      final List<UserMealQuestionsEntity>? questions = response.body;
+
+      if (questions != null && questions.isNotEmpty) {
+        debugPrint("📋 Total Questions Returned: ${questions.length}");
+
+        for (var q in questions) {
+          debugPrint("🔸 Question ID: ${q.id}");
+          debugPrint("🔸 Question: ${q.question}");
+          debugPrint("🔸 Answer: ${q.answer}");
+          debugPrint("🔸 Options: ${q.options}");
+          debugPrint("🔸 UserMealLog ID: ${q.userMealLog.id}");
+        }
+
+        final mealId = questions.first.userMealLog?.id?.toDouble() ?? 0.0;
+        debugPrint("✅ Extracted mealId: $mealId");
+
+        widget.onCompleted?.call(mealId);
+      } else {
+        debugPrint("⚠️ Response body is empty or null.");
+      }
+    } catch (e, stacktrace) {
       debugPrint("❌ Bulk update failed: $e");
+      debugPrint("🪵 Stacktrace: $stacktrace");
     }
   }
 

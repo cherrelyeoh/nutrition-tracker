@@ -23,29 +23,38 @@ export class UserMealQuestionsService extends TypeOrmCrudService<UserMealQuestio
     const updatedEntities: UserMealQuestionsEntity[] = [];
 
     for (const dto of updates) {
-      const entity = await this.repo.findOneBy({ id: dto.id });
+      // Load with relations so userMealLog is available in response
+      const entity = await this.repo.findOne({
+        where: { id: dto.id },
+        relations: ['userMealLog'], // 👈 load relation here
+      });
+
       if (!entity) continue;
 
-      // Apply updates only if present
+      // Apply updates if defined
       if (dto.question !== undefined) {
-        console.log(entity.question);
         entity.question = dto.question;
       }
 
       if (dto.options !== undefined) {
-        console.log(entity.options);
-
         entity.options = dto.options;
       }
 
       if (dto.answer !== undefined) {
-        console.log(entity.answer);
-
         entity.answer = dto.answer;
       }
 
       const saved = await this.repo.save(entity);
-      updatedEntities.push(saved);
+
+      // Reload with relation to ensure it's fresh (optional if already loaded above)
+      const savedWithRelation = await this.repo.findOne({
+        where: { id: saved.id },
+        relations: ['userMealLog'],
+      });
+
+      if (savedWithRelation) {
+        updatedEntities.push(savedWithRelation);
+      }
     }
 
     return updatedEntities;
