@@ -23,9 +23,11 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
   DateTime today = DateTime.now();
   DateTime currentMonth = DateTime.now();
   List<Widget> mealWidgets = [];
+  List<UserMealLogEntity> userMealLogs = [];
 
   List<DateTime> allAvailableDates = []; // All valid dates
   List<DateTime> visibleDates = []; // Filtered by current month
+  DateTime? selectedDate;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -33,7 +35,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
   void initState() {
     super.initState();
     debugPrint('🟨 MealCalendarMain init - userId: ${widget.userId}');
-    _loadUserMealData();
+    _loadUserMealData(DateTime.now());
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
@@ -45,22 +47,36 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
     });
   }
 
-  Future<void> _loadUserMealData() async {
-    debugPrint('Calling user meal data');
+  Future<void> _loadUserMealData(DateTime clickedDate) async {
+    debugPrint('Calling user meal data for $clickedDate');
     final bigbumService = Bigbum.create(
       baseUrl:
           Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
     );
+    final String dateString =
+        '${clickedDate.year.toString().padLeft(4, '0')}-${clickedDate.month.toString().padLeft(2, '0')}-${clickedDate.day.toString().padLeft(2, '0')}';
+
+    final startDate = '$dateString 00:00:00';
+    final endDate = '$dateString 23:59:59';
     try {
       final response = await bigbumService.UserMealLogController_getUserMeals(
-          userId: widget.userId,
-          startDate: '2025-07-01',
-          endDate: '2025-07-03');
+        userId: widget.userId,
+        startDate: startDate,
+        endDate: endDate,
+      );
       if (response.isSuccessful && response.body != null) {
         final userMealLogs = response.body!;
 
         debugPrint("Querying meals from user of id ${widget.userId}!");
         debugPrint("🔁 Response: $userMealLogs");
+
+        // Reset all totals to 0 before aggregating new data
+        mealTypeTotals.forEach((key, value) {
+          value['calories'] = 0;
+          value['protein'] = 0;
+          value['carbs'] = 0;
+          value['fats'] = 0;
+        });
 
         for (var meal in userMealLogs) {
           String type = meal.mealType ?? 'Lunch';
@@ -90,89 +106,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
         debugPrint("==========================");
 
         setState(() {
-          mealWidgets = mealTypeIcons.entries.map((entry) {
-            final mealType = entry.key;
-            final iconPath = entry.value;
-
-            final totals = mealTypeTotals[mealType] ??
-                {
-                  'calories': 0,
-                  'protein': 0,
-                  'carbs': 0,
-                  'fats': 0,
-                };
-
-            // Filter all meals of this type
-            final mealsOfType =
-                userMealLogs.where((m) => m.mealType == mealType).toList();
-
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                MealCalendarWidget(
-                  mealType: mealType,
-                  mealIcon: iconPath,
-                  calAmount: totals['calories']?.toStringAsFixed(0) ?? '0',
-                  calTotalAmount: totals['calories']?.toStringAsFixed(0) ?? '0',
-                ),
-                const SizedBox(height: 10),
-
-                // Render all meals under this meal type
-                ...mealsOfType.map((meal) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                FoodScanResults(mealId: meal.id),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 46,
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: ShapeDecoration(
-                          color: Colors.white.withAlpha(40),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              width: 1,
-                              color: Color(0xFF808080),
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              meal.mealName ?? 'Meal',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 18,
-                              color: Colors.white,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-
-                const SizedBox(height: 20),
-              ],
-            );
-          }).toList();
+          this.userMealLogs = response.body!;
         });
       }
     } on DioException catch (e) {
@@ -204,6 +138,13 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
     'Lunch': {'calories': 0, 'protein': 0, 'carbs': 0, 'fats': 0},
     'Dinner': {'calories': 0, 'protein': 0, 'carbs': 0, 'fats': 0},
     'Snack': {'calories': 0, 'protein': 0, 'carbs': 0, 'fats': 0},
+  };
+
+  Map<String, bool> mealTypeExpanded = {
+    'Breakfast': false,
+    'Lunch': false,
+    'Dinner': false,
+    'Snack': false,
   };
 
   @override
@@ -249,10 +190,15 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 6), // spacing between items
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            final clickedDate = dates[index];
+
                             setState(() {
                               selectedIndex = index;
+                              selectedDate = clickedDate;
                             });
+
+                            await _loadUserMealData(clickedDate);
                           },
                           child: Container(
                             width: 69,
@@ -349,7 +295,98 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
               //   ),
               // ),
 
-              ...mealWidgets,
+              ...mealTypeIcons.entries.map((entry) {
+                final mealType = entry.key;
+                final iconPath = entry.value;
+
+                final totals = mealTypeTotals[mealType] ??
+                    {
+                      'calories': 0,
+                      'protein': 0,
+                      'carbs': 0,
+                      'fats': 0,
+                    };
+
+                final mealsOfType =
+                    userMealLogs.where((m) => m.mealType == mealType).toList();
+                final isExpanded = mealTypeExpanded[mealType] ?? false;
+
+                return Column(
+                  children: [
+                    MealCalendarWidget(
+                      mealType: mealType,
+                      mealIcon: iconPath,
+                      calAmount: totals['calories']?.toStringAsFixed(0) ?? '0',
+                      calTotalAmount: '800',
+                      proteinTotalAmount: mealTypeTotals[mealType]?['protein']
+                              ?.toStringAsFixed(0) ??
+                          '0',
+                      carbsTotalAmount: mealTypeTotals[mealType]?['carbs']
+                              ?.toStringAsFixed(0) ??
+                          '0',
+                      fatsTotalAmount: mealTypeTotals[mealType]?['fats']
+                              ?.toStringAsFixed(0) ??
+                          '0',
+                      isExpanded: mealTypeExpanded[mealType] ?? false,
+                      onToggleMeals: () {
+                        setState(() {
+                          mealTypeExpanded[mealType] =
+                              !(mealTypeExpanded[mealType] ?? false);
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    if (mealTypeExpanded[mealType] ?? false)
+                      ...mealsOfType.map((meal) => Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FoodScanResults(
+                                        mealId: meal.id?.toInt()),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 46,
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                decoration: ShapeDecoration(
+                                  color: Colors.white.withAlpha(40),
+                                  shape: RoundedRectangleBorder(
+                                    side: const BorderSide(
+                                        width: 1, color: Color(0xFF808080)),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      meal.mealName ?? 'Meal',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.arrow_forward_ios,
+                                        size: 18, color: Colors.white),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
+                    const SizedBox(height: 20),
+                  ],
+                );
+              }).toList(),
             ],
           ),
         ),
