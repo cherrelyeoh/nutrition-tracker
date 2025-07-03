@@ -6,3 +6,4 @@ targets:
           input_folder: "lib/services/swagger"
           output_folder: "lib/services/newapi"
           use_path_for_request_names: false
+          with_base_url: false

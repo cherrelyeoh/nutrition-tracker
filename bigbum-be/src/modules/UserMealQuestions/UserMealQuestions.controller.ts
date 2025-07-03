@@ -1,10 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post, Put } from '@nestjs/common';
 import { Crud } from '@dataui/crud';
 import { UserMealQuestionsService } from './UserMealQuestions.service';
 import { UserMealQuestionsEntity } from './UserMealQuestions.entity';
 import { RouteMetadata } from 'nestjs-gis';
 import { CreateUserMealQuestionDto } from './dto/CreateUserMealQuestion.dto';
 import { UpdateUserMealQuestionDto } from './dto/UpdateUserMealQuestion.dto';
+import { ApiBody } from '@nestjs/swagger';
 
 @RouteMetadata()
 @Crud({
@@ -15,4 +16,12 @@ import { UpdateUserMealQuestionDto } from './dto/UpdateUserMealQuestion.dto';
 @Controller('rest/UserMealQuestions')
 export class UserMealQuestionsController {
   constructor(private service: UserMealQuestionsService) {}
+
+  @Post('bulk-update')
+  @ApiBody({ type: [UpdateUserMealQuestionDto] })
+  async bulkUpdate(
+    @Body() updates: UpdateUserMealQuestionDto[],
+  ): Promise<UserMealQuestionsEntity[]> {
+    return this.service.bulkUpdate(updates);
+  }
 }

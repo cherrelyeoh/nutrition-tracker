@@ -10,6 +10,8 @@ import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
 
+import 'Questions/questionDeck.dart';
+
 class FoodScanMain extends StatefulWidget {
   final String? mealType;
   const FoodScanMain({super.key, this.mealType});
@@ -92,35 +94,76 @@ class _FoodScanMainState extends State<FoodScanMain> {
           Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
     );
 
+    // try {
+    //   final response =
+    //       await bigbumService.UserMealLogController_extractNutrientDetails(
+    //           body: mealScanObject);
+    //   // final mealLog = await client.userMealLogControllerExtractNutrientDetails(
+    //   //     body: mealScanObject);
+    //   final mealLog = response.body;
+    //   debugPrint("Meal logged!");
+    //   debugPrint("🔁 Response: $mealLog"); //
+    //   // if (mealLog.responseType == "Question") {
+    //   //   debugPrint('The Scanning returned a question');
+    //   // } else {
+    //   debugPrint('The Scanning logged a meal');
+    //   if (!mounted) return;
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => FoodScanResults(
+    //         mealLog: mealLog,
+    //         mealImage: base64Image,
+    //         mealName: mealNameController.text,
+    //         mealDescription:
+    //             mealLog['mainMeal']?['comments'] ?? 'No description available',
+    //         mealId: mealScanObject.userMealId,
+    //       ),
+    //     ),
+    //   );
+    // } on DioException catch (e) {
+    //   // Access status code from DioError
+    //   final statusCode = e.response?.statusCode;
+    //   debugPrint('❌ Food Scan Failed with: $statusCode');
+    //   debugPrint('Response data: ${e.response?.data}');
+    // }
+
     try {
       final response =
           await bigbumService.UserMealLogController_extractNutrientDetails(
-              body: mealScanObject);
-      // final mealLog = await client.userMealLogControllerExtractNutrientDetails(
-      //     body: mealScanObject);
-      final mealLog = response.body;
-      debugPrint("Meal logged!");
-      debugPrint("🔁 Response: $mealLog"); //
-      // if (mealLog.responseType == "Question") {
-      //   debugPrint('The Scanning returned a question');
-      // } else {
-      debugPrint('The Scanning logged a meal');
-      if (!mounted) return;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FoodScanResults(
-            mealLog: mealLog,
-            mealImage: base64Image,
-            mealName: mealNameController.text,
-            mealDescription:
-                mealLog['mainMeal']?['comments'] ?? 'No description available',
-            mealId: mealScanObject.userMealId,
-          ),
-        ),
+        body: mealScanObject,
       );
+
+      final mealLog = response.body;
+      debugPrint("🔁 Response: $mealLog");
+
+      final responseType = mealLog['ResponseType'];
+
+      if (responseType == 'Question') {
+        final rawList = mealLog['questionList'];
+        final List<Map<String, dynamic>> questions =
+            List<Map<String, dynamic>>.from(rawList);
+        showQuestionDeckDialog(context, questions);
+      } else {
+        debugPrint('✅ Scanning logged a meal result');
+
+        if (!mounted) return;
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FoodScanResults(
+              mealLog: mealLog,
+              mealImage: base64Image,
+              mealName: mealNameController.text,
+              mealDescription: mealLog['mainMeal']?['comments'] ??
+                  'No description available',
+              mealId: mealScanObject.userMealId,
+            ),
+          ),
+        );
+      }
     } on DioException catch (e) {
-      // Access status code from DioError
       final statusCode = e.response?.statusCode;
       debugPrint('❌ Food Scan Failed with: $statusCode');
       debugPrint('Response data: ${e.response?.data}');
@@ -129,6 +172,21 @@ class _FoodScanMainState extends State<FoodScanMain> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  void showQuestionDeckDialog(
+      BuildContext context, List<Map<String, dynamic>> questions) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => QuestionDeck(
+        questions: questions,
+        onCompleted: () {
+          // Trigger mealScan again
+          mealScan();
+        },
+      ),
+    );
   }
 
   @override

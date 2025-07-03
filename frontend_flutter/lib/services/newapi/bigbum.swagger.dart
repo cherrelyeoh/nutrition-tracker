@@ -42,7 +42,7 @@ abstract class Bigbum extends ChopperService {
       client: httpClient,
       authenticator: authenticator,
       errorConverter: errorConverter,
-      baseUrl: baseUrl ?? Uri.parse('http://'),
+      baseUrl: baseUrl ?? Uri.parse("http://10.0.2.2:3000"),
     );
     return _$Bigbum(newClient);
   }
@@ -81,7 +81,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyAIPromptEntityResponseDto>>
-  getManyBaseAIPromptControllerAIPromptEntity({
+      getManyBaseAIPromptControllerAIPromptEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -125,7 +125,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/AIPrompt')
   Future<chopper.Response<GetManyAIPromptEntityResponseDto>>
-  _getManyBaseAIPromptControllerAIPromptEntity({
+      _getManyBaseAIPromptControllerAIPromptEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -140,7 +140,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single AIPromptEntity
   Future<chopper.Response<AIPromptEntity>>
-  createOneBaseAIPromptControllerAIPromptEntity({
+      createOneBaseAIPromptControllerAIPromptEntity({
     required AIPromptEntity? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -154,13 +154,13 @@ abstract class Bigbum extends ChopperService {
   ///Create a single AIPromptEntity
   @POST(path: '/rest/AIPrompt', optionalBody: true)
   Future<chopper.Response<AIPromptEntity>>
-  _createOneBaseAIPromptControllerAIPromptEntity({
+      _createOneBaseAIPromptControllerAIPromptEntity({
     @Body() required AIPromptEntity? body,
   });
 
   ///Create multiple AIPromptEntities
   Future<chopper.Response<List<AIPromptEntity>>>
-  createManyBaseAIPromptControllerAIPromptEntity({
+      createManyBaseAIPromptControllerAIPromptEntity({
     required CreateManyAIPromptEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -174,14 +174,14 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple AIPromptEntities
   @POST(path: '/rest/AIPrompt/bulk', optionalBody: true)
   Future<chopper.Response<List<AIPromptEntity>>>
-  _createManyBaseAIPromptControllerAIPromptEntity({
+      _createManyBaseAIPromptControllerAIPromptEntity({
     @Body() required CreateManyAIPromptEntityDto? body,
   });
 
   ///Update a single AIPromptEntity
   ///@param id
   Future<chopper.Response<AIPromptEntity>>
-  updateOneBaseAIPromptControllerAIPromptEntity({
+      updateOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
@@ -197,7 +197,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PATCH(path: '/rest/AIPrompt/{id}', optionalBody: true)
   Future<chopper.Response<AIPromptEntity>>
-  _updateOneBaseAIPromptControllerAIPromptEntity({
+      _updateOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Body() required AIPromptEntity? body,
   });
@@ -205,7 +205,7 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single AIPromptEntity
   ///@param id
   Future<chopper.Response<AIPromptEntity>>
-  replaceOneBaseAIPromptControllerAIPromptEntity({
+      replaceOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     required AIPromptEntity? body,
   }) {
@@ -221,7 +221,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PUT(path: '/rest/AIPrompt/{id}', optionalBody: true)
   Future<chopper.Response<AIPromptEntity>>
-  _replaceOneBaseAIPromptControllerAIPromptEntity({
+      _replaceOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Body() required AIPromptEntity? body,
   });
@@ -247,7 +247,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<AIPromptEntity>>
-  getOneBaseAIPromptControllerAIPromptEntity({
+      getOneBaseAIPromptControllerAIPromptEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -273,7 +273,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/AIPrompt/{id}')
   Future<chopper.Response<AIPromptEntity>>
-  _getOneBaseAIPromptControllerAIPromptEntity({
+      _getOneBaseAIPromptControllerAIPromptEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -307,7 +307,7 @@ abstract class Bigbum extends ChopperService {
   ///@param startDate
   ///@param endDate
   Future<chopper.Response<List<UserMealLogEntity>>>
-  UserMealLogController_getUserMeals({
+      UserMealLogController_getUserMeals({
     required num? userId,
     required String? startDate,
     required String? endDate,
@@ -330,7 +330,7 @@ abstract class Bigbum extends ChopperService {
   ///@param endDate
   @GET(path: '/rest/UserMealLog/mealsByUser/{userId}')
   Future<chopper.Response<List<UserMealLogEntity>>>
-  _UserMealLogController_getUserMeals({
+      _UserMealLogController_getUserMeals({
     @Path('userId') required num? userId,
     @Query('startDate') required String? startDate,
     @Query('endDate') required String? endDate,
@@ -348,7 +348,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserMealLogEntityResponseDto>>
-  getManyBaseUserMealLogControllerUserMealLogEntity({
+      getManyBaseUserMealLogControllerUserMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -392,7 +392,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserMealLog')
   Future<chopper.Response<GetManyUserMealLogEntityResponseDto>>
-  _getManyBaseUserMealLogControllerUserMealLogEntity({
+      _getManyBaseUserMealLogControllerUserMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -407,7 +407,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserMealLogEntity
   Future<chopper.Response<UserMealLogEntity>>
-  createOneBaseUserMealLogControllerUserMealLogEntity({
+      createOneBaseUserMealLogControllerUserMealLogEntity({
     required UserMealLogEntity? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -421,13 +421,13 @@ abstract class Bigbum extends ChopperService {
   ///Create a single UserMealLogEntity
   @POST(path: '/rest/UserMealLog', optionalBody: true)
   Future<chopper.Response<UserMealLogEntity>>
-  _createOneBaseUserMealLogControllerUserMealLogEntity({
+      _createOneBaseUserMealLogControllerUserMealLogEntity({
     @Body() required UserMealLogEntity? body,
   });
 
   ///Create multiple UserMealLogEntities
   Future<chopper.Response<List<UserMealLogEntity>>>
-  createManyBaseUserMealLogControllerUserMealLogEntity({
+      createManyBaseUserMealLogControllerUserMealLogEntity({
     required CreateManyUserMealLogEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -441,14 +441,14 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple UserMealLogEntities
   @POST(path: '/rest/UserMealLog/bulk', optionalBody: true)
   Future<chopper.Response<List<UserMealLogEntity>>>
-  _createManyBaseUserMealLogControllerUserMealLogEntity({
+      _createManyBaseUserMealLogControllerUserMealLogEntity({
     @Body() required CreateManyUserMealLogEntityDto? body,
   });
 
   ///Update a single UserMealLogEntity
   ///@param id
   Future<chopper.Response<UserMealLogEntity>>
-  updateOneBaseUserMealLogControllerUserMealLogEntity({
+      updateOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
@@ -467,7 +467,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PATCH(path: '/rest/UserMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserMealLogEntity>>
-  _updateOneBaseUserMealLogControllerUserMealLogEntity({
+      _updateOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserMealLogEntity? body,
   });
@@ -475,7 +475,7 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserMealLogEntity
   ///@param id
   Future<chopper.Response<UserMealLogEntity>>
-  replaceOneBaseUserMealLogControllerUserMealLogEntity({
+      replaceOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     required UserMealLogEntity? body,
   }) {
@@ -494,7 +494,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PUT(path: '/rest/UserMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserMealLogEntity>>
-  _replaceOneBaseUserMealLogControllerUserMealLogEntity({
+      _replaceOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserMealLogEntity? body,
   });
@@ -511,7 +511,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @DELETE(path: '/rest/UserMealLog/{id}')
   Future<chopper.Response>
-  _deleteOneBaseUserMealLogControllerUserMealLogEntity({
+      _deleteOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
   });
 
@@ -521,7 +521,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserMealLogEntity>>
-  getOneBaseUserMealLogControllerUserMealLogEntity({
+      getOneBaseUserMealLogControllerUserMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -547,7 +547,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserMealLog/{id}')
   Future<chopper.Response<UserMealLogEntity>>
-  _getOneBaseUserMealLogControllerUserMealLogEntity({
+      _getOneBaseUserMealLogControllerUserMealLogEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -575,7 +575,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyAIIntegrationLogsEntityResponseDto>>
-  getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -619,7 +619,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/AIIntegrationLogs')
   Future<chopper.Response<GetManyAIIntegrationLogsEntityResponseDto>>
-  _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _getManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -634,7 +634,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single AIIntegrationLogsEntity
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required CreateAIIntegrationLogDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -650,13 +650,13 @@ abstract class Bigbum extends ChopperService {
   ///Create a single AIIntegrationLogsEntity
   @POST(path: '/rest/AIIntegrationLogs', optionalBody: true)
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _createOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Body() required CreateAIIntegrationLogDto? body,
   });
 
   ///Create multiple AIIntegrationLogsEntities
   Future<chopper.Response<List<AIIntegrationLogsEntity>>>
-  createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required CreateManyAIIntegrationLogsEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -672,14 +672,14 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple AIIntegrationLogsEntities
   @POST(path: '/rest/AIIntegrationLogs/bulk', optionalBody: true)
   Future<chopper.Response<List<AIIntegrationLogsEntity>>>
-  _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _createManyBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Body() required CreateManyAIIntegrationLogsEntityDto? body,
   });
 
   ///Update a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required UpdateAIIntegrationLogDto? body,
   }) {
@@ -698,7 +698,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PATCH(path: '/rest/AIIntegrationLogs/{id}', optionalBody: true)
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _updateOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Body() required UpdateAIIntegrationLogDto? body,
   });
@@ -706,7 +706,7 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     required AIIntegrationLogsEntity? body,
   }) {
@@ -725,7 +725,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PUT(path: '/rest/AIIntegrationLogs/{id}', optionalBody: true)
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _replaceOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Body() required AIIntegrationLogsEntity? body,
   });
@@ -733,7 +733,7 @@ abstract class Bigbum extends ChopperService {
   ///Delete a single AIIntegrationLogsEntity
   ///@param id
   Future<chopper.Response>
-  deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
   }) {
     return _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity(
@@ -745,7 +745,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @DELETE(path: '/rest/AIIntegrationLogs/{id}')
   Future<chopper.Response>
-  _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _deleteOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
   });
 
@@ -755,7 +755,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -781,7 +781,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/AIIntegrationLogs/{id}')
   Future<chopper.Response<AIIntegrationLogsEntity>>
-  _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
+      _getOneBaseAIIntegrationLogsControllerAIIntegrationLogsEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -857,7 +857,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserEntityResponseDto>>
-  getManyBaseUserControllerUserEntity({
+      getManyBaseUserControllerUserEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -901,7 +901,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/User')
   Future<chopper.Response<GetManyUserEntityResponseDto>>
-  _getManyBaseUserControllerUserEntity({
+      _getManyBaseUserControllerUserEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -916,7 +916,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create multiple UserEntities
   Future<chopper.Response<List<UserEntity>>>
-  createManyBaseUserControllerUserEntity({
+      createManyBaseUserControllerUserEntity({
     required CreateManyUserEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(UserEntity, () => UserEntity.fromJsonFactory);
@@ -927,7 +927,7 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple UserEntities
   @POST(path: '/rest/User/bulk', optionalBody: true)
   Future<chopper.Response<List<UserEntity>>>
-  _createManyBaseUserControllerUserEntity({
+      _createManyBaseUserControllerUserEntity({
     @Body() required CreateManyUserEntityDto? body,
   });
 
@@ -1027,6 +1027,26 @@ abstract class Bigbum extends ChopperService {
   @GET(path: '/rest/User/metadata')
   Future<chopper.Response> _UserController_();
 
+  ///
+  Future<chopper.Response<List<UserMealQuestionsEntity>>>
+      UserMealQuestionsController_bulkUpdate({
+    required List<UpdateUserMealQuestionDto>? body,
+  }) {
+    generatedMapping.putIfAbsent(
+      UserMealQuestionsEntity,
+      () => UserMealQuestionsEntity.fromJsonFactory,
+    );
+
+    return _UserMealQuestionsController_bulkUpdate(body: body);
+  }
+
+  ///
+  @POST(path: '/rest/UserMealQuestions/bulk-update', optionalBody: true)
+  Future<chopper.Response<List<UserMealQuestionsEntity>>>
+      _UserMealQuestionsController_bulkUpdate({
+    @Body() required List<UpdateUserMealQuestionDto>? body,
+  });
+
   ///Retrieve multiple UserMealQuestionsEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
   ///@param s Adds search condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#search" target="_blank">Docs</a>
@@ -1039,7 +1059,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserMealQuestionsEntityResponseDto>>
-  getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1083,7 +1103,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserMealQuestions')
   Future<chopper.Response<GetManyUserMealQuestionsEntityResponseDto>>
-  _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1098,7 +1118,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserMealQuestionsEntity
   Future<chopper.Response<UserMealQuestionsEntity>>
-  createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required CreateUserMealQuestionDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1114,13 +1134,13 @@ abstract class Bigbum extends ChopperService {
   ///Create a single UserMealQuestionsEntity
   @POST(path: '/rest/UserMealQuestions', optionalBody: true)
   Future<chopper.Response<UserMealQuestionsEntity>>
-  _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _createOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Body() required CreateUserMealQuestionDto? body,
   });
 
   ///Create multiple UserMealQuestionsEntities
   Future<chopper.Response<List<UserMealQuestionsEntity>>>
-  createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required CreateManyUserMealQuestionsEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1136,14 +1156,14 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple UserMealQuestionsEntities
   @POST(path: '/rest/UserMealQuestions/bulk', optionalBody: true)
   Future<chopper.Response<List<UserMealQuestionsEntity>>>
-  _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _createManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Body() required CreateManyUserMealQuestionsEntityDto? body,
   });
 
   ///Update a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response<UserMealQuestionsEntity>>
-  updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UpdateUserMealQuestionDto? body,
   }) {
@@ -1162,7 +1182,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PATCH(path: '/rest/UserMealQuestions/{id}', optionalBody: true)
   Future<chopper.Response<UserMealQuestionsEntity>>
-  _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _updateOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserMealQuestionDto? body,
   });
@@ -1170,7 +1190,7 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response<UserMealQuestionsEntity>>
-  replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     required UserMealQuestionsEntity? body,
   }) {
@@ -1189,7 +1209,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PUT(path: '/rest/UserMealQuestions/{id}', optionalBody: true)
   Future<chopper.Response<UserMealQuestionsEntity>>
-  _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _replaceOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Body() required UserMealQuestionsEntity? body,
   });
@@ -1197,7 +1217,7 @@ abstract class Bigbum extends ChopperService {
   ///Delete a single UserMealQuestionsEntity
   ///@param id
   Future<chopper.Response>
-  deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
   }) {
     return _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity(
@@ -1209,7 +1229,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @DELETE(path: '/rest/UserMealQuestions/{id}')
   Future<chopper.Response>
-  _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _deleteOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
   });
 
@@ -1219,7 +1239,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserMealQuestionsEntity>>
-  getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1245,7 +1265,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserMealQuestions/{id}')
   Future<chopper.Response<UserMealQuestionsEntity>>
-  _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
+      _getOneBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1264,7 +1284,7 @@ abstract class Bigbum extends ChopperService {
   ///
   ///@param id
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-  UserSubMealLogController_getByMainMealId({required num? id}) {
+      UserSubMealLogController_getByMainMealId({required num? id}) {
     generatedMapping.putIfAbsent(
       UserSubMealLogEntity,
       () => UserSubMealLogEntity.fromJsonFactory,
@@ -1277,7 +1297,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @GET(path: '/rest/UserSubMealLog/main-meal/{id}')
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-  _UserSubMealLogController_getByMainMealId({@Path('id') required num? id});
+      _UserSubMealLogController_getByMainMealId({@Path('id') required num? id});
 
   ///Retrieve multiple UserSubMealLogEntities
   ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
@@ -1291,7 +1311,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserSubMealLogEntityResponseDto>>
-  getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+      getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1335,7 +1355,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserSubMealLog')
   Future<chopper.Response<GetManyUserSubMealLogEntityResponseDto>>
-  _getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _getManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1350,7 +1370,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserSubMealLogEntity
   Future<chopper.Response<UserSubMealLogEntity>>
-  createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required CreateUserSubMealLogDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1366,13 +1386,13 @@ abstract class Bigbum extends ChopperService {
   ///Create a single UserSubMealLogEntity
   @POST(path: '/rest/UserSubMealLog', optionalBody: true)
   Future<chopper.Response<UserSubMealLogEntity>>
-  _createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _createOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Body() required CreateUserSubMealLogDto? body,
   });
 
   ///Create multiple UserSubMealLogEntities
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-  createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+      createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     required CreateManyUserSubMealLogEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1388,14 +1408,14 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple UserSubMealLogEntities
   @POST(path: '/rest/UserSubMealLog/bulk', optionalBody: true)
   Future<chopper.Response<List<UserSubMealLogEntity>>>
-  _createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _createManyBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Body() required CreateManyUserSubMealLogEntityDto? body,
   });
 
   ///Update a single UserSubMealLogEntity
   ///@param id
   Future<chopper.Response<UserSubMealLogEntity>>
-  updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UpdateUserSubMealLogDto? body,
   }) {
@@ -1414,7 +1434,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PATCH(path: '/rest/UserSubMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserSubMealLogEntity>>
-  _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _updateOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserSubMealLogDto? body,
   });
@@ -1422,7 +1442,7 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserSubMealLogEntity
   ///@param id
   Future<chopper.Response<UserSubMealLogEntity>>
-  replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     required UserSubMealLogEntity? body,
   }) {
@@ -1441,7 +1461,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PUT(path: '/rest/UserSubMealLog/{id}', optionalBody: true)
   Future<chopper.Response<UserSubMealLogEntity>>
-  _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _replaceOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Body() required UserSubMealLogEntity? body,
   });
@@ -1449,7 +1469,7 @@ abstract class Bigbum extends ChopperService {
   ///Delete a single UserSubMealLogEntity
   ///@param id
   Future<chopper.Response>
-  deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
   }) {
     return _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity(id: id);
@@ -1459,7 +1479,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @DELETE(path: '/rest/UserSubMealLog/{id}')
   Future<chopper.Response>
-  _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _deleteOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
   });
 
@@ -1469,7 +1489,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserSubMealLogEntity>>
-  getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1495,7 +1515,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserSubMealLog/{id}')
   Future<chopper.Response<UserSubMealLogEntity>>
-  _getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
+      _getOneBaseUserSubMealLogControllerUserSubMealLogEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1513,7 +1533,7 @@ abstract class Bigbum extends ChopperService {
 
   ///
   Future<chopper.Response<ExtractBiodataOutputDto>>
-  UserBiodataController_extractUserBiodata({
+      UserBiodataController_extractUserBiodata({
     required ExtractBiodataInputDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1527,7 +1547,7 @@ abstract class Bigbum extends ChopperService {
   ///
   @POST(path: '/rest/UserBiodata/extractUserBiodata', optionalBody: true)
   Future<chopper.Response<ExtractBiodataOutputDto>>
-  _UserBiodataController_extractUserBiodata({
+      _UserBiodataController_extractUserBiodata({
     @Body() required ExtractBiodataInputDto? body,
   });
 
@@ -1543,7 +1563,7 @@ abstract class Bigbum extends ChopperService {
   ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<GetManyUserBiodataEntityResponseDto>>
-  getManyBaseUserBiodataControllerUserBiodataEntity({
+      getManyBaseUserBiodataControllerUserBiodataEntity({
     List<String>? fields,
     String? s,
     List<String>? filter,
@@ -1587,7 +1607,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserBiodata')
   Future<chopper.Response<GetManyUserBiodataEntityResponseDto>>
-  _getManyBaseUserBiodataControllerUserBiodataEntity({
+      _getManyBaseUserBiodataControllerUserBiodataEntity({
     @Query('fields') List<String>? fields,
     @Query('s') String? s,
     @Query('filter') List<String>? filter,
@@ -1602,7 +1622,7 @@ abstract class Bigbum extends ChopperService {
 
   ///Create a single UserBiodataEntity
   Future<chopper.Response<UserBiodataEntity>>
-  createOneBaseUserBiodataControllerUserBiodataEntity({
+      createOneBaseUserBiodataControllerUserBiodataEntity({
     required CreateUserBiodataDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1616,13 +1636,13 @@ abstract class Bigbum extends ChopperService {
   ///Create a single UserBiodataEntity
   @POST(path: '/rest/UserBiodata', optionalBody: true)
   Future<chopper.Response<UserBiodataEntity>>
-  _createOneBaseUserBiodataControllerUserBiodataEntity({
+      _createOneBaseUserBiodataControllerUserBiodataEntity({
     @Body() required CreateUserBiodataDto? body,
   });
 
   ///Create multiple UserBiodataEntities
   Future<chopper.Response<List<UserBiodataEntity>>>
-  createManyBaseUserBiodataControllerUserBiodataEntity({
+      createManyBaseUserBiodataControllerUserBiodataEntity({
     required CreateManyUserBiodataEntityDto? body,
   }) {
     generatedMapping.putIfAbsent(
@@ -1636,14 +1656,14 @@ abstract class Bigbum extends ChopperService {
   ///Create multiple UserBiodataEntities
   @POST(path: '/rest/UserBiodata/bulk', optionalBody: true)
   Future<chopper.Response<List<UserBiodataEntity>>>
-  _createManyBaseUserBiodataControllerUserBiodataEntity({
+      _createManyBaseUserBiodataControllerUserBiodataEntity({
     @Body() required CreateManyUserBiodataEntityDto? body,
   });
 
   ///Update a single UserBiodataEntity
   ///@param id
   Future<chopper.Response<UserBiodataEntity>>
-  updateOneBaseUserBiodataControllerUserBiodataEntity({
+      updateOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UpdateUserBiodataDto? body,
   }) {
@@ -1662,7 +1682,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PATCH(path: '/rest/UserBiodata/{id}', optionalBody: true)
   Future<chopper.Response<UserBiodataEntity>>
-  _updateOneBaseUserBiodataControllerUserBiodataEntity({
+      _updateOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Body() required UpdateUserBiodataDto? body,
   });
@@ -1670,7 +1690,7 @@ abstract class Bigbum extends ChopperService {
   ///Replace a single UserBiodataEntity
   ///@param id
   Future<chopper.Response<UserBiodataEntity>>
-  replaceOneBaseUserBiodataControllerUserBiodataEntity({
+      replaceOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     required UserBiodataEntity? body,
   }) {
@@ -1689,7 +1709,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @PUT(path: '/rest/UserBiodata/{id}', optionalBody: true)
   Future<chopper.Response<UserBiodataEntity>>
-  _replaceOneBaseUserBiodataControllerUserBiodataEntity({
+      _replaceOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Body() required UserBiodataEntity? body,
   });
@@ -1706,7 +1726,7 @@ abstract class Bigbum extends ChopperService {
   ///@param id
   @DELETE(path: '/rest/UserBiodata/{id}')
   Future<chopper.Response>
-  _deleteOneBaseUserBiodataControllerUserBiodataEntity({
+      _deleteOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
   });
 
@@ -1716,7 +1736,7 @@ abstract class Bigbum extends ChopperService {
   ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   Future<chopper.Response<UserBiodataEntity>>
-  getOneBaseUserBiodataControllerUserBiodataEntity({
+      getOneBaseUserBiodataControllerUserBiodataEntity({
     required num? id,
     List<String>? fields,
     List<String>? join,
@@ -1742,7 +1762,7 @@ abstract class Bigbum extends ChopperService {
   ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
   @GET(path: '/rest/UserBiodata/{id}')
   Future<chopper.Response<UserBiodataEntity>>
-  _getOneBaseUserBiodataControllerUserBiodataEntity({
+      _getOneBaseUserBiodataControllerUserBiodataEntity({
     @Path('id') required num? id,
     @Query('fields') List<String>? fields,
     @Query('join') List<String>? join,
@@ -1771,7 +1791,8 @@ class GetManyAIPromptEntityResponseDto {
 
   factory GetManyAIPromptEntityResponseDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$GetManyAIPromptEntityResponseDtoFromJson(json);
+  ) =>
+      _$GetManyAIPromptEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyAIPromptEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -1981,10 +2002,9 @@ extension $AIPromptEntityExtension on AIPromptEntity {
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
       creationDate:
           (creationDate != null ? creationDate.value : this.creationDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -2162,7 +2182,8 @@ class GetManyUserMealLogEntityResponseDto {
 
   factory GetManyUserMealLogEntityResponseDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$GetManyUserMealLogEntityResponseDtoFromJson(json);
+  ) =>
+      _$GetManyUserMealLogEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyUserMealLogEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -2259,7 +2280,8 @@ class GetManyAIIntegrationLogsEntityResponseDto {
 
   factory GetManyAIIntegrationLogsEntityResponseDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$GetManyAIIntegrationLogsEntityResponseDtoFromJson(json);
+  ) =>
+      _$GetManyAIIntegrationLogsEntityResponseDtoFromJson(json);
 
   static const toJsonFactory =
       _$GetManyAIIntegrationLogsEntityResponseDtoToJson;
@@ -2540,10 +2562,9 @@ extension $UserEntityExtension on UserEntity {
       mobileNumber:
           (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
       password: (password != null ? password.value : this.password),
-      passwordResetCode:
-          (passwordResetCode != null
-              ? passwordResetCode.value
-              : this.passwordResetCode),
+      passwordResetCode: (passwordResetCode != null
+          ? passwordResetCode.value
+          : this.passwordResetCode),
       accountStatus:
           (accountStatus != null ? accountStatus.value : this.accountStatus),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
@@ -2553,10 +2574,9 @@ extension $UserEntityExtension on UserEntity {
           (subscriptionId != null ? subscriptionId.value : this.subscriptionId),
       creationDate:
           (creationDate != null ? creationDate.value : this.creationDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -2756,18 +2776,16 @@ extension $AIIntegrationLogsEntityExtension on AIIntegrationLogsEntity {
       responseType:
           (responseType != null ? responseType.value : this.responseType),
       promptType: (promptType != null ? promptType.value : this.promptType),
-      requestDuration:
-          (requestDuration != null
-              ? requestDuration.value
-              : this.requestDuration),
+      requestDuration: (requestDuration != null
+          ? requestDuration.value
+          : this.requestDuration),
       promptToken: (promptToken != null ? promptToken.value : this.promptToken),
       cost: (cost != null ? cost.value : this.cost),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
       createdDate: (createdDate != null ? createdDate.value : this.createdDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -3030,10 +3048,9 @@ extension $UserMealLogEntityExtension on UserMealLogEntity {
       promptLog: (promptLog != null ? promptLog.value : this.promptLog),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
       createdDate: (createdDate != null ? createdDate.value : this.createdDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -3231,10 +3248,9 @@ extension $CreateAIIntegrationLogDtoExtension on CreateAIIntegrationLogDto {
       response: (response != null ? response.value : this.response),
       responseType:
           (responseType != null ? responseType.value : this.responseType),
-      requestDuration:
-          (requestDuration != null
-              ? requestDuration.value
-              : this.requestDuration),
+      requestDuration: (requestDuration != null
+          ? requestDuration.value
+          : this.requestDuration),
       promptToken: (promptToken != null ? promptToken.value : this.promptToken),
       cost: (cost != null ? cost.value : this.cost),
       promptTypeId:
@@ -3250,7 +3266,8 @@ class CreateManyAIIntegrationLogsEntityDto {
 
   factory CreateManyAIIntegrationLogsEntityDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$CreateManyAIIntegrationLogsEntityDtoFromJson(json);
+  ) =>
+      _$CreateManyAIIntegrationLogsEntityDtoFromJson(json);
 
   static const toJsonFactory = _$CreateManyAIIntegrationLogsEntityDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -3906,10 +3923,9 @@ extension $CreateUserDtoExtension on CreateUserDto {
       mobileNumber:
           (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
       password: (password != null ? password.value : this.password),
-      passwordResetCode:
-          (passwordResetCode != null
-              ? passwordResetCode.value
-              : this.passwordResetCode),
+      passwordResetCode: (passwordResetCode != null
+          ? passwordResetCode.value
+          : this.passwordResetCode),
       accountStatus:
           (accountStatus != null ? accountStatus.value : this.accountStatus),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
@@ -3985,6 +4001,93 @@ class UpdateUserDto {
 }
 
 @JsonSerializable(explicitToJson: true)
+class UpdateUserMealQuestionDto {
+  const UpdateUserMealQuestionDto({
+    required this.id,
+    this.question,
+    this.options,
+    this.answer,
+  });
+
+  factory UpdateUserMealQuestionDto.fromJson(Map<String, dynamic> json) =>
+      _$UpdateUserMealQuestionDtoFromJson(json);
+
+  static const toJsonFactory = _$UpdateUserMealQuestionDtoToJson;
+  Map<String, dynamic> toJson() => _$UpdateUserMealQuestionDtoToJson(this);
+
+  @JsonKey(name: 'id')
+  final double id;
+  @JsonKey(name: 'question')
+  final String? question;
+  @JsonKey(name: 'options', defaultValue: <String>[])
+  final List<String>? options;
+  @JsonKey(name: 'answer')
+  final String? answer;
+  static const fromJsonFactory = _$UpdateUserMealQuestionDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is UpdateUserMealQuestionDto &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.question, question) ||
+                const DeepCollectionEquality().equals(
+                  other.question,
+                  question,
+                )) &&
+            (identical(other.options, options) ||
+                const DeepCollectionEquality().equals(
+                  other.options,
+                  options,
+                )) &&
+            (identical(other.answer, answer) ||
+                const DeepCollectionEquality().equals(other.answer, answer)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(question) ^
+      const DeepCollectionEquality().hash(options) ^
+      const DeepCollectionEquality().hash(answer) ^
+      runtimeType.hashCode;
+}
+
+extension $UpdateUserMealQuestionDtoExtension on UpdateUserMealQuestionDto {
+  UpdateUserMealQuestionDto copyWith({
+    double? id,
+    String? question,
+    List<String>? options,
+    String? answer,
+  }) {
+    return UpdateUserMealQuestionDto(
+      id: id ?? this.id,
+      question: question ?? this.question,
+      options: options ?? this.options,
+      answer: answer ?? this.answer,
+    );
+  }
+
+  UpdateUserMealQuestionDto copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String?>? question,
+    Wrapped<List<String>?>? options,
+    Wrapped<String?>? answer,
+  }) {
+    return UpdateUserMealQuestionDto(
+      id: (id != null ? id.value : this.id),
+      question: (question != null ? question.value : this.question),
+      options: (options != null ? options.value : this.options),
+      answer: (answer != null ? answer.value : this.answer),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetManyUserMealQuestionsEntityResponseDto {
   const GetManyUserMealQuestionsEntityResponseDto({
     required this.data,
@@ -3996,7 +4099,8 @@ class GetManyUserMealQuestionsEntityResponseDto {
 
   factory GetManyUserMealQuestionsEntityResponseDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$GetManyUserMealQuestionsEntityResponseDtoFromJson(json);
+  ) =>
+      _$GetManyUserMealQuestionsEntityResponseDtoFromJson(json);
 
   static const toJsonFactory =
       _$GetManyUserMealQuestionsEntityResponseDtoToJson;
@@ -4216,10 +4320,9 @@ extension $UserMealQuestionsEntityExtension on UserMealQuestionsEntity {
       answer: (answer != null ? answer.value : this.answer),
       userMealLog: (userMealLog != null ? userMealLog.value : this.userMealLog),
       createdDate: (createdDate != null ? createdDate.value : this.createdDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -4295,7 +4398,8 @@ class CreateManyUserMealQuestionsEntityDto {
 
   factory CreateManyUserMealQuestionsEntityDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$CreateManyUserMealQuestionsEntityDtoFromJson(json);
+  ) =>
+      _$CreateManyUserMealQuestionsEntityDtoFromJson(json);
 
   static const toJsonFactory = _$CreateManyUserMealQuestionsEntityDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -4339,93 +4443,6 @@ extension $CreateManyUserMealQuestionsEntityDtoExtension
 }
 
 @JsonSerializable(explicitToJson: true)
-class UpdateUserMealQuestionDto {
-  const UpdateUserMealQuestionDto({
-    required this.id,
-    this.question,
-    this.options,
-    this.answer,
-  });
-
-  factory UpdateUserMealQuestionDto.fromJson(Map<String, dynamic> json) =>
-      _$UpdateUserMealQuestionDtoFromJson(json);
-
-  static const toJsonFactory = _$UpdateUserMealQuestionDtoToJson;
-  Map<String, dynamic> toJson() => _$UpdateUserMealQuestionDtoToJson(this);
-
-  @JsonKey(name: 'id')
-  final double id;
-  @JsonKey(name: 'question')
-  final String? question;
-  @JsonKey(name: 'options', defaultValue: <String>[])
-  final List<String>? options;
-  @JsonKey(name: 'answer')
-  final String? answer;
-  static const fromJsonFactory = _$UpdateUserMealQuestionDtoFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is UpdateUserMealQuestionDto &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.question, question) ||
-                const DeepCollectionEquality().equals(
-                  other.question,
-                  question,
-                )) &&
-            (identical(other.options, options) ||
-                const DeepCollectionEquality().equals(
-                  other.options,
-                  options,
-                )) &&
-            (identical(other.answer, answer) ||
-                const DeepCollectionEquality().equals(other.answer, answer)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(question) ^
-      const DeepCollectionEquality().hash(options) ^
-      const DeepCollectionEquality().hash(answer) ^
-      runtimeType.hashCode;
-}
-
-extension $UpdateUserMealQuestionDtoExtension on UpdateUserMealQuestionDto {
-  UpdateUserMealQuestionDto copyWith({
-    double? id,
-    String? question,
-    List<String>? options,
-    String? answer,
-  }) {
-    return UpdateUserMealQuestionDto(
-      id: id ?? this.id,
-      question: question ?? this.question,
-      options: options ?? this.options,
-      answer: answer ?? this.answer,
-    );
-  }
-
-  UpdateUserMealQuestionDto copyWithWrapped({
-    Wrapped<double>? id,
-    Wrapped<String?>? question,
-    Wrapped<List<String>?>? options,
-    Wrapped<String?>? answer,
-  }) {
-    return UpdateUserMealQuestionDto(
-      id: (id != null ? id.value : this.id),
-      question: (question != null ? question.value : this.question),
-      options: (options != null ? options.value : this.options),
-      answer: (answer != null ? answer.value : this.answer),
-    );
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
 class GetManyUserSubMealLogEntityResponseDto {
   const GetManyUserSubMealLogEntityResponseDto({
     required this.data,
@@ -4437,7 +4454,8 @@ class GetManyUserSubMealLogEntityResponseDto {
 
   factory GetManyUserSubMealLogEntityResponseDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$GetManyUserSubMealLogEntityResponseDtoFromJson(json);
+  ) =>
+      _$GetManyUserSubMealLogEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyUserSubMealLogEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -4702,10 +4720,9 @@ extension $UserSubMealLogEntityExtension on UserSubMealLogEntity {
       mainMeal: (mainMeal != null ? mainMeal.value : this.mainMeal),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
       createdDate: (createdDate != null ? createdDate.value : this.createdDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -4853,7 +4870,8 @@ class CreateManyUserSubMealLogEntityDto {
 
   factory CreateManyUserSubMealLogEntityDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$CreateManyUserSubMealLogEntityDtoFromJson(json);
+  ) =>
+      _$CreateManyUserSubMealLogEntityDtoFromJson(json);
 
   static const toJsonFactory = _$CreateManyUserSubMealLogEntityDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -5042,10 +5060,9 @@ extension $ExtractBiodataInputDtoExtension on ExtractBiodataInputDto {
       weight: (weight != null ? weight.value : this.weight),
       age: (age != null ? age.value : this.age),
       goal: (goal != null ? goal.value : this.goal),
-      physicalActivity:
-          (physicalActivity != null
-              ? physicalActivity.value
-              : this.physicalActivity),
+      physicalActivity: (physicalActivity != null
+          ? physicalActivity.value
+          : this.physicalActivity),
     );
   }
 }
@@ -5234,10 +5251,9 @@ extension $ExtractBiodataOutputDtoExtension on ExtractBiodataOutputDto {
       bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
       muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
       goal: (goal != null ? goal.value : this.goal),
-      physicalActivity:
-          (physicalActivity != null
-              ? physicalActivity.value
-              : this.physicalActivity),
+      physicalActivity: (physicalActivity != null
+          ? physicalActivity.value
+          : this.physicalActivity),
     );
   }
 }
@@ -5254,7 +5270,8 @@ class GetManyUserBiodataEntityResponseDto {
 
   factory GetManyUserBiodataEntityResponseDto.fromJson(
     Map<String, dynamic> json,
-  ) => _$GetManyUserBiodataEntityResponseDtoFromJson(json);
+  ) =>
+      _$GetManyUserBiodataEntityResponseDtoFromJson(json);
 
   static const toJsonFactory = _$GetManyUserBiodataEntityResponseDtoToJson;
   Map<String, dynamic> toJson() =>
@@ -5532,17 +5549,15 @@ extension $UserBiodataEntityExtension on UserBiodataEntity {
       bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
       muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
       goal: (goal != null ? goal.value : this.goal),
-      physicalActivity:
-          (physicalActivity != null
-              ? physicalActivity.value
-              : this.physicalActivity),
+      physicalActivity: (physicalActivity != null
+          ? physicalActivity.value
+          : this.physicalActivity),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
       creationDate:
           (creationDate != null ? creationDate.value : this.creationDate),
-      lastUpdatedDate:
-          (lastUpdatedDate != null
-              ? lastUpdatedDate.value
-              : this.lastUpdatedDate),
+      lastUpdatedDate: (lastUpdatedDate != null
+          ? lastUpdatedDate.value
+          : this.lastUpdatedDate),
       deletedAt: (deletedAt != null ? deletedAt.value : this.deletedAt),
     );
   }
@@ -5695,10 +5710,9 @@ extension $CreateUserBiodataDtoExtension on CreateUserBiodataDto {
       bodyFat: (bodyFat != null ? bodyFat.value : this.bodyFat),
       muscleMass: (muscleMass != null ? muscleMass.value : this.muscleMass),
       goal: (goal != null ? goal.value : this.goal),
-      physicalActivity:
-          (physicalActivity != null
-              ? physicalActivity.value
-              : this.physicalActivity),
+      physicalActivity: (physicalActivity != null
+          ? physicalActivity.value
+          : this.physicalActivity),
       createdBy: (createdBy != null ? createdBy.value : this.createdBy),
     );
   }
@@ -5774,7 +5788,8 @@ class RestAIPromptTestFunctionPost$RequestBody {
 
   factory RestAIPromptTestFunctionPost$RequestBody.fromJson(
     Map<String, dynamic> json,
-  ) => _$RestAIPromptTestFunctionPost$RequestBodyFromJson(json);
+  ) =>
+      _$RestAIPromptTestFunctionPost$RequestBodyFromJson(json);
 
   static const toJsonFactory = _$RestAIPromptTestFunctionPost$RequestBodyToJson;
   Map<String, dynamic> toJson() =>
@@ -5882,9 +5897,8 @@ class $JsonSerializableConverter extends chopper.JsonConverter {
 
     if (ResultType == DateTime) {
       return response.copyWith(
-        body:
-            DateTime.parse((response.body as String).replaceAll('"', ''))
-                as ResultType,
+        body: DateTime.parse((response.body as String).replaceAll('"', ''))
+            as ResultType,
       );
     }
 

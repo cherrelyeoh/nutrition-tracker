@@ -470,6 +470,27 @@ UpdateUserDto _$UpdateUserDtoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$UpdateUserDtoToJson(UpdateUserDto instance) =>
     <String, dynamic>{};
 
+UpdateUserMealQuestionDto _$UpdateUserMealQuestionDtoFromJson(
+        Map<String, dynamic> json) =>
+    UpdateUserMealQuestionDto(
+      id: (json['id'] as num).toDouble(),
+      question: json['question'] as String?,
+      options: (json['options'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      answer: json['answer'] as String?,
+    );
+
+Map<String, dynamic> _$UpdateUserMealQuestionDtoToJson(
+        UpdateUserMealQuestionDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'question': instance.question,
+      'options': instance.options,
+      'answer': instance.answer,
+    };
+
 GetManyUserMealQuestionsEntityResponseDto
     _$GetManyUserMealQuestionsEntityResponseDtoFromJson(
             Map<String, dynamic> json) =>
@@ -558,27 +579,6 @@ Map<String, dynamic> _$CreateManyUserMealQuestionsEntityDtoToJson(
         CreateManyUserMealQuestionsEntityDto instance) =>
     <String, dynamic>{
       'bulk': instance.bulk.map((e) => e.toJson()).toList(),
-    };
-
-UpdateUserMealQuestionDto _$UpdateUserMealQuestionDtoFromJson(
-        Map<String, dynamic> json) =>
-    UpdateUserMealQuestionDto(
-      id: (json['id'] as num).toDouble(),
-      question: json['question'] as String?,
-      options: (json['options'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-      answer: json['answer'] as String?,
-    );
-
-Map<String, dynamic> _$UpdateUserMealQuestionDtoToJson(
-        UpdateUserMealQuestionDto instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'question': instance.question,
-      'options': instance.options,
-      'answer': instance.answer,
     };
 
 GetManyUserSubMealLogEntityResponseDto

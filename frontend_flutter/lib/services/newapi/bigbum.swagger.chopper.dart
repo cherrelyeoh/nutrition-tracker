@@ -695,6 +695,22 @@ final class _$Bigbum extends Bigbum {
   }
 
   @override
+  Future<Response<List<UserMealQuestionsEntity>>>
+      _UserMealQuestionsController_bulkUpdate(
+          {required List<UpdateUserMealQuestionDto>? body}) {
+    final Uri $url = Uri.parse('/rest/UserMealQuestions/bulk-update');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client
+        .send<List<UserMealQuestionsEntity>, UserMealQuestionsEntity>($request);
+  }
+
+  @override
   Future<Response<GetManyUserMealQuestionsEntityResponseDto>>
       _getManyBaseUserMealQuestionsControllerUserMealQuestionsEntity({
     List<String>? fields,

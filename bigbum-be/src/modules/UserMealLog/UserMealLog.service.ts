@@ -156,26 +156,24 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
   ): Promise<MealQuestionResponse> {
     console.log('Parsed Content:', JSON.stringify(parsedContent, null, 2));
 
-    const questions: UserMealQuestionsEntity[] =
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      parsedContent.Result.QuestionsList.map((q: any) => {
-        const entity = new UserMealQuestionsEntity();
-        entity.question = q.Question;
-        entity.options = q.Options;
-        entity.userMealLog = userMealLog;
-        return entity;
-      });
+    const createdQuestions: UserMealQuestionsEntity[] = [];
 
-    for (const question of questions) {
-      await this.userMealQuestionService.create(question);
+    for (const q of parsedContent.Result.QuestionsList) {
+      const entity = new UserMealQuestionsEntity();
+      entity.question = q.Question;
+      entity.options = q.Options;
+      entity.userMealLog = userMealLog;
+
+      const savedQuestion = await this.userMealQuestionService.create(entity);
+      createdQuestions.push(savedQuestion);
     }
 
     return {
       ResponseType: 'Question',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      questionList: parsedContent.Result.QuestionsList.map((q: any) => ({
-        question: q.Question,
-        options: q.Options,
+      questionList: createdQuestions.map((q) => ({
+        id: q.id, // Include ID from DB
+        question: q.question,
+        options: q.options,
       })),
     };
   }

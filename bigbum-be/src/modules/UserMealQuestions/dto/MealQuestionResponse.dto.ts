@@ -11,4 +11,5 @@ export class MealQuestionResponse extends BaseResponseDto {
 export class MealQuestions {
   question: string;
   options: string[];
+  id: number;
 }

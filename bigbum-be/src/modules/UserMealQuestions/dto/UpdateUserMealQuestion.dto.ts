@@ -4,11 +4,12 @@ import {
   IsArray,
   IsNotEmpty,
   IsNumber,
+  IsInt,
 } from 'class-validator';
 
 export class UpdateUserMealQuestionDto {
   @IsNotEmpty()
-  @IsNumber()
+  @IsInt()
   id: number;
 
   @IsOptional()
