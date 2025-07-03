@@ -177,6 +177,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
   Future<void> _loadMealData() async {
     //This is for flow when user picks meal from meal_calendar page
     if (widget.mealLog == null) {
+      debugPrint('Flow coming from mealCalendarMain');
       // final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
       final bigbumService = Bigbum.create(
         baseUrl:
@@ -185,7 +186,8 @@ class _FoodScanResultsState extends State<FoodScanResults> {
       try {
         // hardcoded value - please remove once implementation is done
         final response = await bigbumService
-            .getOneBaseUserMealLogControllerUserMealLogEntity(id: 4);
+            .getOneBaseUserMealLogControllerUserMealLogEntity(
+                id: widget.mealId);
         if (response.isSuccessful && response.body != null) {
           final userMealLog = response.body!;
 

@@ -10,6 +10,11 @@ class MealCalendarWidget extends StatefulWidget {
   final String? imagePathFats;
   final String mealType;
   final String mealIcon;
+  final VoidCallback? onToggleMeals;
+  final bool isExpanded;
+  final String? proteinTotalAmount;
+  final String? carbsTotalAmount;
+  final String? fatsTotalAmount;
 
   const MealCalendarWidget({
     super.key,
@@ -20,6 +25,11 @@ class MealCalendarWidget extends StatefulWidget {
     this.imagePathFats,
     required this.mealType,
     required this.mealIcon,
+    this.onToggleMeals,
+    required this.isExpanded,
+    this.proteinTotalAmount,
+    this.carbsTotalAmount,
+    this.fatsTotalAmount,
   });
 
   @override
@@ -31,12 +41,15 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
   @override
   void initState() {
     super.initState();
+  }
 
-    macros = [
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> macros = [
       {
         'title': 'Protein',
-        'amount': '400',
-        'totalAmount': '500',
+        'amount': widget.proteinTotalAmount,
+        'totalAmount': '80',
         'icon': Icons.fitness_center,
         'color': Colors.white,
         'barColor2': const Color(0xFFC7B290),
@@ -44,8 +57,8 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
       },
       {
         'title': 'Carbs',
-        'amount': '250',
-        'totalAmount': '350',
+        'amount': widget.carbsTotalAmount,
+        'totalAmount': '75',
         'icon': Icons.fastfood,
         'color': const Color(0xFFB28F5E),
         'barColor1': const Color(0xFFC7B290),
@@ -53,18 +66,14 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
       },
       {
         'title': 'Fats',
-        'amount': '40',
-        'totalAmount': '100',
+        'amount': widget.fatsTotalAmount,
+        'totalAmount': '40',
         'icon': Icons.local_pizza,
         'color': const Color(0xFFC7B290),
         'barColor2': const Color(0xFFC49A2C),
         'barColor1': const Color(0xFFC7B290),
       },
     ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
       width: 355,
       height: 183,
@@ -103,18 +112,26 @@ class _MealCalendarWidgetState extends State<MealCalendarWidget> {
               ),
               Row(
                 children: [
-                  Container(
-                    width: 24,
-                    height: 24,
-                    decoration: const ShapeDecoration(
-                      color: Color(0xFFFE6C6C),
-                      shape: OvalBorder(),
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.more_horiz,
-                        size: 16,
-                        color: Colors.white,
+                  GestureDetector(
+                    onTap: () {
+                      debugPrint("More button clicked for ${widget.mealType}");
+                      if (widget.onToggleMeals != null) {
+                        widget.onToggleMeals!();
+                      }
+                    },
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: const ShapeDecoration(
+                        color: Color(0xFFFE6C6C),
+                        shape: OvalBorder(),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.more_horiz,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

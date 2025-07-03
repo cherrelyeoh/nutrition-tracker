@@ -84,7 +84,6 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   void initState() {
     super.initState();
-    // fetchData();
   }
 
   @override
