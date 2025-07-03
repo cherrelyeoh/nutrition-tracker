@@ -5,7 +5,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
-import 'package:fluttertest/services/api/export.dart';
+import 'package:fluttertest/services/api/export.dart' hide UserMealInputDto;
+import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
 
@@ -36,7 +37,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
   @override
   void initState() {
     super.initState();
-    selectedMealType = widget.mealType; // ✅ Use param if provided
+    selectedMealType = widget.mealType;
     if (selectedMealType != null) {
       mealTypeController.text = selectedMealType!;
     }
@@ -75,7 +76,8 @@ class _FoodScanMainState extends State<FoodScanMain> {
         mealImage: base64Image,
         mealName: mealNameController.text,
         userMealId: null,
-        dateOfMeal: DateTime.now());
+        dateOfMeal: DateTime.now(),
+        mealType: mealTypeController.text);
 
     final dio = Dio();
 
@@ -85,11 +87,20 @@ class _FoodScanMainState extends State<FoodScanMain> {
 
     final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
 
+    final bigbumService = Bigbum.create(
+      baseUrl:
+          Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
+    );
+
     try {
-      final mealLog = await client.userMealLogControllerExtractNutrientDetails(
-          body: mealScanObject);
+      final response =
+          await bigbumService.UserMealLogController_extractNutrientDetails(
+              body: mealScanObject);
+      // final mealLog = await client.userMealLogControllerExtractNutrientDetails(
+      //     body: mealScanObject);
+      final mealLog = response.body;
       debugPrint("Meal logged!");
-      debugPrint(jsonEncode(mealLog)); //
+      debugPrint("🔁 Response: $mealLog"); //
       // if (mealLog.responseType == "Question") {
       //   debugPrint('The Scanning returned a question');
       // } else {
@@ -103,7 +114,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
             mealImage: base64Image,
             mealName: mealNameController.text,
             mealDescription:
-                mealLog.body.mainMeal?.comments ?? 'No description available',
+                mealLog['mainMeal']?['comments'] ?? 'No description available',
             mealId: mealScanObject.userMealId,
           ),
         ),
@@ -123,67 +134,13 @@ class _FoodScanMainState extends State<FoodScanMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.grey[900],
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 0,
-      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Custom Header
-              // SizedBox(
-              //   width: double.infinity,
-              //   height: 30,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       GestureDetector(
-              //         onTap: () {
-              //           debugPrint("Going back to home page...");
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //                 builder: (context) => const MainHomePage()),
-              //           );
-              //         },
-              //         child: SvgPicture.asset(
-              //           'assets/img/arrow-left.svg',
-              //           width: 12,
-              //           height: 12,
-              //         ),
-              //       ),
-              //       const SizedBox(width: 20),
-              //       const Expanded(
-              //         // Forces "Dinner" to take up available space
-              //         child: Text(
-              //           'Dinner',
-              //           style: TextStyle(
-              //             color: Color(0xFFFE6C6C),
-              //             fontSize: 22,
-              //             fontWeight: FontWeight.w600,
-              //           ),
-              //           textAlign: TextAlign.start,
-              //         ),
-              //       ),
-              //       const Row(
-              //         children: [
-              //           Icon(Icons.notifications,
-              //               size: 27, color: Color(0xFFFE6C6C)),
-              //           SizedBox(width: 15),
-              //           Icon(Icons.settings,
-              //               size: 27, color: Color(0xFFFE6C6C)),
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              // ),
-
               const SizedBox(height: 20),
-
               const Center(
                 child: Text(
                   'Food Logging',
@@ -193,9 +150,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
               Center(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -247,9 +202,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
                   },
                 ),
               ),
-
               const SizedBox(height: 15),
-
               Container(
                 width: double.infinity,
                 decoration: ShapeDecoration(
@@ -398,9 +351,7 @@ class _FoodScanMainState extends State<FoodScanMain> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 30),
-
               Center(
                 child: ElevatedButton(
                   onPressed: isLoading ? null : mealScan,
@@ -422,7 +373,6 @@ class _FoodScanMainState extends State<FoodScanMain> {
                         ),
                 ),
               ),
-
               const SizedBox(height: 30)
             ],
           ),
