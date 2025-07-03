@@ -14,11 +14,14 @@ class UserSessionDto {
     required this.emailAddress,
     required this.mobileNumber,
     required this.accountStatus,
+    //This function contains bug. Subscription ID should be optional but required
+
     required this.subscriptionId,
   });
-  
-  factory UserSessionDto.fromJson(Map<String, Object?> json) => _$UserSessionDtoFromJson(json);
-  
+
+  factory UserSessionDto.fromJson(Map<String, Object?> json) =>
+      _$UserSessionDtoFromJson(json);
+
   final num id;
   final String name;
   final String emailAddress;
