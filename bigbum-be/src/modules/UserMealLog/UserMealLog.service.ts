@@ -121,8 +121,9 @@ export class UserMealLogService extends TypeOrmCrudService<UserMealLogEntity> {
       rawContent.ResponseType === 'NutrientResult'
     ) {
       let userMealLog: UserMealLogEntity = {
-        mealType: input.mealName,
+        mealType: input.mealType,
         mealImage: input.mealImage,
+        mealName: input.mealName,
         dateOfMeal: input.dateOfMeal,
         createdBy: user,
         promptLog: aiLog,

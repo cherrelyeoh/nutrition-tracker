@@ -39,7 +39,7 @@ dart run build_runner clean
 dart run swagger_parser
 dart run build_runner build --delete-conflicting-outputs
 
-dart run build_runner clean; dart run swagger_parser; dart run build_runner build --delete-conflicting-outputs
+dart run build_runner clean;  dart run build_runner build --delete-conflicting-outputs
 
 
 Invoke-WebRequest -Uri http://localhost:3000/api-json -OutFile lib/services/swagger/bigbum.swagger

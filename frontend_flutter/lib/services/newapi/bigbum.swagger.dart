@@ -1,6 +1,7 @@
 // ignore_for_file: type=lint
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart' as json;
 import 'package:collection/collection.dart';
 import 'dart:convert';
 
@@ -9,6 +10,7 @@ import 'package:chopper/chopper.dart';
 import 'client_mapping.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show MultipartFile;
 import 'package:chopper/chopper.dart' as chopper;
 
 part 'bigbum.swagger.chopper.dart';
@@ -2039,6 +2041,7 @@ class UserMealInputDto {
     this.userMealId,
     this.mealImage,
     required this.mealName,
+    required this.mealType,
     required this.dateOfMeal,
   });
 
@@ -2056,6 +2059,8 @@ class UserMealInputDto {
   final String? mealImage;
   @JsonKey(name: 'mealName')
   final String mealName;
+  @JsonKey(name: 'mealType')
+  final String mealType;
   @JsonKey(name: 'dateOfMeal')
   final DateTime dateOfMeal;
   static const fromJsonFactory = _$UserMealInputDtoFromJson;
@@ -2081,6 +2086,11 @@ class UserMealInputDto {
                   other.mealName,
                   mealName,
                 )) &&
+            (identical(other.mealType, mealType) ||
+                const DeepCollectionEquality().equals(
+                  other.mealType,
+                  mealType,
+                )) &&
             (identical(other.dateOfMeal, dateOfMeal) ||
                 const DeepCollectionEquality().equals(
                   other.dateOfMeal,
@@ -2097,6 +2107,7 @@ class UserMealInputDto {
       const DeepCollectionEquality().hash(userMealId) ^
       const DeepCollectionEquality().hash(mealImage) ^
       const DeepCollectionEquality().hash(mealName) ^
+      const DeepCollectionEquality().hash(mealType) ^
       const DeepCollectionEquality().hash(dateOfMeal) ^
       runtimeType.hashCode;
 }
@@ -2107,6 +2118,7 @@ extension $UserMealInputDtoExtension on UserMealInputDto {
     double? userMealId,
     String? mealImage,
     String? mealName,
+    String? mealType,
     DateTime? dateOfMeal,
   }) {
     return UserMealInputDto(
@@ -2114,6 +2126,7 @@ extension $UserMealInputDtoExtension on UserMealInputDto {
       userMealId: userMealId ?? this.userMealId,
       mealImage: mealImage ?? this.mealImage,
       mealName: mealName ?? this.mealName,
+      mealType: mealType ?? this.mealType,
       dateOfMeal: dateOfMeal ?? this.dateOfMeal,
     );
   }
@@ -2123,6 +2136,7 @@ extension $UserMealInputDtoExtension on UserMealInputDto {
     Wrapped<double?>? userMealId,
     Wrapped<String?>? mealImage,
     Wrapped<String>? mealName,
+    Wrapped<String>? mealType,
     Wrapped<DateTime>? dateOfMeal,
   }) {
     return UserMealInputDto(
@@ -2130,6 +2144,7 @@ extension $UserMealInputDtoExtension on UserMealInputDto {
       userMealId: (userMealId != null ? userMealId.value : this.userMealId),
       mealImage: (mealImage != null ? mealImage.value : this.mealImage),
       mealName: (mealName != null ? mealName.value : this.mealName),
+      mealType: (mealType != null ? mealType.value : this.mealType),
       dateOfMeal: (dateOfMeal != null ? dateOfMeal.value : this.dateOfMeal),
     );
   }

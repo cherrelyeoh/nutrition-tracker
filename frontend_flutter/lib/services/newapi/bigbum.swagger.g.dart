@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: prefer_const_constructors
-
 part of 'bigbum.swagger.dart';
 
 // **************************************************************************
@@ -76,6 +74,7 @@ UserMealInputDto _$UserMealInputDtoFromJson(Map<String, dynamic> json) =>
       userMealId: (json['userMealId'] as num?)?.toDouble(),
       mealImage: json['mealImage'] as String?,
       mealName: json['mealName'] as String,
+      mealType: json['mealType'] as String,
       dateOfMeal: DateTime.parse(json['dateOfMeal'] as String),
     );
 
@@ -85,6 +84,7 @@ Map<String, dynamic> _$UserMealInputDtoToJson(UserMealInputDto instance) =>
       'userMealId': instance.userMealId,
       'mealImage': instance.mealImage,
       'mealName': instance.mealName,
+      'mealType': instance.mealType,
       'dateOfMeal': instance.dateOfMeal.toIso8601String(),
     };
 
