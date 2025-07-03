@@ -65,6 +65,7 @@ class _AuthenticationClient implements AuthenticationClient {
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late LoginResponseDto _value;
     try {
+      //This function contains bug. Subscription ID should be optional but required
       _value = LoginResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
