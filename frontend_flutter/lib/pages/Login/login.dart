@@ -41,7 +41,8 @@ class _LoginPageState extends State<LoginPage> {
     debugPrint("Login Email ${emailController.text}");
     debugPrint("Login Password ${passwordController.text}");
 
-    final client = AuthenticationClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+    final client =
+        AuthenticationClient(dio, baseUrl: 'https://bigbum-npow.onrender.com/');
 
     try {
       final user = await client.userControllerLogin(body: loginData);

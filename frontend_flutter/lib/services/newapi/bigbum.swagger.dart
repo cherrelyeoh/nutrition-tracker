@@ -1,7 +1,6 @@
 // ignore_for_file: type=lint
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:json_annotation/json_annotation.dart' as json;
 import 'package:collection/collection.dart';
 import 'dart:convert';
 
@@ -10,7 +9,6 @@ import 'package:chopper/chopper.dart';
 import 'client_mapping.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart' show MultipartFile;
 import 'package:chopper/chopper.dart' as chopper;
 
 part 'bigbum.swagger.chopper.dart';
@@ -42,7 +40,7 @@ abstract class Bigbum extends ChopperService {
       client: httpClient,
       authenticator: authenticator,
       errorConverter: errorConverter,
-      baseUrl: baseUrl ?? Uri.parse("http://10.0.2.2:3000"),
+      baseUrl: baseUrl ?? Uri.parse("https://bigbum-npow.onrender.com/"),
     );
     return _$Bigbum(newClient);
   }

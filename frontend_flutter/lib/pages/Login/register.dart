@@ -64,7 +64,8 @@ class _RegisterPageState extends State<RegisterPage> {
     debugPrint("Password ${passwordController.text}");
     debugPrint("Phone ${numberController.text}");
 
-    final client = AuthenticationClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+    final client =
+        AuthenticationClient(dio, baseUrl: 'https://bigbum-npow.onrender.com/');
 
     try {
       final user = await client.userControllerSignUp(body: signUpData);

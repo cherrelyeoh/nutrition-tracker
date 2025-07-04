@@ -238,8 +238,8 @@ class _FoodScanResultsState extends State<FoodScanResults> {
       // This is for for flow when user selects meal from calendar
 
       if (widget.mealLog == null) {
-        final subMealClient =
-            UserSubMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+        final subMealClient = UserSubMealLogClient(dio,
+            baseUrl: 'https://bigbum-npow.onrender.com/');
         final subMealLogs = await subMealClient
             .userSubMealLogControllerGetByMainMealId(id: mealId!);
 

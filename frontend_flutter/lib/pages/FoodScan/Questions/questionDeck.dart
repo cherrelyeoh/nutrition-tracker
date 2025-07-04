@@ -23,10 +23,7 @@ class _QuestionDeckState extends State<QuestionDeck> {
   int currentIndex = 0;
   Map<int, String> selectedAnswers = {};
 
-  final bigbumService = Bigbum.create(
-    baseUrl:
-        Uri.parse('http://10.0.2.2:3000'), // Replace with your API base URL
-  );
+  final bigbumService = Bigbum.create();
   void handleAnswer(String answer) async {
     final currentQuestion = widget.questions[currentIndex];
     final questionId = currentQuestion['id'];
@@ -83,7 +80,7 @@ class _QuestionDeckState extends State<QuestionDeck> {
           debugPrint("🔸 UserMealLog ID: ${q.userMealLog.id}");
         }
 
-        final mealId = questions.first.userMealLog?.id?.toDouble() ?? 0.0;
+        final mealId = questions.first.userMealLog.id?.toDouble() ?? 0.0;
         debugPrint("✅ Extracted mealId: $mealId");
 
         widget.onCompleted?.call(mealId);

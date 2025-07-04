@@ -90,12 +90,12 @@ class _BodyScanMainState extends State<BodyScanMain> {
     debugPrint("MealImage $base64Image");
     debugPrint("MealName ${mealNameController.text}");
 
-    final client = UserBiodataClient(dio, baseUrl: 'http://10.0.2.2:3000/');
+    // final client = UserBiodataClient(dio, baseUrl: 'http://10.0.2.2:3000/');
 
     try {
-      final bodyScanResult = await client
-          .userBiodataControllerExtractUserBiodata(body: bodyScanObject);
-      debugPrint("Body Scan!");
+      // final bodyScanResult = await client
+      //     .userBiodataControllerExtractUserBiodata(body: bodyScanObject);
+      // debugPrint("Body Scan!");
       // debugPrint(jsonEncode(bodyScanResult));
     } on DioException catch (e) {
       final statusCode = e.response?.statusCode;
