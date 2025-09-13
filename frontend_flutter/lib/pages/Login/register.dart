@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertest/pages/Login/login.dart';
 import 'package:fluttertest/pages/UserOnboarding/intro_onboarding.dart';
 import 'package:fluttertest/services/api/authentication/authentication_client.dart';
@@ -64,8 +65,10 @@ class _RegisterPageState extends State<RegisterPage> {
     debugPrint("Password ${passwordController.text}");
     debugPrint("Phone ${numberController.text}");
 
-    final client =
-        AuthenticationClient(dio, baseUrl: 'https://bigbum-npow.onrender.com/');
+    final client = AuthenticationClient(
+      dio,
+      baseUrl: dotenv.env['BASE_URL'] ?? 'http://10.0.2.2:3000',
+    );
 
     try {
       final user = await client.userControllerSignUp(body: signUpData);

@@ -10,6 +10,8 @@ import { AIIntegrationLogsModule } from './modules/AIIntegrationLogs/AIIntegrati
 import { UserModule } from './modules/User/User.module';
 import { UserMealQuestionsModule } from './modules/UserMealQuestions/UserMealQuestions.module';
 import { UserBiodataModule } from './modules/UserBiodata/UserBiodata.module';
+import { AutomapperModule } from '@automapper/nestjs';
+import { classes } from '@automapper/classes';
 
 @Module({
   imports: [

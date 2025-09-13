@@ -7,7 +7,7 @@ part of 'ai_prompt_entity.dart';
 // **************************************************************************
 
 AIPromptEntity _$AIPromptEntityFromJson(Map<String, dynamic> json) =>
-    const AIPromptEntity();
+    AIPromptEntity();
 
 Map<String, dynamic> _$AIPromptEntityToJson(AIPromptEntity instance) =>
     <String, dynamic>{};

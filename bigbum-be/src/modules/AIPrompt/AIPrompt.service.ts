@@ -46,4 +46,6 @@ export class AIPromptService extends TypeOrmCrudService<AIPromptEntity> {
       throw new Error('Failed to convert image to Base64');
     }
   }
+
+  async;
 }

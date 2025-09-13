@@ -240,82 +240,59 @@ If the input is invalid or cannot be processed, respond in the following error f
     prompt: string,
   ): Promise<any> {
     return {
-      id: 'chatcmpl-BABdymPYvyhcE4zZUV0JfWL6zE0eV',
+      id: 'chatcmpl-BpEoyM0VW73Lw9ecrHUeHZca8xkNA',
       object: 'chat.completion',
-      created: 1741767738,
+      created: 1751551400,
       model: 'gpt-4o-2024-08-06',
       choices: [
         {
           index: 0,
           message: {
             role: 'assistant',
-            content: `{
-  "ResponseType": "NutrientResult",
-  "Result": {
-    "Protein": "35",
-    "Carbs": "65",
-    "Fats": "25",
-    "Calories": "800",
-    "Comments": "This is a balanced meal with a good mix of macronutrients.",
-    "Grade": 4,
-    "FoodDescription": [
-      {
-        "Salmon": {
-          "Weight": "100g",
-          "Calories": "200kcal",
-          "Protein": "20g",
-          "Fats": "13g",
-          "Carbs": "0g"
-        }
-      },
-      {
-        "Rice": {
-          "Weight": "100g",
-          "Calories": "130kcal",
-          "Protein": "3g",
-          "Fats": "1g",
-          "Carbs": "28g"
-        }
-      },
-      {
-        "Salad": {
-          "Weight": "50g",
-          "Calories": "50kcal",
-          "Protein": "1g",
-          "Fats": "0g",
-          "Carbs": "12g"
-        }
-      },
-      {
-        "Pickled Vegetables": {
-          "Weight": "30g",
-          "Calories": "20kcal",
-          "Protein": "0g",
-          "Fats": "0g",
-          "Carbs": "5g"
-        }
-      },
-      {
-        "Sushi Rolls": {
-          "Weight": "80g",
-          "Calories": "400kcal",
-          "Protein": "11g",
-          "Fats": "11g",
-          "Carbs": "20g"
-        }
-      }
-    ]
-  }
-}`,
+            content: JSON.stringify({
+              ResponseType: 'Question',
+              Result: {
+                QuestionsList: [
+                  {
+                    Question: 'What type of rice is this?',
+                    Options: [
+                      'White Rice',
+                      'Brown Rice',
+                      'Fried Rice',
+                      'Sushi Rice',
+                    ],
+                  },
+                  {
+                    Question: 'How much chicken is on the plate?',
+                    Options: ['50g', '100g', '150g', '200g'],
+                  },
+                  {
+                    Question: 'How much rice is on the plate?',
+                    Options: ['50g', '100g', '150g', '200g'],
+                  },
+                  {
+                    Question: 'Is there any dressing or sauce on the chicken?',
+                    Options: [
+                      'Soy Sauce',
+                      'No Sauce',
+                      'Curry Sauce',
+                      'Chili Sauce',
+                    ],
+                  },
+                ],
+              },
+            }),
+            refusal: null,
+            annotations: [],
           },
-          refusal: null,
-          annotations: [],
+          logprobs: null,
+          finish_reason: 'stop',
         },
       ],
       usage: {
-        prompt_tokens: 1199,
-        completion_tokens: 366,
-        total_tokens: 1565,
+        prompt_tokens: 726,
+        completion_tokens: 178,
+        total_tokens: 904,
         prompt_tokens_details: {
           cached_tokens: 0,
           audio_tokens: 0,
@@ -328,7 +305,7 @@ If the input is invalid or cannot be processed, respond in the following error f
         },
       },
       service_tier: 'default',
-      system_fingerprint: 'fp_fc9f1d7035',
+      system_fingerprint: 'fp_a288987b44',
     };
   }
 

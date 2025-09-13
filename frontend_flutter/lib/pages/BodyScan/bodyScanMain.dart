@@ -5,7 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertest/pages/Homepage/main.dart';
-import 'package:fluttertest/services/api/export.dart';
+// import 'package:fluttertest/services/api/export.dart';
+import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
 
@@ -99,8 +100,11 @@ class _BodyScanMainState extends State<BodyScanMain> {
       // debugPrint(jsonEncode(bodyScanResult));
     } on DioException catch (e) {
       final statusCode = e.response?.statusCode;
-      debugPrint('❌ Body Scan Failed with: $statusCode');
+      debugPrint('❌ DioException - Status: $statusCode');
       debugPrint('Response data: ${e.response?.data}');
+    } catch (e, stack) {
+      debugPrint('❌ Unexpected error: $e');
+      debugPrint('🪵 Stacktrace: $stack');
     }
 
     setState(() {

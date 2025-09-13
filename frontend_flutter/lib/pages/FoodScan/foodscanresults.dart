@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertest/services/api/user_sub_meal_log/user_sub_meal_log_client.dart';
 import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/meallog_mealcard.dart';
@@ -239,7 +240,8 @@ class _FoodScanResultsState extends State<FoodScanResults> {
 
       if (widget.mealLog == null) {
         final subMealClient = UserSubMealLogClient(dio,
-            baseUrl: 'https://bigbum-npow.onrender.com/');
+            baseUrl: dotenv.env['BASE_URL'] ?? 'http://10.0.2.2:3000');
+
         final subMealLogs = await subMealClient
             .userSubMealLogControllerGetByMainMealId(id: mealId!);
 

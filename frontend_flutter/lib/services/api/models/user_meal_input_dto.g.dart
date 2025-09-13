@@ -9,7 +9,7 @@ part of 'user_meal_input_dto.dart';
 UserMealInputDto _$UserMealInputDtoFromJson(Map<String, dynamic> json) =>
     UserMealInputDto(
       userId: json['userId'] as num,
-      userMealId: json['userMealId'] as num,
+      userMealId: json['userMealId'] as num?,
       mealImage: json['mealImage'] as String,
       mealName: json['mealName'] as String,
       dateOfMeal: DateTime.parse(json['dateOfMeal'] as String),

@@ -1,5 +1,6 @@
 // ignore_for_file: type=lint
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:collection/collection.dart';
 import 'dart:convert';
@@ -32,6 +33,7 @@ abstract class Bigbum extends ChopperService {
     if (client != null) {
       return _$Bigbum(client);
     }
+    final envBaseUrl = dotenv.env['BASE_URL'] ?? "http://10.0.2.2:3000";
 
     final newClient = ChopperClient(
       services: [_$Bigbum()],
@@ -40,7 +42,7 @@ abstract class Bigbum extends ChopperService {
       client: httpClient,
       authenticator: authenticator,
       errorConverter: errorConverter,
-      baseUrl: baseUrl ?? Uri.parse("https://bigbum-npow.onrender.com/"),
+      baseUrl: baseUrl ?? Uri.parse(envBaseUrl),
     );
     return _$Bigbum(newClient);
   }

@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/services/api/export.dart';
@@ -41,8 +42,10 @@ class _LoginPageState extends State<LoginPage> {
     debugPrint("Login Email ${emailController.text}");
     debugPrint("Login Password ${passwordController.text}");
 
-    final client =
-        AuthenticationClient(dio, baseUrl: 'https://bigbum-npow.onrender.com/');
+    final client = AuthenticationClient(
+      dio,
+      baseUrl: dotenv.env['BASE_URL'] ?? 'http://10.0.2.2:3000',
+    );
 
     try {
       final user = await client.userControllerLogin(body: loginData);

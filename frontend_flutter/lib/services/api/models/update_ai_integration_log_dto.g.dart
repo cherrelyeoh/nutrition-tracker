@@ -8,7 +8,7 @@ part of 'update_ai_integration_log_dto.dart';
 
 UpdateAIIntegrationLogDto _$UpdateAIIntegrationLogDtoFromJson(
         Map<String, dynamic> json) =>
-    const UpdateAIIntegrationLogDto();
+    UpdateAIIntegrationLogDto();
 
 Map<String, dynamic> _$UpdateAIIntegrationLogDtoToJson(
         UpdateAIIntegrationLogDto instance) =>

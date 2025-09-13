@@ -7,7 +7,7 @@ part of 'update_user_dto.dart';
 // **************************************************************************
 
 UpdateUserDto _$UpdateUserDtoFromJson(Map<String, dynamic> json) =>
-    const UpdateUserDto();
+    UpdateUserDto();
 
 Map<String, dynamic> _$UpdateUserDtoToJson(UpdateUserDto instance) =>
     <String, dynamic>{};

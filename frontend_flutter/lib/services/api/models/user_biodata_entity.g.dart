@@ -7,7 +7,7 @@ part of 'user_biodata_entity.dart';
 // **************************************************************************
 
 UserBiodataEntity _$UserBiodataEntityFromJson(Map<String, dynamic> json) =>
-    const UserBiodataEntity();
+    UserBiodataEntity();
 
 Map<String, dynamic> _$UserBiodataEntityToJson(UserBiodataEntity instance) =>
     <String, dynamic>{};
