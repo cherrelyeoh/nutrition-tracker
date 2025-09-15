@@ -21,12 +21,22 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isLoading = false;
+  bool isButtonDisabled = true;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    emailController.addListener(_checkFields);
+    passwordController.addListener(_checkFields);
+  }
+
+  void _checkFields() {
+    setState(() {
+      isButtonDisabled =
+          emailController.text.isEmpty || passwordController.text.isEmpty;
+    });
   }
 
   Future<void> loginUser() async {
@@ -36,7 +46,9 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     final loginData = LoginDto(
-        emailAddress: emailController.text, password: passwordController.text);
+      emailAddress: emailController.text,
+      password: passwordController.text,
+    );
 
     final dio = Dio();
     debugPrint("Login Email ${emailController.text}");
@@ -48,9 +60,20 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     try {
-      final user = await client.userControllerLogin(body: loginData);
+      // Perform the login request with a timeout of 20 seconds
+      final user = await client.userControllerLogin(body: loginData).timeout(
+        const Duration(seconds: 20), // Set the timeout to 20 seconds
+        onTimeout: () {
+          throw DioException(
+            requestOptions: RequestOptions(path: ''),
+            error: 'Request Timeout: The server took too long to respond.',
+          );
+        },
+      );
       debugPrint("User trying to login!");
       debugPrint("🔁 Response: ${jsonEncode(user)}");
+
+      // If login is successful, navigate to the next screen
       final userId = user.user.id;
       final userName = user.user.name;
 
@@ -58,21 +81,77 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => BaseScreen(
-                  userId: userId,
-                  userName: userName,
-                )),
+          builder: (context) => BaseScreen(
+            userId: userId,
+            userName: userName,
+          ),
+        ),
       );
     } on DioException catch (e) {
-      // Access status code from DioError
+      // Handle DioException specifically
       final statusCode = e.response?.statusCode;
-      debugPrint('❌ Registration failed with status: $statusCode');
-      debugPrint('Response data: ${e.response?.data}');
-    }
+      String errorMessage = 'An error occurred, please try again later.';
 
-    setState(() {
-      isLoading = false;
-    });
+      // Handle different error statuses or messages
+      if (statusCode == 401 || statusCode == 404) {
+        errorMessage = 'Invalid username or password. Please try again.';
+      } else if (statusCode == 400) {
+        errorMessage =
+            'Bad request: Please check your login username or password.';
+      } else if (statusCode == 500) {
+        errorMessage = 'Server error: Please try again later.';
+      }
+
+      debugPrint('❌ Login failed with status: $statusCode');
+      debugPrint('Response data: ${e.response?.data}');
+
+      // Show error message to the user via a dialog
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Login Failed'),
+            content: Text(errorMessage),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      // Catch any unexpected errors
+      debugPrint('❌ An unexpected error occurred: $e');
+
+      // Show a generic error message
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content:
+                const Text('An unexpected error occurred. Please try again.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } finally {
+      // Always set loading to false after the request finishes
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -167,13 +246,17 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(50),
               ),
               child: ElevatedButton(
-                onPressed: isLoading ? null : loginUser,
+                onPressed: isButtonDisabled || isLoading ? null : loginUser,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFE6C6C),
+                  backgroundColor: isButtonDisabled || isLoading
+                      ? Colors.grey
+                      : const Color(0xFFFE6C6C),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
-                    side: const BorderSide(color: Color(0xFFFE6C6C)),
+                    side: isButtonDisabled || isLoading
+                        ? const BorderSide(color: Colors.grey)
+                        : const BorderSide(color: Color(0xFFFE6C6C)),
                   ),
                   textStyle: const TextStyle(
                     fontSize: 20,
