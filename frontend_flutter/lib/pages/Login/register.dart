@@ -32,25 +32,6 @@ class _RegisterPageState extends State<RegisterPage> {
       isLoading = true;
     });
 
-    // if (nameController.text.isEmpty ||
-    //     emailController.text.isEmpty ||
-    //     passwordController.text.isEmpty ||
-    //     retypePasswordController.text.isEmpty) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text("Please fill in all fields")),
-    //   );
-    //   setState(() => isLoading = false);
-    //   return;
-    // }
-
-    // if (passwordController.text != retypePasswordController.text) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(content: Text("Passwords do not match")),
-    //   );
-    //   setState(() => isLoading = false);
-    //   return;
-    // }
-
     final signUpData = SignUpDto(
       name: nameController.text,
       emailAddress: emailController.text,
