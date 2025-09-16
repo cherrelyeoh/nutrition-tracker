@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/BodyScan/bodyScanMain.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
 import 'package:fluttertest/pages/Login/login.dart';
-import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
 import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/macros_small_widget.dart';
 import 'package:fluttertest/widgets/meal_idea_widget.dart';
@@ -284,7 +283,7 @@ class _MainHomePageState extends State<MainHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
+                            const Text(
                               'Remaining Calories',
                               style: TextStyle(
                                 color: Color(0xFFFE6C6C),
@@ -297,7 +296,7 @@ class _MainHomePageState extends State<MainHomePage> {
                             Text(
                               //TO-DO TO QUERY USER'S PERSONAL CALORIE AMOUNT
                               '${(2500 - (totalCalories ?? 0)).toStringAsFixed(0)}kCal',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFFFFD700),
                                 fontSize: 40,
                                 fontFamily: 'Poppins',

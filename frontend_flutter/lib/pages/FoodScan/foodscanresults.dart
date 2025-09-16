@@ -3,9 +3,15 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertest/models/user_model.dart';
+import 'package:fluttertest/pages/FoodScan/foodScanMain.dart';
+import 'package:fluttertest/pages/Homepage/main.dart';
+import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
 import 'package:fluttertest/services/api/user_sub_meal_log/user_sub_meal_log_client.dart';
 import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
+import 'package:fluttertest/widgets/base/base_app_component.dart';
 import 'package:fluttertest/widgets/meallog_mealcard.dart';
+import 'package:provider/provider.dart';
 
 class MealLog {
   final String responseType;
@@ -178,7 +184,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
   Future<void> _loadMealData() async {
     //This is for flow when user picks meal from meal_calendar page
     if (widget.mealLog == null) {
-      debugPrint('Flow coming from mealCalendarMain');
+      debugPrint('Flow coming from mealCalendarMain/main page logged meals');
       // final client = UserMealLogClient(dio, baseUrl: 'http://10.0.2.2:3000/');
       final bigbumService = Bigbum.create();
       try {
@@ -237,7 +243,6 @@ class _FoodScanResultsState extends State<FoodScanResults> {
     final dio = Dio();
     try {
       // This is for for flow when user selects meal from calendar
-
       if (widget.mealLog == null) {
         final subMealClient = UserSubMealLogClient(dio,
             baseUrl: dotenv.env['BASE_URL'] ?? 'http://10.0.2.2:3000');
@@ -299,6 +304,9 @@ class _FoodScanResultsState extends State<FoodScanResults> {
 
   @override
   Widget build(BuildContext context) {
+    final userModel = Provider.of<UserModel>(context);
+    final userId = userModel.userId;
+    final userName = userModel.userName;
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -397,7 +405,7 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                                   clipBehavior: Clip.antiAlias,
                                   decoration: const BoxDecoration(),
                                   child: const Icon(
-                                    Icons.fastfood, // or any icon you like
+                                    Icons.fastfood,
                                     size: 20,
                                     color: Colors.white,
                                   ),
@@ -720,7 +728,97 @@ class _FoodScanResultsState extends State<FoodScanResults> {
                     ),
                   ),
 
-                  // Custom Header
+                  const SizedBox(height: 20),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0), // Padding from the sides
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .spaceEvenly, // Adjusts space evenly between and around the buttons
+                      children: [
+                        // First Button (only visible when mealLog is null)
+                        widget.mealLog == null
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  // Navigate to first path
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          BaseScreen(initialSelectedIndex: 1),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFFE6C6C),
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  textStyle: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                child: const Text("My Meals"),
+                              )
+                            : const SizedBox.shrink(),
+
+                        // Second Button (only visible when mealLog is not null)
+                        widget.mealLog != null
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  // Navigate to second path
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BaseScreen(
+                                            initialSelectedIndex: 2)),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFFE6C6C),
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  textStyle: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                child: const Text("Button 2"),
+                              )
+                            : const SizedBox.shrink(),
+
+                        // Third Button (always visible)
+                        ElevatedButton(
+                          onPressed: () {
+                            // Navigate to third path
+                            FocusScope.of(context).unfocus();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BaseScreen()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFFE6C6C),
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          child: const Text("Home"),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

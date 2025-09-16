@@ -383,7 +383,7 @@ class _MealCalendarMainState extends State<MealCalendarMain> {
                     const SizedBox(height: 20),
                   ],
                 );
-              }).toList(),
+              }),
             ],
           ),
         ),

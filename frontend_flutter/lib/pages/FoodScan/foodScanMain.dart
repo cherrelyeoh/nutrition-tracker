@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertest/pages/FoodScan/foodScanResults.dart';
-import 'package:fluttertest/services/api/export.dart' hide UserMealInputDto;
 import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
 import 'package:fluttertest/widgets/image_picker_widget.dart';
 import 'dart:convert';
@@ -90,10 +89,12 @@ class _FoodScanMainState extends State<FoodScanMain> {
     final bigbumService = Bigbum.create();
 
     try {
+      debugPrint("Calling Extract Nutrient Details: ");
       final response =
           await bigbumService.UserMealLogController_extractNutrientDetails(
         body: mealScanObject,
       );
+      debugPrint("🔁 Response raw: $response");
 
       final mealLog = response.body;
       debugPrint("🔁 Response: $mealLog");

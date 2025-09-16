@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertest/models/user_model.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/services/api/export.dart';
@@ -13,6 +14,7 @@ import 'package:fluttertest/services/storage/token_storage.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/base/base_app_component.dart';
 import 'package:fluttertest/widgets/login_input.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -82,6 +84,11 @@ class _LoginPageState extends State<LoginPage> {
       final userEmail = authData.emailAddress;
       await TokenStorage.saveTokens(
           authData.accessToken, authData.refreshToken, null);
+
+      Provider.of<UserModel>(context, listen: false).setUserData(
+        userId: userId,
+        userName: userName,
+      );
 
       if (!mounted) return;
       Navigator.pushReplacement(

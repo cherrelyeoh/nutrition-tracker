@@ -4,11 +4,12 @@ import 'package:fluttertest/pages/Homepage/main.dart';
 import 'package:fluttertest/pages/MealCalendar/mealCalendarMain.dart';
 import 'package:fluttertest/widgets/base/custom_app_bar.dart';
 import 'package:fluttertest/widgets/base/custom_bottom_navigation.dart';
+import 'package:provider/provider.dart';
+import 'package:fluttertest/models/user_model.dart'; // Import your UserModel
 
 class BaseScreen extends StatefulWidget {
-  final num userId;
-  final String userName;
-  const BaseScreen({super.key, required this.userId, required this.userName});
+  final int? initialSelectedIndex; // Add this
+  const BaseScreen({super.key, this.initialSelectedIndex = 0});
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
@@ -21,18 +22,99 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   void initState() {
     super.initState();
-    debugPrint('Main page loaded - User id = ${widget.userId}');
-    debugPrint('Main page loaded - Username = ${widget.userName}');
+    // Initialize the _selectedIndex from the passed value
+    _selectedIndex = widget.initialSelectedIndex ?? 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Get the user data from the UserModel provider
+    final userModel = Provider.of<UserModel>(context);
+    final userId = userModel.userId;
+    final userName = userModel.userName;
+
+    debugPrint('Main page loaded - User id = $userId');
+    debugPrint('Main page loaded - Username = $userName');
 
     _pages = [
       PageItem(
-          title: 'Home',
-          page: MainHomePage(userId: widget.userId, userName: widget.userName)),
+        title: 'Home',
+        page: MainHomePage(userId: userId, userName: userName),
+      ),
       PageItem(
-          title: 'Meal Calendar',
-          page: MealCalendarMain(userId: widget.userId)),
+        title: 'Meal Calendar',
+        page: MealCalendarMain(userId: userId),
+      ),
       const PageItem(title: 'Scan Food', page: FoodScanMain()),
     ];
+
+    final screenWidth = MediaQuery.of(context).size.width;
+    final fabSize = screenWidth *
+        0.18; // 18% of screen width, roughly ~72 on standard phones
+
+    return Scaffold(
+      drawer: Drawer(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        child: SafeArea(
+          child: ListView(
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+            children: [
+              _buildDrawerHeader(context),
+              Divider(
+                indent: 10,
+                endIndent: 10,
+                color: Colors.grey.shade300,
+                thickness: 0.5,
+                height: 20,
+              ),
+              _buildDrawerMenuItems(context),
+            ],
+          ),
+        ),
+      ),
+      appBar: CustomAppBar(
+        title: _pages[_selectedIndex].title,
+        profileImageUrl: "https://i.pravatar.cc/150?img=1",
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 5),
+        child: _pages[_selectedIndex].page,
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onItemTapped: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        width: fabSize,
+        height: fabSize,
+        decoration: const ShapeDecoration(
+          color: Color(0xFFEF2A39),
+          shape: OvalBorder(),
+          shadows: [
+            BoxShadow(
+              color: Color(0x66000000),
+              blurRadius: 16,
+              offset: Offset(0, 5),
+              spreadRadius: 5,
+            ),
+          ],
+        ),
+        child: IconButton(
+          icon: const Icon(Icons.add, color: Colors.white),
+          onPressed: () {
+            setState(() {
+              _selectedIndex = 2; // This will navigate to the 'Scan Food' page
+            });
+          },
+        ),
+      ),
+    );
   }
 
   Widget _buildDrawerHeader(BuildContext context) {
@@ -94,76 +176,6 @@ class _BaseScreenState extends State<BaseScreen> {
           },
         ),
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final fabSize = screenWidth *
-        0.18; // 18% of screen width, roughly ~72 on standard phones
-    return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        child: SafeArea(
-          child: ListView(
-            padding:
-                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-            children: [
-              _buildDrawerHeader(context),
-              Divider(
-                indent: 10,
-                endIndent: 10,
-                color: Colors.grey.shade300,
-                thickness: 0.5,
-                height: 20,
-              ),
-              _buildDrawerMenuItems(context),
-            ],
-          ),
-        ),
-      ),
-      appBar: CustomAppBar(
-        title: _pages[_selectedIndex].title,
-        profileImageUrl: "https://i.pravatar.cc/150?img=1",
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 5),
-        child: _pages[_selectedIndex].page,
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        width: fabSize,
-        height: fabSize,
-        decoration: const ShapeDecoration(
-          color: Color(0xFFEF2A39),
-          shape: OvalBorder(),
-          shadows: [
-            BoxShadow(
-              color: Color(0x66000000),
-              blurRadius: 16,
-              offset: Offset(0, 5),
-              spreadRadius: 5,
-            ),
-          ],
-        ),
-        child: IconButton(
-          icon: const Icon(Icons.add, color: Colors.white),
-          onPressed: () {
-            setState(() {
-              _selectedIndex = 2;
-            });
-          },
-        ),
-      ),
     );
   }
 }
