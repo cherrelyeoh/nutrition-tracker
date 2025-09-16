@@ -1187,4 +1187,189 @@ final class _$Bigbum extends Bigbum {
     );
     return client.send<dynamic, dynamic>($request);
   }
+
+  @override
+  Future<Response<AuthLoginResponseDto>> _AuthController_login(
+      {required AuthLoginDto? body}) {
+    final Uri $url = Uri.parse('/rest/Auth/login');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<AuthLoginResponseDto, AuthLoginResponseDto>($request);
+  }
+
+  @override
+  Future<Response<AuthRefreshResponseDto>> _AuthController_refresh(
+      {required AuthRefreshDto? body}) {
+    final Uri $url = Uri.parse('/rest/Auth/refresh');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client
+        .send<AuthRefreshResponseDto, AuthRefreshResponseDto>($request);
+  }
+
+  @override
+  Future<Response<AuthLogoutResponseDto>> _AuthController_logout(
+      {required AuthLogoutDto? body}) {
+    final Uri $url = Uri.parse('/rest/Auth/logout');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<AuthLogoutResponseDto, AuthLogoutResponseDto>($request);
+  }
+
+  @override
+  Future<Response<GetManyAuthEntityResponseDto>>
+      _getManyBaseAuthControllerAuthEntity({
+    List<String>? fields,
+    String? s,
+    List<String>? filter,
+    List<String>? or,
+    List<String>? sort,
+    List<String>? join,
+    int? limit,
+    int? offset,
+    int? page,
+    int? cache,
+  }) {
+    final Uri $url = Uri.parse('/rest/Auth');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'fields': fields,
+      's': s,
+      'filter': filter,
+      'or': or,
+      'sort': sort,
+      'join': join,
+      'limit': limit,
+      'offset': offset,
+      'page': page,
+      'cache': cache,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<GetManyAuthEntityResponseDto,
+        GetManyAuthEntityResponseDto>($request);
+  }
+
+  @override
+  Future<Response<AuthEntity>> _createOneBaseAuthControllerAuthEntity(
+      {required AuthEntity? body}) {
+    final Uri $url = Uri.parse('/rest/Auth');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<AuthEntity, AuthEntity>($request);
+  }
+
+  @override
+  Future<Response<List<AuthEntity>>> _createManyBaseAuthControllerAuthEntity(
+      {required CreateManyAuthEntityDto? body}) {
+    final Uri $url = Uri.parse('/rest/Auth/bulk');
+    final $body = body;
+    final Request $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<List<AuthEntity>, AuthEntity>($request);
+  }
+
+  @override
+  Future<Response<AuthEntity>> _updateOneBaseAuthControllerAuthEntity({
+    required num? id,
+    required AuthEntity? body,
+  }) {
+    final Uri $url = Uri.parse('/rest/Auth/${id}');
+    final $body = body;
+    final Request $request = Request(
+      'PATCH',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<AuthEntity, AuthEntity>($request);
+  }
+
+  @override
+  Future<Response<AuthEntity>> _replaceOneBaseAuthControllerAuthEntity({
+    required num? id,
+    required AuthEntity? body,
+  }) {
+    final Uri $url = Uri.parse('/rest/Auth/${id}');
+    final $body = body;
+    final Request $request = Request(
+      'PUT',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<AuthEntity, AuthEntity>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> _deleteOneBaseAuthControllerAuthEntity(
+      {required num? id}) {
+    final Uri $url = Uri.parse('/rest/Auth/${id}');
+    final Request $request = Request(
+      'DELETE',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  @override
+  Future<Response<AuthEntity>> _getOneBaseAuthControllerAuthEntity({
+    required num? id,
+    List<String>? fields,
+    List<String>? join,
+    int? cache,
+  }) {
+    final Uri $url = Uri.parse('/rest/Auth/${id}');
+    final Map<String, dynamic> $params = <String, dynamic>{
+      'fields': fields,
+      'join': join,
+      'cache': cache,
+    };
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+      parameters: $params,
+    );
+    return client.send<AuthEntity, AuthEntity>($request);
+  }
+
+  @override
+  Future<Response<dynamic>> _AuthController_() {
+    final Uri $url = Uri.parse('/rest/Auth/metadata');
+    final Request $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<dynamic, dynamic>($request);
+  }
 }

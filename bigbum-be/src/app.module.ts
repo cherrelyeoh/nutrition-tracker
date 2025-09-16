@@ -10,12 +10,16 @@ import { AIIntegrationLogsModule } from './modules/AIIntegrationLogs/AIIntegrati
 import { UserModule } from './modules/User/User.module';
 import { UserMealQuestionsModule } from './modules/UserMealQuestions/UserMealQuestions.module';
 import { UserBiodataModule } from './modules/UserBiodata/UserBiodata.module';
-import { AutomapperModule } from '@automapper/nestjs';
-import { classes } from '@automapper/classes';
+import { AuthModule } from './modules/Auth/Auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot(
+      {
+        envFilePath: '.env',
+        isGlobal: true, // makes config available everywhere without re-importing
+      }, // path to your .env file
+    ),
     TypeOrmModule.forRoot(config),
     AIPromptModule,
     UserMealLogModule,
@@ -23,6 +27,7 @@ import { classes } from '@automapper/classes';
     UserModule,
     UserMealQuestionsModule,
     UserBiodataModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -137,6 +137,29 @@ Map<String, dynamic> _$GetManyAIIntegrationLogsEntityResponseDtoToJson(
       'pageCount': instance.pageCount,
     };
 
+GetManyUserEntityResponseDto _$GetManyUserEntityResponseDtoFromJson(
+        Map<String, dynamic> json) =>
+    GetManyUserEntityResponseDto(
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => UserEntity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      count: (json['count'] as num).toDouble(),
+      total: (json['total'] as num).toDouble(),
+      page: (json['page'] as num).toDouble(),
+      pageCount: (json['pageCount'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$GetManyUserEntityResponseDtoToJson(
+        GetManyUserEntityResponseDto instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'count': instance.count,
+      'total': instance.total,
+      'page': instance.page,
+      'pageCount': instance.pageCount,
+    };
+
 UserEntity _$UserEntityFromJson(Map<String, dynamic> json) => UserEntity(
       id: (json['id'] as num).toDouble(),
       name: json['name'] as String,
@@ -350,29 +373,6 @@ Map<String, dynamic> _$SignUpDtoToJson(SignUpDto instance) => <String, dynamic>{
       'emailAddress': instance.emailAddress,
       'mobileNumber': instance.mobileNumber,
       'password': instance.password,
-    };
-
-GetManyUserEntityResponseDto _$GetManyUserEntityResponseDtoFromJson(
-        Map<String, dynamic> json) =>
-    GetManyUserEntityResponseDto(
-      data: (json['data'] as List<dynamic>?)
-              ?.map((e) => UserEntity.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      count: (json['count'] as num).toDouble(),
-      total: (json['total'] as num).toDouble(),
-      page: (json['page'] as num).toDouble(),
-      pageCount: (json['pageCount'] as num).toDouble(),
-    );
-
-Map<String, dynamic> _$GetManyUserEntityResponseDtoToJson(
-        GetManyUserEntityResponseDto instance) =>
-    <String, dynamic>{
-      'data': instance.data.map((e) => e.toJson()).toList(),
-      'count': instance.count,
-      'total': instance.total,
-      'page': instance.page,
-      'pageCount': instance.pageCount,
     };
 
 LoginDto _$LoginDtoFromJson(Map<String, dynamic> json) => LoginDto(
@@ -878,6 +878,146 @@ UpdateUserBiodataDto _$UpdateUserBiodataDtoFromJson(
 Map<String, dynamic> _$UpdateUserBiodataDtoToJson(
         UpdateUserBiodataDto instance) =>
     <String, dynamic>{};
+
+AuthLoginDto _$AuthLoginDtoFromJson(Map<String, dynamic> json) => AuthLoginDto(
+      emailAddress: json['emailAddress'] as String,
+      password: json['password'] as String,
+      deviceInfo: json['deviceInfo'] as String?,
+    );
+
+Map<String, dynamic> _$AuthLoginDtoToJson(AuthLoginDto instance) =>
+    <String, dynamic>{
+      'emailAddress': instance.emailAddress,
+      'password': instance.password,
+      'deviceInfo': instance.deviceInfo,
+    };
+
+AuthLoginResponseDto _$AuthLoginResponseDtoFromJson(
+        Map<String, dynamic> json) =>
+    AuthLoginResponseDto(
+      accessToken: json['accessToken'] as String,
+      refreshToken: json['refreshToken'] as String,
+      userId: (json['userId'] as num).toDouble(),
+      emailAddress: json['emailAddress'] as String,
+      username: json['username'] as String,
+    );
+
+Map<String, dynamic> _$AuthLoginResponseDtoToJson(
+        AuthLoginResponseDto instance) =>
+    <String, dynamic>{
+      'accessToken': instance.accessToken,
+      'refreshToken': instance.refreshToken,
+      'userId': instance.userId,
+      'emailAddress': instance.emailAddress,
+      'username': instance.username,
+    };
+
+AuthRefreshDto _$AuthRefreshDtoFromJson(Map<String, dynamic> json) =>
+    AuthRefreshDto(
+      refreshToken: json['refreshToken'] as String,
+    );
+
+Map<String, dynamic> _$AuthRefreshDtoToJson(AuthRefreshDto instance) =>
+    <String, dynamic>{
+      'refreshToken': instance.refreshToken,
+    };
+
+AuthRefreshResponseDto _$AuthRefreshResponseDtoFromJson(
+        Map<String, dynamic> json) =>
+    AuthRefreshResponseDto(
+      accessToken: json['accessToken'] as String,
+      refreshToken: json['refreshToken'] as String,
+    );
+
+Map<String, dynamic> _$AuthRefreshResponseDtoToJson(
+        AuthRefreshResponseDto instance) =>
+    <String, dynamic>{
+      'accessToken': instance.accessToken,
+      'refreshToken': instance.refreshToken,
+    };
+
+AuthLogoutDto _$AuthLogoutDtoFromJson(Map<String, dynamic> json) =>
+    AuthLogoutDto(
+      refreshToken: json['refreshToken'] as String,
+    );
+
+Map<String, dynamic> _$AuthLogoutDtoToJson(AuthLogoutDto instance) =>
+    <String, dynamic>{
+      'refreshToken': instance.refreshToken,
+    };
+
+AuthLogoutResponseDto _$AuthLogoutResponseDtoFromJson(
+        Map<String, dynamic> json) =>
+    AuthLogoutResponseDto(
+      message: json['message'] as String,
+    );
+
+Map<String, dynamic> _$AuthLogoutResponseDtoToJson(
+        AuthLogoutResponseDto instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+    };
+
+GetManyAuthEntityResponseDto _$GetManyAuthEntityResponseDtoFromJson(
+        Map<String, dynamic> json) =>
+    GetManyAuthEntityResponseDto(
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => AuthEntity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+      count: (json['count'] as num).toDouble(),
+      total: (json['total'] as num).toDouble(),
+      page: (json['page'] as num).toDouble(),
+      pageCount: (json['pageCount'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$GetManyAuthEntityResponseDtoToJson(
+        GetManyAuthEntityResponseDto instance) =>
+    <String, dynamic>{
+      'data': instance.data.map((e) => e.toJson()).toList(),
+      'count': instance.count,
+      'total': instance.total,
+      'page': instance.page,
+      'pageCount': instance.pageCount,
+    };
+
+AuthEntity _$AuthEntityFromJson(Map<String, dynamic> json) => AuthEntity(
+      id: (json['id'] as num).toDouble(),
+      refreshToken: json['refreshToken'] as String,
+      user: UserEntity.fromJson(json['user'] as Map<String, dynamic>),
+      deviceInfo: json['deviceInfo'] as String?,
+      expiresAt: json['expiresAt'] == null
+          ? null
+          : DateTime.parse(json['expiresAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$AuthEntityToJson(AuthEntity instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'refreshToken': instance.refreshToken,
+      'user': instance.user.toJson(),
+      'deviceInfo': instance.deviceInfo,
+      'expiresAt': instance.expiresAt?.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+    };
+
+CreateManyAuthEntityDto _$CreateManyAuthEntityDtoFromJson(
+        Map<String, dynamic> json) =>
+    CreateManyAuthEntityDto(
+      bulk: (json['bulk'] as List<dynamic>?)
+              ?.map((e) => AuthEntity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$CreateManyAuthEntityDtoToJson(
+        CreateManyAuthEntityDto instance) =>
+    <String, dynamic>{
+      'bulk': instance.bulk.map((e) => e.toJson()).toList(),
+    };
 
 RestAIPromptTestFunctionPost$RequestBody
     _$RestAIPromptTestFunctionPost$RequestBodyFromJson(

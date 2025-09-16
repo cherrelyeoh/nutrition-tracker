@@ -8,6 +8,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertest/pages/Introduction/intro.dart';
 import 'package:fluttertest/pages/Login/register.dart';
 import 'package:fluttertest/services/api/export.dart';
+import 'package:fluttertest/services/newapi/bigbum.swagger.dart';
+import 'package:fluttertest/services/storage/token_storage.dart';
 import 'package:fluttertest/widgets/app_button_1.dart';
 import 'package:fluttertest/widgets/base/base_app_component.dart';
 import 'package:fluttertest/widgets/login_input.dart';
@@ -45,10 +47,10 @@ class _LoginPageState extends State<LoginPage> {
       isLoading = true;
     });
 
-    final loginData = LoginDto(
-      emailAddress: emailController.text,
-      password: passwordController.text,
-    );
+    final loginData = AuthLoginDto(
+        emailAddress: emailController.text,
+        password: passwordController.text,
+        deviceInfo: 'test device info');
 
     final dio = Dio();
     debugPrint("Login Email ${emailController.text}");
@@ -59,23 +61,27 @@ class _LoginPageState extends State<LoginPage> {
       baseUrl: dotenv.env['BASE_URL'] ?? 'http://10.0.2.2:3000',
     );
 
-    try {
-      // Perform the login request with a timeout of 20 seconds
-      final user = await client.userControllerLogin(body: loginData).timeout(
-        const Duration(seconds: 20), // Set the timeout to 20 seconds
-        onTimeout: () {
-          throw DioException(
-            requestOptions: RequestOptions(path: ''),
-            error: 'Request Timeout: The server took too long to respond.',
-          );
-        },
-      );
-      debugPrint("User trying to login!");
-      debugPrint("🔁 Response: ${jsonEncode(user)}");
+    final bigbumService = Bigbum.create();
 
+    try {
+      final response =
+          await bigbumService.AuthController_login(body: loginData);
+      debugPrint("User trying to login!");
+      final authData = response.body!;
       // If login is successful, navigate to the next screen
-      final userId = user.user.id;
-      final userName = user.user.name;
+      if (response.isSuccessful && response.body != null) {
+        print("Access token: ${authData.accessToken}");
+        print("Refresh token: ${authData.refreshToken}");
+        print("UserId: ${authData.userId}");
+        print("Email: ${authData.emailAddress}");
+      } else {
+        print("Login failed: ${response.error}");
+      }
+
+      final userId = authData.userId;
+      final userEmail = authData.emailAddress;
+      await TokenStorage.saveTokens(
+          authData.accessToken, authData.refreshToken, null);
 
       if (!mounted) return;
       Navigator.pushReplacement(
@@ -83,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(
           builder: (context) => BaseScreen(
             userId: userId,
-            userName: userName,
+            userName: authData.username,
           ),
         ),
       );

@@ -1,7 +1,9 @@
 // ignore_for_file: type=lint
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertest/services/newapi/auth_interceptor.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart' as json;
 import 'package:collection/collection.dart';
 import 'dart:convert';
 
@@ -10,6 +12,7 @@ import 'package:chopper/chopper.dart';
 import 'client_mapping.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show MultipartFile;
 import 'package:chopper/chopper.dart' as chopper;
 
 part 'bigbum.swagger.chopper.dart';
@@ -34,11 +37,12 @@ abstract class Bigbum extends ChopperService {
       return _$Bigbum(client);
     }
     final envBaseUrl = dotenv.env['BASE_URL'] ?? "http://10.0.2.2:3000";
-
     final newClient = ChopperClient(
       services: [_$Bigbum()],
       converter: converter ?? $JsonSerializableConverter(),
-      interceptors: interceptors ?? [],
+      interceptors: [
+        HttpLoggingInterceptor(), // built-in request/response logging
+      ],
       client: httpClient,
       authenticator: authenticator,
       errorConverter: errorConverter,
@@ -1777,6 +1781,257 @@ abstract class Bigbum extends ChopperService {
   ///
   @GET(path: '/rest/UserBiodata/metadata')
   Future<chopper.Response> _UserBiodataController_();
+
+  ///
+  Future<chopper.Response<AuthLoginResponseDto>> AuthController_login({
+    required AuthLoginDto? body,
+  }) {
+    generatedMapping.putIfAbsent(
+      AuthLoginResponseDto,
+      () => AuthLoginResponseDto.fromJsonFactory,
+    );
+
+    return _AuthController_login(body: body);
+  }
+
+  ///
+  @POST(path: '/rest/Auth/login', optionalBody: true)
+  Future<chopper.Response<AuthLoginResponseDto>> _AuthController_login({
+    @Body() required AuthLoginDto? body,
+  });
+
+  ///
+  Future<chopper.Response<AuthRefreshResponseDto>> AuthController_refresh({
+    required AuthRefreshDto? body,
+  }) {
+    generatedMapping.putIfAbsent(
+      AuthRefreshResponseDto,
+      () => AuthRefreshResponseDto.fromJsonFactory,
+    );
+
+    return _AuthController_refresh(body: body);
+  }
+
+  ///
+  @POST(path: '/rest/Auth/refresh', optionalBody: true)
+  Future<chopper.Response<AuthRefreshResponseDto>> _AuthController_refresh({
+    @Body() required AuthRefreshDto? body,
+  });
+
+  ///
+  Future<chopper.Response<AuthLogoutResponseDto>> AuthController_logout({
+    required AuthLogoutDto? body,
+  }) {
+    generatedMapping.putIfAbsent(
+      AuthLogoutResponseDto,
+      () => AuthLogoutResponseDto.fromJsonFactory,
+    );
+
+    return _AuthController_logout(body: body);
+  }
+
+  ///
+  @POST(path: '/rest/Auth/logout', optionalBody: true)
+  Future<chopper.Response<AuthLogoutResponseDto>> _AuthController_logout({
+    @Body() required AuthLogoutDto? body,
+  });
+
+  ///Retrieve many AuthEntity
+  ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
+  ///@param s Adds search condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#search" target="_blank">Docs</a>
+  ///@param filter Adds filter condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#filter" target="_blank">Docs</a>
+  ///@param or Adds OR condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#or" target="_blank">Docs</a>
+  ///@param sort Adds sort by field. <a href="https://github.com/nestjsx/crud/wiki/Requests#sort" target="_blank">Docs</a>
+  ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
+  ///@param limit Limit amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#limit" target="_blank">Docs</a>
+  ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
+  ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
+  ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
+  Future<chopper.Response<GetManyAuthEntityResponseDto>>
+      getManyBaseAuthControllerAuthEntity({
+    List<String>? fields,
+    String? s,
+    List<String>? filter,
+    List<String>? or,
+    List<String>? sort,
+    List<String>? join,
+    int? limit,
+    int? offset,
+    int? page,
+    int? cache,
+  }) {
+    generatedMapping.putIfAbsent(
+      GetManyAuthEntityResponseDto,
+      () => GetManyAuthEntityResponseDto.fromJsonFactory,
+    );
+
+    return _getManyBaseAuthControllerAuthEntity(
+      fields: fields,
+      s: s,
+      filter: filter,
+      or: or,
+      sort: sort,
+      join: join,
+      limit: limit,
+      offset: offset,
+      page: page,
+      cache: cache,
+    );
+  }
+
+  ///Retrieve many AuthEntity
+  ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
+  ///@param s Adds search condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#search" target="_blank">Docs</a>
+  ///@param filter Adds filter condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#filter" target="_blank">Docs</a>
+  ///@param or Adds OR condition. <a href="https://github.com/nestjsx/crud/wiki/Requests#or" target="_blank">Docs</a>
+  ///@param sort Adds sort by field. <a href="https://github.com/nestjsx/crud/wiki/Requests#sort" target="_blank">Docs</a>
+  ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
+  ///@param limit Limit amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#limit" target="_blank">Docs</a>
+  ///@param offset Offset amount of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#offset" target="_blank">Docs</a>
+  ///@param page Page portion of resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#page" target="_blank">Docs</a>
+  ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
+  @GET(path: '/rest/Auth')
+  Future<chopper.Response<GetManyAuthEntityResponseDto>>
+      _getManyBaseAuthControllerAuthEntity({
+    @Query('fields') List<String>? fields,
+    @Query('s') String? s,
+    @Query('filter') List<String>? filter,
+    @Query('or') List<String>? or,
+    @Query('sort') List<String>? sort,
+    @Query('join') List<String>? join,
+    @Query('limit') int? limit,
+    @Query('offset') int? offset,
+    @Query('page') int? page,
+    @Query('cache') int? cache,
+  });
+
+  ///Create one AuthEntity
+  Future<chopper.Response<AuthEntity>> createOneBaseAuthControllerAuthEntity({
+    required AuthEntity? body,
+  }) {
+    generatedMapping.putIfAbsent(AuthEntity, () => AuthEntity.fromJsonFactory);
+
+    return _createOneBaseAuthControllerAuthEntity(body: body);
+  }
+
+  ///Create one AuthEntity
+  @POST(path: '/rest/Auth', optionalBody: true)
+  Future<chopper.Response<AuthEntity>> _createOneBaseAuthControllerAuthEntity({
+    @Body() required AuthEntity? body,
+  });
+
+  ///Create many AuthEntity
+  Future<chopper.Response<List<AuthEntity>>>
+      createManyBaseAuthControllerAuthEntity({
+    required CreateManyAuthEntityDto? body,
+  }) {
+    generatedMapping.putIfAbsent(AuthEntity, () => AuthEntity.fromJsonFactory);
+
+    return _createManyBaseAuthControllerAuthEntity(body: body);
+  }
+
+  ///Create many AuthEntity
+  @POST(path: '/rest/Auth/bulk', optionalBody: true)
+  Future<chopper.Response<List<AuthEntity>>>
+      _createManyBaseAuthControllerAuthEntity({
+    @Body() required CreateManyAuthEntityDto? body,
+  });
+
+  ///Update one AuthEntity
+  ///@param id
+  Future<chopper.Response<AuthEntity>> updateOneBaseAuthControllerAuthEntity({
+    required num? id,
+    required AuthEntity? body,
+  }) {
+    generatedMapping.putIfAbsent(AuthEntity, () => AuthEntity.fromJsonFactory);
+
+    return _updateOneBaseAuthControllerAuthEntity(id: id, body: body);
+  }
+
+  ///Update one AuthEntity
+  ///@param id
+  @PATCH(path: '/rest/Auth/{id}', optionalBody: true)
+  Future<chopper.Response<AuthEntity>> _updateOneBaseAuthControllerAuthEntity({
+    @Path('id') required num? id,
+    @Body() required AuthEntity? body,
+  });
+
+  ///Replace one AuthEntity
+  ///@param id
+  Future<chopper.Response<AuthEntity>> replaceOneBaseAuthControllerAuthEntity({
+    required num? id,
+    required AuthEntity? body,
+  }) {
+    generatedMapping.putIfAbsent(AuthEntity, () => AuthEntity.fromJsonFactory);
+
+    return _replaceOneBaseAuthControllerAuthEntity(id: id, body: body);
+  }
+
+  ///Replace one AuthEntity
+  ///@param id
+  @PUT(path: '/rest/Auth/{id}', optionalBody: true)
+  Future<chopper.Response<AuthEntity>> _replaceOneBaseAuthControllerAuthEntity({
+    @Path('id') required num? id,
+    @Body() required AuthEntity? body,
+  });
+
+  ///Delete one AuthEntity
+  ///@param id
+  Future<chopper.Response> deleteOneBaseAuthControllerAuthEntity({
+    required num? id,
+  }) {
+    return _deleteOneBaseAuthControllerAuthEntity(id: id);
+  }
+
+  ///Delete one AuthEntity
+  ///@param id
+  @DELETE(path: '/rest/Auth/{id}')
+  Future<chopper.Response> _deleteOneBaseAuthControllerAuthEntity({
+    @Path('id') required num? id,
+  });
+
+  ///Retrieve one AuthEntity
+  ///@param id
+  ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
+  ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
+  ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
+  Future<chopper.Response<AuthEntity>> getOneBaseAuthControllerAuthEntity({
+    required num? id,
+    List<String>? fields,
+    List<String>? join,
+    int? cache,
+  }) {
+    generatedMapping.putIfAbsent(AuthEntity, () => AuthEntity.fromJsonFactory);
+
+    return _getOneBaseAuthControllerAuthEntity(
+      id: id,
+      fields: fields,
+      join: join,
+      cache: cache,
+    );
+  }
+
+  ///Retrieve one AuthEntity
+  ///@param id
+  ///@param fields Selects resource fields. <a href="https://github.com/nestjsx/crud/wiki/Requests#select" target="_blank">Docs</a>
+  ///@param join Adds relational resources. <a href="https://github.com/nestjsx/crud/wiki/Requests#join" target="_blank">Docs</a>
+  ///@param cache Reset cache (if was enabled). <a href="https://github.com/nestjsx/crud/wiki/Requests#cache" target="_blank">Docs</a>
+  @GET(path: '/rest/Auth/{id}')
+  Future<chopper.Response<AuthEntity>> _getOneBaseAuthControllerAuthEntity({
+    @Path('id') required num? id,
+    @Query('fields') List<String>? fields,
+    @Query('join') List<String>? join,
+    @Query('cache') int? cache,
+  });
+
+  ///
+  Future<chopper.Response> AuthController_() {
+    return _AuthController_();
+  }
+
+  ///
+  @GET(path: '/rest/Auth/metadata')
+  Future<chopper.Response> _AuthController_();
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -2359,6 +2614,101 @@ extension $GetManyAIIntegrationLogsEntityResponseDtoExtension
     Wrapped<double>? pageCount,
   }) {
     return GetManyAIIntegrationLogsEntityResponseDto(
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetManyUserEntityResponseDto {
+  const GetManyUserEntityResponseDto({
+    required this.data,
+    required this.count,
+    required this.total,
+    required this.page,
+    required this.pageCount,
+  });
+
+  factory GetManyUserEntityResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$GetManyUserEntityResponseDtoFromJson(json);
+
+  static const toJsonFactory = _$GetManyUserEntityResponseDtoToJson;
+  Map<String, dynamic> toJson() => _$GetManyUserEntityResponseDtoToJson(this);
+
+  @JsonKey(name: 'data', defaultValue: <UserEntity>[])
+  final List<UserEntity> data;
+  @JsonKey(name: 'count')
+  final double count;
+  @JsonKey(name: 'total')
+  final double total;
+  @JsonKey(name: 'page')
+  final double page;
+  @JsonKey(name: 'pageCount')
+  final double pageCount;
+  static const fromJsonFactory = _$GetManyUserEntityResponseDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is GetManyUserEntityResponseDto &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)) &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.pageCount, pageCount) ||
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(data) ^
+      const DeepCollectionEquality().hash(count) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(pageCount) ^
+      runtimeType.hashCode;
+}
+
+extension $GetManyUserEntityResponseDtoExtension
+    on GetManyUserEntityResponseDto {
+  GetManyUserEntityResponseDto copyWith({
+    List<UserEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
+    return GetManyUserEntityResponseDto(
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
+  }
+
+  GetManyUserEntityResponseDto copyWithWrapped({
+    Wrapped<List<UserEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
+    return GetManyUserEntityResponseDto(
       data: (data != null ? data.value : this.data),
       count: (count != null ? count.value : this.count),
       total: (total != null ? total.value : this.total),
@@ -3417,101 +3767,6 @@ extension $SignUpDtoExtension on SignUpDto {
       mobileNumber:
           (mobileNumber != null ? mobileNumber.value : this.mobileNumber),
       password: (password != null ? password.value : this.password),
-    );
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetManyUserEntityResponseDto {
-  const GetManyUserEntityResponseDto({
-    required this.data,
-    required this.count,
-    required this.total,
-    required this.page,
-    required this.pageCount,
-  });
-
-  factory GetManyUserEntityResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$GetManyUserEntityResponseDtoFromJson(json);
-
-  static const toJsonFactory = _$GetManyUserEntityResponseDtoToJson;
-  Map<String, dynamic> toJson() => _$GetManyUserEntityResponseDtoToJson(this);
-
-  @JsonKey(name: 'data', defaultValue: <UserEntity>[])
-  final List<UserEntity> data;
-  @JsonKey(name: 'count')
-  final double count;
-  @JsonKey(name: 'total')
-  final double total;
-  @JsonKey(name: 'page')
-  final double page;
-  @JsonKey(name: 'pageCount')
-  final double pageCount;
-  static const fromJsonFactory = _$GetManyUserEntityResponseDtoFromJson;
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is GetManyUserEntityResponseDto &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)) &&
-            (identical(other.count, count) ||
-                const DeepCollectionEquality().equals(other.count, count)) &&
-            (identical(other.total, total) ||
-                const DeepCollectionEquality().equals(other.total, total)) &&
-            (identical(other.page, page) ||
-                const DeepCollectionEquality().equals(other.page, page)) &&
-            (identical(other.pageCount, pageCount) ||
-                const DeepCollectionEquality().equals(
-                  other.pageCount,
-                  pageCount,
-                )));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(data) ^
-      const DeepCollectionEquality().hash(count) ^
-      const DeepCollectionEquality().hash(total) ^
-      const DeepCollectionEquality().hash(page) ^
-      const DeepCollectionEquality().hash(pageCount) ^
-      runtimeType.hashCode;
-}
-
-extension $GetManyUserEntityResponseDtoExtension
-    on GetManyUserEntityResponseDto {
-  GetManyUserEntityResponseDto copyWith({
-    List<UserEntity>? data,
-    double? count,
-    double? total,
-    double? page,
-    double? pageCount,
-  }) {
-    return GetManyUserEntityResponseDto(
-      data: data ?? this.data,
-      count: count ?? this.count,
-      total: total ?? this.total,
-      page: page ?? this.page,
-      pageCount: pageCount ?? this.pageCount,
-    );
-  }
-
-  GetManyUserEntityResponseDto copyWithWrapped({
-    Wrapped<List<UserEntity>>? data,
-    Wrapped<double>? count,
-    Wrapped<double>? total,
-    Wrapped<double>? page,
-    Wrapped<double>? pageCount,
-  }) {
-    return GetManyUserEntityResponseDto(
-      data: (data != null ? data.value : this.data),
-      count: (count != null ? count.value : this.count),
-      total: (total != null ? total.value : this.total),
-      page: (page != null ? page.value : this.page),
-      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
     );
   }
 }
@@ -5780,6 +6035,655 @@ class UpdateUserBiodataDto {
 
   @override
   int get hashCode => runtimeType.hashCode;
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthLoginDto {
+  const AuthLoginDto({
+    required this.emailAddress,
+    required this.password,
+    this.deviceInfo,
+  });
+
+  factory AuthLoginDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthLoginDtoFromJson(json);
+
+  static const toJsonFactory = _$AuthLoginDtoToJson;
+  Map<String, dynamic> toJson() => _$AuthLoginDtoToJson(this);
+
+  @JsonKey(name: 'emailAddress')
+  final String emailAddress;
+  @JsonKey(name: 'password')
+  final String password;
+  @JsonKey(name: 'deviceInfo')
+  final String? deviceInfo;
+  static const fromJsonFactory = _$AuthLoginDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthLoginDto &&
+            (identical(other.emailAddress, emailAddress) ||
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality().equals(
+                  other.password,
+                  password,
+                )) &&
+            (identical(other.deviceInfo, deviceInfo) ||
+                const DeepCollectionEquality().equals(
+                  other.deviceInfo,
+                  deviceInfo,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(emailAddress) ^
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(deviceInfo) ^
+      runtimeType.hashCode;
+}
+
+extension $AuthLoginDtoExtension on AuthLoginDto {
+  AuthLoginDto copyWith({
+    String? emailAddress,
+    String? password,
+    String? deviceInfo,
+  }) {
+    return AuthLoginDto(
+      emailAddress: emailAddress ?? this.emailAddress,
+      password: password ?? this.password,
+      deviceInfo: deviceInfo ?? this.deviceInfo,
+    );
+  }
+
+  AuthLoginDto copyWithWrapped({
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? password,
+    Wrapped<String?>? deviceInfo,
+  }) {
+    return AuthLoginDto(
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      password: (password != null ? password.value : this.password),
+      deviceInfo: (deviceInfo != null ? deviceInfo.value : this.deviceInfo),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthLoginResponseDto {
+  const AuthLoginResponseDto({
+    required this.accessToken,
+    required this.refreshToken,
+    required this.userId,
+    required this.emailAddress,
+    required this.username,
+  });
+
+  factory AuthLoginResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthLoginResponseDtoFromJson(json);
+
+  static const toJsonFactory = _$AuthLoginResponseDtoToJson;
+  Map<String, dynamic> toJson() => _$AuthLoginResponseDtoToJson(this);
+
+  @JsonKey(name: 'accessToken')
+  final String accessToken;
+  @JsonKey(name: 'refreshToken')
+  final String refreshToken;
+  @JsonKey(name: 'userId')
+  final double userId;
+  @JsonKey(name: 'emailAddress')
+  final String emailAddress;
+  @JsonKey(name: 'username')
+  final String username;
+  static const fromJsonFactory = _$AuthLoginResponseDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthLoginResponseDto &&
+            (identical(other.accessToken, accessToken) ||
+                const DeepCollectionEquality().equals(
+                  other.accessToken,
+                  accessToken,
+                )) &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality().equals(
+                  other.refreshToken,
+                  refreshToken,
+                )) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.emailAddress, emailAddress) ||
+                const DeepCollectionEquality().equals(
+                  other.emailAddress,
+                  emailAddress,
+                )) &&
+            (identical(other.username, username) ||
+                const DeepCollectionEquality().equals(
+                  other.username,
+                  username,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(accessToken) ^
+      const DeepCollectionEquality().hash(refreshToken) ^
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(emailAddress) ^
+      const DeepCollectionEquality().hash(username) ^
+      runtimeType.hashCode;
+}
+
+extension $AuthLoginResponseDtoExtension on AuthLoginResponseDto {
+  AuthLoginResponseDto copyWith({
+    String? accessToken,
+    String? refreshToken,
+    double? userId,
+    String? emailAddress,
+    String? username,
+  }) {
+    return AuthLoginResponseDto(
+      accessToken: accessToken ?? this.accessToken,
+      refreshToken: refreshToken ?? this.refreshToken,
+      userId: userId ?? this.userId,
+      emailAddress: emailAddress ?? this.emailAddress,
+      username: username ?? this.username,
+    );
+  }
+
+  AuthLoginResponseDto copyWithWrapped({
+    Wrapped<String>? accessToken,
+    Wrapped<String>? refreshToken,
+    Wrapped<double>? userId,
+    Wrapped<String>? emailAddress,
+    Wrapped<String>? username,
+  }) {
+    return AuthLoginResponseDto(
+      accessToken: (accessToken != null ? accessToken.value : this.accessToken),
+      refreshToken:
+          (refreshToken != null ? refreshToken.value : this.refreshToken),
+      userId: (userId != null ? userId.value : this.userId),
+      emailAddress:
+          (emailAddress != null ? emailAddress.value : this.emailAddress),
+      username: (username != null ? username.value : this.username),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthRefreshDto {
+  const AuthRefreshDto({required this.refreshToken});
+
+  factory AuthRefreshDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthRefreshDtoFromJson(json);
+
+  static const toJsonFactory = _$AuthRefreshDtoToJson;
+  Map<String, dynamic> toJson() => _$AuthRefreshDtoToJson(this);
+
+  @JsonKey(name: 'refreshToken')
+  final String refreshToken;
+  static const fromJsonFactory = _$AuthRefreshDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthRefreshDto &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality().equals(
+                  other.refreshToken,
+                  refreshToken,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(refreshToken) ^ runtimeType.hashCode;
+}
+
+extension $AuthRefreshDtoExtension on AuthRefreshDto {
+  AuthRefreshDto copyWith({String? refreshToken}) {
+    return AuthRefreshDto(refreshToken: refreshToken ?? this.refreshToken);
+  }
+
+  AuthRefreshDto copyWithWrapped({Wrapped<String>? refreshToken}) {
+    return AuthRefreshDto(
+      refreshToken:
+          (refreshToken != null ? refreshToken.value : this.refreshToken),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthRefreshResponseDto {
+  const AuthRefreshResponseDto({
+    required this.accessToken,
+    required this.refreshToken,
+  });
+
+  factory AuthRefreshResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthRefreshResponseDtoFromJson(json);
+
+  static const toJsonFactory = _$AuthRefreshResponseDtoToJson;
+  Map<String, dynamic> toJson() => _$AuthRefreshResponseDtoToJson(this);
+
+  @JsonKey(name: 'accessToken')
+  final String accessToken;
+  @JsonKey(name: 'refreshToken')
+  final String refreshToken;
+  static const fromJsonFactory = _$AuthRefreshResponseDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthRefreshResponseDto &&
+            (identical(other.accessToken, accessToken) ||
+                const DeepCollectionEquality().equals(
+                  other.accessToken,
+                  accessToken,
+                )) &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality().equals(
+                  other.refreshToken,
+                  refreshToken,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(accessToken) ^
+      const DeepCollectionEquality().hash(refreshToken) ^
+      runtimeType.hashCode;
+}
+
+extension $AuthRefreshResponseDtoExtension on AuthRefreshResponseDto {
+  AuthRefreshResponseDto copyWith({String? accessToken, String? refreshToken}) {
+    return AuthRefreshResponseDto(
+      accessToken: accessToken ?? this.accessToken,
+      refreshToken: refreshToken ?? this.refreshToken,
+    );
+  }
+
+  AuthRefreshResponseDto copyWithWrapped({
+    Wrapped<String>? accessToken,
+    Wrapped<String>? refreshToken,
+  }) {
+    return AuthRefreshResponseDto(
+      accessToken: (accessToken != null ? accessToken.value : this.accessToken),
+      refreshToken:
+          (refreshToken != null ? refreshToken.value : this.refreshToken),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthLogoutDto {
+  const AuthLogoutDto({required this.refreshToken});
+
+  factory AuthLogoutDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthLogoutDtoFromJson(json);
+
+  static const toJsonFactory = _$AuthLogoutDtoToJson;
+  Map<String, dynamic> toJson() => _$AuthLogoutDtoToJson(this);
+
+  @JsonKey(name: 'refreshToken')
+  final String refreshToken;
+  static const fromJsonFactory = _$AuthLogoutDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthLogoutDto &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality().equals(
+                  other.refreshToken,
+                  refreshToken,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(refreshToken) ^ runtimeType.hashCode;
+}
+
+extension $AuthLogoutDtoExtension on AuthLogoutDto {
+  AuthLogoutDto copyWith({String? refreshToken}) {
+    return AuthLogoutDto(refreshToken: refreshToken ?? this.refreshToken);
+  }
+
+  AuthLogoutDto copyWithWrapped({Wrapped<String>? refreshToken}) {
+    return AuthLogoutDto(
+      refreshToken:
+          (refreshToken != null ? refreshToken.value : this.refreshToken),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthLogoutResponseDto {
+  const AuthLogoutResponseDto({required this.message});
+
+  factory AuthLogoutResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthLogoutResponseDtoFromJson(json);
+
+  static const toJsonFactory = _$AuthLogoutResponseDtoToJson;
+  Map<String, dynamic> toJson() => _$AuthLogoutResponseDtoToJson(this);
+
+  @JsonKey(name: 'message')
+  final String message;
+  static const fromJsonFactory = _$AuthLogoutResponseDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthLogoutResponseDto &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(message) ^ runtimeType.hashCode;
+}
+
+extension $AuthLogoutResponseDtoExtension on AuthLogoutResponseDto {
+  AuthLogoutResponseDto copyWith({String? message}) {
+    return AuthLogoutResponseDto(message: message ?? this.message);
+  }
+
+  AuthLogoutResponseDto copyWithWrapped({Wrapped<String>? message}) {
+    return AuthLogoutResponseDto(
+      message: (message != null ? message.value : this.message),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetManyAuthEntityResponseDto {
+  const GetManyAuthEntityResponseDto({
+    required this.data,
+    required this.count,
+    required this.total,
+    required this.page,
+    required this.pageCount,
+  });
+
+  factory GetManyAuthEntityResponseDto.fromJson(Map<String, dynamic> json) =>
+      _$GetManyAuthEntityResponseDtoFromJson(json);
+
+  static const toJsonFactory = _$GetManyAuthEntityResponseDtoToJson;
+  Map<String, dynamic> toJson() => _$GetManyAuthEntityResponseDtoToJson(this);
+
+  @JsonKey(name: 'data', defaultValue: <AuthEntity>[])
+  final List<AuthEntity> data;
+  @JsonKey(name: 'count')
+  final double count;
+  @JsonKey(name: 'total')
+  final double total;
+  @JsonKey(name: 'page')
+  final double page;
+  @JsonKey(name: 'pageCount')
+  final double pageCount;
+  static const fromJsonFactory = _$GetManyAuthEntityResponseDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is GetManyAuthEntityResponseDto &&
+            (identical(other.data, data) ||
+                const DeepCollectionEquality().equals(other.data, data)) &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)) &&
+            (identical(other.total, total) ||
+                const DeepCollectionEquality().equals(other.total, total)) &&
+            (identical(other.page, page) ||
+                const DeepCollectionEquality().equals(other.page, page)) &&
+            (identical(other.pageCount, pageCount) ||
+                const DeepCollectionEquality().equals(
+                  other.pageCount,
+                  pageCount,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(data) ^
+      const DeepCollectionEquality().hash(count) ^
+      const DeepCollectionEquality().hash(total) ^
+      const DeepCollectionEquality().hash(page) ^
+      const DeepCollectionEquality().hash(pageCount) ^
+      runtimeType.hashCode;
+}
+
+extension $GetManyAuthEntityResponseDtoExtension
+    on GetManyAuthEntityResponseDto {
+  GetManyAuthEntityResponseDto copyWith({
+    List<AuthEntity>? data,
+    double? count,
+    double? total,
+    double? page,
+    double? pageCount,
+  }) {
+    return GetManyAuthEntityResponseDto(
+      data: data ?? this.data,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      page: page ?? this.page,
+      pageCount: pageCount ?? this.pageCount,
+    );
+  }
+
+  GetManyAuthEntityResponseDto copyWithWrapped({
+    Wrapped<List<AuthEntity>>? data,
+    Wrapped<double>? count,
+    Wrapped<double>? total,
+    Wrapped<double>? page,
+    Wrapped<double>? pageCount,
+  }) {
+    return GetManyAuthEntityResponseDto(
+      data: (data != null ? data.value : this.data),
+      count: (count != null ? count.value : this.count),
+      total: (total != null ? total.value : this.total),
+      page: (page != null ? page.value : this.page),
+      pageCount: (pageCount != null ? pageCount.value : this.pageCount),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class AuthEntity {
+  const AuthEntity({
+    required this.id,
+    required this.refreshToken,
+    required this.user,
+    this.deviceInfo,
+    this.expiresAt,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory AuthEntity.fromJson(Map<String, dynamic> json) =>
+      _$AuthEntityFromJson(json);
+
+  static const toJsonFactory = _$AuthEntityToJson;
+  Map<String, dynamic> toJson() => _$AuthEntityToJson(this);
+
+  @JsonKey(name: 'id')
+  final double id;
+  @JsonKey(name: 'refreshToken')
+  final String refreshToken;
+  @JsonKey(name: 'user')
+  final UserEntity user;
+  @JsonKey(name: 'deviceInfo')
+  final String? deviceInfo;
+  @JsonKey(name: 'expiresAt')
+  final DateTime? expiresAt;
+  @JsonKey(name: 'createdAt')
+  final DateTime createdAt;
+  @JsonKey(name: 'updatedAt')
+  final DateTime updatedAt;
+  static const fromJsonFactory = _$AuthEntityFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is AuthEntity &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality().equals(
+                  other.refreshToken,
+                  refreshToken,
+                )) &&
+            (identical(other.user, user) ||
+                const DeepCollectionEquality().equals(other.user, user)) &&
+            (identical(other.deviceInfo, deviceInfo) ||
+                const DeepCollectionEquality().equals(
+                  other.deviceInfo,
+                  deviceInfo,
+                )) &&
+            (identical(other.expiresAt, expiresAt) ||
+                const DeepCollectionEquality().equals(
+                  other.expiresAt,
+                  expiresAt,
+                )) &&
+            (identical(other.createdAt, createdAt) ||
+                const DeepCollectionEquality().equals(
+                  other.createdAt,
+                  createdAt,
+                )) &&
+            (identical(other.updatedAt, updatedAt) ||
+                const DeepCollectionEquality().equals(
+                  other.updatedAt,
+                  updatedAt,
+                )));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(refreshToken) ^
+      const DeepCollectionEquality().hash(user) ^
+      const DeepCollectionEquality().hash(deviceInfo) ^
+      const DeepCollectionEquality().hash(expiresAt) ^
+      const DeepCollectionEquality().hash(createdAt) ^
+      const DeepCollectionEquality().hash(updatedAt) ^
+      runtimeType.hashCode;
+}
+
+extension $AuthEntityExtension on AuthEntity {
+  AuthEntity copyWith({
+    double? id,
+    String? refreshToken,
+    UserEntity? user,
+    String? deviceInfo,
+    DateTime? expiresAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return AuthEntity(
+      id: id ?? this.id,
+      refreshToken: refreshToken ?? this.refreshToken,
+      user: user ?? this.user,
+      deviceInfo: deviceInfo ?? this.deviceInfo,
+      expiresAt: expiresAt ?? this.expiresAt,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  AuthEntity copyWithWrapped({
+    Wrapped<double>? id,
+    Wrapped<String>? refreshToken,
+    Wrapped<UserEntity>? user,
+    Wrapped<String?>? deviceInfo,
+    Wrapped<DateTime?>? expiresAt,
+    Wrapped<DateTime>? createdAt,
+    Wrapped<DateTime>? updatedAt,
+  }) {
+    return AuthEntity(
+      id: (id != null ? id.value : this.id),
+      refreshToken:
+          (refreshToken != null ? refreshToken.value : this.refreshToken),
+      user: (user != null ? user.value : this.user),
+      deviceInfo: (deviceInfo != null ? deviceInfo.value : this.deviceInfo),
+      expiresAt: (expiresAt != null ? expiresAt.value : this.expiresAt),
+      createdAt: (createdAt != null ? createdAt.value : this.createdAt),
+      updatedAt: (updatedAt != null ? updatedAt.value : this.updatedAt),
+    );
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CreateManyAuthEntityDto {
+  const CreateManyAuthEntityDto({required this.bulk});
+
+  factory CreateManyAuthEntityDto.fromJson(Map<String, dynamic> json) =>
+      _$CreateManyAuthEntityDtoFromJson(json);
+
+  static const toJsonFactory = _$CreateManyAuthEntityDtoToJson;
+  Map<String, dynamic> toJson() => _$CreateManyAuthEntityDtoToJson(this);
+
+  @JsonKey(name: 'bulk', defaultValue: <AuthEntity>[])
+  final List<AuthEntity> bulk;
+  static const fromJsonFactory = _$CreateManyAuthEntityDtoFromJson;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is CreateManyAuthEntityDto &&
+            (identical(other.bulk, bulk) ||
+                const DeepCollectionEquality().equals(other.bulk, bulk)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(bulk) ^ runtimeType.hashCode;
+}
+
+extension $CreateManyAuthEntityDtoExtension on CreateManyAuthEntityDto {
+  CreateManyAuthEntityDto copyWith({List<AuthEntity>? bulk}) {
+    return CreateManyAuthEntityDto(bulk: bulk ?? this.bulk);
+  }
+
+  CreateManyAuthEntityDto copyWithWrapped({Wrapped<List<AuthEntity>>? bulk}) {
+    return CreateManyAuthEntityDto(
+      bulk: (bulk != null ? bulk.value : this.bulk),
+    );
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
