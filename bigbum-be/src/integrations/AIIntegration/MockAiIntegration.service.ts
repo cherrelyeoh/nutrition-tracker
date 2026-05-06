@@ -32,8 +32,7 @@ export class MockAiIntegrationService
   ) {
     super();
   }
-  private openApiKey =
-    'OPENAI_API_KEY_REDACTED';
+  private openApiKey = process.env.OPENAI_API_KEY ?? '';
   prompt = `Please analyze the meal image provided and estimate its calorie content and macronutrient breakdown (protein, fats, and carbohydrates). 
 
 If additional information is needed, ask follow-up questions in the following structured format:  
